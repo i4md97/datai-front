@@ -19,7 +19,6 @@ import {
   CHANGE_GLOBAL,
   CHANGE_SIZE_STEP
 } from "../types";
-import StepTen from "../../pages/Preaprobado/Steps/StepTen";
 
 export default function PreaprobadoState(props) {
   const theme = localStorage.getItem('_theme');

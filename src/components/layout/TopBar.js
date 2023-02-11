@@ -42,7 +42,7 @@ export default function TopBar({
           <MenuIcon style={{ fontSize: "2rem" }} />
         </button>
         <h4 className="pl-3 topbar-settings" style={{ fontSize: "1.5rem", alignContent: "center" }}>
-          BRISK
+          FRONT
         </h4>
       </div>
 

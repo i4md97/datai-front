@@ -29,7 +29,7 @@ const Topbar = ({
         />
         <div className="d-flex align-items-center">
           {/* <Link className="topbar__logo" to="/" /> */}
-          <h1 className="siteTitle pt-2 h4">BRISK</h1>
+          <h1 className="siteTitle pt-2 h4">FRONT</h1>
         </div>
       </div>
       <div className="topbar__right align-items-center">

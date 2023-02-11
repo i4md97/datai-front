@@ -59,7 +59,7 @@ export default function ForgotPassword() {
             <h3 className="account__title">
               <ExitToAppIcon style={{fontSize: "150px"}} />
             </h3>
-            <h4 style={{fontSize: "30px", fontWeight: "700"}} >BRISK FINANCING</h4>
+            <h4 style={{fontSize: "30px", fontWeight: "700"}} >FRONT FINANCING</h4>
           </div>
           {send 
           ? <h3 className="pt-4 text-center" style={{color:"rgba(255,255,255,.7)"}}>Hemos enviando un Email de Confirmacion a tu correo.</h3>   
@@ -128,7 +128,7 @@ export default function ForgotPassword() {
           style={{color: "white", fontSize: "30px", fontWeight: "700"}}
         >
           {" "}
-          BRISK FINANCING
+          FRONT FINANCING
         </h4>
 
         {send 

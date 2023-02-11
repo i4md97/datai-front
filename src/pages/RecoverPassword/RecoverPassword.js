@@ -111,7 +111,7 @@ export default function RecoverPassword() {
           style={{color: "white", fontSize: "30px", fontWeight: "700"}}
         >
           {" "}
-          BRISK FINANCING
+          FRONT FINANCING
         </h4>
 
         <form className="pt-4" onSubmit={formik.handleSubmit}>
