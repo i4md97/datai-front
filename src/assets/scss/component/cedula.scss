@@ -1,0 +1,95 @@
+.form-cedula {
+  &-input {
+    border: 0;
+    background: #fff;
+
+    border-radius: 5px;
+    height: 40px;
+    margin-top: 0.5rem;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+
+    box-shadow: inset 1px 1px 3px #ccc;
+    &:focus {
+      outline: none;
+    }
+    @include themify($themes) {
+      color: themed("colorTextBackground");
+    }
+  }
+  &-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+  }
+  &-label {
+    @include themify($themes) {
+      color: themed("colorTextBackground");
+    }
+    font-family: "Poppins", "Arial", sans-serif;
+    font-size: 20px;
+    margin: 0;
+  }
+
+  &-submit {
+    margin-top: 0.5rem;
+    height: 36px;
+    border-radius: 3px;
+    border: none;
+    width: 100%;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    @include themify($themes) {
+      background: themed("colorBtn");
+      color: themed("colorBorder");
+    }
+  }
+  &-submit-outline {
+    margin-top: 1rem;
+    height: 36px;
+    border-radius: 3px;
+    border: none;
+    width: 100%;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    @include themify($themes) {
+      background: #5895b3;
+      color: themed("colorBorder");
+    }
+  }
+  &-modal {
+    background: #239dda;
+    color: white;
+    &:disabled{
+      opacity: 0.6;
+    }
+  }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.border-right-custom {
+  border-right: 1px solid #e0e0e0;
+  @media screen and (max-width: 768px) {
+    border: none;
+  }
+}
+
+.border-left-custom {
+  border-left: 1px solid #e0e0e0;
+  @media screen and (max-width: 987px) {
+    border: none;
+  }
+}

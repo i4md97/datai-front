@@ -1,0 +1,96 @@
+.rtl-support {
+  .phone-input {
+    direction: ltr;
+    text-align: right;
+  }
+}
+
+.input-without-border-radius {
+  border-radius: unset;
+  margin-left: -1px;
+  padding: 1rem;
+}
+
+.form-control-login {
+  border-radius: 5px;
+}
+
+.form-input-blue {
+  border: 0;
+  font-size: 17px;
+  &:focus {
+    outline: none;
+  }
+  min-height: 24px;
+  text-align: center;
+  @include directify($directions) {
+    #{directed('margin-right')}: auto;
+    #{directed('padding-right')}: 10px;
+  }
+  margin-top: auto;
+  line-height: 18px;
+  font-weight: 600;
+  text-align: left;
+  background: rgba(69, 116, 187, 0.5);
+  border-radius: 3px;
+  color: #fff;
+}
+
+.form-cedula-input-success {
+  background: #5bbd91;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+.custom-control-label::before {
+  border: 2px solid rgba(0, 0, 0, 0.9) !important;
+  border-radius: 50% !important;
+  color: rgba(0, 0, 0, 0.9) !important;
+  height: 1.3rem;
+  width: 1.3rem;
+  background-color: transparent !important;
+  cursor: pointer;
+}
+.custom-check .custom-control-label::after {
+  height: 1.3rem;
+  width: 1.3rem;
+  background-image: url("../../images/check.svg") !important;
+  background-position: center;
+  background-size: 50% 50%;
+  border: 1px solid transparent !important;
+  color: rgba(0, 0, 0, 0.9) !important;
+  cursor: pointer;
+}
+.custom-check-active .custom-control-label:after {
+  height: 1.3rem;
+  width: 1.3rem;
+  margin: 0.02rem 0 0 0.05rem;
+  background-image: transparent;
+  cursor: pointer;
+
+  color: rgba(0, 0, 0, 0.9) !important;
+}
+.custom-check,
+.custom-check-active {
+  position: absolute;
+  cursor: pointer;
+  top: 2px;
+  right: 2px;
+  z-index: 10;
+}
+
+.opacity-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+
+  background-color: rgba(128, 128, 128, 0.3);
+}
+
+.form-cedula-input:disabled {
+  opacity: 0.3;
+  background: #d2d1d1 !important;
+  color: rgba(0, 0, 0, 0.8) !important;
+}

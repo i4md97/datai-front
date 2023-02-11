@@ -1,0 +1,31 @@
+
+@import "../../assets/scss/settings/variable.scss";
+
+.sw-datai-dropdown {
+ .dropdown__menu {
+   z-index: 99;
+  //  padding: 3px 2px;
+   border-radius: 7px;
+   @include themify($themes) {
+     border: 1px solid themed('colorFolderHover');
+   }
+
+   button {
+     white-space: normal;
+     &:hover {
+      @include themify($themes) {
+        background: themed('colorBorder') !important;
+      }
+     }
+   }
+ } 
+ &.striped {
+  .dropdown__menu {
+    button:nth-child(even) {
+      @include themify($themes) {
+        background: themed('colorFolderHover');
+      }
+    }
+  }
+ }
+}

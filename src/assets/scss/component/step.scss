@@ -1,0 +1,412 @@
+.overlay {
+  z-index: 1000;
+}
+
+.padding-th {
+  th,
+  td,
+  tr {
+    padding: 5px 0 !important;
+  }
+}
+.step__sticky .MuiStepper-root {
+  background: transparent;
+  padding: 1.5rem 0;
+  width: 70%;
+  margin: 0 auto;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.step__sticky-active {
+  box-shadow: 0 7px 10px -2px rgba(0, 0, 0, 0.3);
+}
+.container__step {
+  position: sticky;
+  top: 40px;
+  z-index: 10;
+  @include themify($themes) {
+    background: themed("colorBackgroundBody");
+  }
+  @media screen and (max-width: 768px) {
+    position: relative;
+    top: 0;
+  }
+}
+
+.arrow-left-mobile {
+  position: absolute !important;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  padding-bottom: 1.1rem;
+  align-items: center;
+  transition: all 0.1s ease-out;
+  padding-left: 0.3rem;
+  &:hover {
+    transform: scale(1.2);
+    transition: all 0.1s ease-out;
+  }
+  &:active {
+    transform: scale(1);
+    transition: all 0.1s ease-out;
+  }
+}
+.arrow-right-mobile {
+  position: absolute !important;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  display: flex;
+  padding-bottom: 1.1rem;
+  padding-right: 0.3rem;
+  align-items: center;
+  transition: all 0.1s ease-out;
+  &:hover {
+    transform: scale(1.2);
+    transition: all 0.1s ease-out;
+  }
+  &:active {
+    transform: scale(1);
+    transition: all 0.1s ease-out;
+  }
+}
+
+.step__sticky {
+  padding-left: 1.5rem;
+  display: flex;
+  position: relative;
+  overflow-x: auto;
+
+  padding-top: 0.5rem;
+  justify-content: center;
+  .arrow-left {
+    position: absolute;
+    left: -20px;
+    padding-top: 0.8rem;
+    transition: all 0.1s ease-out;
+    &:hover {
+      transform: scale(1.2);
+      transition: all 0.1s ease-out;
+    }
+    &:active {
+      transform: scale(1);
+      transition: all 0.1s ease-out;
+    }
+  }
+
+  .arrow-right {
+    position: relative;
+    right: 0;
+    padding-top: 0.75rem;
+    padding-right: 0.5rem;
+    transition: all 0.1s ease-out;
+    &:hover {
+      transform: scale(1.2);
+      transition: all 0.1s ease-out;
+    }
+    &:active {
+      transform: scale(1);
+      transition: all 0.1s ease-out;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding-left: 0;
+  }
+}
+.active__sticky {
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  overflow: auto;
+  @include themify($themes) {
+    background: themed("colorBackground");
+  }
+
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+.container__step-sticky {
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  overflow: auto;
+  @include themify($themes) {
+    background: themed("colorBackground");
+  }
+
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.active__sticky .MuiStepper-root {
+  padding: 0.5rem 0 0.5rem 0;
+}
+
+.step-color {
+  div {
+    background: #ccc;
+    z-index: 1;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.1s ease-out;
+    &:hover {
+      transform: scale(1.2);
+      transition: all 0.1s ease-out;
+    }
+  }
+}
+.cedula .step-color {
+  div {
+    background: #ccc;
+
+    z-index: 1;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.1s ease-out;
+    @include themify($themes) {
+      border: 3.5px solid themed("colorBtn");
+    }
+    &:hover {
+      transform: scale(1.2);
+      transition: all 0.1s ease-out;
+    }
+  }
+}
+.cedula .activeStep {
+  div {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+    @include themify($themes) {
+      background: themed("colorBtn");
+    }
+    transition: all 0.1s ease-out;
+    &:hover {
+      transform: scale(1.2);
+      transition: all 0.1s ease-out;
+    }
+  }
+}
+.cedula .activeStepFinish {
+  div {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+    @include themify($themes) {
+      background: themed("colorFinalStep");
+      border: 3.5px solid themed("colorFinalStep");
+    }
+  }
+}
+
+.MuiStep-root {
+  .MuiStepConnector-line {
+    border: "1px solid red";
+    background: #eaeaf0;
+    margin-top: 11px;
+    top: 25px;
+  }
+  .MuiStepConnector-completed,
+  .MuiStepConnector-active {
+    span {
+      @include themify($themes) {
+        border: 2px solid #eaeaf0;
+        background: #eaeaf0;
+      }
+    }
+  }
+
+  .Mui-disabled {
+    .MuiStepConnector-line {
+      border: 2px solid #eaeaf0;
+
+      top: 25px;
+    }
+  }
+}
+.cedula .MuiStep-root {
+  .MuiStepConnector-line {
+    background: #eaeaf0;
+    margin-top: 11px;
+    top: 25px;
+  }
+
+  .MuiStepConnector-completed,
+  .MuiStepConnector-active {
+    span {
+      @include themify($themes) {
+        border: 2px solid themed("colorBtn");
+        background: themed("colorBtn");
+      }
+    }
+  }
+
+  .Mui-disabled {
+    .MuiStepConnector-line {
+      border: 2px solid #eaeaf0;
+
+      top: 25px;
+    }
+  }
+}
+
+.checkButtonResolution {
+  border: 3px solid #e0e0e0;
+  background: transparent;
+  width: 100px;
+  border-radius: 20px;
+  height: 100%;
+  transition: all 0.1s;
+  &:active {
+    transform: scale(0.9);
+
+    transition: all 0.1s ease-out;
+  }
+  &:hover {
+    @include themify($themes) {
+      border: 2px solid themed("colorBtn");
+    }
+
+    @media screen and (max-width: 986px) {
+      border: 3px solid #e0e0e0;
+    }
+  }
+}
+.checkButtonActiveResolution {
+  @include themify($themes) {
+    border: 3px solid themed("colorBtn");
+    background: themed("colorBtn");
+  }
+  color: white;
+  width: 100px;
+  border-radius: 20px;
+  height: 100%;
+  transition: all 0.1s;
+  &:hover {
+    transition: all 0.1s ease-out;
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+}
+.checkButton {
+  border: 3px solid #e0e0e0;
+  background: transparent;
+  width: 100px;
+  border-radius: 5px;
+  height: 100%;
+  transition: all 0.1s;
+  @include themify($themes) {
+    color: themed("colorText");
+  }
+  &:active {
+    transform: none;
+    transition: all 0.1s ease-out;
+  }
+  &:hover {
+    border: 3px solid rgba(76, 225, 153, 0.5);
+    background: rgba(76, 225, 153, 0.2);
+    @media screen and (max-width: 986px) {
+      border: 3px solid #e0e0e0;
+    }
+  }
+}
+.checkButtonActive {
+  background: $color-accent;
+  border: 3px solid rgba(76, 225, 153, 0.5);
+  color: white;
+  width: 100px;
+  border-radius: 5px;
+  height: 100%;
+  transition: all 0.1s;
+  &:hover {
+    transition: all 0.1s ease-out;
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.Toastify__toast--error {
+  border: 2px solid white;
+  box-shadow: 0px 0px 20px 5px #000;
+  border-radius: 10px;
+  font-size: 1.2rem;
+}
+.Toastify__toast--success {
+  border: 2px solid white;
+  box-shadow: 0px 0px 20px 5px #000;
+  border-radius: 10px;
+  font-size: 1.2rem;
+}
+.Toastify__toast--info {
+  border: 2px solid white;
+  box-shadow: 0px 0px 20px 5px #000;
+  border-radius: 10px;
+  font-size: 1.2rem;
+}
+
+@keyframes rotateSetting {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+.container-settings {
+  position: fixed;
+  z-index: 10;
+  bottom: -5px;
+  right: -5px;
+  width: 110px;
+  text-align: center;
+  @include themify($themes) {
+    background: themed("colorBackgroundBody");
+  }
+  border-top-left-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+
+  /*    background: white;
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,.3);  */
+  span {
+    line-height: 15px;
+    padding-bottom: 0.5rem;
+    text-align: center;
+    position: relative;
+
+    color: rgba(0, 0, 0, 0.7);
+    padding-top: 3px;
+  }
+}
+.btn-settings {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  animation: rotateSetting 2s infinite;
+
+  &:focus {
+    outline: none;
+  }
+  svg {
+    font-size: 70px;
+    transition: 0.5s all;
+    &:hover {
+      transition: 0.5s all;
+      transform: scale(1.1);
+    }
+  }
+  &:hover {
+    transition: 0.5s all;
+  }
+}

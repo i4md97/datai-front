@@ -1,0 +1,26 @@
+@import "../../assets/scss/settings/variable.scss";
+
+.ab-testing-analytics{
+  h4 {
+    @include themify ($themes) {
+      color: themed('colorTextAdditional');
+    }
+    font-weight: 600;
+  }
+  p {
+    @include themify ($themes) {
+      color: themed('colorTextLighter');
+    }
+    font-size: .9rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+  }
+  .recharts-default-legend {
+    display: flex;
+    justify-content: center;
+    .recharts-legend-item {
+      display: flex !important;
+      align-items: center;
+    }
+  }
+}

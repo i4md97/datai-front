@@ -1,0 +1,148 @@
+.container {
+  @media screen and (min-width: 768px) {
+    width: 100%;
+    max-width: 1630px;
+  }
+}
+
+.container__wrap {
+  @include directify($directions) {
+    #{directed('padding-left')}: 0px;
+  }
+
+  font-family: "Poppins", Arial, sans-serif;
+  padding-top: 60px;
+  min-height: calc(100vh - 50px);
+  box-sizing: border-box;
+  transition: padding-left 0.3s;
+
+  @include themify($themes) {
+    background: themed('colorBackgroundBody');
+  }
+
+  @media screen and (min-width: 576px) {
+    @include directify($directions) {
+      #{directed('padding-left')}: 240px;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    padding-top: 70px;
+  }
+}
+
+.top-tabs {
+  position: sticky;
+  top: 60px;
+  z-index: 100;
+  @include themify ($themes) {
+    background: themed("colorBackgroundBody");
+  }
+}
+.breadcrumb {
+  border-radius: 0;
+}
+.datai-breadcrumbs {
+  ol {
+    margin-bottom: 0;
+    background: none;
+    padding-left: 0;
+  }
+}
+.breadcrumb-item {
+  @include themify($themes) {
+    color: themed("colorText");
+  }
+  font-weight: 500;
+  font-size: .95em;
+  &::before {
+    @include themify ($themes) {
+      color: themed("colorText");
+    }
+  }
+}
+.global-icons {
+  @include themify($themes) {
+    color: themed("colorText");
+  }
+}
+.top-hr {
+  @include themify($themes) {
+    border-top: 1px solid themed("colorIcon");
+  }
+}
+
+.tab-title {
+  h2 {
+    font-size: 24px;
+    font-weight: 500;
+    @include themify($themes) {
+      color: themed("colorText");
+    }
+  }
+}
+
+.layout {
+  &.layout--collapse {
+    & + .container__wrap {
+      @include directify($directions) {
+        #{directed('padding-left')}: 0px;
+      }
+
+      @media screen and (min-width: 576px) {
+        @include directify($directions) {
+          #{directed('padding-left')}: 55px;
+        }
+      }
+    }
+  }
+
+  &.layout--top-navigation {
+    & + .container__wrap {
+      @media screen and (min-width: 576px) {
+        @include directify($directions) {
+          #{directed('padding-left')}: 0px;
+        }
+      }
+    }
+  }
+}
+
+.theme-white .footer {
+  background: #f2f4f7;
+}
+
+.logo {
+  @include themify($themes) {
+    background: themed('colorBackgroundBody');
+    color: themed('colorText');
+  }
+  padding-left: 200px;
+  height: 50px;
+
+  span {
+    @include themify($themes) {
+      color: themed("colorTextBackground-2");
+    }
+  }
+  img {
+    width: 85px;
+    @include themify($themes) {
+      filter: brightness(themed("imageBrightness"));
+    }
+  }
+
+  @media (max-width: 568px) {
+    padding-left: 20px;
+    padding-bottom: 40px;
+  }
+}
+
+.logo-active {
+  padding-left: 70px;
+  transition: 0.3s all;
+  @media (max-width: 568px) {
+    padding-left: 10px;
+    padding-bottom: 40px;
+  }
+}

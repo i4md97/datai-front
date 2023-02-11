@@ -1,0 +1,53 @@
+.container-menu {
+  width: 100%;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: white;
+  @include themify($themes) {
+    background: themed("colorBackground");
+    color: themed("colorIcon");
+  }
+}
+.container-values {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  font-size: 14px;
+  padding-left: 10px;
+  justify-content: center;
+  color: white;
+  @include themify($themes) {
+    background: #e0e0e0;
+  }
+  &-title {
+    font-size: 13px;
+    text-align:left;
+    font-weight: 600;
+    color: #9fa2b4 !important;
+    line-height:15px
+  }
+  &-price {
+     text-align:left;
+    font-size: 20px;
+    font-weight: 700;
+    color: black !important;
+    margin: 0;
+  }
+  &-price-text {
+     text-align:left;
+    font-size: 14px;
+    font-weight: initial;
+  }
+  &-porcentaje {
+     text-align:left;
+    margin: 0;
+  }
+}

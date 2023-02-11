@@ -1,0 +1,39 @@
+.potenciales {
+  .saldos-potenciales, 
+  .potencial-mercado {
+    h4 {
+      font-size: 1em;
+      color: #1d8cf8 !important;
+      svg {
+        height: 20px;
+      }
+    }
+  }
+
+  .table th {
+    font-weight: 600;
+  }
+  .table tbody td {
+    font-weight: 400;
+  }
+
+  .no-lines-table {
+    thead, tbody, tr, th, td {
+      border: none !important;
+    }
+  }
+
+  .chart-card {
+    h4 {
+      font-size: 1em;
+      font-weight: 600;
+    }
+  }
+
+  .card-bar-potencial {
+    h4 {
+      font-size: 1.1em;
+    }
+  }
+
+}

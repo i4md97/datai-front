@@ -1,0 +1,566 @@
+@import "../../assets/scss/settings/variable.scss";
+
+.MuiPaper-root {
+  background-color: transparent !important;
+  justify-content: center;
+  width: 70%;
+
+  .MuiStep-root .MuiStepConnector-line {
+    @include themify($themes) {
+      transition: .5s;
+      border: 2px solid themed('colorTextLighter');
+    }
+  }
+  
+  .step-color {
+    div {
+      @include themify($themes) {
+        transition: .5s;
+        background: themed('colorBackground');
+        color: themed('colorIcon');
+      }
+    }
+    &.activeStep {
+      div {
+        background: lighten($color-accent, 15%);
+        color: white;
+      }
+    }
+  } 
+}
+
+.preaprobado {
+
+  .step-row {
+    .step__sticky-active {
+      box-shadow: unset !important;
+    }
+    .arrow-left, .arrow-right {
+      @include themify($themes) {
+        color: themed('colorIcon');
+      }
+      &.not-show {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+  }
+
+  .font-size-widget {
+    @include themify($themes) {
+      color: themed('colorIcon');
+    }
+  }
+
+  .btn {
+    &.btn- {
+      &primary {
+        background: #70bbfd ;
+        color: #fff;
+      }
+      &secondary {
+        background: #d8dfe9 ;
+        color: #878996;
+        &::before {
+          background-color: #a8bace;
+        }
+      }
+    }
+    min-width: 200px;
+    border: none;
+  }
+
+  .custom-check {
+    top: 10px;
+    right: 10px;
+    label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 25px;
+      height: 25px;
+      position: relative;
+      cursor: pointer;
+    }
+    label::after, label::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-image: none !important;
+    }
+    .custom-control-label::before, label::before {
+      @include themify($themes) {
+        border: 1px solid themed('colorTextLighter') !important;
+      }
+    }
+    .custom-control-label::after, label::after {
+      background-image: none !important;
+      @include themify($themes) {
+        background: themed('colorTextLighter');
+      }
+      border-radius: 10px;
+      height: 8px;
+      width: 8px;
+      top: 6.5px;
+      left: 6px;
+    }
+    &.check-success:not(.custom-check-active) {
+      label, .custom-control-lable {
+        &::before {
+          border: 1px solid $color-accent !important;
+        }
+        &::after {
+          background: $color-accent !important;
+        }
+      }
+    }
+  }
+
+  label {
+    @include themify($themes) {
+      color: themed('colorText');
+    }
+  }
+  input, select {
+    background: transparent;
+    font-weight: 400;
+    text-align: left !important;
+    padding: 5px 5px;
+    @include themify($themes) {
+      color: themed('colorText') !important;
+    }
+    box-shadow: none;
+    &::placeholder {
+      @include themify($themes) {
+        color: themed('colorText') !important;
+      }
+    }
+  }
+
+  .form-cedula-input {
+    @include themify($themes) {
+      border: 1px solid themed('colorTextLight');
+    }
+    &:disabled {
+      @include themify($themes) {
+        background: themed('colorTextAdditional');
+        color: themed('colorTextLighter');
+      }
+    }
+    p {
+      @include themify($themes) {
+        color: themed('colorTextLighter');
+      }
+    }
+  }
+
+  option {
+    color: #212121;
+  }
+
+  .card-title {
+    font-size: 1.15em;
+    padding-bottom: 0;
+  }
+
+  .td-hover {
+    cursor: pointer;
+    border-radius: 5px;
+    @include themify($themes) {
+      background: themed('colorFolderHover') !important;
+      border: 1px solid themed('colorBackground');
+    }
+    vertical-align: middle;
+  }
+
+  .datos-personales {
+    p {
+      font-size: 1.1em;
+      font-weight: 400;
+    }
+    input {
+      @include themify($themes) {
+        border: 1px solid themed('colorBorder');
+      }
+    }
+    .dropdown {
+      position: relative;
+      input {
+        height: 0;
+        width: 0;
+        left: 0;
+        top: 0;
+        overflow: hidden;
+        position: absolute;
+        opacity: 0;
+      }
+      & > button {
+        @include themify($themes) {
+          border: 1px solid themed('colorBorder');
+        }
+      }
+    } 
+
+  }
+
+  .actividad-economica {
+    h5 {
+      font-size: 1.1em;
+      padding-bottom: 7px;
+    }
+    .custom-dropdown {
+      @include themify($themes) {
+        border: 1px solid themed('colorTextLight');
+      }
+    }
+  }
+
+  .verificacion-normativa {
+    .card__title {
+      text-transform: unset;
+    }
+    .aesthetic-card {
+      .total-stat {
+        font-size: 2em;
+        font-weight: 500;
+      }
+      &.green {
+        .total-stat {
+          color: #4ce1b6;
+        }
+      }
+      &.yellow {
+        .total-stat {
+          color: #f6da6e;
+        }
+      }
+    }
+  }
+
+  .detalles-pasivos {
+    table {
+      thead th {
+        text-align: left;
+        font-weight: 600;
+      }
+      tbody td {
+        text-align: left;
+        vertical-align: middle;
+        select {
+          padding-left: 0;
+          min-width: 120px;
+          text-align-last: left;
+        }
+      }
+    }
+  }
+
+  .escenario-preliminar {
+    table {
+      width: 100%;
+      &.table-3 {
+      }
+      thead {
+        tr {
+          @include themify($themes) {
+            border-bottom: 1px solid themed('colorBorder');
+          }
+          th {
+            border: none;
+            font-weight: 400;
+            min-width: 170px;
+          }
+        }
+        .table-name {
+          min-width: 400px;
+        }
+        .table-name-2 {
+          min-width: 300px;
+        }
+      }
+      tbody {
+        tr {
+          @include themify($themes) {
+            border-bottom: 1px solid themed('colorBorder');
+          }
+        }
+        td {
+          min-width: 170px;
+        }
+      }
+      .table-feedback {
+        padding: 7px 12px;
+        border-radius: 6px;
+        &.bg-success {
+          background: $color-accent !important;
+        }
+      }
+      .table-custom-input > div p {
+        @include themify($themes) {
+          color: themed('colorBackground') !important;
+        }
+      }
+      .w-wide {
+        min-width: 250px;
+      }
+      .w-thin {
+        min-width: 80px;
+      }
+    }
+  }
+
+  
+  .table-custom-input {
+    max-width: 115px;
+    width: 50px;
+    padding: 0 20px;
+    vertical-align: middle;
+    & > div {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      input {
+        border-radius: 12px;
+        padding-left: 15px;
+        max-height: 35px;
+        @include themify($themes) {
+          color: themed('colorBackground') !important;
+          background: themed('colorEmoji') !important;
+        }
+      }
+      p {
+        position: absolute;
+        right: 15px;
+        top: 5px;
+        font-weight: 400;
+        font-size: 1.2em;
+        @include themify($themes) {
+          color: themed('colorBackground');
+        }
+      }
+    }
+  }
+
+  .capacidad-pago {
+    table {
+      thead th {
+        font-weight: 600;
+      }
+      th, td {
+        text-align: left;
+        padding: 13px 10px;
+      }
+      tr {
+        &.break {
+          border-bottom-width: 2.5px !important;
+          &+ tr td{
+            padding-top: 20px;
+          }
+        }
+      }
+      tr:last-of-type {
+        border-bottom: none !important;
+      }
+      .w-50 {
+        min-width: 350px;
+      }
+      .w-25 {
+        min-width: 170px;
+      }
+    }
+    .form-cedula-field {
+      position: relative;
+      .symbol {
+        position: absolute;
+        top: 10px;
+        left: 12px;
+        @include themify($themes) {
+          color: themed('colorBackground') !important;
+        }
+      }
+      .form-cedula-input {
+        border-radius: 15px;
+        padding-left: 28px;
+        @include themify($themes) {
+          background: themed('colorTextAdditional') !important;
+          color: themed('colorBackground') !important;
+        }
+      }
+    }
+  }
+
+  .montos-financiar {
+    table {
+      th, td {
+        text-align: left;
+      }
+      tr {
+        &.break {
+          border-bottom-width: 2.5px !important;
+          &+ tr td{
+            padding-top: 20px;
+          }
+        }
+      }
+      .table-name {
+        min-width: 450px;
+      }
+      .w-15 {
+        width: 15%;
+        max-width: 50px;
+      }
+      .w-10 {
+        width: 10%;
+        min-width: 70px;
+        max-width: 150px;
+        font-size: 16px;
+      }
+      .table-blank {
+        min-width: 50px;
+      }
+      .table-custom-input {
+        min-width: 150px;
+        &> div {
+          width: 85%;
+        }
+      }
+      .bg-success {
+        background: $color-accent !important;
+        color: white;
+        padding: 7px 0;
+        border-radius: 10px;
+      }
+      .bg-danger {
+        background: #dc3545 !important;
+        color: white;
+        padding: 7px 0;
+        border-radius: 10px;
+      }
+      .form-cedula-input {
+        border-radius: 20px;
+        @include themify($themes) {
+          border: 1px solid themed('colorTextLighter') !important;
+        }
+      }
+      .w-10 {
+        .form-cedula-input {
+          border-radius: 6px;
+          height: 30px;
+        }
+      }
+    }
+    .anotations-card {
+      h4 {
+        font-weight: 500;
+        font-size: .95rem;
+        padding: 10px;
+      }
+      textarea {
+        min-height: 150px !important;
+        box-shadow: none;
+        padding: 10px;
+        border-radius: 0;
+        @include themify($themes) {
+          color: themed('colorText');
+          background: themed("colorBackground");
+          border: 1px solid themed("colorTextLighter");
+        }
+        &::placeholder {
+          @include themify($themes) {
+            color: themed('colorTextLighter');
+          }
+        }
+      }
+    }
+    .section-actions {
+      button {
+        width: 100%;
+        min-width: unset;
+        max-width: 150px;
+      }
+    }
+  }
+
+  .resolucion-operacion {
+    p {
+      @include themify($themes) {
+        color: themed('colorTextAdditional');
+      }
+      strong {
+        font-weight: 600;
+      }
+    }
+    .bottom-section {
+      button {
+        max-width: 150px;
+      }
+    }
+  }
+}
+
+.parametros-politica {
+  h2 {
+    font-size: 1.1rem;
+  }
+  h3 {
+    font-size: 1rem;
+  }
+
+  table {
+    th {
+      font-weight: 400;
+      font-size: .8rem !important;
+      vertical-align: middle;
+    }
+    td {
+      border-top: none;
+      width: 44%;
+      max-width: 440px;
+      input, select {
+        width: 100%;
+        height: 30px;
+        padding: 0 10px;
+        @include themify($themes) {
+          border: 1px solid themed('colorTextLighter');
+          color: themed('colorText');
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .MuiPaper-root {
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .MuiStep-horizontal {
+    flex: unset !important;
+  }
+  .step-row {
+    .step-color div {
+      width: 50px;
+      height: 50px;
+      svg {
+        width: 0.8em;
+        height: 0.8em;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .datos-personales {
+    .font-size-widget {
+      top: -40px !important;
+    }
+  }
+
+  .capacidad-pago {
+    table {
+      min-width: unset !important;
+    }
+  }
+}

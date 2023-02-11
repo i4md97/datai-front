@@ -1,0 +1,114 @@
+.menuOff {
+  position: fixed;
+  right: -608px;
+  top: 77px;
+  z-index: 100;
+  transition: 0.5s all;
+}
+.menuOn {
+  position: fixed;
+  right: 0px;
+  top: 105px;
+  z-index: 100;
+  transition: 0.5s all;
+
+  .card-body {
+    height: 85vh;
+    overflow-y: scroll;
+  }
+
+  h2 {
+    font-weight: 600;
+    @include themify($themes) {
+      color: themed("colorText");
+    }
+  }
+
+  .datepicker {
+    border: none !important;
+    &::placeholder {
+      @include themify($themes) {
+        color: themed("colorText") !important;
+        font-size: .85em !important;
+      }
+    }
+  }
+  .input-group {
+    border: 1px solid #cccccc !important;
+    border-radius: 4px !important;
+    .input-group-append > span {
+      background: white;
+      border: none !important;
+      font-size: 1.4em;
+    }
+  }
+
+  .css-1okebmr-indicatorSeparator {
+    display: none !important;
+  }
+
+}
+
+.menuSettings {
+  z-index: 101;
+}
+
+.home-sidebar {
+  z-index: 1;
+  top: 0;
+  transition: 0.5s all;
+  height: 100%;
+  max-height: 300px;
+  &.menuOff {
+    position: relative;
+    right: 0;
+    top: 0;
+    height: 0;
+    max-height: 0;
+    overflow: hidden;
+  }
+  &.menuOn {
+    position: relative;
+    margin-top: 0;
+  }
+  .card-body {
+    @include themify ($themes) {
+      background: themed("colorBackgroundBody");
+    } 
+  }
+  width: 100%;
+
+  .card-body {
+    height: unset;
+    overflow-y: unset;
+  }
+
+  .global-select {
+    padding: 5px 0 7px;
+  }
+
+  .container-datepicker {
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (min-width: 992px ) {
+  .home-sidebar {
+    top: 152px;
+    &.menuOn {
+      position: sticky;
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .home-sidebar {
+    max-height: 545px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .home-sidebar {
+    max-height: 786px;
+  }
+}

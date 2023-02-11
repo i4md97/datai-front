@@ -1,0 +1,36 @@
+.business {
+  &-title {
+    font-size: 1rem;
+    color: black;
+    text-align: left;
+  }
+  &-subtitle {
+    padding-top: 0.2rem;
+    font-size: 0.8rem;
+    line-height: 14px;
+    text-align: left;
+  }
+}
+
+.datepicker {
+  position: absolute;
+  bottom: 0;
+  background: white !important;
+  border: 1px solid hsl(0, 0%, 80%) !important;
+  color: black;
+}
+
+.result-picker {
+  padding-right: 1rem;
+  background: white;
+  position: absolute;
+  font-size: 1rem;
+  color: black;
+  left: 0.8rem;
+  bottom: 0.4rem;
+  /* transform: translateY(-30px); */
+}
+
+.container-datepicker {
+  position: relative;
+}

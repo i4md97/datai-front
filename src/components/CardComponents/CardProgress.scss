@@ -1,0 +1,39 @@
+@import "../../assets/scss/settings/variable.scss";
+
+.card-progress {
+  .card-body {
+    border-radius: 7px;
+  }
+  .card-body {
+    box-shadow: none;
+    .title {
+      @include themify ($themes){
+        color: themed('colorTextLight');
+      }
+      font-size: .9em;
+      font-weight: 600;
+    }
+    .values {
+      @include themify ($themes){
+        color: themed('colorTextAdditional');
+      }
+      font-size: 1.4em;
+      font-weight: 600;
+    }
+    .percentage {
+      font-size: .75rem;
+      color: $color-accent;
+      margin-bottom: 2px;
+      font-weight: 500;
+    }
+    .progress {
+      height: 0.5rem;
+      @include themify ($themes){
+        background: themed('colorTextLighter');
+      }
+      .progress-bar {
+        background: $color-accent;
+      }
+    }
+  }
+}

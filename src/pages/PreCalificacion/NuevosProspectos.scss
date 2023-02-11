@@ -1,0 +1,97 @@
+.nuevos-prospectos {
+  .card-body {
+    border-radius: 7px;
+    box-shadow: 0px 3px 45px 2px rgba(33, 43, 60, .05) !important;
+
+    h3 {
+      color: #a7a7a7;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+  }
+  .fit-card {
+    height: unset;
+  }
+
+  .inputs-container {
+    flex-wrap: wrap;
+  }
+  .custom-input {
+    width: 50%;
+    .form-control, input, select {
+      width: 100%;
+      background: white;
+      border: 1px solid #bebebe;
+      color: #aaaaaa;
+      border-radius: 5px;
+      padding: 7px;
+      &::placeholder {
+        color: #bebebe;
+      }
+    }
+    .custom-container {
+      width: 88%;
+      display: flex;
+      flex-direction: column;
+      p {
+        width: 100%;
+      }
+    }
+    .custom-input-container {
+      background: unset;
+      height: unset;
+    }
+    .custom-input-title {
+      font-weight: 400;
+      text-transform: unset;
+      color: #838383;
+      font-size: .8rem;
+    }
+    &:nth-child(even) {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      input, select {
+        justify-self: flex-end;
+        align-self: flex-end;
+      }
+    }
+  }
+
+  .monto-maximo {
+    h3 {
+      font-size: 1rem;
+    }
+    .value {
+      font-weight: 600;
+      color: #5f5f5f;
+      font-size: 1.7rem;
+      margin-top: 10px;
+    }
+    p {
+      color: #838383;
+    }
+  }
+  .btn.disabled, 
+  .btn.btn-primary.disabled, 
+  .btn.btn-secondary.disabled {
+    background-color: #70bbfd;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .nuevos-prospectos {
+    .custom-input {
+      .custom-container {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.Toastify__toast--success {
+  background: #70bbfd !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0px 3px 45px 2px rgba(33, 43, 60, .05) !important;
+}
