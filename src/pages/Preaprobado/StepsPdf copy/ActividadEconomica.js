@@ -1,6 +1,8 @@
 import React from "react";
+
 import {Container, Card, CardBody, Row, Col} from "reactstrap";
-export default function StepSeven({animation}) {
+
+export default function ActividadEconomica({animation}) {
   return (
     <Container
       fluid={true}

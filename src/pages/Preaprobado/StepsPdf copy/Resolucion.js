@@ -2,7 +2,7 @@ import React from "react";
 
 import {Container, Card, CardBody, Col} from "reactstrap";
 
-export default function StepTen({animation}) {
+export default function Resolucion({animation}) {
   return (
     <Container
       fluid={true}

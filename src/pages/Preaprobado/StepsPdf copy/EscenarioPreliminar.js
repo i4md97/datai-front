@@ -4,7 +4,7 @@ import { FormName } from "redux-form";
 import PdfHeader from "../../../components/PdfHeader/PdfHeader";
 import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
 
-export default function StepFive({ animation, StepFourCheck }) {
+export default function EscenarioPreliminar({ animation, StepFourCheck }) {
   const { escenarioPreeliminar, changeEscenarioPreeliminar, cedula,global } =
     useContext(PreaprobadoContext);
   const [activeCheckFive, setActiveCheckFive] = useState([]);

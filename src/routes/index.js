@@ -1,7 +1,8 @@
-import Users from "../pages/Users/index";
+// Public routes
 import Login from "../pages/Login/Login";
 import ForgotPassword from "../pages/forgotPassword/ForgotPassword";
 import RecoverPassword from "../pages/RecoverPassword/RecoverPassword";
+// Private routes
 import Preaprobado from "../pages/Preaprobado/Preaprobado";
 import PerfilComercial from "../pages/InteligenciaNegocios/PerfilComercial";
 import Pronostico from "../pages/InteligenciaNegocios/Pronosticos";
@@ -11,9 +12,7 @@ import EvolucionSemanal from "../pages/Inicio/EvolucionSemanal";
 import AnalisisCartera from "../pages/Inicio/AnalisisCartera";
 import AnalisisMora from "../pages/Inicio/AnalisisMora";
 import Potenciales from "../pages/Inicio/Potenciales";
-import PreCalificacion from "../pages/PreCalificacion/NuevosProspectos";
-import PreAprobados from "../pages/Formalizacion/PreAprobados";
-import PreCalificados from "../pages/Formalizacion/PreCalificados";
+import NuevosProspectos from "../pages/PreCalificacion/NuevosProspectos";
 import ParametrosPolitica from "../pages/Preaprobado/parametrosPolitica/parametrosPolitica"
 //Aqui se encuentran las rutas, este proceso esta realizado para que solo debas crear una nueva carpeta en src/pages con su archivo .js lo importes aqui y lo crees en el objeto que elijas con el mismo formato que los demas,
 const authProtectedRoutes = [
@@ -59,20 +58,11 @@ const authProtectedRoutes = [
   },
   {
     path: "/pre-calificacion/datos-cliente-nuevo",
-    component: PreCalificacion,
-  },
-  {
-    path: "/formalizacion/pre-aprobados",
-    component: PreAprobados,
-  },
-  {
-    path: "/formalizacion/pre-calificados",
-    component: PreCalificacion,
+    component: NuevosProspectos,
   },
 ];
 
 const publicRoutes = [
-  { path: "/users", component: Users },
   { path: "/", component: Login },
   { path: "/forgot", component: ForgotPassword },
   { path: "/recover-password", component: RecoverPassword },

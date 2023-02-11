@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {Card, CardBody, Row, Col} from "reactstrap";
 import PdfHeader from "../../../components/PdfHeader/PdfHeader";
-export default function StepTwo({animation, cedula, riesgo}) {
+
+export default function VerificacionNormativa({animation, cedula, riesgo}) {
   const [data, setData] = useState({
     interno: [],
     cic: [],
   });
 
-  const [referencias, setReferencias] = useState({
+  const [referencias] = useState({
     interno: {
       riesgo_cumpl: ["NO TIENE", "Alertas Confirmadas", "Alertas Pendientes"],
       score_atraso: ["AA", "A", "B", "C", "D", "E", "N", "SW"],

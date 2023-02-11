@@ -1,12 +1,16 @@
-import "./App.css";
 import {authProtectedRoutes, publicRoutes} from "./routes";
 import {BrowserRouter as Router, Switch} from "react-router-dom";
 import Route from "./routes/Route";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./assets/scss/app.scss";
+import "./App.css";
+
 import PreaprobadoState from "./context/preaprobados/PreaprobadoState";
 import UsuarioState from "./context/usuario/UsuarioState";
 import { SidebarProvider } from "./context/SidebarContext";
+
+import NotFound from "./pages/NotFound/NotFound";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./assets/scss/app.scss";
 
 //Aqui inicia la app, si te das cuenta aqui estamos montando las rutas que se encuentran en la carpeta src/routes/index y un componente Route que estamos reutilizando con todas las configuraciones
 
@@ -34,6 +38,10 @@ function App() {
                 component={element.component}
               />
             ))}
+            <Route 
+              path="*"
+              component={NotFound}
+            />
           </Switch>
         </Router>
       </SidebarProvider>

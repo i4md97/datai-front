@@ -3,7 +3,8 @@ import {Container, Card, CardBody, Col, Table} from "reactstrap";
 import UsuarioContext from "../../../context/usuario/UsuarioContext";
 import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
 import PdfHeader from "../../../components/PdfHeader/PdfHeader";
-export default function StepEight({animation, escenarioPreeliminar, cedula}) {
+
+export default function CapacidadPago({animation, escenarioPreeliminar, cedula}) {
   const {user} = useContext(UsuarioContext);
   const {stepFourCheck, changeEscenarioPreeliminar,changeCapacidadPago} =
     useContext(PreaprobadoContext);

@@ -13,7 +13,7 @@ import TasaPlazo from "../../../components/TasaPlazo/TasaPlazo"
 // Style
 import styled from "styled-components";
 
-const SizeStep = styled.div`
+const StylesContainer = styled.div`
   th,
   .font-card,
   .dashboard__total-stat {
@@ -30,7 +30,7 @@ const SizeStep = styled.div`
 
   }
 `;
-export default function StepNine({ animation, pdf }) {
+export default function EstructuraFinanciamiento({ animation, pdf }) {
   const [plazo, setPlazo] = useState("");
   const [tasa, setTasa] = useState("");
 
@@ -283,7 +283,7 @@ export default function StepNine({ animation, pdf }) {
 
   return (
     <div className={`dashboard montos-financiar step__cards  ${animation && !pdf && "step__animation"} `}>
-      <SizeStep pdf={pdf} size2={size} size={sizeSteps.estructuraFinanciamiento || null}>
+      <StylesContainer pdf={pdf} size2={size} size={sizeSteps.estructuraFinanciamiento || null}>
         <Row className="pt-4">
           <Col>
               {!pdf && (
@@ -426,7 +426,7 @@ export default function StepNine({ animation, pdf }) {
             </div>
           </Col>
         </Row>
-      </SizeStep>
+      </StylesContainer>
     </div>
   );
 }

@@ -11,7 +11,7 @@ import { Row, Col, Card, CardBody, Table } from "reactstrap";
 // Styles
 import styled from "styled-components";
 
-const SizeStep = styled.div`
+const StylesContainer = styled.div`
   th,
   .font-card,
   .dashboard__total-stat {
@@ -28,7 +28,7 @@ const SizeStep = styled.div`
   }
 `;
 
-export default function StepEight({
+export default function CapacidadPago({
   animation,
   escenarioPreeliminar,
   cedula,
@@ -465,7 +465,7 @@ export default function StepEight({
       </Row> */}
       <Row className="pt-4">
         <Col>
-          <SizeStep pdf={pdf} size2={size} size={sizeSteps.capacidadPago || null}>
+          <StylesContainer pdf={pdf} size2={size} size={sizeSteps.capacidadPago || null}>
             <Card className="">
               <CardBody>
                 <Table responsive style={{ minWidth: pdf ? "inherit" : "910px" }}>
@@ -546,7 +546,7 @@ export default function StepEight({
                 </Table>
               </CardBody>
             </Card>
-          </SizeStep>
+          </StylesContainer>
         </Col>
       </Row>
     </div>

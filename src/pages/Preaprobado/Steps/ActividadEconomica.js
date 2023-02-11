@@ -11,7 +11,7 @@ import SizeSteps from "../../../components/SizeSteps/SizeSteps";
 // Styles
 import styled from "styled-components";
 
-const SizeStep = styled.div`
+const StylesContainer = styled.div`
   th,
   .font-card,
   .dashboard__total-stat {
@@ -19,7 +19,7 @@ const SizeStep = styled.div`
     props.size ? `${props.size}px` : `${props.size2}px`} !important;
   }
 `;
-export default function StepSeven({ animation, pdf }) {
+export default function ActividadEconomica({ animation, pdf }) {
   const { sizeSteps, size } = useContext(PreaprobadoContext);
 
   const profesiones = [
@@ -84,7 +84,7 @@ export default function StepSeven({ animation, pdf }) {
     <div
       className={`dashboard actividad-economica step__cards ${animation && !pdf && "step__animation"}`}
     >
-      <SizeStep size2={size} size={sizeSteps.actividadEconomica || null}>
+      <StylesContainer size2={size} size={sizeSteps.actividadEconomica || null}>
         <Row className="pt-4">
           <Col sm={12} lg={6}>
             <Card>
@@ -218,7 +218,7 @@ export default function StepSeven({ animation, pdf }) {
             <Button color="primary" className="action-button">Guardar</Button>
           </Col>
         </Row>
-      </SizeStep>
+      </StylesContainer>
     </div>
   );
 }

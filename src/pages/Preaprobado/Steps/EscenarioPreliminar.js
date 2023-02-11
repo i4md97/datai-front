@@ -6,14 +6,14 @@ import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext
 
 // Components
 import { Row, Col, Card, CardBody, Table } from "reactstrap";
-import SizeSteps from "../../../components/SizeSteps/SizeSteps";
-import TasaPlazo from "../../../components/TasaPlazo/TasaPlazo"
+// import SizeSteps from "../../../components/SizeSteps/SizeSteps";
+// import TasaPlazo from "../../../components/TasaPlazo/TasaPlazo";
 import CustomTooltip from "../CustomTooltip";
 
 // Styles
 import styled from "styled-components";
 
-const SizeStep = styled.div`
+const StylesContainer = styled.div`
   th,
   .font-card,
   .dashboard__total-stat {
@@ -32,7 +32,7 @@ const SizeStep = styled.div`
   }
 `;
 
-export default function StepFive({ animation, StepFourCheck, pdf }) {
+export default function EscenarioPreliminar({ animation, StepFourCheck, pdf }) {
   const {
     escenarioPreeliminar,
     changeEscenarioPreeliminar,
@@ -320,7 +320,7 @@ export default function StepFive({ animation, StepFourCheck, pdf }) {
 
   return (
     <div className={`dashboard escenario-preliminar step__cards ${animation && !pdf && "step__animation"}`} >
-      <SizeStep pdf={pdf} size2={size} size={sizeSteps.escenarioPreeliminar || null}>
+      <StylesContainer pdf={pdf} size2={size} size={sizeSteps.escenarioPreeliminar || null}>
         <Row className="pt-4">
           <Col xs={12} xl={12}>
             {/* <SizeSteps className="d-flex" name="escenarioPreeliminar" /> */}
@@ -507,7 +507,7 @@ export default function StepFive({ animation, StepFourCheck, pdf }) {
             </Card >
           </Col>
         </Row>
-      </SizeStep >
+      </StylesContainer>
     </div >
   );
 }

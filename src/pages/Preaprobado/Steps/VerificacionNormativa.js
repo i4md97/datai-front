@@ -5,13 +5,13 @@ import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext
 
 // Components
 import { Card, CardBody, Row, Col } from "reactstrap";
-import SizeSteps from "../../../components/SizeSteps/SizeSteps";
+// import SizeSteps from "../../../components/SizeSteps/SizeSteps";
 import PdfHeader from "../../../components/PdfHeader/PdfHeader";
 
 // Styles
 import styled from "styled-components";
 
-const SizeStep = styled.div`
+const StylesContainer = styled.div`
   th,
   .font-card,
   .dashboard__total-stat {
@@ -20,7 +20,7 @@ const SizeStep = styled.div`
   }
 `;
 
-export default function StepTwo({ animation, cedula, riesgo, pdf }) {
+export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }) {
   const { sizeSteps, statSize } = useContext(PreaprobadoContext);
 
   const [data, setData] = useState({
@@ -83,7 +83,7 @@ export default function StepTwo({ animation, cedula, riesgo, pdf }) {
 
   return (
     <div className={`dashboard verificacion-normativa py-3 step__cards ${animation && !pdf && "step__animation"}`}>
-      <SizeStep size2={statSize} size={sizeSteps.verificacionNormativa || null}>
+      <StylesContainer size2={statSize} size={sizeSteps.verificacionNormativa || null}>
 				<Row className="pt-4">
 					<Col>
 						{/* <SizeSteps className="d-flex" name="verificacionNormativa" /> */}
@@ -250,7 +250,7 @@ export default function StepTwo({ animation, cedula, riesgo, pdf }) {
               );
             })}
         </Row>
-      </SizeStep>
+      </StylesContainer>
     </div>
   );
 }

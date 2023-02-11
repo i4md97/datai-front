@@ -1,7 +1,8 @@
 import React from "react";
 import {Container, Card, CardBody, Col, Table} from "reactstrap";
 import PdfHeader from "../../../components/PdfHeader/PdfHeader";
-export default function StepNine({animation}) {
+
+export default function EstructuraFinanciamiento({animation}) {
   return (
     <Container
       fluid={true}

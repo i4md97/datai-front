@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import AddSharpIcon from "@material-ui/icons/AddSharp";
 import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
 import PreaprobadoContext from "../../context/preaprobados/PreaprobadoContext";
-export default function StepTen({name, className}) {
+
+export default function SizeSteps({name, className}) {
  const {sizeSteps,changeSizeStep,size} = useContext(PreaprobadoContext)
 
 

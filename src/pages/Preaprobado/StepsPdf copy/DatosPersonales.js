@@ -1,7 +1,7 @@
 import React from "react";
 import {Container, Card, CardBody, Row, Col, Spinner} from "reactstrap";
 
-export default function StepTwo({
+export default function DatosPersonales({
   animation,
   inputCedula,
   setInputCedula,

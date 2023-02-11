@@ -9,13 +9,13 @@ import UsuarioContext from "../../../context/usuario/UsuarioContext";
 
 // Components
 import { Row, Col, Card, CardBody, Button } from "reactstrap";
-import SizeSteps from "../../../components/SizeSteps/SizeSteps";
+// import SizeSteps from "../../../components/SizeSteps/SizeSteps";
 import FinalStepModal from "../../../components/FinalStepModal/FinalStepModal";
 
 // Styles
 import styled from "styled-components";
 
-const SizeStep = styled.div`
+const StylesContainer = styled.div`
   th,
   .font-card,
   .dashboard__total-stat {
@@ -23,7 +23,7 @@ const SizeStep = styled.div`
     props.size ? `${props.size}px` : `${props.size2}px`} !important;
   }
 `;
-export default function StepTen({ animation, downloadPDF, pdf }) {
+export default function Resolucion({ animation, downloadPDF, pdf }) {
   const {
     sizeSteps,
     size,
@@ -79,7 +79,7 @@ export default function StepTen({ animation, downloadPDF, pdf }) {
         loading={loading}
         handleSave={handleSave}
       />
-      <SizeStep size2={size} size={sizeSteps.datosPersonales || null}>
+      <StylesContainer size2={size} size={sizeSteps.datosPersonales || null}>
         <Row className="pt-4">
           <Col>
             {/* <SizeSteps className="d-flex" name="datosPersonales" /> */}
@@ -115,7 +115,7 @@ export default function StepTen({ animation, downloadPDF, pdf }) {
             </Button>
           </Col>
         </Row>
-      </SizeStep>
+      </StylesContainer>
     </div>
   );
 }

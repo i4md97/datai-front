@@ -4,7 +4,6 @@ import React, { useContext, useState } from "react";
 // Components
 import { Card, CardBody } from "reactstrap";
 import Select from "react-select";
-// import Switch from "react-switch";
 import Switch from "@material-ui/core/Switch";
 import SettingsIcon from "@material-ui/icons/Settings";
 
@@ -66,7 +65,7 @@ const MenuSettings = ({
                     }}
                     checked={animation}
                     color="primary"
-                    className="react-switch"
+                    className="mui-switch"
                     inputProps={{ "aria-label": "primary checkbox" }}
                   />
 

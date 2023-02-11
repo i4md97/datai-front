@@ -12,18 +12,19 @@ import petition_post from "../../utils/petitions/petition_post";
 
 
 // Components
-import { Container, Row, Col, Tooltip } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import { Stepper, Step, StepLabel } from "@material-ui/core";
 import CustomTooltip from "./CustomTooltip";
 import Loading from "../../components/Loading/Loading"
-import StepTwo from "./Steps/StepTwo";
-import StepThree from "./Steps/StepThree";
-import StepFour from "./Steps/StepFour";
-import StepFive from "./Steps/StepFive";
-import StepSeven from "./Steps/StepSeven";
-import StepEight from "./Steps/StepEight";
-import StepNine from "./Steps/StepNine";
-import StepTen from "./Steps/StepTen";
+// Steps
+import DatosPersonales from "./Steps/DatosPersonales";
+import ActividadEconomica from "./Steps/ActividadEconomica";
+import VerificacionNormativa from "./Steps/VerificacionNormativa";
+import DetallesPasivos from "./Steps/DetallesPasivos";
+import EscenarioPreliminar from "./Steps/EscenarioPreliminar";
+import CapacidadPago from "./Steps/CapacidadPago";
+import EstructuraFinanciamiento from "./Steps/EstructuraFinanciamiento";
+import Resolucion from "./Steps/Resolucion";
 
 // icons
 import PersonIcon from "@material-ui/icons/Person";
@@ -261,7 +262,7 @@ export default function Preaprobado({ animation, activeStep, setActiveStep }) {
           {!showAllSteps ? (
             <>
               {activeStep === 0 && (
-                <StepTwo
+                <DatosPersonales
                   loadingRecommend={loadingRecommend}
                   loading={loading}
                   cedula={cedula}
@@ -274,39 +275,39 @@ export default function Preaprobado({ animation, activeStep, setActiveStep }) {
                 />
               )}
 
-              {activeStep === 1 && <StepSeven animation={animation} />}
+              {activeStep === 1 && <ActividadEconomica animation={animation} />}
 
               {activeStep === 2 && (
-                <StepThree
+                <VerificacionNormativa
                   riesgo={riesgo}
                   cedula={cedula}
                   animation={animation}
                 />
               )}
               {activeStep === 3 && (
-                <StepFour cedula={cedula} animation={animation} />
+                <DetallesPasivos cedula={cedula} animation={animation} />
               )}
               {activeStep === 4 && (
-                <StepFive StepFourCheck={stepFourCheck} animation={animation} />
+                <EscenarioPreliminar StepFourCheck={stepFourCheck} animation={animation} />
               )}
               {/*      {activeStep === 4 && <StepSix animation={animation} />} */}
               {activeStep === 5 && (
-                <StepEight
+                <CapacidadPago
                   cedula={cedula}
                   escenarioPreeliminar={escenarioPreeliminar}
                   animation={animation}
                 />
               )}
-              {activeStep === 6 && <StepNine animation={animation} />}
+              {activeStep === 6 && <EstructuraFinanciamiento animation={animation} />}
               {activeStep === 7 && (
-                <StepTen animation={animation} downloadPDF={downloadPDF} />
+                <Resolucion animation={animation} downloadPDF={downloadPDF} />
               )}
             </>
           ) : (
             <>
               <div style={{ height: "1050px" }}>
                 <PdfHeader pagination="1" title="DATOS PERSONALES" />
-                <StepTwo
+                <DatosPersonales
                   pdf={true}
                   loadingRecommend={loadingRecommend}
                   loading={loading}
@@ -322,12 +323,12 @@ export default function Preaprobado({ animation, activeStep, setActiveStep }) {
 
               <div style={{ height: "1050px" }}>
                 <PdfHeader pagination="2" title="ACTIVIDAD ECONOMICA" />
-                <StepSeven pdf={true} animation={animation} />
+                <ActividadEconomica pdf={true} animation={animation} />
               </div>
               <div style={{ height: "2100px" }}>
                 <PdfHeader pagination="3" title="VERIFICACION DE NORMATIVA" />
 
-                <StepThree
+                <VerificacionNormativa
                   riesgo={riesgo}
                   cedula={cedula}
                   animation={animation}
@@ -337,11 +338,11 @@ export default function Preaprobado({ animation, activeStep, setActiveStep }) {
               <div style={{ height: "1050px" }}>
                 <PdfHeader pagination="5" />
 
-                <StepFour pdf={true} cedula={cedula} animation={animation} />
+                <DetallesPasivos pdf={true} cedula={cedula} animation={animation} />
               </div>
               <div style={{ height: "1050px" }}>
                 <PdfHeader pagination="6" />
-                <StepFive
+                <EscenarioPreliminar
                   pdf={true}
                   StepFourCheck={stepFourCheck}
                   animation={animation}
@@ -350,7 +351,7 @@ export default function Preaprobado({ animation, activeStep, setActiveStep }) {
               <div style={{ height: "1050px" }}>
                 <PdfHeader pagination="7" />
 
-                <StepEight
+                <CapacidadPago
                   pdf={true}
                   cedula={cedula}
                   escenarioPreeliminar={escenarioPreeliminar}
@@ -359,11 +360,11 @@ export default function Preaprobado({ animation, activeStep, setActiveStep }) {
               </div>
               <div style={{ height: "1050px" }}>
                 <PdfHeader pagination="8" title="MONTOS TOTALES A FINANCIAR" />
-                <StepNine pdf={true} animation={animation} />
+                <EstructuraFinanciamiento pdf={true} animation={animation} />
               </div>
               <div >
                 <PdfHeader pagination="9" />
-                <StepTen pdf={true} animation={animation} downloadPDF={downloadPDF} />
+                <Resolucion pdf={true} animation={animation} downloadPDF={downloadPDF} />
 
               </div>
 

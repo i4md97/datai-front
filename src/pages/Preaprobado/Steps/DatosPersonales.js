@@ -8,7 +8,7 @@ import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext
 import Check from "../../../components/Check/Check";
 import ChevronDownIcon from 'mdi-react/ChevronDownIcon';
 
-const SizeStep2 = styled.div`
+const StylesContainer = styled.div`
   th,
   .font-card,
   .dashboard__total-stat {
@@ -17,7 +17,7 @@ const SizeStep2 = styled.div`
   }
 `;
 
-export default function StepTwo({
+export default function DatosPersonales({
   animation,
   inputCedula,
   setInputCedula,
@@ -171,14 +171,14 @@ export default function StepTwo({
 
         <Col sm={12} md={6}>
           {/* {cedula && <SizeSteps className="d-none d-lg-flex" name="datosPersonales"/>} */}
-          <SizeStep2 className="row m-0 p-0" size={sizeSteps.datosPersonales} size2={size}>
+          <StylesContainer className="row m-0 p-0" size={sizeSteps.datosPersonales} size2={size}>
             <Card>
               <CardBody>
                 <Row>
                   <Col sm={12}>
                     <h4 className="card-title color__background pb-2 text-semibold">Información Personal</h4>
                     
-                    <p className="pb-1 text-color">Nombre Completo</p>
+                    <p className="pb-1 text-color">Nombre del cliente / Razón social</p>
                     <div className="border-content">
                       <p className="dashboard__total-stat">
                         {cedula && (cedula.personal_data.nom_compl || "n.a")}
@@ -264,7 +264,7 @@ export default function StepTwo({
                 </Row>
               </CardBody>
             </Card>
-          </SizeStep2>
+          </StylesContainer>
         </Col>
       </Row>
     </div>

@@ -1,4 +1,5 @@
 import React from "react";
+
 import {Container, Card, CardBody, Row, Col} from "reactstrap";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
@@ -6,15 +7,13 @@ import ReceiptIcon from "@material-ui/icons/Receipt";
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import PersonIcon from "@material-ui/icons/Person";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import FontAwesome from "react-fontawesome";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {
-  faCoffee,
-  faHandHoldingUsd,
-  faPercentage,
-} from "@fortawesome/free-solid-svg-icons";
+
+import {faHandHoldingUsd} from "@fortawesome/free-solid-svg-icons";
+
 import {Pie, PieChart, ResponsiveContainer} from "recharts";
-export default function StepOne({animation}) {
+
+export default function DatosCampana({animation}) {
   const data01 = [
     {value: 3.5, fill: "#007BFF"},
     {value: 100, fill: "#eeeeee"},

@@ -1,6 +1,8 @@
 import React from "react";
+
 import {Container, Table, Card, CardBody} from "reactstrap";
-export default function StepSix({animation}) {
+
+export default function DetallePasivosInternos({animation}) {
   return (
     <Container
       fluid={true}

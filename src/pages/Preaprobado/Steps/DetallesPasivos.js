@@ -11,7 +11,7 @@ import CustomTooltip from "../CustomTooltip";
 // Styles
 import styled from "styled-components";
 
-const SizeStep = styled.div`
+const StylesContainer = styled.div`
   th,
   .font-card,
   .dashboard__total-stat {
@@ -31,7 +31,7 @@ const SizeStep = styled.div`
 `;
 
 
-export default function StepFour({ animation, cedula, pdf }) {
+export default function DetallesPasivos({ animation, cedula, pdf }) {
   const { stepFourCheck, changeStepFourCheck, sizeSteps, size, changeCedula } = useContext(PreAprobadoContext);
   const { user } = useContext(UsuarioContext);
 
@@ -102,7 +102,7 @@ export default function StepFour({ animation, cedula, pdf }) {
 
   return (
     <div className={`dashboard detalles-pasivos step__cards ${animation && !pdf && "step__animation"}`}>
-      <SizeStep pdf={pdf} size2={size} size={sizeSteps.detallesPasivos || null}>
+      <StylesContainer pdf={pdf} size2={size} size={sizeSteps.detallesPasivos || null}>
 
         <Row className="pt-4">
           <Col xs={12} xl={12}>
@@ -400,7 +400,7 @@ export default function StepFour({ animation, cedula, pdf }) {
             </Card>
           </Col>
         </Row>
-      </SizeStep>
+      </StylesContainer>
     </div>
   );
 }

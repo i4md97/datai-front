@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
+
 import PreAprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
+import UsuarioContext from "../../../context/usuario/UsuarioContext";
 
 import { Container, Table, Card, CardBody } from "reactstrap";
-import UsuarioContext from "../../../context/usuario/UsuarioContext";
-export default function StepFour({ animation, cedula }) {
+
+export default function DetallesPasivos({ animation, cedula }) {
   const { stepFourCheck, changeStepFourCheck } = useContext(PreAprobadoContext);
   const { user } = useContext(UsuarioContext);
 

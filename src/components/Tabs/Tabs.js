@@ -8,7 +8,7 @@ import PreaprobadoContext from "../../context/preaprobados/PreaprobadoContext"
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import ReplayIcon from '@material-ui/icons/Replay';
 
-export default function StepTen({ menuInicio }) {
+export default function Tabs({ menuInicio }) {
   const { step, cedula } = useContext(PreaprobadoContext)
 
   const [tab, setTab] = useState({ base: "", page: "" });
@@ -63,10 +63,10 @@ export default function StepTen({ menuInicio }) {
             value = "Datos personales";
             break;
           case 2:
-            value = "Actividad Economica";
+            value = "Actividad Económica";
             break;
           case 3:
-            value = "Verificacion de Normativa";
+            value = "Verificación de Normativa";
             break;
           case 4:
             value = "Detalles de Pasivos";
@@ -81,7 +81,7 @@ export default function StepTen({ menuInicio }) {
             value = "Estructura de Financiamiento";
             break;
           case 8:
-            value = "Resolucion";
+            value = "Resolución";
             break;
           default:
             break;
