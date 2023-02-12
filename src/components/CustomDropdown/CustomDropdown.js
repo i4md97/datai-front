@@ -23,7 +23,7 @@ const CustomDropdown = ({
 
   const [optionSelected, setOptionSelected] = useState(defaultOption);
 
-  /* useEffect(() => {
+  useEffect(() => {
     if (selectedOption) {
       const optionFound = options.find(option => option === selectedOption);
       if (optionFound) {
@@ -31,7 +31,7 @@ const CustomDropdown = ({
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]); */
+  },[]);
 
   useEffect(() => {
     setOptionSelected(defaultOption);
