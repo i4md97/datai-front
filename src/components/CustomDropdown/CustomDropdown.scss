@@ -33,5 +33,14 @@
  }
  .btn {
    min-width: unset !important;
- }
+   @include themify($themes) {
+     background: themed('colorBorder') !important;
+     border: 1px solid themed('colorTextLight');
+    }
+  }
+  .bg-light {
+    @include themify($themes) {
+      background: themed('colorBackground') !important;
+     }
+  }
 }

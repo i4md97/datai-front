@@ -439,24 +439,24 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
                   </Col>
                   <Col md={3}>
                     <label className="d-flex pl-4">
-                      <Input type="radio" name="nivel-transaccional" />Menos a $1.000
+                      <Input type="radio" name="nivel-transaccional" value="Menos a $1.000" />Menos a $1.000
                     </label>
                     <label className="d-flex pl-4">
-                      <Input type="radio" name="nivel-transaccional" />Entre $1.000 y $2.500
+                      <Input type="radio" name="nivel-transaccional" value="Entre $1.000 y $2.500" />Entre $1.000 y $2.500
                     </label>
                     <label className="d-flex pl-4">
-                      <Input type="radio" name="nivel-transaccional" />Entre $2.500 y $5.000
+                      <Input type="radio" name="nivel-transaccional" value="Entre $2.500 y $5.000" />Entre $2.500 y $5.000
                     </label>
                   </Col>
                   <Col md={3}>
                     <label className="d-flex pl-4">
-                      <Input type="radio" name="nivel-transaccional" />Entre $5.000 y $10.000
+                      <Input type="radio" name="nivel-transaccional" value="Entre $5.000 y $10.000" />Entre $5.000 y $10.000
                     </label>
                     <label className="d-flex pl-4">
-                      <Input type="radio" name="nivel-transaccional" />Entre $10.000 y $20.000
+                      <Input type="radio" name="nivel-transaccional" value="Entre $10.000 y $20.000" />Entre $10.000 y $20.000
                     </label>
                     <label className="d-flex pl-4">
-                      <Input type="radio" name="nivel-transaccional" />Mayor a $20.000
+                      <Input type="radio" name="nivel-transaccional" value="Mayor a $20.000" />Mayor a $20.000
                     </label>
                   </Col>
                   <Col md={6} className="d-flex align-items-center justify-content-start">
@@ -487,16 +487,16 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
                   <Col md={12}>
                     <p className="general-title text-bold py-3">En caso afirmativo, deberá seleccionar una de las siguientes condiciones y presentar la inscripción emitida por la SUGEF</p>
                     <label className="d-flex pl-4">
-                      <Input type="radio" name="nivel-transaccional" />La administración del dinero, remesas, cuentas bancarias, ahorros, valores u otros activos del cliente.
+                      <Input type="radio" name="nivel-transaccional" value="administracion"/>La administración del dinero, remesas, cuentas bancarias, ahorros, valores u otros activos del cliente.
                     </label>
                     <label className="d-flex pl-4">
-                      <Input type="radio" name="nivel-transaccional" />La compra y venta de bienes inmuebles.
+                      <Input type="radio" name="nivel-transaccional" value="compra-venta" />La compra y venta de bienes inmuebles.
                     </label>
                     <label className="d-flex pl-4">
-                      <Input type="radio" name="nivel-transaccional" />La operación, la administración de la compra y la venta de personas jurídicas u otras estructuras jurídicas.
+                      <Input type="radio" name="nivel-transaccional" value="operacion" />La operación, la administración de la compra y la venta de personas jurídicas u otras estructuras jurídicas.
                     </label>
                     <label className="d-flex pl-4">
-                      <Input type="radio" name="nivel-transaccional" />Propietario de casas de empeño, casinos, compra y venta de metales preciosos.
+                      <Input type="radio" name="nivel-transaccional" value="propietario" />Propietario de casas de empeño, casinos, compra y venta de metales preciosos.
                     </label>
                   </Col>
                 </Row>
