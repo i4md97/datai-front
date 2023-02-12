@@ -29,6 +29,11 @@
   }
 }
 
+.datai-tooltip .tooltip {
+  position: relative;
+  z-index: 200;
+}
+
 .card-tooltip {
   @media (min-width: 1426px) {
     -webkit-flex: 0 0 25%;

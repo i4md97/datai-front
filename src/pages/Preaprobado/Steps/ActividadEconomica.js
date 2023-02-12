@@ -5,7 +5,7 @@ import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext
 
 // Components
 import { Row, Col, Card, CardBody, Button } from "reactstrap";
-import CustomDropDown from "../../../components/CustomDropdown/CustomDropdown";
+import CustomDropdown from "../../../components/CustomDropdown/CustomDropdown";
 import SizeSteps from "../../../components/SizeSteps/SizeSteps";
 
 // Styles
@@ -112,7 +112,8 @@ export default function ActividadEconomica({ animation, pdf }) {
                     />
                     <h5>Profesión u Oficio</h5>
                     {/* <p className="dashboard__total-stat">Tecnico Profecional</p> */}
-                    <CustomDropDown 
+                    <CustomDropdown 
+                      id="profesion-oficio"
                       className="w-100 striped" 
                       defaultOption="Sleccionar"
                       options={profesiones}
@@ -126,14 +127,15 @@ export default function ActividadEconomica({ animation, pdf }) {
                     />
                     <h5>Tipo de Empresa</h5>
                     {/* <p className="dashboard__total-stat">CORPORATIVA</p> */}
-                    <CustomDropDown 
+                    <CustomDropdown 
                       className="w-100 striped" 
                       defaultOption="Sleccionar" 
                       options={tiposEmpresas} 
                     />
                     <h5>Tipo de Industria</h5>
                     {/* <p className="dashboard__total-stat">Servicios</p> */}
-                    <CustomDropDown 
+                    <CustomDropdown 
+                      id="tipo-industria"
                       className="w-100 striped" 
                       defaultOption="Sleccionar" 
                       options={tipoIndustrias} 
@@ -141,7 +143,8 @@ export default function ActividadEconomica({ animation, pdf }) {
 
                     <h5>Tipo Actividad Económica</h5>
                     {/* <p className="dashboard__total-stat">SALUD</p> */}
-                    <CustomDropDown 
+                    <CustomDropdown
+                      id="tipo-actividad-economica" 
                       className="w-100 striped" 
                       defaultOption="Sleccionar" 
                       options={tipoActividades} 

@@ -6,6 +6,7 @@ import "./App.css";
 import PreaprobadoState from "./context/preaprobados/PreaprobadoState";
 import UsuarioState from "./context/usuario/UsuarioState";
 import { SidebarProvider } from "./context/SidebarContext";
+import { ClientProvider } from "./context/ClientContext";
 
 import NotFound from "./pages/NotFound/NotFound";
 
@@ -17,35 +18,37 @@ import "./assets/scss/app.scss";
 function App() {
   return (
     <UsuarioState> 
-    <PreaprobadoState>
-      <SidebarProvider>
-        <Router>
-          <Switch>
-            {publicRoutes.map((element, i) => (
-              <Route
-                exact
-                key={i}
-                path={element.path}
-                component={element.component}
-              />
-            ))}
-            {authProtectedRoutes.map((element, i) => (
-              <Route
-                layout={true}
-                exact
-                key={i}
-                path={element.path}
-                component={element.component}
-              />
-            ))}
-            <Route 
-              path="*"
-              component={NotFound}
-            />
-          </Switch>
-        </Router>
-      </SidebarProvider>
-    </PreaprobadoState>
+      <PreaprobadoState>
+        <ClientProvider>
+          <SidebarProvider>
+            <Router>
+              <Switch>
+                {publicRoutes.map((element, i) => (
+                  <Route
+                    exact
+                    key={i}
+                    path={element.path}
+                    component={element.component}
+                  />
+                ))}
+                {authProtectedRoutes.map((element, i) => (
+                  <Route
+                    layout={true}
+                    exact
+                    key={i}
+                    path={element.path}
+                    component={element.component}
+                  />
+                ))}
+                <Route 
+                  path="*"
+                  component={NotFound}
+                />
+              </Switch>
+            </Router>
+          </SidebarProvider>
+        </ClientProvider>
+      </PreaprobadoState>
     </UsuarioState>
   );
 }

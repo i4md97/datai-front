@@ -9,7 +9,7 @@ const CustomTooltip = ({ id, tooltipText, className }) => {
   return (
     <>
       <Tooltip 
-        className={className}
+        className={`datai-tooltip ${className}`}
         target={`#${id}`}
         isOpen={open}
         toggle={ () => setOpen(prev => !prev) }

@@ -30,11 +30,7 @@
 }
 
 .preaprobado {
-
   .step-row {
-    .step__sticky-active {
-      box-shadow: unset !important;
-    }
     .arrow-left, .arrow-right {
       @include themify($themes) {
         color: themed('colorIcon');
