@@ -47,10 +47,6 @@ export default function DatosPersonales({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const setIdTypeHander = (option) => {
-    setIdType(option);
-  }
-
   return (
     <div className={`dashboard datos-personales step__cards pb-5 ${animation && "step__animation"}`}>
       <Row className="pt-4">
@@ -67,11 +63,11 @@ export default function DatosPersonales({
 
               <label className="text-center general-title text-bold">Tipo Identificación</label>
               <CustomDropdown 
-                      id="tipo-identificacion"
-                      className="w-100" 
-                      defaultOption="Sleccionar"
-                      options={idTypes}
-                      callback={setIdTypeHander}
+                id="tipo-identificacion"
+                className="w-100" 
+                defaultOption="Sleccionar"
+                options={idTypes}
+                callback={setIdType}
               />
               <label>Número Identificación</label>
               <input

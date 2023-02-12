@@ -22,6 +22,7 @@ import Loading from "../../components/Loading/Loading"
 // Steps
 import DatosPersonales from "./Steps/DatosPersonales";
 import ActividadEconomica from "./Steps/ActividadEconomica";
+import ActividadEconomicaNew from "./Steps/ActividadEconomicaNew";
 import VerificacionNormativa from "./Steps/VerificacionNormativa";
 import DetallesPasivos from "./Steps/DetallesPasivos";
 import EscenarioPreliminar from "./Steps/EscenarioPreliminar";
@@ -234,7 +235,7 @@ export default function Preaprobado({ animation, activeStep, setActiveStep }) {
           cliente={cliente}
         />
       case 1:
-        return <ActividadEconomica animation={animation} />
+        return <ActividadEconomicaNew animation={animation} />
       case 2:
         return <VerificacionNormativa
           riesgo={riesgo}
