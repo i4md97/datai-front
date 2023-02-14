@@ -29,7 +29,7 @@ const UbicacionesDropdowns = () => {
   return (
     <Row>
       <Col sm={4}>
-        <label className="text-center general-title text-bold">Provincia</label>
+        <label className="text-center general-title">Provincia</label>
         <CustomDropdown 
           className="w-100" 
           defaultOption="Seleccionar"
@@ -38,7 +38,7 @@ const UbicacionesDropdowns = () => {
         />
       </Col>
       <Col sm={4}>
-        <label className="text-center general-title text-bold">Cantón</label>
+        <label className="text-center general-title">Cantón</label>
         <CustomDropdown 
           className="w-100" 
           defaultOption="Seleccionar"
@@ -49,7 +49,7 @@ const UbicacionesDropdowns = () => {
         />
       </Col>
       <Col sm={4}>
-        <label className="text-center general-title text-bold">Distrito</label>
+        <label className="text-center general-title">Distrito</label>
         <CustomDropdown 
           className="w-100"
           defaultOption="Seleccionar"

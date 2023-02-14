@@ -111,6 +111,7 @@ export const Login = () => {
       changeUser(data);
       history.push("/inicio/evolucion-semanal");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const captchaRef = useRef();

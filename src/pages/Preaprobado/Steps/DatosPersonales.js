@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { Card, CardBody, Row, Col, Spinner, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from "reactstrap";
+import { Card, CardBody, Row, Col, Spinner, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, Button, Input } from "reactstrap";
 import CustomDropdown from "../../../components/CustomDropdown/CustomDropdown";
 // import SizeSteps from "../../../components/SizeSteps/SizeSteps";
 
@@ -31,7 +31,8 @@ export default function DatosPersonales({
   consultarCliente,
   cliente,
 }) {
-  const { sizeSteps, size } = useContext(PreaprobadoContext);
+  const { sizeSteps, size, changeStep } = useContext(PreaprobadoContext);
+
   const [checkForm, setCheckForm] = useState("checkOne");
 
   const idTypes = ["CÉDULA", "DIMEX", "PASAPORTE", "CÉDULA JURÍDICA"];
@@ -40,6 +41,8 @@ export default function DatosPersonales({
   const [option, setOption] = useState("Elegir Campaña");
   const [option2, setOption2] = useState("Seleccionar Campaña");
 
+  const [isSaving, setIsSaving] = useState(false);
+
   useEffect(() => {
     if (cedula) {
       setInputCedula(cedula.cedula)
@@ -47,60 +50,79 @@ export default function DatosPersonales({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const saveAndContinueHandler = () => {
+    setIsSaving(true);
+    setTimeout(() => {
+      setIsSaving(false);
+      changeStep(1);
+    }, 1500);
+  }
+
   return (
     <div className={`dashboard datos-personales step__cards pb-5 ${animation && "step__animation"}`}>
       <Row className="pt-4">
-        <Col>
-          <h4 className="page-title general-title">Consulta Cliente</h4>
-          <hr />
-        </Col>
-      </Row>
-      <Row className="jusfity-content-center pt-4">
-        <Col sm={12} md={6}>
-          {/* {cedula && <SizeSteps className="d-block d-md-none d-flex justify-content-end" name="datosPersonales"/>} */}
+        <Col sm={12}>
           <Card>
             <CardBody>
-
-              <label className="text-center general-title text-bold">Tipo Identificación</label>
-              <CustomDropdown 
-                id="tipo-identificacion"
-                className="w-100" 
-                defaultOption="Sleccionar"
-                options={idTypes}
-                callback={setIdType}
-              />
-              <label>Número Identificación</label>
-              <input
-                type="text"
-                className="text-center dashboard__total-stat form-cedula-input border-content"
-                onChange={(e) => setIdNumber(e.target.value)}
-                value={idNumber}
-              />
+              <Row className="pb-3">
+                <Col>
+                  <h5 className="text-bold">Consultar cliente</h5>
+                </Col>
+              </Row>
+              <Row>
+                <Col sm={6}>
+                  <label className="text-center general-title">Tipo Identificación <span className="text-danger">*</span></label>
+                  <CustomDropdown 
+                    id="tipo-identificacion"
+                    className="mb-0" 
+                    classNameButton="mb-0"
+                    defaultOption="Sleccionar"
+                    options={idTypes}
+                    callback={setIdType}
+                  />
+                </Col>
+                <Col sm={6}>
+                  <label>Número Identificación <span className="text-danger">*</span></label>
+                  <input
+                    type="text"
+                    className="text-center dashboard__total-stat form-cedula-input border-content my-0"
+                    onChange={(e) => setIdNumber(e.target.value)}
+                    value={idNumber}
+                  />
+                </Col>
+                <Col sm={12} className="pt-3">
+                  <button
+                    disabled={!idType || !idNumber}
+                    onClick={consultarCliente(idType, idNumber)}
+                    type="submit"
+                    className="btn btn-primary my-0"
+                  >
+                    {loadingRecommend ? (
+                      <Spinner
+                        as="span"
+                        animation="grow"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      "Consultar Cliente"
+                    )}
+                  </button>
+                </Col>
+              </Row>
               <div className="d-flex justify-content-center">
-                <button
-                  disabled={!idType || !idNumber}
-                  onClick={consultarCliente(idType, idNumber)}
-                  type="submit"
-                  className="btn btn-secondary mt-3"
-                >
-                  {loadingRecommend ? (
-                    <Spinner
-                      as="span"
-                      animation="grow"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                  ) : (
-                    "CONSULTAR CLIENTE"
-                  )}
-                </button>
               </div>
             </CardBody>
           </Card>
+        </Col>
+      </Row>
+      <Row className="jusfity-content-center">
+        <Col sm={12} md={6}>
+          {/* {cedula && <SizeSteps className="d-block d-md-none d-flex justify-content-end" name="datosPersonales"/>} */}
           <Card disabled={true} >
             <CardBody>
-              <Check className="d-none custom-check check-success" setCheckForm={setCheckForm} checkForm={checkForm} id="checkOne"/>
+              <Check className="custom-check check-success" setCheckForm={setCheckForm} checkForm={checkForm} id="checkOne"/>
               <label
                 className="text-center general-title text-bold"
                 htmlFor="cedula"
@@ -137,14 +159,14 @@ export default function DatosPersonales({
                       aria-hidden="true"
                     />
                   ) : (
-                    "Recomendar Cédula"
+                    "Recomendar Cliente"
                   )}
                 </button>
               </div>
             </CardBody>
           </Card>
 
-          <Card className="d-none">
+          <Card className="">
             <CardBody>
               <Check className="custom-check check-success" setCheckForm={setCheckForm} checkForm={checkForm} id="checkTwo" />
               <label
@@ -227,59 +249,62 @@ export default function DatosPersonales({
               <CardBody>
                 <Row>
                   <Col sm={12}>
-                    <h4 className="card-title color__background pb-2 text-semibold">Información Personal</h4>
+                    <h5 className="color__background pb-2 text-bold">Información Personal</h5>
                     
-                    <p className="pb-1 text-color font-weight-bold">Nombre del cliente / Razón social</p>
-                    <div className="border-content">
+                    <p className="pb-1 text-color text-semibold">Nombre del cliente / Razón social</p>
+                    <div className="border-content disabled">
                       <p className="dashboard__total-stat">
                         {cliente?.interno?.nombre_completo || "n.a"}
                       </p>
                     </div>
                     
-                    <p className="pb-1 text-color font-weight-bold">Representante legal</p>
-                    <div className="border-content">
-                      <p className="dashboard__total-stat">
-                        {cliente?.interno?.nombre_completo || "n.a"}
-                      </p>
-                    </div>
+                    <p className="pb-1 text-color text-semibold">Representante legal</p>
+                    <Input 
+                      className="editable-field" 
+                      name="representante" 
+                      value={cliente?.interno?.nombre_completo || "n.a"} 
+                      onChange={() => {}}
+                    />
 
-                    <p className="pb-1 text-color font-weight-bold">Identificación</p>
-                    <div className="border-content">
-                      <p className="dashboard__total-stat">
-                        {cliente?.interno?.no_identif || "n.a"}
-                      </p>
-                    </div>
+                    <p className="pb-1 text-color text-semibold">Identificación</p>
+                    <Input 
+                      className="editable-field" 
+                      name="identificacion" 
+                      value={cliente?.interno?.no_identif || "n.a"} 
+                      onChange={() => {}}
+                    />
 
-                    <p className="pb-1 text-color font-weight-bold">Nombre Comercial</p>
-                    <div className="border-content">
-                      <p className="dashboard__total-stat">
-                        {cliente?.buro?.empresa_2 || "n.a"}
-                      </p>
-                    </div>
+                    <p className="pb-1 text-color text-semibold">Nombre Comercial</p>
+                    <Input 
+                      className="editable-field" 
+                      name="nombre_comercial" 
+                      value={cliente?.buro?.empresa_2 || "n.a"}
+                      onChange={() => {}}
+                    />
 
-                    <p className="pb-1 text-color font-weight-bold">Teléfono personale</p>
-                    <div className="border-content">
+                    <p className="pb-1 text-color text-semibold">Teléfono personal</p>
+                    <div className="border-content disabled">
                       <p className="dashboard__total-stat">
                         {cliente?.interno?.tel_cel || "n.a"}
                       </p>
                     </div>
 
-                    <p className="pb-1 text-color font-weight-bold">Teléfono empresa</p>
-                    <div className="border-content">
+                    <p className="pb-1 text-color text-semibold">Teléfono empresa</p>
+                    <div className="border-content disabled">
                       <p className="dashboard__total-stat">
                         {cliente?.interno?.tel_trab || "n.a"}
                       </p>
                     </div>
 
-                    <p className="pb-1 text-color font-weight-bold">Email</p>
-                    <div className="border-content">
+                    <p className="pb-1 text-color text-semibold">Email</p>
+                    <div className="border-content disabled">
                       <p className="dashboard__total-stat">
                         {cliente?.interno?.email || "n.a"}
                       </p>
                     </div>
 
-                    <p className="pb-1 text-color font-weight-bold">Sitio WEB</p>
-                    <div className="border-content">
+                    <p className="pb-1 text-color text-semibold">Sitio WEB</p>
+                    <div className="border-content disabled">
                       <p className="dashboard__total-stat">
                         {cliente?.interno?.url || "n.a"}
                       </p>
@@ -330,6 +355,24 @@ export default function DatosPersonales({
               </CardBody>
             </Card>
           </StylesContainer>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col>
+          <Button color="primary" className="action-button" onClick={saveAndContinueHandler}>
+            Guardar y Continuar
+            {isSaving && 
+              <Spinner
+                as="span"
+                animation="grow"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+                className="ml-2"
+              />
+            }
+          </Button>
         </Col>
       </Row>
     </div>

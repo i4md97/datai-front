@@ -74,6 +74,7 @@ export default function CapacidadPago({
       actual: cedula ? cedula.salary : 0,
     });
     setFormColillaPago(escenarioPreeliminar.colillaPago || "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -341,6 +342,7 @@ export default function CapacidadPago({
         },
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formSituacion, reloadCalc]);
 
   useEffect(() => {
@@ -367,6 +369,7 @@ export default function CapacidadPago({
     if (!formColillaPago) {
       setRealodCalc(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formColillaPago]);
 
 

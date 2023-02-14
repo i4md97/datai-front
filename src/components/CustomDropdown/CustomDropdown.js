@@ -1,7 +1,7 @@
 import {useState} from "react";
 
 // Bootstrap
-import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from "reactstrap";
+import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, Input } from "reactstrap";
 
 // Icons
 import ChevronDownIcon from 'mdi-react/ChevronDownIcon';
@@ -18,6 +18,7 @@ const CustomDropdown = ({
   options = [], 
   defaultOption = "",
   selectedOption = "",
+  name = "",
   callback = () => {}}
 ) => {
 
@@ -28,13 +29,10 @@ const CustomDropdown = ({
       const optionFound = options.find(option => option === selectedOption);
       if (optionFound) {
         setOptionSelected(selectedOption);
-      };
+      } else {
+        setOptionSelected(defaultOption);
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
-
-  useEffect(() => {
-    setOptionSelected(defaultOption);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[selectedOption]);
 
@@ -49,6 +47,7 @@ const CustomDropdown = ({
   }
   
   return (
+    <>
     <UncontrolledDropdown 
       className={`sw-datai-dropdown ${className} ${disabled ? "disabled" : ""}`}
       id={id}
@@ -65,6 +64,8 @@ const CustomDropdown = ({
         ))}
       </DropdownMenu>
     </UncontrolledDropdown>
+    {name && <Input className="d-none" type="text" name={name} value={optionSelected} onChange={() => {}} />}
+    </>
   )
 }
 

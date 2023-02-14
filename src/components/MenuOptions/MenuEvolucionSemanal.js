@@ -10,7 +10,7 @@ import makeAnimated from "react-select/animated";
 
 export default function MenuEvolucionSemanal({ menuInicio }) {
     /* States */
-    const options2 = {
+    /* const options2 = {
         legend: {
             display: false,
         },
@@ -18,7 +18,7 @@ export default function MenuEvolucionSemanal({ menuInicio }) {
             display: "block",
             text: "PERFIL COMERCIAL"
         }
-    };
+    }; */
     const [data, setData] = useState({
         globales: {
             zona: [],
@@ -33,8 +33,7 @@ export default function MenuEvolucionSemanal({ menuInicio }) {
         },
     });
 
-
-    const dataChart = {
+    /* const dataChart = {
         labels: ["1", "2", "3", "4", "5"],
         datasets: [
 
@@ -45,7 +44,7 @@ export default function MenuEvolucionSemanal({ menuInicio }) {
                 borderColor: "#742774"
             }
         ]
-    };
+    }; */
 
     const animatedComponents = makeAnimated();
     const options = {

@@ -525,6 +525,37 @@
   }
 }
 
+
+.border-content {
+  @include themify($themes) {
+    border: 1px solid themed("colorBorder");
+  }
+  border-radius: 2.5px;
+  padding: 10px 10px 5px;
+  margin-bottom: 15px;
+  min-height: 20px;
+  box-shadow: none;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  p {
+    line-height: 1;
+    text-align: left;
+    font-weight: 400;
+  }
+  &.disabled {
+    @include themify($themes) {
+      background: themed("colorBorder");
+    }
+  }
+}
+
+.editable-field {
+  @include themify($themes) {
+    font-size: 14px;
+  }
+}
+
 @media screen and (max-width: 1200px) {
   .MuiPaper-root {
     width: 100% !important;

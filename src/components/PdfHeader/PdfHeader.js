@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
 import PreaprobadoContext from "../../context/preaprobados/PreaprobadoContext";

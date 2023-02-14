@@ -4,7 +4,7 @@ import React, { useEffect, useState, useContext } from "react";
 import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
 
 // Components
-import { Card, CardBody, Row, Col, Input } from "reactstrap";
+import { Card, CardBody, Row, Col, Form, Input } from "reactstrap";
 import CustomDropdown from "../../../components/CustomDropdown/CustomDropdown";
 // import SizeSteps from "../../../components/SizeSteps/SizeSteps";
 import PdfHeader from "../../../components/PdfHeader/PdfHeader";
@@ -105,6 +105,9 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
 						<hr />
 					</Col>
 				</Row>
+        <Form>
+          
+        </Form>
         <Row className="justify-content-center">
           <Col sm={12}>
             <Card>
