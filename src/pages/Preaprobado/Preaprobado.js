@@ -10,9 +10,11 @@ import { useCliente } from "../../context/ClientContext";
 
 // Services
 import petition_post from "../../utils/petitions/petition_post";
+// TODO: delete after implementation
 import {db_interna} from "../../db/db_interna";
 import {db_cic} from "../../db/db_cic";
 import {db_buro} from "../../db/db_buro";
+import { cedula_tmp } from "../../db/id_info";
 
 // Components
 import { Container, Row, Col } from "reactstrap";
@@ -153,6 +155,11 @@ export default function Preaprobado({ animation, activeStep, setActiveStep }) {
         }
       }
     }
+  }
+
+  // TODO: delete after implementation
+  const loadCedulaData = () => {
+    changeCedula(cedula_tmp);
   }
 
   /* Population of Cedula */
@@ -310,6 +317,12 @@ export default function Preaprobado({ animation, activeStep, setActiveStep }) {
                 }}
               />
             </div>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col>
+            <button onClick={loadCedulaData}>load data</button>
           </Col>
         </Row>
 

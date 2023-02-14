@@ -1,10 +1,10 @@
-import React,{ useContext } from "react";
+import React,{ useContext, useState } from "react";
 
 // Helpers
 import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
 
 // Components
-import { Row, Col, Card, CardBody, Button, Form, InputGroup, InputGroupText, Input } from "reactstrap";
+import { Row, Col, Card, CardBody, Button, Form, InputGroup, InputGroupText, Input, Spinner } from "reactstrap";
 import CustomDropdown from "../../../components/CustomDropdown/CustomDropdown";
 import UbicacionesDropdowns from "../../../components/Ubicaciones/UbicacionesDropdowns";
 // import SizeSteps from "../../../components/SizeSteps/SizeSteps";
@@ -25,7 +25,16 @@ const StylesContainer = styled.div`
 `;
 
 const ActividadEconomicaNew = ({ animation, pdf }) => {
-  const { sizeSteps, size } = useContext(PreaprobadoContext);
+  const { sizeSteps, size, changeStep } = useContext(PreaprobadoContext);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const saveAndContinueHandler = () => {
+    setIsSaving(true);
+    setTimeout(() => {
+      setIsSaving(false);
+      changeStep(2);
+    }, 1500);
+  }
 
   return (
     <div
@@ -322,10 +331,12 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
                       </Row>
                       <Row>
                         <Col sm={4}>
+                          {/* TODO: fetch selected option */}
                           <label className="text-center general-title">Oficio</label>
                           <CustomDropdown 
                             className=""
                             defaultOption="Seleccionar"
+                            selectedOption="ADMINISTRADOR"
                             options={actividadOptions.jobOptions}
                           />
                         </Col>
@@ -561,7 +572,19 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
 
         <Row>
           <Col>
-            <Button color="primary" className="action-button">Guardar y Continuar</Button>
+          <Button color="primary" className="action-button" onClick={saveAndContinueHandler}>
+            Guardar y Continuar
+            {isSaving && 
+              <Spinner
+                as="span"
+                animation="grow"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+                className="ml-2"
+              />
+            }
+          </Button>
           </Col>
         </Row>
       </StylesContainer>

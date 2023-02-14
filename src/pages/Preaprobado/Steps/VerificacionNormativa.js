@@ -4,7 +4,7 @@ import React, { useEffect, useState, useContext } from "react";
 import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
 
 // Components
-import { Card, CardBody, Row, Col, Form, Input } from "reactstrap";
+import { Card, CardBody, Row, Col, Form, Input, Button, Spinner } from "reactstrap";
 import CustomDropdown from "../../../components/CustomDropdown/CustomDropdown";
 // import SizeSteps from "../../../components/SizeSteps/SizeSteps";
 import PdfHeader from "../../../components/PdfHeader/PdfHeader";
@@ -24,7 +24,8 @@ const StylesContainer = styled.div`
 `;
 
 export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }) {
-  const { sizeSteps, statSize } = useContext(PreaprobadoContext);
+  const { sizeSteps, statSize, changeStep } = useContext(PreaprobadoContext);
+  const [isSaving, setIsSaving] = useState(false);
 
   const [data, setData] = useState({
     interno: [],
@@ -93,7 +94,15 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
   const labelImpuestosReportados = [
     "Ingreso reportado útimos meses",
     "Impuestos reportados últimos meses"
-  ]
+  ];
+
+  const saveAndContinueHandler = () => {
+    setIsSaving(true);
+    setTimeout(() => {
+      setIsSaving(false);
+      changeStep(3);
+    }, 1500);
+  }
 
   return (
     <div className={`dashboard verificacion-normativa py-3 step__cards ${animation && !pdf && "step__animation"}`}>
@@ -106,7 +115,7 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
 					</Col>
 				</Row>
         <Form>
-          
+
         </Form>
         <Row className="justify-content-center">
           <Col sm={12}>
@@ -359,40 +368,59 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
                   </Col>
                 </Row>
                 <Row>
-                  <Col sm={2}>
-                    <label className="text-center general-title text-bold">ESTATUS</label>
-                    <CustomDropdown 
-                      className="w-100" 
-                      classNameButton="bg-light"
-                      defaultOption="Sleccionar"
-                      options={normativaOptions.statusOptions}
-                    />
-                  </Col>
-                  <Col sm={2}>
-                    <label className="text-center general-title text-bold">ESTATUS</label>
-                    <CustomDropdown 
-                      className="w-100" 
-                      classNameButton="bg-light"
-                      defaultOption="Sleccionar"
-                      options={normativaOptions.stageOptions}
-                    />
-                  </Col>
-                  <Col sm={2}>
-                    <label className="text-center general-title text-bold">ESTATUS</label>
-                    <CustomDropdown 
-                      className="w-100" 
-                      classNameButton="bg-light"
-                      defaultOption="Sleccionar"
-                      options={normativaOptions.standByOptions}
-                    />
-                  </Col>
-                  <Col sm={6}>
-                    <label className="text-center general-title text-bold">DETALLE</label>
-                    <Input type="text"/>
-                  </Col>
-                </Row>
+                    <Col>
+                      <Row>
+                        <Col>
+                          <label className="text-center general-title">ESTATUS</label>
+                          <CustomDropdown 
+                            className=""
+                            defaultOption="Seleccionar"
+                            options={normativaOptions.statusOptions}
+                          />
+                        </Col>
+                        <Col>
+                          <label className="text-center general-title">ETAPA</label>
+                          <CustomDropdown 
+                            className=""
+                            defaultOption="Seleccionar"
+                            options={normativaOptions.stageOptions}
+                          />
+                        </Col>
+                        <Col>
+                          <label className="text-center general-title">STAND BY</label>
+                          <CustomDropdown 
+                            className=""
+                            defaultOption="Seleccionar"
+                            options={normativaOptions.standByOptions}
+                          />
+                        </Col>
+                      </Row>
+                    </Col>
+                    <Col>
+                      <label className="text-center general-title">DETALLE</label>
+                      <Input type="text" />
+                    </Col>
+                  </Row>
               </CardBody>
             </Card>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col>
+          <Button color="primary" className="action-button" onClick={saveAndContinueHandler}>
+            Guardar y Continuar
+            {isSaving && 
+              <Spinner
+                as="span"
+                animation="grow"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+                className="ml-2"
+              />
+            }
+          </Button>
           </Col>
         </Row>
       </StylesContainer>
