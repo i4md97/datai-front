@@ -64,7 +64,7 @@ const CustomDropdown = ({
         ))}
       </DropdownMenu>
     </UncontrolledDropdown>
-    {name && <Input className="d-none" type="text" name={name} value={optionSelected} onChange={() => {}} />}
+    {name && <Input type="hidden" name={name} value={optionSelected} onChange={() => {}} />}
     </>
   )
 }

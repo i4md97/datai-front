@@ -166,115 +166,110 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
           <Col xs={12} xl={12}>
             <Card>
               <CardBody className="m-lg-0 pb-4">
-                {suma.saldoInterno 
+                {suma.saldoInterno
                   ? 
                     <Table style={{ minWidth: pdf ? "inherit" : "800px" }} responsive>
                       <thead>
                         <tr style={{ borderBottom: "1px solid #e0e0e0" }}>
                           <th>Tipo Garantía</th>
                           <th>Tipo de Operación</th>
-                          <th>Plan de Inversión</th>
-                          {/* <th>Monto Formalizado</th> */}
-                          <th>Saldo</th>
-                          <th>Cuota Mensual Real</th>
-                          {/* <th>Plazo Restante (meses)</th> */}
+                          <th>Ahorro Potencial</th>
+                          <th>Saldo Actual</th>
+                          <th>Cuota Mensual</th>
                           <th>Tasa</th>
                           <th>Condición</th>
                           <th>Referencia (Si/No)</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {cedula &&
-                          cedula.debts.data.map((element, i) => {
-                            if (element[2] === user.firm_c) {
-                              return (
-                                <tr key={`step-four-tr-${i}`}>
-                                  <td>{element[2]} </td>
-                                  <td>
-                                    {element[13] === 1 && "Directa"}
-                                    {element[13] === 2 &&
-                                      "Creditos con obligacion de desembolso"}
-                                    {element[13] === 3 && "Tarjeta de credito"}
-                                    {element[13] === 4 &&
-                                      "Lineas de utilizacion automatica excepto tarjetas de credito"}
-                                    {element[13] === 5 &&
-                                      "Lineas de credito con compromiso de desembolsar"}
-                                    {element[13] === 6 &&
-                                      "Lineas de credito u operaciones crediticias"}
-                                  </td>
-                                  <td>
+                        {cedula?.debts?.data.map((element, i) => {
+                          if (element[2] === user.firm_c) {
+                            return (
+                              <tr key={`pasivos-internos-tr-${i}`}>
+                                <td>{element[2]}</td>
+                                <td>
+                                  {element[13] === 1 && "Directa"}
+                                  {element[13] === 2 &&
+                                    "Creditos con obligacion de desembolso"}
+                                  {element[13] === 3 && "Tarjeta de credito"}
+                                  {element[13] === 4 &&
+                                    "Lineas de utilizacion automatica excepto tarjetas de credito"}
+                                  {element[13] === 5 &&
+                                    "Lineas de credito con compromiso de desembolsar"}
+                                  {element[13] === 6 &&
+                                    "Lineas de credito u operaciones crediticias"}
+                                </td>
+                                <td>
 
+                                  {!pdf ? 
+                                    <>
+                                      {/* <Input value={element[10].toFixed(2)} onChange={()=>{}} /> */}
+                                      {element[10]}
+                                    </>
+                                    : // cedula.selected ? (cedula.selected.internos[`internos${i}`] || "Seleccionar") : "Seleccionar"
+                                      element[10].toFixed(2)
+                                  }
+                                </td>
+                                {/* <td>
+                                  ₡{" "}
+                                  {new Intl.NumberFormat(["ban", "id"]).format(
+                                    element[8].toFixed(2)
+                                  )}{" "}
+                                </td> */}
+                                <td className="td-hover" id={`internos-td-saldo-${i}`}>
+                                  ₡{" "}
+                                  {new Intl.NumberFormat(["ban", "id"]).format(
+                                    element[7].toFixed(2)
+                                  )}{" "}
+                                </td>
+                                <td>
+                                  ₡{" "}
+                                  {new Intl.NumberFormat(["ban", "id"]).format(
+                                    (element[11] + element[12]).toFixed(11)
+                                  )}{" "}
+                                </td>
+                                {/* <td>
+                                  {new Intl.NumberFormat(["ban", "id"]).format(
+                                    element[30].toFixed(2)
+                                  )}{" "}
+                                </td> */}
 
-                                    {!pdf ? (
-                                      <>
-                                        { element[10].toFixed(2) }
-                                      </>
-                                    ) : // cedula.selected ? (cedula.selected.internos[`internos${i}`] || "Seleccionar") : "Seleccionar"
-                                        element[10].toFixed(2)
-                                    }
-
-
-                                  </td>
-                                  {/* <td>
-                                    ₡{" "}
-                                    {new Intl.NumberFormat(["ban", "id"]).format(
-                                      element[8].toFixed(2)
-                                    )}{" "}
-                                  </td> */}
-                                  <td className="td-hover" id={`internos-td-saldo-${i}`}>
-                                    ₡{" "}
-                                    {new Intl.NumberFormat(["ban", "id"]).format(
-                                      element[7].toFixed(2)
-                                    )}{" "}
-                                  </td>
-                                  <td>
-                                    ₡{" "}
-                                    {new Intl.NumberFormat(["ban", "id"]).format(
-                                      (element[11] + element[12]).toFixed(11)
-                                    )}{" "}
-                                  </td>
-                                  {/* <td>
-                                    {new Intl.NumberFormat(["ban", "id"]).format(
-                                      element[30].toFixed(2)
-                                    )}{" "}
-                                  </td> */}
-
-                                  <td className="td-hover" id={`internos-td-tasa-${i}`}>{element[18]} </td>
-                                  <td>{element[15]} </td>
-                                  <td>
-                                    {" "}
-                                    <button
-                                      onClick={() => {
-                                        handleClickStepFourCheck({
-                                          data: element,
-                                          type: "interno",
-                                          index: i,
-                                        });
-                                      }}
-                                      className={` ${activeCheck.find(
-                                        (element) => element.index === i
-                                      )
-                                        ? "checkButtonActive"
-                                        : "checkButton"
-                                        }`}
-                                    >
-                                      SI
-                                    </button>
-                                  </td>
-                                  <CustomTooltip 
-                                    id={`internos-td-saldo-${i}`}
-                                    tooltipText={`Monto Formalizado: ₡ ${new Intl.NumberFormat(["ban", "id"]).format(element[7].toFixed(2))}`} 
-                                    className="td-tooltip" 
-                                  />
-                                  <CustomTooltip 
-                                    id={`internos-td-tasa-${i}`}
-                                    tooltipText={`Plazo Restante (meses): ${new Intl.NumberFormat(["ban", "id"]).format(element[30].toFixed(2))}`} 
-                                    className="td-tooltip" 
-                                  />
-                                </tr>
-                              );
-                            }
-                          })}
+                                <td className="td-hover" id={`internos-td-tasa-${i}`}>{element[18]} </td>
+                                <td>{element[15]} </td>
+                                <td>
+                                  {" "}
+                                  <button
+                                    onClick={() => {
+                                      handleClickStepFourCheck({
+                                        data: element,
+                                        type: "interno",
+                                        index: i,
+                                      });
+                                    }}
+                                    className={` ${activeCheck.find(
+                                      (element) => element.index === i
+                                    )
+                                      ? "checkButtonActive"
+                                      : "checkButton"
+                                      }`}
+                                  >
+                                    SI
+                                  </button>
+                                </td>
+                                <CustomTooltip 
+                                  id={`internos-td-saldo-${i}`}
+                                  tooltipText={`Monto Formalizado: ₡ ${new Intl.NumberFormat(["ban", "id"]).format(element[7].toFixed(2))}`} 
+                                  className="td-tooltip" 
+                                />
+                                <CustomTooltip 
+                                  id={`internos-td-tasa-${i}`}
+                                  tooltipText={`Plazo Restante (meses): ${new Intl.NumberFormat(["ban", "id"]).format(element[30].toFixed(2))}`} 
+                                  className="td-tooltip" 
+                                />
+                              </tr>
+                            );
+                          }
+                        })}
                         {cedula && (
                           <tr>
                             <td colSpan={3}></td>
@@ -338,7 +333,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                         <tr>
                           <td>BAC SAN JOSÉ</td>
                           <td>1</td>
-                          <td>₡35,000</td>
+                          <td><Input value="₡35,000" onChange={() => {}} /></td>
                           <td>₡7,500,000</td>
                           <td>₡125,000</td>
                           <td>19%</td>
@@ -405,112 +400,109 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                     <Table style={{ minWidth: pdf ? "inherit" : "800px" }} responsive>
                       <thead>
                         <tr style={{ borderBottom: "1px solid #e0e0e0" }}>
-                          <th>Entidades</th>
+                          <th>Entidad</th>
                           <th>Tipo de Operación</th>
-                          <th>Ahorro</th>
-                          {/* <th>Monto Formalizado</th> */}
-                          <th>Saldo</th>
-                          <th>Cuota Mensual Real</th>
-                          {/* <th>Plazo Restante (meses)</th> */}
+                          <th>Ahorro Potencial</th>
+                          <th>Saldo Actual</th>
+                          <th>Cuota Mensual</th>
                           <th>Tasa</th>
                           <th>Condición</th>
                           <th className="th__width-medium">Refinancia (Si/No)</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {cedula &&
-                          cedula.debts.data.map((element, i) => {
-                            if (element[2] !== user.firm_c) {
-                              return (
-                                <tr key={`step-four-cedula-${i}`}>
-                                  <td>{element[2]} </td>
-                                  <td>
-                                    {element[13] === 1 && "Directa"}
-                                    {element[13] === 2 &&
-                                      "Creditos con obligacion de desembolso"}
-                                    {element[13] === 3 && "Tarjeta de credito"}
-                                    {element[13] === 4 &&
-                                      "Lineas de utilizacion automatica excepto tarjetas de credito"}
-                                    {element[13] === 5 &&
-                                      "Lineas de credito con compromiso de desembolsar"}
-                                    {element[13] === 6 &&
-                                      "Lineas de credito u operaciones crediticias"}
-                                  </td>
-                                  <td>
-                                    {!pdf ? (
-                                      <>
-                                        {element[10].toFixed(2)}
-                                      </>
-                                    ) : (
-                                      // cedula.selected ? (cedula.selected.externos[`externos${i}`] || "Seleccionar") : "Seleccionar"
-                                      element[7].toFixed(2)
-                                    )}
+                        {cedula?.debts?.data.map((element, i) => {
+                          if (element[2] !== user.firm_c) {
+                            return (
+                              <tr key={`pasivos-externos-tr-${i}`}>
+                                <td>{element[2]} </td>
+                                <td>
+                                  {element[13] === 1 && "NA"}
+                                  {element[13] === 2 &&
+                                    "Creditos con obligacion de desembolso"}
+                                  {element[13] === 3 && "Tarjeta de credito"}
+                                  {element[13] === 4 &&
+                                    "Lineas de utilizacion automatica excepto tarjetas de credito"}
+                                  {element[13] === 5 &&
+                                    "Lineas de credito con compromiso de desembolsar"}
+                                  {element[13] === 6 &&
+                                    "Lineas de credito u operaciones crediticias"}
+                                </td>
+                                <td>
+                                  {!pdf ? (
+                                    <>
+                                      {/* {element[10].toFixed(2)} */}
+                                      {element[10]}
+                                    </>
+                                  ) : (
+                                    // cedula.selected ? (cedula.selected.externos[`externos${i}`] || "Seleccionar") : "Seleccionar"
+                                    element[7].toFixed(2)
+                                  )}
 
-                                  </td>
-                                  {/* <td>
-                                    ₡{" "}
-                                    {new Intl.NumberFormat(["ban", "id"]).format(
-                                      element[8].toFixed(2)
-                                    )}{" "}
-                                  </td> */}
-                                  <td className="td-hover" id={`externos-td-saldo-${i}`}>
-                                    ₡{" "}
-                                    {new Intl.NumberFormat(["ban", "id"]).format(
-                                      element[7].toFixed(2)
-                                    )}{" "}
-                                  </td>
-                                  <td>
-                                    ₡
-                                    {new Intl.NumberFormat(["ban", "id"]).format(
-                                      (element[11] + element[12]).toFixed(2)
-                                    )}{" "}
-                                  </td>
-                                  {/* <td>
-                                    {new Intl.NumberFormat(["ban", "id"]).format(
-                                      element[30].toFixed(2)
-                                    )}{" "}
-                                  </td> */}
+                                </td>
+                                {/* <td>
+                                  ₡{" "}
+                                  {new Intl.NumberFormat(["ban", "id"]).format(
+                                    element[8].toFixed(2)
+                                  )}{" "}
+                                </td> */}
+                                <td className="td-hover" id={`externos-td-saldo-${i}`}>
+                                  ₡{" "}
+                                  {new Intl.NumberFormat(["ban", "id"]).format(
+                                    element[7].toFixed(2)
+                                  )}{" "}
+                                </td>
+                                <td>
+                                  ₡
+                                  {new Intl.NumberFormat(["ban", "id"]).format(
+                                    (element[11] + element[12]).toFixed(2)
+                                  )}{" "}
+                                </td>
+                                {/* <td>
+                                  {new Intl.NumberFormat(["ban", "id"]).format(
+                                    element[30].toFixed(2)
+                                  )}{" "}
+                                </td> */}
 
-                                  <td className="td-hover" id={`externos-td-tasa-${i}`}>{element[18]} </td>
-                                  <td>{element[15]} </td>
-                                  <td>
-                                    {" "}
-                                    <button
-                                      onClick={() => {
-                                        handleClickStepFourCheck({
-                                          data: element,
-                                          type: "externo",
-                                          index: i,
-                                        });
-                                      }}
-                                      className={` ${activeCheck.find(
-                                        (element) => element.index === i
-                                      )
-                                        ? "checkButtonActive"
-                                        : "checkButton"
-                                        }`}
-                                    >
-                                      {activeCheck.find((element) => element.index === i)
-                                        ? "SI"
-                                        : "NO"
-                                      }
-                                    </button>
-                                  </td>
-                                  <CustomTooltip 
-                                    id={`externos-td-saldo-${i}`} 
-                                    tooltipText={`Monto Formalizado: ₡ ${new Intl.NumberFormat(["ban", "id"]).format( element[8].toFixed(2))}`} 
-                                    className="td-tooltip" 
-                                  />
-                                  <CustomTooltip 
-                                    id={`externos-td-tasa-${i}`} 
-                                    tooltipText={`Plazo Restante (meses): ${new Intl.NumberFormat(["ban", "id"]).format( element[30].toFixed(2) )}`} 
-                                    className="td-tooltip"
-                                  />
-                                </tr>
-                              );
-                            }
-                          })}
-
+                                <td className="td-hover" id={`externos-td-tasa-${i}`}>{element[18]} </td>
+                                <td>{element[15]} </td>
+                                <td>
+                                  {" "}
+                                  <button
+                                    onClick={() => {
+                                      handleClickStepFourCheck({
+                                        data: element,
+                                        type: "externo",
+                                        index: i,
+                                      });
+                                    }}
+                                    className={` ${activeCheck.find(
+                                      (element) => element.index === i
+                                    )
+                                      ? "checkButtonActive"
+                                      : "checkButton"
+                                      }`}
+                                  >
+                                    {activeCheck.find((element) => element.index === i)
+                                      ? "SI"
+                                      : "NO"
+                                    }
+                                  </button>
+                                </td>
+                                <CustomTooltip 
+                                  id={`externos-td-saldo-${i}`} 
+                                  tooltipText={`Monto Formalizado: ₡ ${new Intl.NumberFormat(["ban", "id"]).format( element[8].toFixed(2))}`} 
+                                  className="td-tooltip" 
+                                />
+                                <CustomTooltip 
+                                  id={`externos-td-tasa-${i}`} 
+                                  tooltipText={`Plazo Restante (meses): ${new Intl.NumberFormat(["ban", "id"]).format( element[30].toFixed(2) )}`} 
+                                  className="td-tooltip"
+                                />
+                              </tr>
+                            );
+                          }
+                        })}
                         {cedula && (
                           <tr>
                             <td colSpan={3}></td>

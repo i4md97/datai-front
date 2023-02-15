@@ -107,17 +107,8 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
   return (
     <div className={`dashboard verificacion-normativa py-3 step__cards ${animation && !pdf && "step__animation"}`}>
       <StylesContainer size2={statSize} size={sizeSteps.verificacionNormativa || null}>
-				<Row className="pt-4">
-					<Col>
-						{/* <SizeSteps className="d-flex" name="verificacionNormativa" /> */}
-						<h4 className="page-title general-title">Verificación Normativa</h4>
-						<hr />
-					</Col>
-				</Row>
-        <Form>
 
-        </Form>
-        <Row className="justify-content-center">
+        <Row className="pt-4 justify-content-center">
           <Col sm={12}>
             <Card>
               <CardBody>
@@ -141,6 +132,40 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
                       selectedOption="CAPITAL DE TRABAJO"
                       options={normativaOptions.capitalOptions}
                     />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col sm={2}>
+                    <p>MONTO MÍNIMO</p>
+                    <p>₡50,000</p>
+                  </Col>
+                  <Col sm={2}>
+                    <p>MONTO MÁXIMO</p>
+                    <p>₡1,000,000</p>
+                  </Col>
+                  <Col className="d-flex">
+                    <div className="pr-2">
+                      <p>TASA</p>
+                      <p>5.00%</p>
+                    </div>
+                    <div className="pr-2">
+                      <p>TIPO TASA</p>
+                      <p>56800.00%</p>
+                    </div>
+                  </Col>
+                  <Col className="d-flex">
+                    <div className="pr-2">
+                      <p>PLAZO</p>
+                      <p>0</p>
+                    </div>
+                    <div className="pr-2">
+                      <p>FPP (Frecuencia Pago INT)</p>
+                      <p>12</p>
+                    </div>
+                  </Col>
+                  <Col sm={2}>
+                    <p>FPP (Frecuencia Pago Principal)</p>
+                    <p>MENSUAL</p>
                   </Col>
                 </Row>
               </CardBody>
