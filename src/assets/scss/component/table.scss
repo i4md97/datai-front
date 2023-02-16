@@ -71,6 +71,13 @@
     }
   }
 
+  &.text-left {
+    tbody td,
+    th {
+      text-align: left;
+    }
+  }
+
   th,
   td {
     &:first-child {

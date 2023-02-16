@@ -252,11 +252,12 @@ export default function DatosPersonales({
                     <h5 className="color__background pb-2 text-bold">Información Personal</h5>
                     
                     <p className="pb-1 text-color text-semibold">Nombre del cliente / Razón social</p>
-                    <div className="border-content disabled">
-                      <p className="dashboard__total-stat">
-                        {cliente?.interno?.nombre_completo || "n.a"}
-                      </p>
-                    </div>
+                    <Input 
+                      className="editable-field" 
+                      name="nombre_cliente" 
+                      value={cliente?.interno?.nombre_completo || "n.a"} 
+                      onChange={() => {}}
+                    />
                     
                     <p className="pb-1 text-color text-semibold">Representante legal</p>
                     <Input 
@@ -283,32 +284,36 @@ export default function DatosPersonales({
                     />
 
                     <p className="pb-1 text-color text-semibold">Teléfono personal</p>
-                    <div className="border-content disabled">
-                      <p className="dashboard__total-stat">
-                        {cliente?.interno?.tel_cel || "n.a"}
-                      </p>
-                    </div>
+                    <Input 
+                      className="editable-field" 
+                      name="telefono-personal" 
+                      value={cliente?.interno?.tel_cel || "n.a"}
+                      onChange={() => {}}
+                    />
 
                     <p className="pb-1 text-color text-semibold">Teléfono empresa</p>
-                    <div className="border-content disabled">
-                      <p className="dashboard__total-stat">
-                        {cliente?.interno?.tel_trab || "n.a"}
-                      </p>
-                    </div>
+                    <Input 
+                      className="editable-field" 
+                      name="telefono-empresa" 
+                      value={cliente?.interno?.tel_trab || "n.a"}
+                      onChange={() => {}}
+                    />
 
                     <p className="pb-1 text-color text-semibold">Email</p>
-                    <div className="border-content disabled">
-                      <p className="dashboard__total-stat">
-                        {cliente?.interno?.email || "n.a"}
-                      </p>
-                    </div>
+                    <Input 
+                      className="editable-field" 
+                      name="email" 
+                      value={cliente?.interno?.email || "n.a"}
+                      onChange={() => {}}
+                    />
 
                     <p className="pb-1 text-color text-semibold">Sitio WEB</p>
-                    <div className="border-content disabled">
-                      <p className="dashboard__total-stat">
-                        {cliente?.interno?.url || "n.a"}
-                      </p>
-                    </div>
+                    <Input 
+                      className="editable-field" 
+                      name="url" 
+                      value={cliente?.interno?.url || "n.a"}
+                      onChange={() => {}}
+                    />
                     
                     <hr className="d-md-none" />
                   </Col>
