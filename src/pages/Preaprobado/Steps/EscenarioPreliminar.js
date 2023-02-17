@@ -8,7 +8,7 @@ import { escenarioPreliminarOptions } from "../../../db/dropdownsOptions";
 // Components
 import { Row, Col, Card, CardBody, Table, Button, Input, Spinner } from "reactstrap";
 import CustomDropdown from "../../../components/CustomDropdown/CustomDropdown";
-// import CustomTooltip from "../CustomTooltip";
+import { EtapaSolicitud } from "../../../components";
 
 // Styles
 import styled from "styled-components";

@@ -8,6 +8,7 @@ import { Row, Col, Card, CardBody, Button, Form, InputGroup, InputGroupText, Inp
 import CustomDropdown from "../../../components/CustomDropdown/CustomDropdown";
 import UbicacionesDropdowns from "../../../components/Ubicaciones/UbicacionesDropdowns";
 // import SizeSteps from "../../../components/SizeSteps/SizeSteps";
+import { EtapaSolicitud, OptionalInput } from "../../../components";
 
 import {actividadOptions} from "../../../db/dropdownsOptions";
 // import { ubicaciones } from "../../../db/ubicaciones";
@@ -157,72 +158,33 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
                   <Row>
                     <Col>
                       <label className="text-center general-title">Facebook</label>
-                      <InputGroup className="mb-4">
-                        <InputGroupText>
-                          <Input
-                            addon
-                            aria-label="Checkbox for following text input"
-                            type="checkbox"
-                          />
-                        </InputGroupText>
-                        <Input type="text"/>
-                      </InputGroup>
+                      <OptionalInput 
+                        name="facebook"
+                      />
                     </Col>
                     <Col>
                       <label className="text-center general-title">Instagram</label>
-                      
-                      <InputGroup className="mb-4">
-                        <InputGroupText>
-                          <Input
-                            addon
-                            aria-label="Checkbox for following text input"
-                            type="checkbox"
-                          />
-                        </InputGroupText>
-                        <Input type="text"/>
-                      </InputGroup>
+                      <OptionalInput 
+                        name="instagram"
+                      />
                     </Col>
                     <Col>
-                      <label className="text-center general-title">Linkedin</label>
-                      
-                      <InputGroup className="mb-4">
-                        <InputGroupText>
-                          <Input
-                            addon
-                            aria-label="Checkbox for following text input"
-                            type="checkbox"
-                          />
-                        </InputGroupText>
-                        <Input type="text"/>
-                      </InputGroup>
+                      <label className="text-center general-title">LinkedIn</label>
+                      <OptionalInput 
+                        name="linkedin"
+                      />
                     </Col>
                     <Col>
                       <label className="text-center general-title">Twitter</label>
-                      
-                      <InputGroup className="mb-4">
-                        <InputGroupText>
-                          <Input
-                            addon
-                            aria-label="Checkbox for following text input"
-                            type="checkbox"
-                          />
-                        </InputGroupText>
-                        <Input type="text"/>
-                      </InputGroup>
+                      <OptionalInput 
+                        name="twitter"
+                      />
                     </Col>
                     <Col>
                       <label className="text-center general-title">Tiktok</label>
-                      
-                      <InputGroup className="mb-4">
-                        <InputGroupText>
-                          <Input
-                            addon
-                            aria-label="Checkbox for following text input"
-                            type="checkbox"
-                          />
-                        </InputGroupText>
-                        <Input type="text"/>
-                      </InputGroup>
+                      <OptionalInput 
+                        name={"tiktok"}
+                      />
                     </Col>
                   </Row>
                   <hr />
@@ -266,7 +228,7 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
                 <CardBody>
                   <Row className="pb-3">
                     <Col>
-                      <p>MERCADO</p>
+                      <p className="text-bold">MERCADO</p>
                     </Col>
                   </Row>
                   <Row>
@@ -297,7 +259,7 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
                 <CardBody>
                   <Row className="pb-3">
                     <Col>
-                      <p>DATOS DEL DUEÑO</p>
+                      <p className="text-bold">DATOS DEL DUEÑO</p>
                     </Col>
                   </Row>
                   <Row>
@@ -523,49 +485,7 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
                 </CardBody>
               </Card>
 
-              <Card>
-                <CardBody>
-                  <Row className="pb-3">
-                    <Col>
-                      <p>ETAPA DE LA SOLICITUD</p>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      <Row>
-                        <Col>
-                          <label className="text-center general-title">ESTATUS</label>
-                          <CustomDropdown 
-                            className=""
-                            defaultOption="Seleccionar"
-                            options={actividadOptions.statusOptions}
-                          />
-                        </Col>
-                        <Col>
-                          <label className="text-center general-title">ETAPA</label>
-                          <CustomDropdown 
-                            className=""
-                            defaultOption="Seleccionar"
-                            options={actividadOptions.stageOptions}
-                          />
-                        </Col>
-                        <Col>
-                          <label className="text-center general-title">STAND BY</label>
-                          <CustomDropdown 
-                            className=""
-                            defaultOption="Seleccionar"
-                            options={actividadOptions.standByOptions}
-                          />
-                        </Col>
-                      </Row>
-                    </Col>
-                    <Col>
-                      <label className="text-center general-title">DETALLE</label>
-                      <Input type="text" />
-                    </Col>
-                  </Row>
-                </CardBody>
-              </Card>
+              <EtapaSolicitud />
             </Col>
           </Row>
         </Form>
