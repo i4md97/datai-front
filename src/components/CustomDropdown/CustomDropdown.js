@@ -38,7 +38,6 @@ const CustomDropdown = ({
 
   const onChangeHandler = (option) => {
     return () => {
-      console.log('!!!');
       setOptionSelected(option);
       if (callback) {
         callback(option);

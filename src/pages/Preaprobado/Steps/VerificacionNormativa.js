@@ -4,17 +4,13 @@ import React, { useEffect, useState, useContext } from "react";
 import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
 
 // Components
-import { Card, CardBody, Row, Col, Form, Input, Button, Spinner } from "reactstrap";
-import CustomDropdown from "../../../components/CustomDropdown/CustomDropdown";
-// import SizeSteps from "../../../components/SizeSteps/SizeSteps";
+import { Card, CardBody, Row, Col } from "reactstrap";
 import PdfHeader from "../../../components/PdfHeader/PdfHeader";
-
-import { normativaOptions } from "../../../db/dropdownsOptions";
 
 // Styles
 import styled from "styled-components";
 
-const StylesContainer = styled.div`
+const SizeStep = styled.div`
   th,
   .font-card,
   .dashboard__total-stat {
@@ -24,19 +20,25 @@ const StylesContainer = styled.div`
 `;
 
 export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }) {
-  const { sizeSteps, statSize, changeStep } = useContext(PreaprobadoContext);
-  const [isSaving, setIsSaving] = useState(false);
+  const { sizeSteps, statSize } = useContext(PreaprobadoContext);
 
   const [data, setData] = useState({
     interno: [],
     cic: [],
   });
 
-  const [referencias] = useState({
+  const [referencias, setReferencias] = useState({
     interno: {
       riesgo_cumpl: ["NO TIENE", "Alertas Confirmadas", "Alertas Pendientes"],
       score_atraso: ["AA", "A", "B", "C", "D", "E", "N", "SW"],
-      rango_atraso_dias: ["0 días", "1 - 30 días", "31 - 60 días", "61 - 90 días", "91 - 120 días", "120 días"],
+      rango_atraso_dias: [
+        "0 días",
+        "1 - 30 días",
+        "31 - 60 días",
+        "61 - 90 días",
+        "91 - 120 días",
+        "120 días",
+      ],
       niv_riesgo: ["BAJO", "MEDIO", "ALTO", "ALTO NO VIABLE"],
       cat_riesgo: ["A1", "A2", "B1", "C1", "D", "E"],
     },
@@ -51,147 +53,40 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
     }
   }, [cedula]);
 
-  const labelPrograma = [
-    "MONTO MÍNIMO",
-    "MONTO MÁXIMO",
-    "Tasa",
-    "TIPO TASA",
-    "PLAZO",
-    "FPP (Frecuencia Pago INT)",
-    "FPP (Frecuencia Pago Principal)"
-  ];
-
   const labelInterno = [
     "Riesgo de Cumplimiento",
     "Score de Atraso",
-    "Rango de Atraso",
-    "Dias de Atraso Máximo",
+    "Rango de Atrasos",
+    "Días de Atrasos",
     "Prorrogas Aplicadas",
     "Nivel de Riesgo",
-    "Categoria de Riesgo"
+    "Categoria de Riesgo",
   ];
   const labelCic = [
-    "Calificación Global CicNivel CHP",
-    "Puntaje CIC",
-    "Dias de Atraso en CIC",
-    "Nivel CHP SBD",
-    "Puntaje CIC SBD",
-    "Dias de Atraso CIC SBD",
+    "Calificación Global Cic",
+    "Puntaje Cic",
+    "Días de Atraso en Cic",
+    "Calificación Global Cic Sbd",
+    "Puntaje Cic Sbd",
+    "Días de Atraso en Cic Sdb",
     "Operaciones con Estado > 1",
-    "Historial - Meses en CIC"
+    "Historial – Meses en CIC",
   ];
   const labelValoracionExterna = [
-    "Juicios Activos",
-    "Referencias Comerciales",
-    "Embargos Bienes Muebles",
-    "Embargos Bienes INMuebles",
-    "Juicios Históricos",
-    "Referencias Comerciales Históricas",
-    "Bienes Prendados",
-    "Bienes Hipotecados"
-  ];
+    "Juicios",
+    "Referencias",
+    "Embargos Bienes Inmuebles",
+    "Embargos Bienes Inmuebles",
 
-  const labelImpuestosReportados = [
-    "Ingreso reportado útimos meses",
-    "Impuestos reportados últimos meses"
   ];
-
-  const saveAndContinueHandler = () => {
-    setIsSaving(true);
-    setTimeout(() => {
-      setIsSaving(false);
-      changeStep(3);
-    }, 1500);
-  }
 
   return (
     <div className={`dashboard verificacion-normativa py-3 step__cards ${animation && !pdf && "step__animation"}`}>
-      <StylesContainer size2={statSize} size={sizeSteps.verificacionNormativa || null}>
-
-        <Row className="pt-4 justify-content-center">
-          <Col sm={12}>
-            <Card>
-              <CardBody>
-                <Row>
-                  <Col sm={6}>
-                    <label className="text-center general-title text-bold">PROGRAMA APLICABLE</label>
-                    <CustomDropdown 
-                      className="w-100" 
-                      classNameButton="bg-light"
-                      defaultOption="Sleccionar"
-                      selectedOption="SBP MICRO CRÉDITO"
-                      options={normativaOptions.creditoOptions}
-                    />
-                  </Col>
-                  <Col sm={6}>
-                    <label className="text-center general-title text-bold">PRODUCTO APLICABLE</label>
-                    <CustomDropdown 
-                      className="w-100" 
-                      classNameButton="bg-light"
-                      defaultOption="Sleccionar"
-                      selectedOption="CAPITAL DE TRABAJO"
-                      options={normativaOptions.capitalOptions}
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col sm={2}>
-                    <p>MONTO MÍNIMO</p>
-                    <p>₡50,000</p>
-                  </Col>
-                  <Col sm={2}>
-                    <p>MONTO MÁXIMO</p>
-                    <p>₡1,000,000</p>
-                  </Col>
-                  <Col className="d-flex">
-                    <div className="pr-2">
-                      <p>TASA</p>
-                      <p>5.00%</p>
-                    </div>
-                    <div className="pr-2">
-                      <p>TIPO TASA</p>
-                      <p>56800.00%</p>
-                    </div>
-                  </Col>
-                  <Col className="d-flex">
-                    <div className="pr-2">
-                      <p>PLAZO</p>
-                      <p>0</p>
-                    </div>
-                    <div className="pr-2">
-                      <p>FPP (Frecuencia Pago INT)</p>
-                      <p>12</p>
-                    </div>
-                  </Col>
-                  <Col sm={2}>
-                    <p>FPP (Frecuencia Pago Principal)</p>
-                    <p>MENSUAL</p>
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </Col>
-          {!cedula && labelPrograma.map((element, i) => {
-              return (
-                <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`interno-card-${i}`}>
-                  <Card className="aesthetic-card green">
-                    <CardBody className={`card-body card-error`}>
-                      <div className="card__title">
-                        <h5 className="text-semibold">{element}</h5>{" "}
-                      </div>
-                      <p className="mt-2">Política:</p>
-                      <p className="total-stat text-center"></p>
-                    </CardBody>
-                  </Card>
-                </Col>
-              );
-            })}
-        </Row>
-
+      <SizeStep size2={statSize} size={sizeSteps.verificacionNormativa || null}>
 				<Row className="pt-4">
 					<Col>
 						{/* <SizeSteps className="d-flex" name="verificacionNormativa" /> */}
-						<h4 className="page-title general-title">INDICADORES INTERNOS</h4>
+						<h4 className="page-title general-title">Interno</h4>
 						<hr />
 					</Col>
 				</Row>
@@ -204,7 +99,6 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
                       <div className="card__title">
                         <h5 className="text-semibold">{element}</h5>{" "}
                       </div>
-                      <p className="mt-2">Política:</p>
                       <p className="total-stat text-center"></p>
                     </CardBody>
                   </Card>
@@ -260,7 +154,7 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
         
 				<Row>
 					<Col>
-						<h4 className="page-title general-title">INDICADORES EXTERNOS CIC</h4>
+						<h4 className="page-title general-title">CIC</h4>
 						<hr />
 					</Col>
 				</Row>
@@ -275,7 +169,6 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
                       <div className="card__title">
                         <h5 className="text-semibold">{element}</h5>{" "}
                       </div>
-                      <p className="mt-2">Política:</p>
                       <p className="total-stat text-center"></p>
                     </CardBody>
                   </Card>
@@ -334,121 +227,29 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
         { labelValoracionExterna.length > 0 && 
           <Row>
             <Col>
-                <h4 className="page-title pt-0 general-title">INDICADORES EXTERNOS BURÓ</h4>
+                <h4 className="page-title pt-0 general-title">Valoración Externa</h4>
                 <hr/>
             </Col>
           </Row>
         }
         <Row className="justify-content-center">
           {labelValoracionExterna.map((element, i) => {
-            return (
-              <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`valoracion-card-${i}`}>
-                <Card className="aesthetic-card yellow">
-                  <CardBody className={`card-body card-error`}>
-                    <div className="card__title mb-1">
-                      <h5 className="text-semibold">{element}</h5>{" "}
-                    </div>
-                    <p className="mt-2">Política:</p>
-                    <p className="total-stat text-center"></p>
-                  </CardBody>
-                </Card>
-              </Col>
-            );
-          })}
+              return (
+                <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`valoracion-card-${i}`}>
+                  <Card className="aesthetic-card yellow">
+                    <CardBody className={`card-body card-error`}>
+                      <div className="card__title mb-1">
+                        <h5 className="text-semibold">{element}</h5>{" "}
+                      </div>
+                      <p className="mt-2">Política:</p>
+                      <p className="total-stat text-center"></p>
+                    </CardBody>
+                  </Card>
+                </Col>
+              );
+            })}
         </Row>
-
-        { labelImpuestosReportados.length > 0 && 
-          <Row>
-            <Col>
-                <h4 className="page-title pt-0 general-title">Ingresos e impuestos reportados según BURÓ</h4>
-                <hr/>
-            </Col>
-          </Row>
-        }
-        <Row className="justify-content-start">
-          {labelImpuestosReportados.map((element, i) => {
-            return (
-              <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`valoracion-card-${i}`}>
-                <Card className="aesthetic-card yellow">
-                  <CardBody className={`card-body card-error`}>
-                    <div className="card__title mb-1">
-                      <h5 className="text-semibold">{element}</h5>{" "}
-                    </div>
-                    <p className="mt-2">Sociedad Reportada:</p>
-                    <p className="total-stat text-center"></p>
-                  </CardBody>
-                </Card>
-              </Col>
-            );
-          })}
-        </Row>
-        
-        <Row>
-          <Col>
-            <Card>
-              <CardBody>
-                <Row className="pb-4">
-                  <Col sm={12}>
-                    <p>ETAPA DE LA SOLICITUD</p>
-                  </Col>
-                </Row>
-                <Row>
-                    <Col>
-                      <Row>
-                        <Col>
-                          <label className="text-center general-title">ESTATUS</label>
-                          <CustomDropdown 
-                            className=""
-                            defaultOption="Seleccionar"
-                            options={normativaOptions.statusOptions}
-                          />
-                        </Col>
-                        <Col>
-                          <label className="text-center general-title">ETAPA</label>
-                          <CustomDropdown 
-                            className=""
-                            defaultOption="Seleccionar"
-                            options={normativaOptions.stageOptions}
-                          />
-                        </Col>
-                        <Col>
-                          <label className="text-center general-title">STAND BY</label>
-                          <CustomDropdown 
-                            className=""
-                            defaultOption="Seleccionar"
-                            options={normativaOptions.standByOptions}
-                          />
-                        </Col>
-                      </Row>
-                    </Col>
-                    <Col>
-                      <label className="text-center general-title">DETALLE</label>
-                      <Input type="text" />
-                    </Col>
-                  </Row>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col>
-          <Button color="primary" className="action-button" onClick={saveAndContinueHandler}>
-            Guardar y Continuar
-            {isSaving && 
-              <Spinner
-                as="span"
-                animation="grow"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-                className="ml-2"
-              />
-            }
-          </Button>
-          </Col>
-        </Row>
-      </StylesContainer>
+      </SizeStep>
     </div>
   );
 }
