@@ -1,6 +1,6 @@
 
 import { Col, Row, Card, CardBody, Input } from "reactstrap";
-import CustomDropdown from "../CustomDropdown/CustomDropdown";
+import { CustomDropdown } from "../";
 
 import { etapaSolicitudOptions } from "../../db/dropdownsOptions";
 

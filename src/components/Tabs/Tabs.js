@@ -75,7 +75,7 @@ export default function Tabs({ menuInicio }) {
             value = "Escenario Preliminar";
             break;
           case 6:
-            value = "Capacidad de Pago";
+            value = "Capacidad de Pago - BG y FNE";
             break;
           case 7:
             value = "Estructura de Financiamiento";

@@ -108,7 +108,7 @@ export default function Preaprobado({ animation, activeStep, setActiveStep }) {
     { id: "step-3", prueba: "Step 3", tooltipText: "Verificación de Normativa" },
     { id: "step-4", prueba: "Step 4", tooltipText: "Detalles de Pasivos" },
     { id: "step-5", prueba: "Step 5", tooltipText: "Escenario Preliminar" },
-    { id: "step-6", prueba: "Step 6", tooltipText: "Capacidad de Pago" },
+    { id: "step-6", prueba: "Step 6", tooltipText: "Capacidad de Pago - BG y FNE" },
     { id: "step-7", prueba: "Step 7", tooltipText: "Estructura de Financiamiento" },
     { id: "step-8", prueba: "Step 8", tooltipText: "Resolución" },
   ];

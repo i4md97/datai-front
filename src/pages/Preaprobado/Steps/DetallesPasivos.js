@@ -6,8 +6,10 @@ import UsuarioContext from "../../../context/usuario/UsuarioContext";
 
 // Components
 import { Row, Col, Table, Card, CardBody, Input, Button, Spinner } from "reactstrap";
+import { 
+  CustomDropdown 
+} from "../../../components";
 import CustomTooltip from "../CustomTooltip";
-import CustomDropdown from "../../../components/CustomDropdown/CustomDropdown";
 
 // Styles
 import styled from "styled-components";

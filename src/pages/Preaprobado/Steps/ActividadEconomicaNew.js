@@ -4,14 +4,15 @@ import React,{ useContext, useState } from "react";
 import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
 
 // Components
-import { Row, Col, Card, CardBody, Button, Form, InputGroup, InputGroupText, Input, Spinner } from "reactstrap";
-import CustomDropdown from "../../../components/CustomDropdown/CustomDropdown";
+import { Row, Col, Card, CardBody, Button, Form, Input, Spinner } from "reactstrap";
+import { 
+  EtapaSolicitud, 
+  OptionalInput, 
+  CustomDropdown 
+} from "../../../components";
 import UbicacionesDropdowns from "../../../components/Ubicaciones/UbicacionesDropdowns";
-// import SizeSteps from "../../../components/SizeSteps/SizeSteps";
-import { EtapaSolicitud, OptionalInput } from "../../../components";
 
 import {actividadOptions} from "../../../db/dropdownsOptions";
-// import { ubicaciones } from "../../../db/ubicaciones";
 
 // Styles
 import styled from "styled-components";
@@ -46,7 +47,6 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
           <Row className="pt-4">
             <Col sm={12} lg={12}>
               <Card>
-                {/* <SizeSteps className="d-flex justify-content-end" name="actividadEconomica" /> */}
                 <CardBody>
                   <Row className="pb-3">
                     <Col>

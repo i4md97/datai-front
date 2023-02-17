@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import { Card, CardBody, Row, Col, Spinner, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, Button, Input } from "reactstrap";
-import CustomDropdown from "../../../components/CustomDropdown/CustomDropdown";
-// import SizeSteps from "../../../components/SizeSteps/SizeSteps";
+import { CustomDropdown } from "../../../components";
 
 import styled from "styled-components";
 import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
@@ -119,7 +118,6 @@ export default function DatosPersonales({
       </Row>
       <Row className="jusfity-content-center">
         <Col sm={12} md={6}>
-          {/* {cedula && <SizeSteps className="d-block d-md-none d-flex justify-content-end" name="datosPersonales"/>} */}
           <Card disabled={true} >
             <CardBody>
               <Check className="custom-check check-success" setCheckForm={setCheckForm} checkForm={checkForm} id="checkOne"/>
@@ -243,7 +241,6 @@ export default function DatosPersonales({
         </Col>
 
         <Col sm={12} md={6}>
-          {/* {cedula && <SizeSteps className="d-none d-lg-flex" name="datosPersonales"/>} */}
           <StylesContainer className="row m-0 p-0" size={sizeSteps.datosPersonales} size2={size}>
             <Card>
               <CardBody>

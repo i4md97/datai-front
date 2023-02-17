@@ -10,7 +10,7 @@ import ChevronDownIcon from 'mdi-react/ChevronDownIcon';
 import "./CustomDropdown.scss";
 import { useEffect } from "react";
 
-const CustomDropdown = ({
+export const CustomDropdown = ({
   id = "", 
   className = "", 
   disabled = false, 
@@ -38,7 +38,6 @@ const CustomDropdown = ({
 
   const onChangeHandler = (option) => {
     return () => {
-      console.log('!!!');
       setOptionSelected(option);
       if (callback) {
         callback(option);
@@ -68,5 +67,3 @@ const CustomDropdown = ({
     </>
   )
 }
-
-export default CustomDropdown;

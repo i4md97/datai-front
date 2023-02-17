@@ -5,7 +5,7 @@ import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext
 
 // Components
 import { Row, Col, Card, CardBody, Button } from "reactstrap";
-import CustomDropdown from "../../../components/CustomDropdown/CustomDropdown";
+import { CustomDropdown } from "../../../components";
 import SizeSteps from "../../../components/SizeSteps/SizeSteps";
 
 // Styles

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Row, Col } from "reactstrap";
-import CustomDropdown from "../CustomDropdown/CustomDropdown";
+import { CustomDropdown } from "../";
 
 import { ubicaciones } from "../../db/ubicaciones";
 

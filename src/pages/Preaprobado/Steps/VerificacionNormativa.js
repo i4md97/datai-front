@@ -4,9 +4,11 @@ import React, { useEffect, useState, useContext } from "react";
 import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
 
 // Components
-import { Card, CardBody, Row, Col, Form, Input, Button, Spinner } from "reactstrap";
-import CustomDropdown from "../../../components/CustomDropdown/CustomDropdown";
-// import SizeSteps from "../../../components/SizeSteps/SizeSteps";
+import { Card, CardBody, Row, Col, Button, Spinner } from "reactstrap";
+import { 
+  EtapaSolicitud,
+  CustomDropdown
+} from "../../../components";
 import PdfHeader from "../../../components/PdfHeader/PdfHeader";
 
 import { normativaOptions } from "../../../db/dropdownsOptions";
@@ -190,7 +192,6 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
 
 				<Row className="pt-4">
 					<Col>
-						{/* <SizeSteps className="d-flex" name="verificacionNormativa" /> */}
 						<h4 className="page-title general-title">INDICADORES INTERNOS</h4>
 						<hr />
 					</Col>
@@ -385,49 +386,7 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
         
         <Row>
           <Col>
-            <Card>
-              <CardBody>
-                <Row className="pb-4">
-                  <Col sm={12}>
-                    <p>ETAPA DE LA SOLICITUD</p>
-                  </Col>
-                </Row>
-                <Row>
-                    <Col>
-                      <Row>
-                        <Col>
-                          <label className="text-center general-title">ESTATUS</label>
-                          <CustomDropdown 
-                            className=""
-                            defaultOption="Seleccionar"
-                            options={normativaOptions.statusOptions}
-                          />
-                        </Col>
-                        <Col>
-                          <label className="text-center general-title">ETAPA</label>
-                          <CustomDropdown 
-                            className=""
-                            defaultOption="Seleccionar"
-                            options={normativaOptions.stageOptions}
-                          />
-                        </Col>
-                        <Col>
-                          <label className="text-center general-title">STAND BY</label>
-                          <CustomDropdown 
-                            className=""
-                            defaultOption="Seleccionar"
-                            options={normativaOptions.standByOptions}
-                          />
-                        </Col>
-                      </Row>
-                    </Col>
-                    <Col>
-                      <label className="text-center general-title">DETALLE</label>
-                      <Input type="text" />
-                    </Col>
-                  </Row>
-              </CardBody>
-            </Card>
+            <EtapaSolicitud />
           </Col>
         </Row>
 

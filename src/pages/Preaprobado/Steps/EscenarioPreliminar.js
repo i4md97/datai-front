@@ -7,8 +7,7 @@ import { escenarioPreliminarOptions } from "../../../db/dropdownsOptions";
 
 // Components
 import { Row, Col, Card, CardBody, Table, Button, Input, Spinner } from "reactstrap";
-import CustomDropdown from "../../../components/CustomDropdown/CustomDropdown";
-import { EtapaSolicitud } from "../../../components";
+import { CustomDropdown } from "../../../components";
 
 // Styles
 import styled from "styled-components";
@@ -63,63 +62,67 @@ export default function EscenarioPreliminar({ animation, StepFourCheck, pdf }) {
                 <Row>
                   <Col xs={12} md={6}>
                     <Table className="text-left" responsive style={{ minWidth: pdf ? "inherit" : "450px" }}>
-                      <tr>
-                        <th className="font-weight-normal">Saldo a Refinanciar</th>
-                        <td>₡7,678,000</td>
-                      </tr>
-                      <tr>
-                        <th className="py-4">PRODUCTOS CREDITICIOS PARA REFINANCIAR</th>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <th className="pt-0">
-                          <CustomDropdown 
-                            options={escenarioPreliminarOptions.productosOptions}
-                            selectedOption="REFINANCIAMIENTO"
-                            classNameButton="mb-0"
-                          />
-                        </th>
-                        <td className="p-0"><Input value="₡7,678,000" onChange={() => {}} /></td>
-                      </tr>
-                      <tr>
-                        <th className="pt-0">
-                          <CustomDropdown 
-                            options={escenarioPreliminarOptions.productosOptions}
-                            selectedOption="REFINANCIAMIENTO"
-                            classNameButton="mb-0"
-                          />
-                        </th>
-                        <td className="p-0"><Input value="₡0" onChange={() => {}} /></td>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">Saldo a Refinanciar</th>
-                        <td>₡7,678,000</td>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">Balance</th>
-                        <td>₡0.00</td>
-                      </tr>
+                      <tbody>
+                        <tr>
+                          <th className="font-weight-normal">Saldo a Refinanciar</th>
+                          <td>₡7,678,000</td>
+                        </tr>
+                        <tr>
+                          <th className="py-4">PRODUCTOS CREDITICIOS PARA REFINANCIAR</th>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th className="pt-0">
+                            <CustomDropdown 
+                              options={escenarioPreliminarOptions.productosOptions}
+                              selectedOption="REFINANCIAMIENTO"
+                              classNameButton="mb-0"
+                            />
+                          </th>
+                          <td className="p-0"><Input value="₡7,678,000" onChange={() => {}} /></td>
+                        </tr>
+                        <tr>
+                          <th className="pt-0">
+                            <CustomDropdown 
+                              options={escenarioPreliminarOptions.productosOptions}
+                              selectedOption="REFINANCIAMIENTO"
+                              classNameButton="mb-0"
+                            />
+                          </th>
+                          <td className="p-0"><Input value="₡0" onChange={() => {}} /></td>
+                        </tr>
+                        <tr>
+                          <th className="font-weight-normal">Saldo a Refinanciar</th>
+                          <td>₡7,678,000</td>
+                        </tr>
+                        <tr>
+                          <th className="font-weight-normal">Balance</th>
+                          <td>₡0.00</td>
+                        </tr>
+                      </tbody>
                     </Table>
                   </Col>
                   <Col xs={12} md={6}>
                     <Table className="text-left" responsive style={{ minWidth: pdf ? "inherit" : "450px" }}>
-                      <tr>
-                        <th className="font-weight-normal">Ahorro Potencial</th>
-                        <td>₡64,000</td>
-                      </tr>
-                      <tr>
-                        <th colSpan="2" className="py-4">PLAN DE INVERSÓN</th>
-                      </tr>
-                      <tr>
-                        <td colSpan="2" className="font-weight-normal">Refinanciamiento Deudas</td>
-                      </tr>
-                      <tr>
-                        <td colSpan="2" className="font-weight-normal">0</td>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">Ahorro del Refinanciamiento</th>
-                        <td>₡64,000</td>
-                      </tr>
+                      <tbody>
+                        <tr>
+                          <th className="font-weight-normal">Ahorro Potencial</th>
+                          <td>₡64,000</td>
+                        </tr>
+                        <tr>
+                          <th colSpan="2" className="py-4">PLAN DE INVERSÓN</th>
+                        </tr>
+                        <tr>
+                          <td colSpan="2" className="font-weight-normal">Refinanciamiento Deudas</td>
+                        </tr>
+                        <tr>
+                          <td colSpan="2" className="font-weight-normal">0</td>
+                        </tr>
+                        <tr>
+                          <th className="font-weight-normal">Ahorro del Refinanciamiento</th>
+                          <td>₡64,000</td>
+                        </tr>
+                      </tbody>
                     </Table></Col>
                 </Row>
               </CardBody>
@@ -137,63 +140,69 @@ export default function EscenarioPreliminar({ animation, StepFourCheck, pdf }) {
                 <Row>
                   <Col xs={12} md={6}>
                     <Table className="text-left" responsive style={{ minWidth: pdf ? "inherit" : "450px" }}>
-                      <tr>
-                        <th className="font-weight-normal">CAPITAL DE TRABAJO</th>
-                        <td className="p-0"><Input value="₡1,500,000" onChange={() => {}} /></td>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">CAPITAL DE INVERSIÓN</th>
-                        <td className="p-0"><Input /></td>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">GASTOS PERSONALES</th>
-                        <td className="p-0"><Input /></td>
-                      </tr>
-                      <tr>
-                        <th></th>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">Crédito Empresarial y Personal</th>
-                        <td>₡1,500,000</td>
-                      </tr>
-                      <tr>
-                        <th></th>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">TOTAL A FINANCIAR</th>
-                        <td>₡9,178,000</td>
-                      </tr>
+                      <table>
+                        <tr>
+                          <th className="font-weight-normal">CAPITAL DE TRABAJO</th>
+                          <td className="p-0"><Input value="₡1,500,000" onChange={() => {}} /></td>
+                        </tr>
+                        <tr>
+                          <th className="font-weight-normal">CAPITAL DE INVERSIÓN</th>
+                          <td className="p-0"><Input /></td>
+                        </tr>
+                        <tr>
+                          <th className="font-weight-normal">GASTOS PERSONALES</th>
+                          <td className="p-0"><Input /></td>
+                        </tr>
+                        <tr>
+                          <th></th>
+                        </tr>
+                        <tr>
+                          <th className="font-weight-normal">Crédito Empresarial y Personal</th>
+                          <td>₡1,500,000</td>
+                        </tr>
+                        <tr>
+                          <th></th>
+                        </tr>
+                        <tr>
+                          <th className="font-weight-normal">TOTAL A FINANCIAR</th>
+                          <td>₡9,178,000</td>
+                        </tr>
+                      </table>
                     </Table>
                   </Col>
                   <Col xs={12} md={6}>
                     <Table className="text-left" responsive style={{ minWidth: pdf ? "inherit" : "450px" }}>
-                      <tr>
-                        <td colSpan={2} className="p-0">
-                          <Input placeholder="Compra de materia prima para Restaurante" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colSpan={2} className="p-0">
-                          <Input />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colSpan={2} className="p-0">
-                          <Input />
-                        </td>
-                      </tr>
-                      <tr>
-                        <th></th>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">Cuota por Financiamiento Empresarial y Personal</th>
-                        <td>₡95,000</td>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">Incremento cuota / Ahorro mensual por créditos nuevos</th>
-                        <td>₡31,000</td>
-                      </tr>
-                    </Table></Col>
+                      <table>
+
+                        <tr>
+                          <td colSpan={2} className="p-0">
+                            <Input placeholder="Compra de materia prima para Restaurante" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colSpan={2} className="p-0">
+                            <Input />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colSpan={2} className="p-0">
+                            <Input />
+                          </td>
+                        </tr>
+                        <tr>
+                          <th></th>
+                        </tr>
+                        <tr>
+                          <th className="font-weight-normal">Cuota por Financiamiento Empresarial y Personal</th>
+                          <td>₡95,000</td>
+                        </tr>
+                        <tr>
+                          <th className="font-weight-normal">Incremento cuota / Ahorro mensual por créditos nuevos</th>
+                          <td>₡31,000</td>
+                        </tr>
+                      </table>
+                    </Table>
+                  </Col>
                 </Row>
               </CardBody>
             </Card>

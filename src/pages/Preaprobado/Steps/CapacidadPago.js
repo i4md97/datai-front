@@ -5,11 +5,13 @@ import UsuarioContext from "../../../context/usuario/UsuarioContext";
 import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
 
 // Components
-import { Row, Col, Card, CardBody, Table } from "reactstrap";
+import { Row, Col, Card, CardBody, Table, Input } from "reactstrap";
+import { EtapaSolicitud } from "../../../components";
 // import SizeSteps from "../../../components/SizeSteps/SizeSteps";
 
 // Styles
 import styled from "styled-components";
+import ABTestingAnalytics from "../../../components/Charts/ABTestingAnalytics";
 
 const StylesContainer = styled.div`
   th,
@@ -458,97 +460,156 @@ export default function CapacidadPago({
 
   }
 
+  const evolucionChartData = [
+    { name: 'Nov-22', a: 33, b: 33 },
+    { name: 'Dec-22', a: 53, b: 25 },
+    { name: 'Jan-23', a: 85, b: 35 },
+    { name: 'Feb-23', a: 41, b: 51 },
+    { name: 'Mar-23', a: 44, b: 54 },
+    { name: 'Apr-23', a: 65, b: 76 },
+    { name: 'May-23', a: 45, b: 90 },
+    { name: 'Jun-23', a: 45, b: 90 },
+    { name: 'Jul-23', a: 45, b: 90 },
+    { name: 'Aug-23', a: 45, b: 90 },
+    { name: 'Sep-23', a: 45, b: 90 },
+    { name: 'Oct-23', a: 45, b: 90 },
+    { name: 'Nov-23', a: 45, b: 90 },
+  ];
+
   return (
     <div className={`dashboard capacidad-pago capacidad-pago step__cards ${animation && !pdf && "step__animation"}`}>
-      {/* <Row>
-        <Col>
-            <SizeSteps className="d-flex" name="capacidadPago" />
-            <h4 className="page-title general-title">CAPACIDAD DE PAGO</h4>
-        </Col>
-      </Row> */}
       <Row className="pt-4">
         <Col>
           <StylesContainer pdf={pdf} size2={size} size={sizeSteps.capacidadPago || null}>
-            <Card className="">
-              <CardBody>
-                <Table responsive style={{ minWidth: pdf ? "inherit" : "910px" }}>
-                  <thead>
-                    <tr style={{ borderBottom: "1px solid #e0e0e0" }}>
-                      <th className="w-50">RUBROS</th>
-                      <th className="w-25">SITUACIÓN PREVIA</th>
-                      <th className="w-25">SITUACIÓN ACTUAL</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {tablaCapacidadPago.map((element, index) => 
-                      <tr align="center" key={`table-row-${index}`} className={`border-bottom${element.borderBottom ? ' break' : ''}`}>
-                        <td className={`text-left d-flex w-100 aling-items-center ${element.type === "input" ? "pt-4" : ''}`}>
-                          {element.title}
-                        </td>
-                        <td className={element.type === "input" ? "px-0" : ''}>{!element.none && getTypeOfTable(element.previa, element.type)}</td>
-                        <td>{element.type !== "input" && getTypeOfTable(element.actual, element.type)}</td>
-                      </tr>
-                    )}
-                  </tbody>
-                </Table>
-              </CardBody>
-            </Card>
-            <h3 className="pb-3">Sensibilización</h3>
             <Card>
               <CardBody>
-                <Table>
-                  <thead>
-                    <tr>
-                      <th>Escenarios</th>
-                      <th>0</th>
-                      <th>1</th>
-                      <th>2</th>
-                      <th>3</th>
-                      <th>4</th>
-                      <th>5</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Estrés Tasa Colones</td>
-                      <td>0%</td>
-                      <td>0.25%</td>
-                      <td>1.00%</td>
-                      <td>2.00%</td>
-                      <td>4.00%</td>
-                      <td>5.00%</td>
-                    </tr>
-                    <tr>
-                      <td>Estrés Tasa Dólares</td>
-                      <td>0%</td>
-                      <td>0.10%</td>
-                      <td>0.25%</td>
-                      <td>1.00%</td>
-                      <td>1.75%</td>
-                      <td>2.50%</td>
-                    </tr>
-                    <tr>
-                      <td>Estrés Tipo Cambio</td>
-                      <td>0%</td>
-                      <td>5.00%</td>
-                      <td>10.00%</td>
-                      <td>15.00%</td>
-                      <td>20.00%</td>
-                      <td>25.00%</td>
-                    </tr>
-                    <tr>
-                      <td>Estrés Ingreso</td>
-                      <td>0%</td>
-                      <td>-5.00%</td>
-                      <td>-8.00%</td>
-                      <td>-10.00%</td>
-                      <td>-15.00%</td>
-                      <td>-20.00%</td>
-                    </tr>
-                  </tbody>
-                </Table>
+                <Row className="pb-3">
+                  <Col>
+                    <h5 className="text-bold">Balance General</h5>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={12} sm={6}>
+                    <Table>
+                      <thead>
+                        <tr>
+                          <th>Activos Circulantes</th>
+                          <th>Valor Estimado</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Inventario e inversiones</td>
+                          <td className="p-0"><Input placeholder="₡500,000" /></td>
+                        </tr>
+                        <tr>
+                          <td>Otros AC</td>
+                          <td className="p-0"><Input placeholder="₡0" /></td>
+                        </tr>
+                        <tr>
+                          <td>Activos Fijos</td>
+                          <td>Valor Estimado</td>
+                        </tr>
+                        <tr>
+                          <td>Propiedades actuales</td>
+                          <td className="p-0"><Input placeholder="₡25,000,000" /></td>
+                        </tr>
+                        <tr>
+                          <td>Vehículos actuales</td>
+                          <td className="p-0"><Input placeholder="₡1,000,000" /></td>
+                        </tr>
+                        <tr>
+                          <td>Mobiliario y equipo</td>
+                          <td className="p-0"><Input placeholder="₡1,500,000" /></td>
+                        </tr>
+                        <tr>
+                          <td>Otros AF</td>
+                          <td className="p-0"><Input placeholder="₡0" /></td>
+                        </tr>
+                        <tr>
+                          <td>Total Activos</td>
+                          <td>₡28,000,000</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                  <Col xs={12} sm={6}>
+                    <Table>
+                      <thead>
+                        <tr>
+                          <th>Pasivo</th>
+                          <th>Valor Estimado</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Pasivo CP</td>
+                          <td className="p-0"><Input placeholder="₡1,500,000" /></td>
+                        </tr>
+                        <tr>
+                          <td>Pasivo LP</td>
+                          <td className="p-0"><Input placeholder="₡25,000,000" /></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>Patrimonio</td>
+                          <td>Valor Estimado</td>
+                        </tr>
+                        <tr>
+                          <td>Capital Soc</td>
+                          <td className="p-0"><Input placeholder="₡1,500,000" /></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>Total Pas y Pat</td>
+                          <td>₡28,000,000</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                </Row>
               </CardBody>
             </Card>
+
+            <Card>
+              <CardBody>
+                <Row className="pb-3">
+                  <Col>
+                    <h5 className="text-bold">FLUJO NETO EFECTIVO</h5>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <p>Work in progress...</p>
+                  </Col>
+                </Row>
+              </CardBody>
+            </Card>
+
+            <EtapaSolicitud />
+
+            <Card>
+              <CardBody>
+                <ABTestingAnalytics 
+                  data={evolucionChartData} 
+                  dir={'left'}
+                  title={'Flujo Neto de Efectivo'}
+                  subtitle1={'Escenario Realista'}
+                  subtitle2={'-Proyección proximo 12 meses'}
+                />
+              </CardBody>
+            </Card>
+
           </StylesContainer>
         </Col>
       </Row>
