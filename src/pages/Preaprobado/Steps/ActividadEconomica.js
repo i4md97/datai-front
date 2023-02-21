@@ -1,27 +1,11 @@
 import React, { useContext } from "react";
 
-// Helpers
-import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
-
 // Components
 import { Row, Col, Card, CardBody, Button } from "reactstrap";
 import { CustomDropdown } from "../../../components";
 import SizeSteps from "../../../components/SizeSteps/SizeSteps";
 
-// Styles
-import styled from "styled-components";
-
-const StylesContainer = styled.div`
-  th,
-  .font-card,
-  .dashboard__total-stat {
-    font-size: ${(props) =>
-    props.size ? `${props.size}px` : `${props.size2}px`} !important;
-  }
-`;
 export default function ActividadEconomica({ animation, pdf }) {
-  const { sizeSteps, size } = useContext(PreaprobadoContext);
-
   const profesiones = [
     "Accionista",
     "Representante legal",
@@ -84,144 +68,142 @@ export default function ActividadEconomica({ animation, pdf }) {
     <div
       className={`dashboard actividad-economica step__cards ${animation && !pdf && "step__animation"}`}
     >
-      <StylesContainer size2={size} size={sizeSteps.actividadEconomica || null}>
-        <Row className="pt-4">
-          <Col sm={12} lg={6}>
-            <Card>
-              {/* <SizeSteps className="d-flex justify-content-end" name="actividadEconomica" /> */}
-              <CardBody>
-                <Row>
-                  <Col>
-                    <h5>Fecha de Inicio de Labores (DD/MM/AAA)</h5>
-                    {/* <p className="dashboard__total-stat">09/02/2021</p> */}
-                    <input
-                      type="text"
-                      className="text-center dashboard__total-stat form-cedula-input border-content"
-                    />
-                    <h5>Antiguedad Laboral (DD/MM/AAA)</h5>
-                    {/* <p className="dashboard__total-stat">12.1</p> */}
-                    <input
-                      type="text"
-                      className="text-center dashboard__total-stat form-cedula-input border-content"
-                    />
-                    <h5>Antiguedad Laboral (DD/MM/AAA)</h5>
-                    {/* <p className="dashboard__total-stat">1.0</p> */}
-                    <input
-                      type="text"
-                      className="text-center dashboard__total-stat form-cedula-input border-content"
-                    />
-                    <h5>Profesión u Oficio</h5>
-                    {/* <p className="dashboard__total-stat">Tecnico Profecional</p> */}
-                    <CustomDropdown 
-                      id="profesion-oficio"
-                      className="w-100 striped" 
-                      defaultOption="Sleccionar"
-                      options={profesiones}
-                    />
+      <Row className="pt-4">
+        <Col sm={12} lg={6}>
+          <Card>
+            {/* <SizeSteps className="d-flex justify-content-end" name="actividadEconomica" /> */}
+            <CardBody>
+              <Row>
+                <Col>
+                  <h5>Fecha de Inicio de Labores (DD/MM/AAA)</h5>
+                  {/* <p className="dashboard__total-stat">09/02/2021</p> */}
+                  <input
+                    type="text"
+                    className="text-center dashboard__total-stat form-cedula-input border-content"
+                  />
+                  <h5>Antiguedad Laboral (DD/MM/AAA)</h5>
+                  {/* <p className="dashboard__total-stat">12.1</p> */}
+                  <input
+                    type="text"
+                    className="text-center dashboard__total-stat form-cedula-input border-content"
+                  />
+                  <h5>Antiguedad Laboral (DD/MM/AAA)</h5>
+                  {/* <p className="dashboard__total-stat">1.0</p> */}
+                  <input
+                    type="text"
+                    className="text-center dashboard__total-stat form-cedula-input border-content"
+                  />
+                  <h5>Profesión u Oficio</h5>
+                  {/* <p className="dashboard__total-stat">Tecnico Profecional</p> */}
+                  <CustomDropdown 
+                    id="profesion-oficio"
+                    className="w-100 striped" 
+                    defaultOption="Sleccionar"
+                    options={profesiones}
+                  />
 
-                    <h5>Cantidad Aproximada de Empleados</h5>
-                    {/* <p className="dashboard__total-stat">200 empls o mas</p> */}
-                    <input
-                      type="text"
-                      className="text-center dashboard__total-stat form-cedula-input border-content"
-                    />
-                    <h5>Tipo de Empresa</h5>
-                    {/* <p className="dashboard__total-stat">CORPORATIVA</p> */}
-                    <CustomDropdown 
-                      className="w-100 striped" 
-                      defaultOption="Sleccionar" 
-                      options={tiposEmpresas} 
-                    />
-                    <h5>Tipo de Industria</h5>
-                    {/* <p className="dashboard__total-stat">Servicios</p> */}
-                    <CustomDropdown 
-                      id="tipo-industria"
-                      className="w-100 striped" 
-                      defaultOption="Sleccionar" 
-                      options={tipoIndustrias} 
-                    />
+                  <h5>Cantidad Aproximada de Empleados</h5>
+                  {/* <p className="dashboard__total-stat">200 empls o mas</p> */}
+                  <input
+                    type="text"
+                    className="text-center dashboard__total-stat form-cedula-input border-content"
+                  />
+                  <h5>Tipo de Empresa</h5>
+                  {/* <p className="dashboard__total-stat">CORPORATIVA</p> */}
+                  <CustomDropdown 
+                    className="w-100 striped" 
+                    defaultOption="Sleccionar" 
+                    options={tiposEmpresas} 
+                  />
+                  <h5>Tipo de Industria</h5>
+                  {/* <p className="dashboard__total-stat">Servicios</p> */}
+                  <CustomDropdown 
+                    id="tipo-industria"
+                    className="w-100 striped" 
+                    defaultOption="Sleccionar" 
+                    options={tipoIndustrias} 
+                  />
 
-                    <h5>Tipo Actividad Económica</h5>
-                    {/* <p className="dashboard__total-stat">SALUD</p> */}
-                    <CustomDropdown
-                      id="tipo-actividad-economica" 
-                      className="w-100 striped" 
-                      defaultOption="Sleccionar" 
-                      options={tipoActividades} 
-                    />
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col sm={12} lg={6}>
-            <SizeSteps name="actividadEconomica" />
-            <Card>
-              {/* <SizeSteps className="d-flex justify-content-end" name="actividadEconomica" /> */}
-              <CardBody>
-                <Row>
-                  <Col>
-                    <h5>Segmento</h5>
-                    {/* <p className="dashboard__total-stat">Asalario Publico</p> */}
-                    <input
-                      type="text"
-                      className="text-center dashboard__total-stat form-cedula-input border-content"
-                    />
-                    <h5>Nombre Empresa / Institución</h5>
-                    {/* <p className="dashboard__total-stat">Ministro de obras publicas y transporte</p> */}
-                    <input
-                      type="text"
-                      className="text-center dashboard__total-stat form-cedula-input border-content"
-                    />
-                    <h5>Sucursal / Región / Área / Seccion / Departamento</h5>
-                    {/* <p className="dashboard__total-stat">La Sabana Oficinas Centrales</p> */}
-                    <input
-                      type="text"
-                      className="text-center dashboard__total-stat form-cedula-input border-content"
-                    />
-                    <h5>Telefono / Oficina / Extensión</h5>
-                    {/* <p className="dashboard__total-stat">2211-3000 / 1345</p> */}
-                    <input
-                      type="text"
-                      className="text-center dashboard__total-stat form-cedula-input border-content"
-                    />
-                    <h5>Email Trabjo</h5>
-                    {/* <p className="dashboard__total-stat">juancarlos@ccss.sa</p> */}
-                    <input
-                      type="text"
-                      className="text-center dashboard__total-stat form-cedula-input border-content"
-                    />
-                    <h5>Salario / Pensión Bruto Mensual</h5>
-                    {/*  <p className="dashboard__total-stat">Si</p> */}
-                    <input
-                      type="text"
-                      className="text-center dashboard__total-stat form-cedula-input border-content"
-                    />
-                    <h5>Ingresos Mensual x Actividad Empresarial</h5>
-                    {/* <p className="dashboard__total-stat">A 2500 // Acueductos a alcantarillados</p> */}
-                    <input
-                      type="text"
-                      className="text-center dashboard__total-stat form-cedula-input border-content"
-                    />
-                    <h5>Ingresos Mensual x Servicios Profesionales</h5>
-                    {/* <p className="dashboard__total-stat">A 2500 // Acueductos a alcantarillados</p> */}
-                    <input
-                      type="text"
-                      className="text-center dashboard__total-stat form-cedula-input border-content"
-                    />
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button className="action-button">Editar</Button>
-            <Button color="primary" className="action-button">Guardar</Button>
-          </Col>
-        </Row>
-      </StylesContainer>
+                  <h5>Tipo Actividad Económica</h5>
+                  {/* <p className="dashboard__total-stat">SALUD</p> */}
+                  <CustomDropdown
+                    id="tipo-actividad-economica" 
+                    className="w-100 striped" 
+                    defaultOption="Sleccionar" 
+                    options={tipoActividades} 
+                  />
+                </Col>
+              </Row>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col sm={12} lg={6}>
+          <SizeSteps name="actividadEconomica" />
+          <Card>
+            {/* <SizeSteps className="d-flex justify-content-end" name="actividadEconomica" /> */}
+            <CardBody>
+              <Row>
+                <Col>
+                  <h5>Segmento</h5>
+                  {/* <p className="dashboard__total-stat">Asalario Publico</p> */}
+                  <input
+                    type="text"
+                    className="text-center dashboard__total-stat form-cedula-input border-content"
+                  />
+                  <h5>Nombre Empresa / Institución</h5>
+                  {/* <p className="dashboard__total-stat">Ministro de obras publicas y transporte</p> */}
+                  <input
+                    type="text"
+                    className="text-center dashboard__total-stat form-cedula-input border-content"
+                  />
+                  <h5>Sucursal / Región / Área / Seccion / Departamento</h5>
+                  {/* <p className="dashboard__total-stat">La Sabana Oficinas Centrales</p> */}
+                  <input
+                    type="text"
+                    className="text-center dashboard__total-stat form-cedula-input border-content"
+                  />
+                  <h5>Telefono / Oficina / Extensión</h5>
+                  {/* <p className="dashboard__total-stat">2211-3000 / 1345</p> */}
+                  <input
+                    type="text"
+                    className="text-center dashboard__total-stat form-cedula-input border-content"
+                  />
+                  <h5>Email Trabjo</h5>
+                  {/* <p className="dashboard__total-stat">juancarlos@ccss.sa</p> */}
+                  <input
+                    type="text"
+                    className="text-center dashboard__total-stat form-cedula-input border-content"
+                  />
+                  <h5>Salario / Pensión Bruto Mensual</h5>
+                  {/*  <p className="dashboard__total-stat">Si</p> */}
+                  <input
+                    type="text"
+                    className="text-center dashboard__total-stat form-cedula-input border-content"
+                  />
+                  <h5>Ingresos Mensual x Actividad Empresarial</h5>
+                  {/* <p className="dashboard__total-stat">A 2500 // Acueductos a alcantarillados</p> */}
+                  <input
+                    type="text"
+                    className="text-center dashboard__total-stat form-cedula-input border-content"
+                  />
+                  <h5>Ingresos Mensual x Servicios Profesionales</h5>
+                  {/* <p className="dashboard__total-stat">A 2500 // Acueductos a alcantarillados</p> */}
+                  <input
+                    type="text"
+                    className="text-center dashboard__total-stat form-cedula-input border-content"
+                  />
+                </Col>
+              </Row>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Button className="action-button">Editar</Button>
+          <Button color="primary" className="action-button">Guardar</Button>
+        </Col>
+      </Row>
     </div>
   );
 }

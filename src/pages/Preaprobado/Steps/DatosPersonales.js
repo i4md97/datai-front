@@ -3,19 +3,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { Card, CardBody, Row, Col, Spinner, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, Button, Input } from "reactstrap";
 import { CustomDropdown } from "../../../components";
 
-import styled from "styled-components";
 import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
 import Check from "../../../components/Check/Check";
 import ChevronDownIcon from 'mdi-react/ChevronDownIcon';
-
-const StylesContainer = styled.div`
-  th,
-  .font-card,
-  .dashboard__total-stat {
-    font-size: ${(props) =>
-    props.size ? `${props.size}px` : `${props.size2}px`} !important;
-  }
-`;
 
 export default function DatosPersonales({
   animation,
@@ -30,7 +20,7 @@ export default function DatosPersonales({
   consultarCliente,
   cliente,
 }) {
-  const { sizeSteps, size, changeStep } = useContext(PreaprobadoContext);
+  const { changeStep } = useContext(PreaprobadoContext);
 
   const [checkForm, setCheckForm] = useState("checkOne");
 
@@ -241,122 +231,81 @@ export default function DatosPersonales({
         </Col>
 
         <Col sm={12} md={6}>
-          <StylesContainer className="row m-0 p-0" size={sizeSteps.datosPersonales} size2={size}>
-            <Card>
-              <CardBody>
-                <Row>
-                  <Col sm={12}>
-                    <h5 className="color__background pb-2 text-bold">Información Personal</h5>
-                    
-                    <p className="pb-1 text-color text-semibold">Nombre del cliente / Razón social</p>
-                    <Input 
-                      className="editable-field" 
-                      name="nombre_cliente" 
-                      value={cliente?.interno?.nombre_completo || "n.a"} 
-                      onChange={() => {}}
-                    />
-                    
-                    <p className="pb-1 text-color text-semibold">Representante legal</p>
-                    <Input 
-                      className="editable-field" 
-                      name="representante" 
-                      value={cliente?.interno?.nombre_completo || "n.a"} 
-                      onChange={() => {}}
-                    />
+          <Card>
+            <CardBody>
+              <Row>
+                <Col sm={12}>
+                  <h5 className="color__background pb-2 text-bold">Información Personal</h5>
+                  
+                  <p className="pb-1 text-color text-semibold">Nombre del cliente / Razón social</p>
+                  <Input 
+                    className="editable-field" 
+                    name="nombre_cliente" 
+                    value={cliente?.interno?.nombre_completo || "n.a"} 
+                    onChange={() => {}}
+                  />
+                  
+                  <p className="pb-1 text-color text-semibold">Representante legal</p>
+                  <Input 
+                    className="editable-field" 
+                    name="representante" 
+                    value={cliente?.interno?.nombre_completo || "n.a"} 
+                    onChange={() => {}}
+                  />
 
-                    <p className="pb-1 text-color text-semibold">Identificación</p>
-                    <Input 
-                      className="editable-field" 
-                      name="identificacion" 
-                      value={cliente?.interno?.no_identif || "n.a"} 
-                      onChange={() => {}}
-                    />
+                  <p className="pb-1 text-color text-semibold">Identificación</p>
+                  <Input 
+                    className="editable-field" 
+                    name="identificacion" 
+                    value={cliente?.interno?.no_identif || "n.a"} 
+                    onChange={() => {}}
+                  />
 
-                    <p className="pb-1 text-color text-semibold">Nombre Comercial</p>
-                    <Input 
-                      className="editable-field" 
-                      name="nombre_comercial" 
-                      value={cliente?.buro?.empresa_2 || "n.a"}
-                      onChange={() => {}}
-                    />
+                  <p className="pb-1 text-color text-semibold">Nombre Comercial</p>
+                  <Input 
+                    className="editable-field" 
+                    name="nombre_comercial" 
+                    value={cliente?.buro?.empresa_2 || "n.a"}
+                    onChange={() => {}}
+                  />
 
-                    <p className="pb-1 text-color text-semibold">Teléfono personal</p>
-                    <Input 
-                      className="editable-field" 
-                      name="telefono-personal" 
-                      value={cliente?.interno?.tel_cel || "n.a"}
-                      onChange={() => {}}
-                    />
+                  <p className="pb-1 text-color text-semibold">Teléfono personal</p>
+                  <Input 
+                    className="editable-field" 
+                    name="telefono-personal" 
+                    value={cliente?.interno?.tel_cel || "n.a"}
+                    onChange={() => {}}
+                  />
 
-                    <p className="pb-1 text-color text-semibold">Teléfono empresa</p>
-                    <Input 
-                      className="editable-field" 
-                      name="telefono-empresa" 
-                      value={cliente?.interno?.tel_trab || "n.a"}
-                      onChange={() => {}}
-                    />
+                  <p className="pb-1 text-color text-semibold">Teléfono empresa</p>
+                  <Input 
+                    className="editable-field" 
+                    name="telefono-empresa" 
+                    value={cliente?.interno?.tel_trab || "n.a"}
+                    onChange={() => {}}
+                  />
 
-                    <p className="pb-1 text-color text-semibold">Email</p>
-                    <Input 
-                      className="editable-field" 
-                      name="email" 
-                      value={cliente?.interno?.email || "n.a"}
-                      onChange={() => {}}
-                    />
+                  <p className="pb-1 text-color text-semibold">Email</p>
+                  <Input 
+                    className="editable-field" 
+                    name="email" 
+                    value={cliente?.interno?.email || "n.a"}
+                    onChange={() => {}}
+                  />
 
-                    <p className="pb-1 text-color text-semibold">Sitio WEB</p>
-                    <Input 
-                      className="editable-field" 
-                      name="url" 
-                      value={cliente?.interno?.url || "n.a"}
-                      onChange={() => {}}
-                    />
-                    
-                    <hr className="d-md-none" />
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-            
-            <Card className="d-none">
-              <CardBody>
-                <Row>
-                  <Col sm={12}>
-                    <h4 className="card-title color__background pb-2 text-semibold">Segmentos</h4>
-
-                      <p className="pb-1 text-color">Segmento</p>
-                      <div className="border-content">
-                        <p className="dashboard__total-stat">
-                          {cedula && (cedula.personal_data.segm || "n.a")}
-                        </p>
-                      </div>
-
-                      <p className="pb-1 text-color">Subsegmento</p>
-                      <div className="border-content">
-                        <p className="dashboard__total-stat">
-                          {cedula && (cedula.personal_data.subseg || "n.a")}
-                        </p>
-                      </div>
-
-                      <p className="pb-1 text-color">Perfil Socioeconómico"</p>
-                      <div className="border-content">
-                        <p className="dashboard__total-stat">
-                          {cedula &&
-                            (cedula.personal_data.perf_socioecon.map(
-                              (element, i) =>
-                                `${element}${i + 1 !==
-                                  cedula.personal_data.perf_socioecon.length
-                                  ? ", "
-                                  : ""
-                                }`
-                            ) || "n.a")}
-                        </p>
-                      </div>
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </StylesContainer>
+                  <p className="pb-1 text-color text-semibold">Sitio WEB</p>
+                  <Input 
+                    className="editable-field" 
+                    name="url" 
+                    value={cliente?.interno?.url || "n.a"}
+                    onChange={() => {}}
+                  />
+                  
+                  <hr className="d-md-none" />
+                </Col>
+              </Row>
+            </CardBody>
+          </Card>
         </Col>
       </Row>
 

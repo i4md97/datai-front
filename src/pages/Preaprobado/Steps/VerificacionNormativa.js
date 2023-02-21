@@ -13,20 +13,8 @@ import PdfHeader from "../../../components/PdfHeader/PdfHeader";
 
 import { normativaOptions } from "../../../db/dropdownsOptions";
 
-// Styles
-import styled from "styled-components";
-
-const StylesContainer = styled.div`
-  th,
-  .font-card,
-  .dashboard__total-stat {
-    font-size: ${(props) =>
-    props.statSize ? `${props.statSize}em` : `${props.size2}px`} !important;
-  }
-`;
-
 export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }) {
-  const { sizeSteps, statSize, changeStep } = useContext(PreaprobadoContext);
+  const { changeStep } = useContext(PreaprobadoContext);
   const [isSaving, setIsSaving] = useState(false);
 
   const [data, setData] = useState({
@@ -108,245 +96,75 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
 
   return (
     <div className={`dashboard verificacion-normativa py-3 step__cards ${animation && !pdf && "step__animation"}`}>
-      <StylesContainer size2={statSize} size={sizeSteps.verificacionNormativa || null}>
-
-        <Row className="pt-4 justify-content-center">
-          <Col sm={12}>
-            <Card>
-              <CardBody>
-                <Row>
-                  <Col sm={6}>
-                    <label className="text-center general-title text-bold">PROGRAMA APLICABLE</label>
-                    <CustomDropdown 
-                      className="w-100" 
-                      classNameButton="bg-light"
-                      defaultOption="Sleccionar"
-                      selectedOption="SBP MICRO CRÉDITO"
-                      options={normativaOptions.creditoOptions}
-                    />
-                  </Col>
-                  <Col sm={6}>
-                    <label className="text-center general-title text-bold">PRODUCTO APLICABLE</label>
-                    <CustomDropdown 
-                      className="w-100" 
-                      classNameButton="bg-light"
-                      defaultOption="Sleccionar"
-                      selectedOption="CAPITAL DE TRABAJO"
-                      options={normativaOptions.capitalOptions}
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col sm={2}>
-                    <p>MONTO MÍNIMO</p>
-                    <p>₡50,000</p>
-                  </Col>
-                  <Col sm={2}>
-                    <p>MONTO MÁXIMO</p>
-                    <p>₡1,000,000</p>
-                  </Col>
-                  <Col className="d-flex">
-                    <div className="pr-2">
-                      <p>TASA</p>
-                      <p>5.00%</p>
-                    </div>
-                    <div className="pr-2">
-                      <p>TIPO TASA</p>
-                      <p>56800.00%</p>
-                    </div>
-                  </Col>
-                  <Col className="d-flex">
-                    <div className="pr-2">
-                      <p>PLAZO</p>
-                      <p>0</p>
-                    </div>
-                    <div className="pr-2">
-                      <p>FPP (Frecuencia Pago INT)</p>
-                      <p>12</p>
-                    </div>
-                  </Col>
-                  <Col sm={2}>
-                    <p>FPP (Frecuencia Pago Principal)</p>
-                    <p>MENSUAL</p>
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </Col>
-          {!cedula && labelPrograma.map((element, i) => {
-              return (
-                <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`interno-card-${i}`}>
-                  <Card className="aesthetic-card green">
-                    <CardBody className={`card-body card-error`}>
-                      <div className="card__title">
-                        <h5 className="text-semibold">{element}</h5>{" "}
-                      </div>
-                      <p className="mt-2">Política:</p>
-                      <p className="total-stat text-center"></p>
-                    </CardBody>
-                  </Card>
+      <Row className="pt-4 justify-content-center">
+        <Col sm={12}>
+          <Card>
+            <CardBody>
+              <Row>
+                <Col sm={6}>
+                  <label className="text-center general-title text-bold">PROGRAMA APLICABLE</label>
+                  <CustomDropdown 
+                    className="w-100" 
+                    classNameButton="bg-light"
+                    defaultOption="Sleccionar"
+                    selectedOption="SBP MICRO CRÉDITO"
+                    options={normativaOptions.creditoOptions}
+                  />
                 </Col>
-              );
-            })}
-        </Row>
-
-				<Row className="pt-4">
-					<Col>
-						<h4 className="page-title general-title">INDICADORES INTERNOS</h4>
-						<hr />
-					</Col>
-				</Row>
-        <Row className="justify-content-center">
-          {!cedula && labelInterno.map((element, i) => {
-              return (
-                <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`interno-card-${i}`}>
-                  <Card className="aesthetic-card green">
-                    <CardBody className={`card-body card-error`}>
-                      <div className="card__title">
-                        <h5 className="text-semibold">{element}</h5>{" "}
-                      </div>
-                      <p className="mt-2">Política:</p>
-                      <p className="total-stat text-center"></p>
-                    </CardBody>
-                  </Card>
+                <Col sm={6}>
+                  <label className="text-center general-title text-bold">PRODUCTO APLICABLE</label>
+                  <CustomDropdown 
+                    className="w-100" 
+                    classNameButton="bg-light"
+                    defaultOption="Sleccionar"
+                    selectedOption="CAPITAL DE TRABAJO"
+                    options={normativaOptions.capitalOptions}
+                  />
                 </Col>
-              );
-            })}
-        </Row>
-
-        <Row className="justify-content-center">
-          {data.interno.map((element, i) => {
-            let value = 0;
-            let valueFilter = 0;
-            if (element === "dias_atraso" || element === "prorr_aplic") {
-              value = cedula.internal_risks[element][0];
-              valueFilter = riesgo.interno[element];
-            } else {
-              referencias.interno[element].map((elementTwo, i) => {
-                if (elementTwo === riesgo.interno[element]) {
-                  valueFilter = i;
-                }
-                if (elementTwo === cedula.internal_risks[element][0]) {
-                  value = i;
-                }
-              });
-            }
+              </Row>
+              <Row>
+                <Col sm={2}>
+                  <p>MONTO MÍNIMO</p>
+                  <p>₡50,000</p>
+                </Col>
+                <Col sm={2}>
+                  <p>MONTO MÁXIMO</p>
+                  <p>₡1,000,000</p>
+                </Col>
+                <Col className="d-flex">
+                  <div className="pr-2">
+                    <p>TASA</p>
+                    <p>5.00%</p>
+                  </div>
+                  <div className="pr-2">
+                    <p>TIPO TASA</p>
+                    <p>56800.00%</p>
+                  </div>
+                </Col>
+                <Col className="d-flex">
+                  <div className="pr-2">
+                    <p>PLAZO</p>
+                    <p>0</p>
+                  </div>
+                  <div className="pr-2">
+                    <p>FPP (Frecuencia Pago INT)</p>
+                    <p>12</p>
+                  </div>
+                </Col>
+                <Col sm={2}>
+                  <p>FPP (Frecuencia Pago Principal)</p>
+                  <p>MENSUAL</p>
+                </Col>
+              </Row>
+            </CardBody>
+          </Card>
+        </Col>
+        {!cedula && labelPrograma.map((element, i) => {
             return (
-              <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`interno-subcard-${i}`}>
+              <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`interno-card-${i}`}>
                 <Card className="aesthetic-card green">
-                  <CardBody
-                    className={`card-body ${cedula && value <= valueFilter
-                      ? "card-confirm"
-                      : "card-error"
-                      } `}
-                  >
-                    <div className="card__title mb-1">
-                      <h5 className="text-semibold">{labelInterno[i]}</h5>{" "}
-                    </div>
-                    <p className="mt-2">Política: {riesgo.interno[element]}</p>
-                    <p className="total-stat text-center">
-                      {cedula && cedula.internal_risks[element][0]}
-                    </p>
-                  </CardBody>
-                </Card>
-              </Col>
-            );
-          })}
-        </Row>
-
-        {pdf && <> <div style={{ marginTop: "18rem" }}></div>
-          <div>
-            <PdfHeader pagination="4" />
-          </div> </>}
-        
-				<Row>
-					<Col>
-						<h4 className="page-title general-title">INDICADORES EXTERNOS CIC</h4>
-						<hr />
-					</Col>
-				</Row>
-
-        <Row className="justify-content-center">
-          {!cedula &&
-            labelCic.map((element, i) => {
-              return (
-                <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`cic-card-${i}`}>
-                  <Card className="aesthetic-card green">
-                    <CardBody className={`card-body card-error`}>
-                      <div className="card__title">
-                        <h5 className="text-semibold">{element}</h5>{" "}
-                      </div>
-                      <p className="mt-2">Política:</p>
-                      <p className="total-stat text-center"></p>
-                    </CardBody>
-                  </Card>
-                </Col>
-              );
-            })}
-        </Row>
-
-        <Row className="justify-content-center">
-          {data.cic.length > 0 && (
-            <>
-              {data.cic.map((element, i) => {
-                return (
-                  <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`cic-subcard-${i}`}>
-                    <Card className="aesthetic-card green">
-                      <CardBody
-                        className={`card-body ${cedula &&
-                          cedula.cic_risks[element][0] <= riesgo.cic[element]
-                          ? "card-confirm"
-                          : "card-error"
-                          } `}
-                      >
-                        <div className="card__title mb-1">
-                          <h5 className="text-semibold">{labelCic[i]}</h5>{" "}
-                        </div>
-                        <p className="mt-2">Política: {riesgo.cic[element]}</p>
-                        <p className="total-stat text-center">
-                          {cedula && cedula.cic_risks[element][0]}
-                        </p>
-                      </CardBody>
-                    </Card>
-                  </Col>
-                );
-              })}
-
-              {/* TODO: eliminar columna cuando BE tenga estos datos */}
-              <Col sm={12} md={6} xl={pdf ? 4 : 3}>
-                <Card className="aesthetic-card green">
-                  <CardBody
-                    className="card-body card-confirm"
-                  >
-                    <div className="card__title mb-1">
-                      <h5 className="text-semibold">Historial – Meses en CIC</h5>{" "}
-                    </div>
-                    <p className="mt-2">Política: 0</p>
-                    <p className="total-stat text-center">
-                      ex
-                    </p>
-                  </CardBody>
-                </Card>
-              </Col>
-            </>
-          )}
-        </Row>
-        
-        { labelValoracionExterna.length > 0 && 
-          <Row>
-            <Col>
-                <h4 className="page-title pt-0 general-title">INDICADORES EXTERNOS BURÓ</h4>
-                <hr/>
-            </Col>
-          </Row>
-        }
-        <Row className="justify-content-center">
-          {labelValoracionExterna.map((element, i) => {
-            return (
-              <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`valoracion-card-${i}`}>
-                <Card className="aesthetic-card yellow">
                   <CardBody className={`card-body card-error`}>
-                    <div className="card__title mb-1">
+                    <div className="card__title">
                       <h5 className="text-semibold">{element}</h5>{" "}
                     </div>
                     <p className="mt-2">Política:</p>
@@ -356,58 +174,225 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
               </Col>
             );
           })}
-        </Row>
+      </Row>
 
-        { labelImpuestosReportados.length > 0 && 
-          <Row>
-            <Col>
-                <h4 className="page-title pt-0 general-title">Ingresos e impuestos reportados según BURÓ</h4>
-                <hr/>
-            </Col>
-          </Row>
-        }
-        <Row className="justify-content-start">
-          {labelImpuestosReportados.map((element, i) => {
+      <Row className="pt-4">
+        <Col>
+          <h4 className="page-title general-title">INDICADORES INTERNOS</h4>
+          <hr />
+        </Col>
+      </Row>
+      <Row className="justify-content-center">
+        {!cedula && labelInterno.map((element, i) => {
             return (
-              <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`valoracion-card-${i}`}>
-                <Card className="aesthetic-card yellow">
+              <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`interno-card-${i}`}>
+                <Card className="aesthetic-card green">
                   <CardBody className={`card-body card-error`}>
-                    <div className="card__title mb-1">
+                    <div className="card__title">
                       <h5 className="text-semibold">{element}</h5>{" "}
                     </div>
-                    <p className="mt-2">Sociedad Reportada:</p>
+                    <p className="mt-2">Política:</p>
                     <p className="total-stat text-center"></p>
                   </CardBody>
                 </Card>
               </Col>
             );
           })}
-        </Row>
-        
-        <Row>
-          <Col>
-            <EtapaSolicitud />
-          </Col>
-        </Row>
+      </Row>
 
+      <Row className="justify-content-center">
+        {data.interno.map((element, i) => {
+          let value = 0;
+          let valueFilter = 0;
+          if (element === "dias_atraso" || element === "prorr_aplic") {
+            value = cedula.internal_risks[element][0];
+            valueFilter = riesgo.interno[element];
+          } else {
+            referencias.interno[element].map((elementTwo, i) => {
+              if (elementTwo === riesgo.interno[element]) {
+                valueFilter = i;
+              }
+              if (elementTwo === cedula.internal_risks[element][0]) {
+                value = i;
+              }
+            });
+          }
+          return (
+            <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`interno-subcard-${i}`}>
+              <Card className="aesthetic-card green">
+                <CardBody
+                  className={`card-body ${cedula && value <= valueFilter
+                    ? "card-confirm"
+                    : "card-error"
+                    } `}
+                >
+                  <div className="card__title mb-1">
+                    <h5 className="text-semibold">{labelInterno[i]}</h5>{" "}
+                  </div>
+                  <p className="mt-2">Política: {riesgo.interno[element]}</p>
+                  <p className="total-stat text-center">
+                    {cedula && cedula.internal_risks[element][0]}
+                  </p>
+                </CardBody>
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
+
+      {pdf && <> <div style={{ marginTop: "18rem" }}></div>
+        <div>
+          <PdfHeader pagination="4" />
+        </div> </>}
+      
+      <Row>
+        <Col>
+          <h4 className="page-title general-title">INDICADORES EXTERNOS CIC</h4>
+          <hr />
+        </Col>
+      </Row>
+
+      <Row className="justify-content-center">
+        {!cedula &&
+          labelCic.map((element, i) => {
+            return (
+              <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`cic-card-${i}`}>
+                <Card className="aesthetic-card green">
+                  <CardBody className={`card-body card-error`}>
+                    <div className="card__title">
+                      <h5 className="text-semibold">{element}</h5>{" "}
+                    </div>
+                    <p className="mt-2">Política:</p>
+                    <p className="total-stat text-center"></p>
+                  </CardBody>
+                </Card>
+              </Col>
+            );
+          })}
+      </Row>
+
+      <Row className="justify-content-center">
+        {data.cic.length > 0 && (
+          <>
+            {data.cic.map((element, i) => {
+              return (
+                <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`cic-subcard-${i}`}>
+                  <Card className="aesthetic-card green">
+                    <CardBody
+                      className={`card-body ${cedula &&
+                        cedula.cic_risks[element][0] <= riesgo.cic[element]
+                        ? "card-confirm"
+                        : "card-error"
+                        } `}
+                    >
+                      <div className="card__title mb-1">
+                        <h5 className="text-semibold">{labelCic[i]}</h5>{" "}
+                      </div>
+                      <p className="mt-2">Política: {riesgo.cic[element]}</p>
+                      <p className="total-stat text-center">
+                        {cedula && cedula.cic_risks[element][0]}
+                      </p>
+                    </CardBody>
+                  </Card>
+                </Col>
+              );
+            })}
+
+            {/* TODO: eliminar columna cuando BE tenga estos datos */}
+            <Col sm={12} md={6} xl={pdf ? 4 : 3}>
+              <Card className="aesthetic-card green">
+                <CardBody
+                  className="card-body card-confirm"
+                >
+                  <div className="card__title mb-1">
+                    <h5 className="text-semibold">Historial – Meses en CIC</h5>{" "}
+                  </div>
+                  <p className="mt-2">Política: 0</p>
+                  <p className="total-stat text-center">
+                    ex
+                  </p>
+                </CardBody>
+              </Card>
+            </Col>
+          </>
+        )}
+      </Row>
+      
+      { labelValoracionExterna.length > 0 && 
         <Row>
           <Col>
-          <Button color="primary" className="action-button" onClick={saveAndContinueHandler}>
-            Guardar y Continuar
-            {isSaving && 
-              <Spinner
-                as="span"
-                animation="grow"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-                className="ml-2"
-              />
-            }
-          </Button>
+              <h4 className="page-title pt-0 general-title">INDICADORES EXTERNOS BURÓ</h4>
+              <hr/>
           </Col>
         </Row>
-      </StylesContainer>
+      }
+      <Row className="justify-content-center">
+        {labelValoracionExterna.map((element, i) => {
+          return (
+            <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`valoracion-card-${i}`}>
+              <Card className="aesthetic-card yellow">
+                <CardBody className={`card-body card-error`}>
+                  <div className="card__title mb-1">
+                    <h5 className="text-semibold">{element}</h5>{" "}
+                  </div>
+                  <p className="mt-2">Política:</p>
+                  <p className="total-stat text-center"></p>
+                </CardBody>
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
+
+      { labelImpuestosReportados.length > 0 && 
+        <Row>
+          <Col>
+              <h4 className="page-title pt-0 general-title">Ingresos e impuestos reportados según BURÓ</h4>
+              <hr/>
+          </Col>
+        </Row>
+      }
+      <Row className="justify-content-start">
+        {labelImpuestosReportados.map((element, i) => {
+          return (
+            <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`valoracion-card-${i}`}>
+              <Card className="aesthetic-card yellow">
+                <CardBody className={`card-body card-error`}>
+                  <div className="card__title mb-1">
+                    <h5 className="text-semibold">{element}</h5>{" "}
+                  </div>
+                  <p className="mt-2">Sociedad Reportada:</p>
+                  <p className="total-stat text-center"></p>
+                </CardBody>
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
+      
+      <Row>
+        <Col>
+          <EtapaSolicitud />
+        </Col>
+      </Row>
+
+      <Row>
+        <Col>
+        <Button color="primary" className="action-button" onClick={saveAndContinueHandler}>
+          Guardar y Continuar
+          {isSaving && 
+            <Spinner
+              as="span"
+              animation="grow"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+              className="ml-2"
+            />
+          }
+        </Button>
+        </Col>
+      </Row>
     </div>
   );
 }

@@ -169,6 +169,28 @@
     vertical-align: middle;
   }
 
+  .dashboard {
+    input:not(.form-control):not([type="checkbox"]):not([type="radio"]) {
+      display: block;
+      width: 100%;
+      height: calc(1.5em + .75rem + 2px);
+      border-radius: .25rem;
+      width: 100%;
+      font-weight: 400;
+      padding: 5px 5px;
+      font-size: 1rem;
+      line-height: 1.5;
+      @include themify($themes) {
+        border: 1px solid themed('colorBorderInput');
+      }
+      &:focus, &:focus-visible {
+        border-color: #80bdff;
+        box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+        outline: none;
+      }
+    }
+  }
+
   .datos-personales {
     p {
       font-size: 1.1em;
