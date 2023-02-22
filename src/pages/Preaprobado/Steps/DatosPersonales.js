@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import { Card, CardBody, Row, Col, Spinner, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, Button, Input } from "reactstrap";
-import { CustomDropdown } from "../../../components";
+import { CustomDropdown, ControlledInput } from "../../../components";
 
 import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
 import Check from "../../../components/Check/Check";
@@ -238,67 +238,59 @@ export default function DatosPersonales({
                   <h5 className="color__background pb-2 text-bold">Información Personal</h5>
                   
                   <p className="pb-1 text-color text-semibold">Nombre del cliente / Razón social</p>
-                  <Input 
-                    className="editable-field" 
-                    name="nombre_cliente" 
-                    value={cliente?.interno?.nombre_completo || "n.a"} 
-                    onChange={() => {}}
+                  <ControlledInput 
+                    className={"editable-field"} 
+                    defaultOption="n.a" 
+                    dbValue={cliente?.interno?.nombre_completo} 
                   />
                   
                   <p className="pb-1 text-color text-semibold">Representante legal</p>
-                  <Input 
-                    className="editable-field" 
-                    name="representante" 
-                    value={cliente?.interno?.nombre_completo || "n.a"} 
-                    onChange={() => {}}
+                  <ControlledInput 
+                    className={"editable-field"} 
+                    defaultOption="n.a" 
+                    dbValue={cliente?.interno?.nombre_completo}
                   />
 
                   <p className="pb-1 text-color text-semibold">Identificación</p>
-                  <Input 
-                    className="editable-field" 
-                    name="identificacion" 
-                    value={cliente?.interno?.no_identif || "n.a"} 
-                    onChange={() => {}}
+                  <ControlledInput 
+                    className={"editable-field"} 
+                    defaultOption="n.a" 
+                    dbValue={cliente?.interno?.no_identif}
                   />
 
                   <p className="pb-1 text-color text-semibold">Nombre Comercial</p>
-                  <Input 
-                    className="editable-field" 
-                    name="nombre_comercial" 
-                    value={cliente?.buro?.empresa_2 || "n.a"}
-                    onChange={() => {}}
+                  <ControlledInput 
+                    className={"editable-field"} 
+                    defaultOption="n.a" 
+                    dbValue={cliente?.buro?.empresa_2}
                   />
 
                   <p className="pb-1 text-color text-semibold">Teléfono personal</p>
-                  <Input 
-                    className="editable-field" 
-                    name="telefono-personal" 
-                    value={cliente?.interno?.tel_cel || "n.a"}
-                    onChange={() => {}}
+                  <ControlledInput 
+                    className={"editable-field"} 
+                    defaultOption="n.a" 
+                    dbValue={cliente?.interno?.tel_cel}
                   />
 
                   <p className="pb-1 text-color text-semibold">Teléfono empresa</p>
-                  <Input 
-                    className="editable-field" 
-                    name="telefono-empresa" 
-                    value={cliente?.interno?.tel_trab || "n.a"}
-                    onChange={() => {}}
+                  <ControlledInput 
+                    className={"editable-field"} 
+                    defaultOption="n.a" 
+                    dbValue={cliente?.interno?.tel_trab}
                   />
 
                   <p className="pb-1 text-color text-semibold">Email</p>
-                  <Input 
-                    className="editable-field" 
-                    name="email" 
-                    value={cliente?.interno?.email || "n.a"}
-                    onChange={() => {}}
+                  <ControlledInput 
+                    className={"editable-field"} 
+                    defaultOption="n.a" 
+                    dbValue={cliente?.interno?.email}
                   />
 
                   <p className="pb-1 text-color text-semibold">Sitio WEB</p>
-                  <Input 
-                    className="editable-field" 
-                    name="url" 
-                    value={cliente?.interno?.url || "n.a"}
-                    onChange={() => {}}
+                  <ControlledInput 
+                    className={"editable-field"} 
+                    defaultOption="n.a" 
+                    dbValue={cliente?.interno?.url}
                   />
                   
                   <hr className="d-md-none" />
