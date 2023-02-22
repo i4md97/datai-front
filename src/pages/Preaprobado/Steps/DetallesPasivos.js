@@ -190,7 +190,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                               <td>
                                 <ControlledInput type="number" defaultOption={element[10]} dbValue={element[10]} />
                               </td>
-                              <td className="td-hover" id={`internos-td-saldo-${i}`}>
+                              <td /* className="td-hover" id={`internos-td-saldo-${i}`} */>
                                 ₡{" "}
                                 {new Intl.NumberFormat(["ban", "id"]).format(
                                   element[7].toFixed(2)
@@ -202,7 +202,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                   (element[11] + element[12]).toFixed(11)
                                 )}
                               </td>
-                              <td className="td-hover" id={`internos-td-tasa-${i}`}>{element[18]}</td>
+                              <td /* className="td-hover" id={`internos-td-tasa-${i}`} */>{element[18]}</td>
                               <td>{element[15]}</td>
                               <td>
                                 <button
@@ -223,7 +223,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                   SI
                                 </button>
                               </td>
-                              <CustomTooltip 
+                              {/* <CustomTooltip 
                                 id={`internos-td-saldo-${i}`}
                                 tooltipText={`Monto Formalizado: ₡ ${new Intl.NumberFormat(["ban", "id"]).format(element[7].toFixed(2))}`} 
                                 className="td-tooltip" 
@@ -232,7 +232,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                 id={`internos-td-tasa-${i}`}
                                 tooltipText={`Plazo Restante (meses): ${new Intl.NumberFormat(["ban", "id"]).format(element[30].toFixed(2))}`} 
                                 className="td-tooltip" 
-                              />
+                              /> */}
                             </tr>
                           );
                         }
@@ -406,7 +406,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                               <td>
                                 <td><ControlledInput type="number" defaultOption={element[10]} /></td>
                               </td>
-                              <td className="td-hover" id={`externos-td-saldo-${i}`}>
+                              <td /* className="td-hover" */ /* id={`externos-td-saldo-${i}`} */>
                                 ₡{" "}
                                 {new Intl.NumberFormat(["ban", "id"]).format(
                                   element[7].toFixed(2)
@@ -419,7 +419,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                 )}
                               </td>
 
-                              <td className="td-hover" id={`externos-td-tasa-${i}`}>{element[18]}</td>
+                              <td /* className="td-hover" */ /* id={`externos-td-tasa-${i}`} */>{element[18]}</td>
                               <td>{element[15]}</td>
                               <td>
                                 {" "}
@@ -444,7 +444,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                   }
                                 </button>
                               </td>
-                              <CustomTooltip 
+                              {/* <CustomTooltip 
                                 id={`externos-td-saldo-${i}`} 
                                 tooltipText={`Monto Formalizado: ₡ ${new Intl.NumberFormat(["ban", "id"]).format( element[8].toFixed(2))}`} 
                                 className="td-tooltip" 
@@ -453,7 +453,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                 id={`externos-td-tasa-${i}`} 
                                 tooltipText={`Plazo Restante (meses): ${new Intl.NumberFormat(["ban", "id"]).format( element[30].toFixed(2) )}`} 
                                 className="td-tooltip"
-                              />
+                              /> */}
                             </tr>
                           );
                         }

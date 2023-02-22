@@ -7,7 +7,7 @@ import { escenarioPreliminarOptions } from "../../../db/dropdownsOptions";
 
 // Components
 import { Row, Col, Card, CardBody, Table, Button, Input, Spinner } from "reactstrap";
-import { CustomDropdown } from "../../../components";
+import { CustomDropdown, ControlledInput } from "../../../components";
 
 export default function EscenarioPreliminar({ animation, StepFourCheck, pdf }) {
   const { changeStep } = useContext(PreaprobadoContext);
@@ -51,7 +51,9 @@ export default function EscenarioPreliminar({ animation, StepFourCheck, pdf }) {
                             classNameButton="mb-0"
                           />
                         </th>
-                        <td className="p-0"><Input value="₡7,678,000" onChange={() => {}} /></td>
+                        <td className="p-0">
+                          <ControlledInput defaultOption="₡7,678,000"/>
+                        </td>
                       </tr>
                       <tr>
                         <th className="pt-0">
@@ -61,7 +63,9 @@ export default function EscenarioPreliminar({ animation, StepFourCheck, pdf }) {
                             classNameButton="mb-0"
                           />
                         </th>
-                        <td className="p-0"><Input value="₡0" onChange={() => {}} /></td>
+                        <td className="p-0">
+                          <ControlledInput defaultOption="₡0"/>
+                        </td>
                       </tr>
                       <tr>
                         <th className="font-weight-normal">Saldo a Refinanciar</th>
@@ -95,84 +99,77 @@ export default function EscenarioPreliminar({ animation, StepFourCheck, pdf }) {
                         <td>₡64,000</td>
                       </tr>
                     </tbody>
-                  </Table></Col>
+                  </Table>
+                </Col>
               </Row>
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
-
-      <Row>
-        <Col xs={12} xl={12}>
-          <h4 className="page-title general-title">Necesidades de financiamiento empresarial y personal</h4>
-        </Col>
-        <Col md={12}>
-          <Card>
-            <CardBody>
               <Row>
+                <Col xs={12} xl={12}>
+                  <h4 className="page-title general-title">Necesidades de financiamiento empresarial y personal</h4>
+                </Col>
                 <Col xs={12} md={6}>
                   <Table className="text-left" responsive style={{ minWidth: pdf ? "inherit" : "450px" }}>
-                    <table>
-                      <tr>
-                        <th className="font-weight-normal">CAPITAL DE TRABAJO</th>
-                        <td className="p-0"><Input value="₡1,500,000" onChange={() => {}} /></td>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">CAPITAL DE INVERSIÓN</th>
-                        <td className="p-0"><Input /></td>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">GASTOS PERSONALES</th>
-                        <td className="p-0"><Input /></td>
-                      </tr>
-                      <tr>
-                        <th></th>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">Crédito Empresarial y Personal</th>
-                        <td>₡1,500,000</td>
-                      </tr>
-                      <tr>
-                        <th></th>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">TOTAL A FINANCIAR</th>
-                        <td>₡9,178,000</td>
-                      </tr>
-                    </table>
+                    <tr>
+                      <th style={{width: "360px"}} className="font-weight-normal">CAPITAL DE TRABAJO</th>
+                      <td className="p-0">
+                        <ControlledInput defaultOption="₡1,500,000"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="font-weight-normal">CAPITAL DE INVERSIÓN</th>
+                      <td className="p-0">
+                        <ControlledInput />
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="font-weight-normal">GASTOS PERSONALES</th>
+                      <td className="p-0">
+                        <ControlledInput />
+                      </td>
+                    </tr>
+                    <tr>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <th className="font-weight-normal">Crédito Empresarial y Personal</th>
+                      <td>₡1,500,000</td>
+                    </tr>
+                    <tr>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <th className="font-weight-normal">TOTAL A FINANCIAR</th>
+                      <td>₡9,178,000</td>
+                    </tr>
                   </Table>
                 </Col>
                 <Col xs={12} md={6}>
                   <Table className="text-left" responsive style={{ minWidth: pdf ? "inherit" : "450px" }}>
-                    <table>
-
-                      <tr>
-                        <td colSpan={2} className="p-0">
-                          <Input placeholder="Compra de materia prima para Restaurante" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colSpan={2} className="p-0">
-                          <Input />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colSpan={2} className="p-0">
-                          <Input />
-                        </td>
-                      </tr>
-                      <tr>
-                        <th></th>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">Cuota por Financiamiento Empresarial y Personal</th>
-                        <td>₡95,000</td>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">Incremento cuota / Ahorro mensual por créditos nuevos</th>
-                        <td>₡31,000</td>
-                      </tr>
-                    </table>
+                    <tr>
+                      <td colSpan={2} className="p-0">
+                        <ControlledInput defaultOption="Compra de materia prima para Restaurante"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colSpan={2} className="p-0">
+                        <ControlledInput />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colSpan={2} className="p-0">
+                        <ControlledInput />
+                      </td>
+                    </tr>
+                    <tr>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <th className="font-weight-normal">Cuota por Financiamiento Empresarial y Personal</th>
+                      <td>₡95,000</td>
+                    </tr>
+                    <tr>
+                      <th className="font-weight-normal">Incremento cuota / Ahorro mensual por créditos nuevos</th>
+                      <td>₡31,000</td>
+                    </tr>
                   </Table>
                 </Col>
               </Row>
