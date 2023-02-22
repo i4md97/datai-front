@@ -51,7 +51,7 @@ export default function EscenarioPreliminar({ animation, StepFourCheck, pdf }) {
                             classNameButton="mb-0"
                           />
                         </th>
-                        <td className="p-0">
+                        <td className="p-1">
                           <ControlledInput defaultOption="₡7,678,000"/>
                         </td>
                       </tr>
@@ -63,7 +63,7 @@ export default function EscenarioPreliminar({ animation, StepFourCheck, pdf }) {
                             classNameButton="mb-0"
                           />
                         </th>
-                        <td className="p-0">
+                        <td className="p-1">
                           <ControlledInput defaultOption="₡0"/>
                         </td>
                       </tr>
@@ -110,19 +110,19 @@ export default function EscenarioPreliminar({ animation, StepFourCheck, pdf }) {
                   <Table className="text-left" responsive style={{ minWidth: pdf ? "inherit" : "450px" }}>
                     <tr>
                       <th style={{width: "360px"}} className="font-weight-normal">CAPITAL DE TRABAJO</th>
-                      <td className="p-0">
+                      <td className="p-1">
                         <ControlledInput defaultOption="₡1,500,000"/>
                       </td>
                     </tr>
                     <tr>
                       <th className="font-weight-normal">CAPITAL DE INVERSIÓN</th>
-                      <td className="p-0">
+                      <td className="p-1">
                         <ControlledInput />
                       </td>
                     </tr>
                     <tr>
                       <th className="font-weight-normal">GASTOS PERSONALES</th>
-                      <td className="p-0">
+                      <td className="p-1">
                         <ControlledInput />
                       </td>
                     </tr>
@@ -145,17 +145,17 @@ export default function EscenarioPreliminar({ animation, StepFourCheck, pdf }) {
                 <Col xs={12} md={6}>
                   <Table className="text-left" responsive style={{ minWidth: pdf ? "inherit" : "450px" }}>
                     <tr>
-                      <td colSpan={2} className="p-0">
+                      <td colSpan={2} className="p-1">
                         <ControlledInput defaultOption="Compra de materia prima para Restaurante"/>
                       </td>
                     </tr>
                     <tr>
-                      <td colSpan={2} className="p-0">
+                      <td colSpan={2} className="p-1">
                         <ControlledInput />
                       </td>
                     </tr>
                     <tr>
-                      <td colSpan={2} className="p-0">
+                      <td colSpan={2} className="p-1">
                         <ControlledInput />
                       </td>
                     </tr>

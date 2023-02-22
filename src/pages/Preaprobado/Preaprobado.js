@@ -319,7 +319,7 @@ export default function Preaprobado({ animation, activeStep, setActiveStep }) {
           </Col>
         </Row>
 
-        <Row className="d-none--">
+        <Row className="d-none">
           <Col>
             <button onClick={loadCedulaData}>load data</button>
           </Col>

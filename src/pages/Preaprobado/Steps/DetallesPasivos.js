@@ -187,7 +187,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                 {element[13] === 6 &&
                                   "Lineas de credito u operaciones crediticias"}
                               </td>
-                              <td>
+                              <td className="p-1">
                                 <ControlledInput type="number" defaultOption={element[10]} dbValue={element[10]} />
                               </td>
                               <td /* className="td-hover" id={`internos-td-saldo-${i}`} */>
@@ -307,7 +307,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                       <tr>
                         <td>{externosCIC.entidad}</td>
                         <td>{externosCIC.tipo_operacion}</td>
-                        <td><ControlledInput type="number" defaultOption="35000" /></td>
+                        <td className="p-1"><ControlledInput type="number" defaultOption="35000" /></td>
                         <td>{externosCIC.saldo_credito}</td>
                         <td>{externosCIC.cuota_mensual}</td>
                         <td>{externosCIC.tasa}</td>
@@ -403,8 +403,8 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                 {element[13] === 6 &&
                                   "Lineas de credito u operaciones crediticias"}
                               </td>
-                              <td>
-                                <td><ControlledInput type="number" defaultOption={element[10]} /></td>
+                              <td className="p-1">
+                                <ControlledInput type="number" defaultOption={element[10]} />
                               </td>
                               <td /* className="td-hover" */ /* id={`externos-td-saldo-${i}`} */>
                                 ₡{" "}
