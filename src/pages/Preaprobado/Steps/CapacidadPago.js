@@ -15,11 +15,7 @@ export default function CapacidadPago({
   pdf,
 }) {
   const { user } = useContext(UsuarioContext);
-  const {
-    stepFourCheck,
-    changeEscenarioPreeliminar,
-    changeCapacidadPago,
-  } = useContext(PreaprobadoContext);
+  const { stepFourCheck, changeEscenarioPreeliminar, changeCapacidadPago } = useContext(PreaprobadoContext);
   const [reloadCalc, setRealodCalc] = useState(false);
   const [formSituacion, setFormSituacion] = useState({
     previa: cedula ? cedula.salary : 0,

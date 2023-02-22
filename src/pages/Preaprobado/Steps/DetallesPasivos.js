@@ -12,11 +12,15 @@ import {
 import CustomTooltip from "../CustomTooltip";
 import { detallePasivosOptions } from "../../../db/dropdownsOptions";
 
+import { db_cic } from "../../../db/db_cic";
+
 export default function DetallesPasivos({ animation, cedula, pdf }) {
+  // TODO: remove all || true flags
   const { stepFourCheck, changeStepFourCheck, changeStep } = useContext(PreAprobadoContext);
   const { user } = useContext(UsuarioContext);
 
   const [isSaving, setIsSaving] = useState(false);
+  const [externosCIC, setExternosCIC] = useState({});
 
   const [activeCheck, setActiveCheck] = useState(stepFourCheck);
   const [suma, setSuma] = useState({
@@ -28,9 +32,18 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
   const [form, setForm] = useState({
     internos: {},
     externos: {}
-  })
+  });
 
   useEffect(() => {
+    if (cedula) {
+      const itemFound = db_cic.find(item => item.no_identif === cedula.personal_data.tipo_id);
+      if (itemFound) {
+        setExternosCIC(itemFound);
+      }
+    }
+  },[cedula]);
+
+  /* useEffect(() => {
     if (cedula && user) {
       let saldoInterno = 0;
       let cuotaInterno = 0;
@@ -60,7 +73,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cedula]);
+  }, [cedula]); */
 
   const handleClickStepFourCheck = (val) => {
     const findOne = activeCheck.find((element) => element.index === val.index);
@@ -133,16 +146,14 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
 
       <Row>
         <Col xs={12} xl={12}>
-          {/* <SizeSteps className="d-flex" name="detallesPasivos"/> */}
-          <h4 className="page-title  general-title">
-            Detalles Pasivos Internos
-          </h4>
+          <h4 className="page-title  general-title">Pasivos Internos</h4>
         </Col>
 
         <Col xs={12} xl={12}>
           <Card>
             <CardBody className="m-lg-0 pb-4">
-              {suma.saldoInterno
+              {/* TODO remove cedula flag */}
+              {cedula && (suma.saldoInterno || true)
                 ? 
                   <Table style={{ minWidth: pdf ? "inherit" : "800px" }} responsive>
                     <thead>
@@ -159,7 +170,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                     </thead>
                     <tbody>
                       {cedula?.debts?.data.map((element, i) => {
-                        if (element[2] === user.firm_c) {
+                        if (element[2] === user.firm_c || true) {
                           return (
                             <tr key={`pasivos-internos-tr-${i}`}>
                               <td>{element[2]}</td>
@@ -176,7 +187,6 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                   "Lineas de credito u operaciones crediticias"}
                               </td>
                               <td>
-
                                 {!pdf ? 
                                   <>
                                     {/* <Input value={element[10].toFixed(2)} onChange={()=>{}} /> */}
@@ -186,34 +196,21 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                     element[10].toFixed(2)
                                 }
                               </td>
-                              {/* <td>
-                                ₡{" "}
-                                {new Intl.NumberFormat(["ban", "id"]).format(
-                                  element[8].toFixed(2)
-                                )}{" "}
-                              </td> */}
                               <td className="td-hover" id={`internos-td-saldo-${i}`}>
                                 ₡{" "}
                                 {new Intl.NumberFormat(["ban", "id"]).format(
                                   element[7].toFixed(2)
-                                )}{" "}
+                                )}
                               </td>
                               <td>
                                 ₡{" "}
                                 {new Intl.NumberFormat(["ban", "id"]).format(
                                   (element[11] + element[12]).toFixed(11)
-                                )}{" "}
+                                )}
                               </td>
-                              {/* <td>
-                                {new Intl.NumberFormat(["ban", "id"]).format(
-                                  element[30].toFixed(2)
-                                )}{" "}
-                              </td> */}
-
-                              <td className="td-hover" id={`internos-td-tasa-${i}`}>{element[18]} </td>
-                              <td>{element[15]} </td>
+                              <td className="td-hover" id={`internos-td-tasa-${i}`}>{element[18]}</td>
+                              <td>{element[15]}</td>
                               <td>
-                                {" "}
                                 <button
                                   onClick={() => {
                                     handleClickStepFourCheck({
@@ -271,7 +268,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                         </tr>
                       )}
                     </tbody>
-                  </Table> 
+                  </Table>
                 : 
                 <p style={{ fontSize: "14px" }}>No posee registro para esta tabla</p>
               }
@@ -290,7 +287,8 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
         <Col xs={12} xl={12}>
           <Card>
             <CardBody className="m-lg-0 pb-4">
-              {true
+              {/* TODO: check flags */}
+              {Object.keys(externosCIC).length > 0
                 ? 
                   <Table style={{ minWidth: pdf ? "inherit" : "800px" }} responsive>
                     <thead>
@@ -307,13 +305,13 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                     </thead>
                     <tbody>
                       <tr>
-                        <td>BAC SAN JOSÉ</td>
-                        <td>1</td>
+                        <td>{externosCIC.entidad}</td>
+                        <td>{externosCIC.tipo_operacion}</td>
                         <td><Input value="₡35,000" onChange={() => {}} /></td>
-                        <td>₡7,500,000</td>
-                        <td>₡125,000</td>
-                        <td>19%</td>
-                        <td>DEUDOR</td>
+                        <td>{externosCIC.saldo_credito}</td>
+                        <td>{externosCIC.cuota_mensual}</td>
+                        <td>{externosCIC.tasa}</td>
+                        <td>{externosCIC.condicion}</td>
                         <td>SI</td>
                       </tr>
                       <tr>
@@ -355,7 +353,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                         <td></td>
                       </tr>
                     </tbody>
-                  </Table> 
+                  </Table>
                 : 
                 <p style={{ fontSize: "14px" }}>No posee registro para esta tabla</p>
               }
@@ -371,7 +369,8 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
         <Col xs={12} xl={12}>
           <Card>
             <CardBody>
-              {suma.saldoExterno 
+              {/* TODO: remove cedula flag */}
+              { cedula && (suma.saldoExterno || true)
                 ? 
                   <Table style={{ minWidth: pdf ? "inherit" : "800px" }} responsive>
                     <thead>
@@ -391,7 +390,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                         if (element[2] !== user.firm_c) {
                           return (
                             <tr key={`pasivos-externos-tr-${i}`}>
-                              <td>{element[2]} </td>
+                              <td>{element[2]}</td>
                               <td>
                                 {element[13] === 1 && "NA"}
                                 {element[13] === 2 &&
@@ -416,32 +415,21 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                 )}
 
                               </td>
-                              {/* <td>
-                                ₡{" "}
-                                {new Intl.NumberFormat(["ban", "id"]).format(
-                                  element[8].toFixed(2)
-                                )}{" "}
-                              </td> */}
                               <td className="td-hover" id={`externos-td-saldo-${i}`}>
                                 ₡{" "}
                                 {new Intl.NumberFormat(["ban", "id"]).format(
                                   element[7].toFixed(2)
-                                )}{" "}
+                                )}
                               </td>
                               <td>
                                 ₡
                                 {new Intl.NumberFormat(["ban", "id"]).format(
                                   (element[11] + element[12]).toFixed(2)
-                                )}{" "}
+                                )}
                               </td>
-                              {/* <td>
-                                {new Intl.NumberFormat(["ban", "id"]).format(
-                                  element[30].toFixed(2)
-                                )}{" "}
-                              </td> */}
 
-                              <td className="td-hover" id={`externos-td-tasa-${i}`}>{element[18]} </td>
-                              <td>{element[15]} </td>
+                              <td className="td-hover" id={`externos-td-tasa-${i}`}>{element[18]}</td>
+                              <td>{element[15]}</td>
                               <td>
                                 {" "}
                                 <button
@@ -515,14 +503,14 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
 
       <Row>
         <Col xs={12} xl={12}>
-          {/* <SizeSteps className="d-flex" name="detallesPasivos"/> */}
           <h4 className="page-title  general-title">Composición Final del Refinanciamiento</h4>
         </Col>
 
         <Col xs={12} xl={12}>
           <Card>
             <CardBody className="m-lg-0 pb-4">
-              {true
+              {/* TODO: check flag */}
+              {cedula
                 ? 
                   <Table style={{ minWidth: pdf ? "inherit" : "800px" }} responsive>
                     <thead>

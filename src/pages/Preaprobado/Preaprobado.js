@@ -43,7 +43,6 @@ import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import AssignmentOutlinedIcon from "@material-ui/icons/AssignmentOutlined";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
-// import logo from "../../assets/images/logo.png";
 
 //toast
 import { toast } from "react-toastify";
