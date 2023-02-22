@@ -4,6 +4,7 @@ import { Input } from "reactstrap";
 
 export const ControlledInput = ({
   type = "text", 
+  pattern,
   className = "", 
   defaultOption = "", 
   dbValue, 
@@ -26,6 +27,6 @@ export const ControlledInput = ({
   }
 
   return (
-    <Input type={type} className={className} value={value} onChange={onChangeHandler} />
+    <Input type={type} pattern={pattern} className={className} value={value} onChange={onChangeHandler} />
   )
 }

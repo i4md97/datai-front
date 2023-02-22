@@ -7,7 +7,8 @@ import UsuarioContext from "../../../context/usuario/UsuarioContext";
 // Components
 import { Row, Col, Table, Card, CardBody, Input, Button, Spinner } from "reactstrap";
 import { 
-  CustomDropdown 
+  CustomDropdown,
+  ControlledInput
 } from "../../../components";
 import CustomTooltip from "../CustomTooltip";
 import { detallePasivosOptions } from "../../../db/dropdownsOptions";
@@ -187,14 +188,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                   "Lineas de credito u operaciones crediticias"}
                               </td>
                               <td>
-                                {!pdf ? 
-                                  <>
-                                    {/* <Input value={element[10].toFixed(2)} onChange={()=>{}} /> */}
-                                    {element[10]}
-                                  </>
-                                  : // cedula.selected ? (cedula.selected.internos[`internos${i}`] || "Seleccionar") : "Seleccionar"
-                                    element[10].toFixed(2)
-                                }
+                                <ControlledInput type="number" defaultOption={element[10]} dbValue={element[10]} />
                               </td>
                               <td className="td-hover" id={`internos-td-saldo-${i}`}>
                                 ₡{" "}
@@ -267,6 +261,12 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                           <td colSpan={3}></td>
                         </tr>
                       )}
+                      <tr>
+                        <td colSpan={2}>Totales</td>
+                        <td>{`{col_total}`}</td>
+                        <td>{`{col_total}`}</td>
+                        <td>{`{col_total}`}</td>
+                      </tr>
                     </tbody>
                   </Table>
                 : 
@@ -307,7 +307,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                       <tr>
                         <td>{externosCIC.entidad}</td>
                         <td>{externosCIC.tipo_operacion}</td>
-                        <td><Input value="₡35,000" onChange={() => {}} /></td>
+                        <td><ControlledInput type="number" defaultOption="35000" /></td>
                         <td>{externosCIC.saldo_credito}</td>
                         <td>{externosCIC.cuota_mensual}</td>
                         <td>{externosCIC.tasa}</td>
@@ -346,9 +346,9 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                       </tr>
                       <tr>
                         <td colSpan={2}>TOTALES</td>
-                        <td>₡35,000</td>
-                        <td>₡7,500,000</td>
-                        <td>₡125,000</td>
+                        <td>{`col_total`}</td>
+                        <td>{`col_total`}</td>
+                        <td>{`col_total`}</td>
                         <td></td>
                         <td></td>
                       </tr>
@@ -404,16 +404,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                   "Lineas de credito u operaciones crediticias"}
                               </td>
                               <td>
-                                {!pdf ? (
-                                  <>
-                                    {/* {element[10].toFixed(2)} */}
-                                    {element[10]}
-                                  </>
-                                ) : (
-                                  // cedula.selected ? (cedula.selected.externos[`externos${i}`] || "Seleccionar") : "Seleccionar"
-                                  element[7].toFixed(2)
-                                )}
-
+                                <td><ControlledInput type="number" defaultOption={element[10]} /></td>
                               </td>
                               <td className="td-hover" id={`externos-td-saldo-${i}`}>
                                 ₡{" "}
@@ -491,6 +482,14 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                           <td colSpan={3}></td>
                         </tr>
                       )}
+                      <tr>
+                        <td colSpan={2}>TOTALES</td>
+                        <td>{`col_total`}</td>
+                        <td>{`col_total`}</td>
+                        <td>{`col_total`}</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
                     </tbody>
                   </Table> 
                 : 
