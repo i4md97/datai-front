@@ -42,13 +42,13 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
   }, [cedula]);
 
   const labelPrograma = [
-    "MONTO MÍNIMO",
-    "MONTO MÁXIMO",
-    "Tasa",
-    "TIPO TASA",
-    "PLAZO",
-    "FPP (Frecuencia Pago INT)",
-    "FPP (Frecuencia Pago Principal)"
+    ["MONTO MÍNIMO", "₡50,000"],
+    ["MONTO MÁXIMO", "₡1,000,000"],
+    ["Tasa", "5.00%"],
+    ["TIPO TASA", "56800.00%"],
+    ["PLAZO", "0"],
+    ["FPP (Frecuencia Pago INT)", "12"],
+    ["FPP (Frecuencia Pago Principal)", "MENSUAL"]
   ];
 
   const labelInterno = [
@@ -71,19 +71,19 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
     "Historial - Meses en CIC"
   ];
   const labelValoracionExterna = [
-    "Juicios Activos",
-    "Referencias Comerciales",
-    "Embargos Bienes Muebles",
-    "Embargos Bienes INMuebles",
-    "Juicios Históricos",
-    "Referencias Comerciales Históricas",
-    "Bienes Prendados",
-    "Bienes Hipotecados"
+    ["Juicios Activos", "0", "₡1,000", "5", "₡75,000"],
+    ["Referencias Comerciales", "0", "₡25,000", "5", "₡75,000"],
+    ["Embargos Bienes Muebles", "0", "₡35,000", "1", "₡5,000,000"],
+    ["Embargos Bienes INMuebles", "0", "₡0", "1", "₡25,000,000"],
+    ["Juicios Históricos", "0", "₡7,000", "5", "₡75,000"],
+    ["Referencias Comerciales Históricas", "0", "₡13,000", "5", "₡75,000"],
+    ["Bienes Prendados", "0", "₡35,000", "NA", "NA"],
+    ["Bienes Hipotecados", "0", "₡0", "NA", "NA"]
   ];
 
   const labelImpuestosReportados = [
-    "Ingreso reportado útimos meses",
-    "Impuestos reportados últimos meses"
+    [["Ingreso reportado útimos meses", "0", "₡0"], ["Patrono reportado", "NA"]],
+    [["Impuestos reportados últimos meses", "12", "₡121,000"], ["Sociedad Reportada", "RESTAURANTE BRISAS"]]
   ];
 
   const saveAndContinueHandler = () => {
@@ -163,11 +163,11 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
             return (
               <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`interno-card-${i}`}>
                 <Card className="aesthetic-card green">
-                  <CardBody className={`card-body card-error`}>
+                  <CardBody className="card-body card-error px-3 py-4">
                     <div className="card__title">
-                      <h5 className="text-semibold">{element}</h5>{" "}
+                      <h5 className="text-semibold">{element[0]}</h5>{" "}
                     </div>
-                    <p className="mt-2">Política:</p>
+                    <p className="mt-2">{element[1]}</p>
                     <p className="total-stat text-center"></p>
                   </CardBody>
                 </Card>
@@ -187,7 +187,7 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
             return (
               <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`interno-card-${i}`}>
                 <Card className="aesthetic-card green">
-                  <CardBody className={`card-body card-error`}>
+                  <CardBody className="card-body card-error px-3 py-4">
                     <div className="card__title">
                       <h5 className="text-semibold">{element}</h5>{" "}
                     </div>
@@ -258,7 +258,7 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
             return (
               <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`cic-card-${i}`}>
                 <Card className="aesthetic-card green">
-                  <CardBody className={`card-body card-error`}>
+                  <CardBody className="card-body card-error px-3 py-4">
                     <div className="card__title">
                       <h5 className="text-semibold">{element}</h5>{" "}
                     </div>
@@ -331,12 +331,28 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
           return (
             <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`valoracion-card-${i}`}>
               <Card className="aesthetic-card yellow">
-                <CardBody className={`card-body card-error`}>
-                  <div className="card__title mb-1">
-                    <h5 className="text-semibold">{element}</h5>{" "}
-                  </div>
-                  <p className="mt-2">Política:</p>
-                  <p className="total-stat text-center"></p>
+                <CardBody className="card-body card-error px-3 py-4">
+                  <Row className="pb-2">
+                    <Col xs={3} className="text-center">
+                      <p>#</p>
+                    </Col>
+                    <Col xs={9}>
+                      <div className="card__title mb-2">
+                        <h5 className="text-semibold">{element[0]}</h5>{" "}
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs={3} className="text-center">
+                      <p>{element[1]}</p>
+                      <p>{element[3]}</p>
+                    </Col>
+                    <Col xs={9}>
+                      {/* <p className="mt-2">Política:</p> */}
+                      <p className="">{element[2]}</p>
+                      <p className="">{element[4]}</p>
+                    </Col>
+                  </Row>
                 </CardBody>
               </Card>
             </Col>
@@ -355,14 +371,38 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
       <Row className="justify-content-start">
         {labelImpuestosReportados.map((element, i) => {
           return (
-            <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`valoracion-card-${i}`}>
+            <Col sm={12} md={6} xl={6} key={`valoracion-card-${i}`}>
               <Card className="aesthetic-card yellow">
-                <CardBody className={`card-body card-error`}>
-                  <div className="card__title mb-1">
-                    <h5 className="text-semibold">{element}</h5>{" "}
-                  </div>
-                  <p className="mt-2">Sociedad Reportada:</p>
-                  <p className="total-stat text-center"></p>
+                <CardBody className="card-body card-error px-3 py-4">
+                  <Row>
+                    <Col xs={1} className="text-center">
+                      <p>#</p>
+                    </Col>
+                    <Col sm={11}>
+                      <div className="card__title mb-1">
+                        <h5 className="text-semibold">Monto Promedio</h5>{" "}
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row className="py-2 border-bottom">
+                    <Col xs={1}>
+                    </ Col>
+                    <Col xs={11} className="pb-2">
+                      <p>{element[0][0]}</p>
+                    </Col>
+                    <Col xs={1} className="text-center">
+                      <p>{element[0][1]}</p>
+                    </Col>
+                    <Col xs={11}>
+                      <p>{element[0][2]}</p>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <p className="mt-2"><b className="text-bold">{element[1][0]}</b>: {element[1][1]}</p>
+                      <p className="text-center"></p>
+                    </Col>
+                  </Row>
                 </CardBody>
               </Card>
             </Col>
