@@ -42,13 +42,11 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
   }, [cedula]);
 
   const labelPrograma = [
-    ["MONTO MÍNIMO", "₡50,000"],
-    ["MONTO MÁXIMO", "₡1,000,000"],
-    ["Tasa", "5.00%"],
-    ["TIPO TASA", "56800.00%"],
-    ["PLAZO", "0"],
-    ["FPP (Frecuencia Pago INT)", "12"],
-    ["FPP (Frecuencia Pago Principal)", "MENSUAL"]
+    ["MONTO MÍNIMO", null, null, "₡50,000"],
+    ["MONTO MÁXIMO", null, null, "₡1,000,000"],
+    ["TIPO TASA", "Tasa", "5.00%", "56800.00%"],
+    ["FPP (Frecuencia Pago INT)", "PLAZO", "0", "12"],
+    ["FPP (Frecuencia Pago Principal)", null, null, "MENSUAL"]
   ];
 
   const labelInterno = [
@@ -159,16 +157,20 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
             </CardBody>
           </Card>
         </Col>
-        {!cedula && labelPrograma.map((element, i) => {
+        {labelPrograma.map((element, i) => {
             return (
               <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`interno-card-${i}`}>
                 <Card className="aesthetic-card green">
                   <CardBody className="card-body card-error px-3 py-4">
-                    <div className="card__title">
+                    <div className="card__title my-2">
                       <h5 className="text-semibold">{element[0]}</h5>{" "}
                     </div>
-                    <p className="mt-2">{element[1]}</p>
-                    <p className="total-stat text-center"></p>
+                    {cedula && element[1] ? 
+                      <p className="mb-0">{element[1]}: {element[2]}</p>
+                      :
+                      <p className="mb-0">&nbsp;</p>
+                    }
+                    {cedula && <p className="total-stat text-center">{element[3]}</p>}
                   </CardBody>
                 </Card>
               </Col>
@@ -201,7 +203,7 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
       </Row>
 
       <Row className="justify-content-center">
-        {data.interno.map((element, i) => {
+        {cedula && data.interno.map((element, i) => {
           let value = 0;
           let valueFilter = 0;
           if (element === "dias_atraso" || element === "prorr_aplic") {
@@ -277,7 +279,7 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
             {data.cic.map((element, i) => {
               return (
                 <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`cic-subcard-${i}`}>
-                  <Card className="aesthetic-card green">
+                  <Card className="aesthetic-card yellow">
                     <CardBody
                       className={`card-body ${cedula &&
                         cedula.cic_risks[element][0] <= riesgo.cic[element]
@@ -300,7 +302,7 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
 
             {/* TODO: eliminar columna cuando BE tenga estos datos */}
             <Col sm={12} md={6} xl={pdf ? 4 : 3}>
-              <Card className="aesthetic-card green">
+              <Card className="aesthetic-card yellow">
                 <CardBody
                   className="card-body card-confirm"
                 >
@@ -330,7 +332,7 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
         {labelValoracionExterna.map((element, i) => {
           return (
             <Col sm={12} md={6} xl={pdf ? 4 : 3} key={`valoracion-card-${i}`}>
-              <Card className="aesthetic-card yellow">
+              <Card className="aesthetic-card green">
                 <CardBody className="card-body card-error px-3 py-4">
                   <Row className="pb-2">
                     <Col xs={3} className="text-center">
@@ -338,19 +340,19 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
                     </Col>
                     <Col xs={9}>
                       <div className="card__title mb-2">
-                        <h5 className="text-semibold">{element[0]}</h5>{" "}
+                        {<h5 className="text-semibold">{element[0]}</h5>}
                       </div>
                     </Col>
                   </Row>
                   <Row>
                     <Col xs={3} className="text-center">
-                      <p>{element[1]}</p>
-                      <p>{element[3]}</p>
+                      {cedula && <p>{element[1]}</p>}
+                      {cedula && <p>{element[3]}</p>}
                     </Col>
                     <Col xs={9}>
                       {/* <p className="mt-2">Política:</p> */}
-                      <p className="">{element[2]}</p>
-                      <p className="">{element[4]}</p>
+                      {cedula && <p className="total-stat">{element[2]}</p>}
+                      {cedula && <p className="total-stat">{element[4]}</p>}
                     </Col>
                   </Row>
                 </CardBody>
@@ -388,19 +390,18 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
                     <Col xs={1}>
                     </ Col>
                     <Col xs={11} className="pb-2">
-                      <p>{element[0][0]}</p>
+                      {cedula && <p>{element[0][0]}</p>}
                     </Col>
                     <Col xs={1} className="text-center">
-                      <p>{element[0][1]}</p>
+                      {cedula && <p>{element[0][1]}</p>}
                     </Col>
                     <Col xs={11}>
-                      <p>{element[0][2]}</p>
+                      {cedula && <p className="total-stat">{element[0][2]}</p>}
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <p className="mt-2"><b className="text-bold">{element[1][0]}</b>: {element[1][1]}</p>
-                      <p className="text-center"></p>
+                      {cedula && <p className="mt-2"><b className="text-bold">{element[1][0]}</b>: {element[1][1]}</p>}
                     </Col>
                   </Row>
                 </CardBody>
