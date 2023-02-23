@@ -188,7 +188,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                   "Lineas de credito u operaciones crediticias"}
                               </td>
                               <td className="p-1">
-                                <ControlledInput type="number" defaultOption={element[10]} dbValue={element[10]} />
+                                <ControlledInput className="bg-green" type="number" defaultOption={element[10]} dbValue={element[10]} />
                               </td>
                               <td /* className="td-hover" id={`internos-td-saldo-${i}`} */>
                                 ₡{" "}
@@ -307,7 +307,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                       <tr>
                         <td>{externosCIC.entidad}</td>
                         <td>{externosCIC.tipo_operacion}</td>
-                        <td className="p-1"><ControlledInput type="number" defaultOption="35000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" type="number" defaultOption="35000" /></td>
                         <td>{externosCIC.saldo_credito}</td>
                         <td>{externosCIC.cuota_mensual}</td>
                         <td>{externosCIC.tasa}</td>
@@ -346,9 +346,9 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                       </tr>
                       <tr>
                         <td colSpan={2}>TOTALES</td>
-                        <td>{`col_total`}</td>
-                        <td>{`col_total`}</td>
-                        <td>{`col_total`}</td>
+                        <td>{`{col_total}`}</td>
+                        <td>{`{col_total}`}</td>
+                        <td>{`{col_total}`}</td>
                         <td></td>
                         <td></td>
                       </tr>
@@ -404,7 +404,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                   "Lineas de credito u operaciones crediticias"}
                               </td>
                               <td className="p-1">
-                                <ControlledInput type="number" defaultOption={element[10]} />
+                                <ControlledInput className="bg-green" type="number" defaultOption={element[10]} />
                               </td>
                               <td /* className="td-hover" */ /* id={`externos-td-saldo-${i}`} */>
                                 ₡{" "}
@@ -484,9 +484,9 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                       )}
                       <tr>
                         <td colSpan={2}>TOTALES</td>
-                        <td>{`col_total`}</td>
-                        <td>{`col_total`}</td>
-                        <td>{`col_total`}</td>
+                        <td>{`{col_total}`}</td>
+                        <td>{`{col_total}`}</td>
+                        <td>{`{col_total}`}</td>
                         <td></td>
                         <td></td>
                       </tr>
