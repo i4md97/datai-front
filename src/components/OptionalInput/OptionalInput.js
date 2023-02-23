@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Input, InputGroup, InputGroupText } from "reactstrap"
 
-export const OptionalInput = ({name}) => {
+export const OptionalInput = ({className, name}) => {
   const [isChecked, setIsChecked] = useState(false);
   const [value, setValue] = useState("");
 
@@ -30,6 +30,7 @@ export const OptionalInput = ({name}) => {
         />
       </InputGroupText>
       <Input 
+        className={className}
         disabled={!isChecked}
         type="text"
         name={name}

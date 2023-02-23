@@ -117,7 +117,7 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
                       options={actividadOptions.industryOptions}
                     />
                     <label className="text-center general-title">Fecha Constitución</label>
-                    <input type="date" className="mb-4"/>
+                    <input type="date" className="mb-4 bg-green"/>
                     <label className="text-center general-title">Impuestos al día?</label>
                     <CustomDropdown 
                       className="w-100" 
@@ -136,38 +136,43 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
                 <Row>
                   <Col sm={12}>
                     <label className="text-center general-title">Dirección exacta empresa:</label>
-                    <Input type="text" className="mb-4"/>
+                    <Input type="text" className="mb-4 bg-green" placeholder="Bo. María Auxiliadora, Cond Brisas del Bosque, casa 38"/>
                   </Col>
                 </Row>
                 <UbicacionesDropdowns />
                 <Row>
-                  <Col className="col-xs-12 col-sm-auto">
+                  <Col className="col-12 col-sm-6 col-md-auto">
                     <label className="text-center general-title">Facebook</label>
-                    <OptionalInput 
+                    <OptionalInput
+                      className="bg-green" 
                       name="facebook"
                     />
                   </Col>
-                  <Col className="col-xs-12 col-sm-auto">
+                  <Col className="col-12 col-sm-6 col-md-auto">
                     <label className="text-center general-title">Instagram</label>
-                    <OptionalInput 
+                    <OptionalInput
+                      className="bg-green" 
                       name="instagram"
                     />
                   </Col>
-                  <Col className="col-xs-12 col-sm-auto">
+                  <Col className="col-12 col-sm-6 col-md-auto">
                     <label className="text-center general-title">LinkedIn</label>
-                    <OptionalInput 
+                    <OptionalInput
+                      className="bg-green" 
                       name="linkedin"
                     />
                   </Col>
-                  <Col className="col-xs-12 col-sm-auto">
+                  <Col className="col-12 col-sm-6 col-md-auto">
                     <label className="text-center general-title">Twitter</label>
                     <OptionalInput 
+                      className="bg-green"
                       name="twitter"
                     />
                   </Col>
-                  <Col className="col-xs-12 col-sm-auto">
+                  <Col className="col-12 col-sm-6 col-md-auto">
                     <label className="text-center general-title">Tiktok</label>
                     <OptionalInput 
+                      className="bg-green"
                       name={"tiktok"}
                     />
                   </Col>
@@ -182,27 +187,27 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
                       options={actividadOptions.incomeOptions}
                     />
                     <label className="text-center general-title">Ingreso Mensual</label>
-                    <Input type="text" />
+                    <Input type="text" className="mb-4 bg-green" placeholder="₡1,000,000"/>
                   </Col>
                   <Col sm={9}>
                     <Row>
                         <Col sm={3}>
                           <label className="text-center general-title">Nombre Empresa</label>
-                          <Input type="text" className="mb-4"/>
+                          <Input type="text" className="mb-4 bg-green"/>
                         </Col>
                         <Col sm={9}>
                           <label className="text-center general-title">Ubicación</label>
-                          <Input type="text" className="mb-4"/>
+                          <Input type="text" className="mb-4 bg-green"/>
                         </Col>
                     </Row>
                     <Row>
                       <Col>
                         <label className="text-center general-title">Teléfono</label>
-                        <Input type="text" className="mb-4"/>
+                        <Input type="text" className="mb-4 bg-green"/>
                       </Col>
                       <Col>
                         <label className="text-center general-title">Email</label>
-                        <Input type="text" className="mb-4"/>
+                        <Input type="text" className="mb-4 bg-green"/>
                       </Col>
                     </Row>
                   </Col>
@@ -219,23 +224,23 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
                 <Row>
                   <Col sm={6}>
                     <label className="text-center general-title">Tipo de Producto</label>
-                    <Input type="text" className="mb-3"/>
+                    <Input type="text" className="mb-3 bg-green"/>
                     <label className="text-center general-title">Calidad del Producto</label>
-                    <Input type="text" className="mb-3"/>
+                    <Input type="text" className="mb-3 bg-green"/>
                     <label className="text-center general-title">Condiciones del local</label>
-                    <Input type="text" className="mb-3"/>
+                    <Input type="text" className="mb-3 bg-green"/>
                   </Col>
                   <Col sm={6}>
                     <label className="text-center general-title">Segmentos que atiende</label>
-                    <Input type="text" className="mb-3"/>
+                    <Input type="text" className="mb-3 bg-green"/>
                     <label className="text-center general-title">Capac atender demanda</label>
-                    <Input type="text" className="mb-3"/>
+                    <Input type="text" className="mb-3 bg-green"/>
                     <label className="text-center general-title">Condiciones para ventas</label>
-                    <Input type="text" className="mb-3"/>
+                    <Input type="text" className="mb-3 bg-green"/>
                   </Col>
                   <Col sm={12}>
                     <label className="text-center general-title">Recomendaciones finales</label>
-                    <Input type="text" className="mb-3"/>
+                    <Input type="text" className="mb-3 bg-green"/>
                   </Col>
                 </Row>
               </CardBody>
@@ -250,14 +255,14 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
                 <Row>
                   <Col sm={12}>
                     <label className="text-center general-title">Dirección exacta dueño:</label>
-                    <Input type="text" className="mb-3"/>
+                    <Input type="text" className="mb-3 bg-green" placeholder="Bo. María Auxiliadora, Cond Brisas del Bosque, casa 38"/>
                   </Col>
                   <Col sm={6}>
                     <UbicacionesDropdowns />
                     <Row>
                       <Col sm={4}>
                         <label className="text-center general-title">Fecha Nacimiento</label>
-                        <Input type="date" className="mb-3"/>
+                        <Input type="date" className="mb-3 bg-green"/>
                       </Col>
                       <Col sm={4}>
                         <label className="text-center general-title">Sexo:</label>
@@ -423,7 +428,7 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
                 <Row>
                   <Col>
                     <label className="text-center general-title">Justifique fuente de ingreso</label>
-                    <Input type="text" />
+                    <Input type="text" className="bg-green" />
                   </Col>
                 </Row>
                 <Row className="py-4">
@@ -464,7 +469,7 @@ const ActividadEconomicaNew = ({ animation, pdf }) => {
                   </Col>
                   <Col sm={7}>
                     <label className="text-center general-title">Detalle:</label>
-                    <Input type="text" />
+                    <Input type="text" className="bg-green" />
                   </Col>
                 </Row>
               </CardBody>
