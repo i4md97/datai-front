@@ -5,7 +5,7 @@ import UsuarioContext from "../../../context/usuario/UsuarioContext";
 import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
 
 // Components
-import { Row, Col, Card, CardBody, Table, Input } from "reactstrap";
+import { Row, Col, Card, CardBody, Table } from "reactstrap";
 import { ControlledInput, EtapaSolicitud, MultipleTestingAnalytics } from "../../../components";
 
 export default function CapacidadPago({

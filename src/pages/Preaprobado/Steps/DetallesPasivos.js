@@ -10,7 +10,7 @@ import {
   CustomDropdown,
   ControlledInput
 } from "../../../components";
-import CustomTooltip from "../CustomTooltip";
+// import CustomTooltip from "../CustomTooltip";
 import { detallePasivosOptions } from "../../../db/dropdownsOptions";
 
 import { db_cic } from "../../../db/db_cic";
@@ -34,6 +34,24 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
     internos: {},
     externos: {}
   });
+
+  const [pasivosInternos, setPasivosInternos] = useState({
+    ahorroPotencial: 0,
+    saldoActual: 0,
+    cuotaMensual: 0,
+  });
+
+  const [pasivosExternos, setPasivosExternos] = useState({
+    ahorroPotencial: 0,
+    saldoActual: 0,
+    cuotaMensual: 0,
+  });
+
+  const [noRegulados, setNoRegulados] = useState({
+    ahorroPotencial: 0,
+    saldoActual: 0,
+    cuotaMensual: 0,
+  })
 
   useEffect(() => {
     if (cedula) {
@@ -102,6 +120,32 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
       setIsSaving(false);
       changeStep(4);
     }, 1500);
+  }
+
+  useEffect(() => {
+    // Pasivos Internos
+    if (cedula) {
+      sumColumn(".pasivos-internos-ahorro__td input", "value", setPasivosInternos, 'ahorroPotencial');
+      sumColumn(".pasivos-internos-saldo__td", "innerText", setPasivosInternos, "saldoActual");
+      sumColumn(".pasivos-internos-cuota__td", "innerText", setPasivosInternos, "cuotaMensual");
+      // Pasivos Externos
+      sumColumn(".pasivos-externos-ahorro__td input", "value", setPasivosExternos, "ahorroPotencial");
+      sumColumn(".pasivos-externos-saldo__td", "innerText", setPasivosExternos, "saldoActual");
+      sumColumn(".pasivos-externos-cuota__td", "innerText", setPasivosExternos, "cuotaMensual");
+      // Externos no regulados
+      sumColumn(".no-regulados-ahorro__td input", "value", setNoRegulados, 'ahorroPotencial')
+      sumColumn(".no-regulados-saldo__td", "innerText", setNoRegulados, "saldoActual");
+      sumColumn(".no-regulados-cuota__td", "innerText", setNoRegulados, "cuotaMensual");
+    }
+  }, [cedula]);
+
+  const sumColumn = (targetClass, selector, stateSetter, option) => {
+    if (targetClass) {
+      const colElements = document.querySelectorAll(`${targetClass}`);
+      const colValues = [...colElements].map(element => element[selector].replace(/[^\d,]+/g, '').replace(/,/g, '.'));
+      const colSum = colValues.reduce((a, b) => parseFloat(a ? a : 0) + parseFloat(b ? b : 0), 0);
+      stateSetter(prev => ({...prev, [option]: colSum}));
+    }
   }
 
   return (
@@ -187,16 +231,21 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                 {element[13] === 6 &&
                                   "Lineas de credito u operaciones crediticias"}
                               </td>
-                              <td className="p-1">
-                                <ControlledInput className="bg-green" type="number" defaultOption={element[10]} dbValue={element[10]} />
+                              <td className="pasivos-internos-ahorro__td p-1">
+                                <ControlledInput 
+                                  className="bg-green"
+                                  type="number"
+                                  defaultOption={element[10]}
+                                  dbValue={element[10]}
+                                  callback={() => {sumColumn(".pasivos-internos-ahorro__td input", "value", setPasivosInternos, 'ahorroPotencial')}} />
                               </td>
-                              <td /* className="td-hover" id={`internos-td-saldo-${i}`} */>
+                              <td className="pasivos-internos-saldo__td" /* id={`internos-td-saldo-${i}`} */>
                                 ₡{" "}
                                 {new Intl.NumberFormat(["ban", "id"]).format(
                                   element[7].toFixed(2)
                                 )}
                               </td>
-                              <td>
+                              <td className="pasivos-internos-cuota__td">
                                 ₡{" "}
                                 {new Intl.NumberFormat(["ban", "id"]).format(
                                   (element[11] + element[12]).toFixed(11)
@@ -263,9 +312,9 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                       )}
                       <tr>
                         <td colSpan={2}>Totales</td>
-                        <td>{`{col_total}`}</td>
-                        <td>{`{col_total}`}</td>
-                        <td>{`{col_total}`}</td>
+                        <td>₡ {new Intl.NumberFormat("de-DE").format(pasivosInternos.ahorroPotencial)}</td>
+                        <td>₡ {new Intl.NumberFormat("de-DE").format(pasivosInternos.saldoActual)}</td>
+                        <td>₡ {new Intl.NumberFormat("de-DE").format(pasivosInternos.cuotaMensual)}</td>
                       </tr>
                     </tbody>
                   </Table>
@@ -307,9 +356,16 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                       <tr>
                         <td>{externosCIC.entidad}</td>
                         <td>{externosCIC.tipo_operacion}</td>
-                        <td className="p-1"><ControlledInput className="bg-green" type="number" defaultOption="35000" /></td>
-                        <td>{externosCIC.saldo_credito}</td>
-                        <td>{externosCIC.cuota_mensual}</td>
+                        <td className="p-1 pasivos-externos-ahorro__td">
+                          <ControlledInput 
+                            className="bg-green" 
+                            type="number" 
+                            defaultOption="35000" 
+                            callback={() => sumColumn(".pasivos-externos-ahorro__td input", "value", setPasivosExternos, "ahorroPotencial")}
+                          />
+                        </td>
+                        <td className="pasivos-externos-saldo__td">{externosCIC.saldo_credito}</td>
+                        <td className="pasivos-externos-cuota__td">{externosCIC.cuota_mensual}</td>
                         <td>{externosCIC.tasa}</td>
                         <td>{externosCIC.condicion}</td>
                         <td>SI</td>
@@ -346,9 +402,9 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                       </tr>
                       <tr>
                         <td colSpan={2}>TOTALES</td>
-                        <td>{`{col_total}`}</td>
-                        <td>{`{col_total}`}</td>
-                        <td>{`{col_total}`}</td>
+                        <td>₡ {new Intl.NumberFormat("de-DE").format(pasivosExternos.ahorroPotencial)}</td>
+                        <td>₡ {new Intl.NumberFormat("de-DE").format(pasivosExternos.saldoActual)}</td>
+                        <td>₡ {new Intl.NumberFormat("de-DE").format(pasivosExternos.cuotaMensual)}</td>
                         <td></td>
                         <td></td>
                       </tr>
@@ -403,16 +459,20 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                                 {element[13] === 6 &&
                                   "Lineas de credito u operaciones crediticias"}
                               </td>
-                              <td className="p-1">
-                                <ControlledInput className="bg-green" type="number" defaultOption={element[10]} />
+                              <td className="p-1 no-regulados-ahorro__td">
+                                <ControlledInput 
+                                  className="bg-green" 
+                                  type="number" 
+                                  defaultOption={element[10]}
+                                  callback={() => {sumColumn(".no-regulados-ahorro__td input", "value", setNoRegulados, 'ahorroPotencial')}} />
                               </td>
-                              <td /* className="td-hover" */ /* id={`externos-td-saldo-${i}`} */>
+                              <td className="no-regulados-saldo__td" /* id={`externos-td-saldo-${i}`} */>
                                 ₡{" "}
                                 {new Intl.NumberFormat(["ban", "id"]).format(
                                   element[7].toFixed(2)
                                 )}
                               </td>
-                              <td>
+                              <td className="no-regulados-cuota__td">
                                 ₡
                                 {new Intl.NumberFormat(["ban", "id"]).format(
                                   (element[11] + element[12]).toFixed(2)
@@ -484,11 +544,10 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                       )}
                       <tr>
                         <td colSpan={2}>TOTALES</td>
-                        <td>{`{col_total}`}</td>
-                        <td>{`{col_total}`}</td>
-                        <td>{`{col_total}`}</td>
-                        <td></td>
-                        <td></td>
+                        <td>₡ {new Intl.NumberFormat("de-DE").format(noRegulados.ahorroPotencial)}</td>
+                        <td>₡ {new Intl.NumberFormat("de-DE").format(noRegulados.saldoActual)}</td>
+                        <td>₡ {new Intl.NumberFormat("de-DE").format(noRegulados.cuotaMensual)}</td>
+                        <td colSpan={"100%"}></td>
                       </tr>
                     </tbody>
                   </Table> 
