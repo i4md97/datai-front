@@ -555,6 +555,35 @@
   }
 }
 
+.normalize-table-section {
+  max-height: 70vh;
+  overflow: scroll;
+  position: relative;
+  .sticky-table-left {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    height: 100%;
+    @include themify($themes) {
+      border-right: 1px solid themed("colorBorder");
+    }
+  }
+
+  .sticky-table-right {
+    position: relative;
+  }
+
+  table {
+    td {
+      height: 47px;
+      max-height: 47px;
+      // overflow: scroll;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
 
 .border-content {
   @include themify($themes) {

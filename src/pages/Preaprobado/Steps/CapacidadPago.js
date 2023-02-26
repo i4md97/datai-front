@@ -476,16 +476,283 @@ export default function CapacidadPago({
                   <h5 className="text-bold">FLUJO NETO EFECTIVO</h5>
                 </Col>
               </Row>
-              <Row>
-                <Col>
-                  <Table responsive striped>
+              <Row className="normalize-table-section">
+                <Col className="pr-0 bg-white sticky-table-left">
+                  <Table style={{width: "100%"}} striped>
                     <thead>
-                      <tr>
-                        <th style={{minWidth: "250px"}}>Rubros de ingresos y gastos</th>
-                        <th>#</th>
+                      <tr className="bg-white">
+                        <th style={{minWidth: "140px", textAlign: "center"}}>Rubros de ingresos y gastos</th>
+                        <th style={{minWidth: "40px"}}>#</th>
                         <th>Fijos</th>
-                        <th>%</th>
-                        <th>Nov-22</th>
+                        <th style={{minWidth: "40px"}}>%</th>
+                        <th className="p-1">
+                          <ControlledInput type="date" dateFormat="MM-YY" defaultOption="2022-11-22" className="bg-green" />
+                        </th>
+                      </tr>
+                  </thead>
+                    <tbody>
+                      <tr>
+                        <td className="text-bold">Ingresos</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>₡1,860,000</td>
+                      </tr>
+                      <tr>
+                        <td>Ventas</td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡300,000" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡300,000" /></td>
+                      </tr>
+                      <tr>
+                        <td>Estacionalidad %</td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="0.0%" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="100.0%" /></td>
+                      </tr>
+                      <tr>
+                        <td colSpan={"100%"}></td>
+                      </tr>
+                      <tr>
+                        <td>Ingresos estimados</td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="15000" /></td>
+                        <td>₡450,000</td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
+                      </tr>
+                      <tr>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Detalle: Gasto telefónico X 30" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="30" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td colSpan={"100%"}></td>
+                      </tr>
+                      <tr>
+                        <td>Ayudas, Donaciones, IMAS, etc</td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡110,000" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡110,000"/></td>
+                      </tr>
+                      <tr>
+                        <td>Financiamiento Empresarial</td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td>₡1,500,000</td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡1,000,000"/></td>
+                      </tr>
+                      <tr>
+                        <td>Financiamiento Personal</td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td>₡0</td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡0"/></td>
+                      </tr>
+                      <tr>
+                        <td>Otros ingresos familiares</td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡0"/></td>
+                        <td className="p-1"></td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                      </tr>
+                      <tr>
+                        <td colSpan={"100%"}></td>
+                      </tr>
+                      <tr>
+                        <td className="text-bold">GASTOS</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>-₡1,544,000</td>
+                      </tr>
+                      <tr>
+                        <td className="text-semibold">Inversiones</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>-₡800,000.00</td>
+                      </tr>
+                      <tr>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Compra Activos: mueb e Inmueb" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡800,000.00" /></td>
+                      </tr>
+                      <tr>
+                        <td colSpan={"100%"}></td>
+                      </tr>
+                      <tr>
+                        <td className="text-semibold">Costo de Ventas</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>-₡200,000.00</td>
+                      </tr>
+                      <tr>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Costo de Ventas (insumos)" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡200,000" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡200,000.00" /></td>
+                      </tr>
+                      <tr>
+                        <td className="text-semibold">Gasto operativo</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>-₡364,000.00</td>
+                      </tr>
+                      <tr>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Servicios subcontratados" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡75,000" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
+                      </tr>
+                      <tr>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Servicios públicos" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡68,000" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
+                      </tr>
+                      <tr>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Alquileres" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡180,000" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
+                      </tr>
+                      <tr>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="CCSS / INS" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡24,000" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
+                      </tr>
+                      <tr>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Mantenimiento Planta y Eq" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡17,000" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
+                      </tr>
+                      <tr>
+                        <td colSpan={"100%"}></td>
+                      </tr>
+                      <tr>
+                        <td className="text-semibold">Gasto administrativo</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>-₡180,000.00</td>
+                      </tr>
+                      <tr>
+                        <td>Mano de Obra / Otros Salarios</td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡75,000" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
+                      </tr>
+                      <tr>
+                        <td colSpan={"100%"}></td>
+                      </tr>
+                      <tr>
+                        <td>Salario Dueño (Costo Familia)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>-₡105,000.00</td>
+                      </tr>
+                      <tr>
+                        <td>Cargas Sociales</td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡25,000" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
+                      </tr>
+                      <tr>
+                        <td>Pensión alimenticia</td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡50,000" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
+                      </tr>
+                      <tr>
+                        <td>Gastos Familiares</td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡15,000" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
+                      </tr>
+                      <tr>
+                        <td>Otras deducciones</td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡15,000" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
+                      </tr>
+                      <tr>
+                        <td className="text-semibold">Gasto Financiero</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>₡0.00</td>
+                      </tr>
+                      <tr>
+                        <td>Cuota hipotecarios</td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
+                      </tr>
+                      <tr>
+                        <td>Cuota empresariales</td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
+                      </tr>
+                      <tr>
+                        <td>Cuota personales</td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
+                      </tr>
+                      <tr>
+                        <td colSpan={"100%"}></td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">FLUJO NETO DE EFECTIVO</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>₡316,000.00</td>
+                      </tr>
+                      <tr>
+                        <td>Reinversión</td>
+                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡50,000" /></td>
+                        <td></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡50,000.00" /></td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">FLUJO DE EFECTIVO</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>₡366,000.00</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </Col>
+                <Col className="pl-0 sticky-table-right">
+                  <Table striped>
+                    <thead>
+                      <tr className="bg-white">
                         <th>Dec-22</th>
                         <th>Jan-23</th>
                         <th>Feb-23</th>
@@ -505,11 +772,6 @@ export default function CapacidadPago({
                     </thead>
                     <tbody>
                       <tr>
-                        <td className="text-bold">Ingresos</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>₡1,860,000</td>
                         <td>₡1,330,000</td>
                         <td>₡800,000</td>
                         <td>₡800,000</td>
@@ -527,11 +789,6 @@ export default function CapacidadPago({
                         <td>₡14,922,600</td>
                       </tr>
                       <tr>
-                        <td>Ventas</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡300,000" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡300,000" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡270,000" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡240,000" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡240,000" /></td>
@@ -549,11 +806,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                       </tr>
                       <tr>
-                        <td>Estacionalidad %</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="0.0%" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="100.0%" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" defaultOption="90.0%" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" defaultOption="80.0%" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" defaultOption="80.0%" /></td>
@@ -574,11 +826,6 @@ export default function CapacidadPago({
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td>Ingresos estimados</td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="15000" /></td>
-                        <td>₡450,000</td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
@@ -596,16 +843,9 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Detalle: Gasto telefónico X 30" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="30" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td>Ayudas, Donaciones, IMAS, etc</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡110,000" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡110,000"/></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡110,000"/></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡110,000"/></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡110,000"/></td>
@@ -623,11 +863,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                       </tr>
                       <tr>
-                        <td>Financiamiento Empresarial</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td>₡1,500,000</td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡1,000,000"/></td>
                         <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡500,000"/></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
@@ -645,11 +880,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                       </tr>
                       <tr>
-                        <td>Financiamiento Personal</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td>₡0</td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡0"/></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
@@ -667,11 +897,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                       </tr>
                       <tr>
-                        <td>Otros ingresos familiares</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡0"/></td>
-                        <td className="p-1"></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
@@ -692,11 +917,6 @@ export default function CapacidadPago({
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td className="text-bold">GASTOS</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>-₡1,544,000</td>
                         <td>-₡3,544,000</td>
                         <td>-₡544,000</td>
                         <td>-₡544,000</td>
@@ -714,11 +934,6 @@ export default function CapacidadPago({
                         <td>-₡12,537,630</td>
                       </tr>
                       <tr>
-                        <td className="text-semibold">Inversiones</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>-₡800,000.00</td>
                         <td>-₡2,000,000.00</td>
                         <td>₡0.00</td>
                         <td>₡0.00</td>
@@ -736,11 +951,6 @@ export default function CapacidadPago({
                         <td>-₡3,417,750.00</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Compra Activos: mueb e Inmueb" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡800,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡2,000,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
@@ -761,11 +971,6 @@ export default function CapacidadPago({
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td className="text-semibold">Costo de Ventas</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>-₡200,000.00</td>
                         <td>-₡1,000,000.00</td>
                         <td>₡0.00</td>
                         <td>₡0.00</td>
@@ -783,11 +988,6 @@ export default function CapacidadPago({
                         <td>-₡1,323,000.00</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Costo de Ventas (insumos)" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡200,000" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡200,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡1,000,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
@@ -805,11 +1005,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="5.0%" /></td>
                       </tr>
                       <tr>
-                        <td className="text-semibold">Gasto operativo</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>-₡364,000.00</td>
                         <td>-₡364,000.00</td>
                         <td>-₡364,000.00</td>
                         <td>-₡364,000.00</td>
@@ -827,11 +1022,6 @@ export default function CapacidadPago({
                         <td>-₡5,217,030.00</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Servicios subcontratados" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡75,000" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
@@ -849,11 +1039,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="5.0%" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Servicios públicos" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡68,000" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
@@ -871,11 +1056,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Alquileres" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡180,000" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
@@ -893,11 +1073,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="CCSS / INS" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡24,000" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
@@ -915,11 +1090,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Mantenimiento Planta y Eq" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡17,000" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
@@ -940,11 +1110,6 @@ export default function CapacidadPago({
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td className="text-semibold">Gasto administrativo</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>-₡180,000.00</td>
                         <td>-₡180,000.00</td>
                         <td>-₡180,000.00</td>
                         <td>-₡180,000.00</td>
@@ -962,11 +1127,6 @@ export default function CapacidadPago({
                         <td>-₡2,579,850.00</td>
                       </tr>
                       <tr>
-                        <td>Mano de Obra / Otros Salarios</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡75,000" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
@@ -987,11 +1147,6 @@ export default function CapacidadPago({
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td>Salario Dueño (Costo Familia)</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>-₡105,000.00</td>
                         <td>-₡105,000.00</td>
                         <td>-₡105,000.00</td>
                         <td>-₡105,000.00</td>
@@ -1009,11 +1164,6 @@ export default function CapacidadPago({
                         <td>-₡1,504,912.50</td>
                       </tr>
                       <tr>
-                        <td>Cargas Sociales</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡25,000" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
@@ -1031,11 +1181,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="5.0%" /></td>
                       </tr>
                       <tr>
-                        <td>Pensión alimenticia</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡50,000" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
@@ -1053,11 +1198,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
                       </tr>
                       <tr>
-                        <td>Gastos Familiares</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡15,000" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
@@ -1075,11 +1215,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
                       </tr>
                       <tr>
-                        <td>Otras deducciones</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡15,000" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
@@ -1097,13 +1232,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                       </tr>
                       <tr>
-                      </tr>
-                      <tr>
-                        <td className="text-semibold">Gasto Financiero</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>₡0.00</td>
                         <td>₡0.00</td>
                         <td>₡0.00</td>
                         <td>₡0.00</td>
@@ -1121,11 +1249,6 @@ export default function CapacidadPago({
                         <td>₡0.00</td>
                       </tr>
                       <tr>
-                        <td>Cuota hipotecarios</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
@@ -1143,11 +1266,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="5.0%" /></td>
                       </tr>
                       <tr>
-                        <td>Cuota empresariales</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
@@ -1165,11 +1283,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
                       </tr>
                       <tr>
-                        <td>Cuota personales</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
@@ -1190,11 +1303,6 @@ export default function CapacidadPago({
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td className="font-weight-bold">FLUJO NETO DE EFECTIVO</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>₡316,000.00</td>
                         <td>-₡1,898,000.00</td>
                         <td>-₡1,642,000.00</td>
                         <td>-₡1,386,000.00</td>
@@ -1212,11 +1320,6 @@ export default function CapacidadPago({
                         <td>₡1,896,370.00</td>
                       </tr>
                       <tr>
-                        <td>Reinversión</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡50,000" /></td>
-                        <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡50,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡100,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡235,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡100,000.00" /></td>
@@ -1234,11 +1337,6 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
                       </tr>
                       <tr>
-                        <td className="font-weight-bold">FLUJO DE EFECTIVO</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>₡366,000.00</td>
                         <td>-₡1,998,000.00</td>
                         <td>-₡1,877,000.00</td>
                         <td>-₡1,486,000.00</td>
