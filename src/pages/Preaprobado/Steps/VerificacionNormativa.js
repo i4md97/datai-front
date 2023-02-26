@@ -120,40 +120,6 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
                   />
                 </Col>
               </Row>
-              <Row>
-                <Col sm={2}>
-                  <p>MONTO MÍNIMO</p>
-                  <p>₡50,000</p>
-                </Col>
-                <Col sm={2}>
-                  <p>MONTO MÁXIMO</p>
-                  <p>₡1,000,000</p>
-                </Col>
-                <Col className="d-flex">
-                  <div className="pr-2">
-                    <p>TASA</p>
-                    <p>5.00%</p>
-                  </div>
-                  <div className="pr-2">
-                    <p>TIPO TASA</p>
-                    <p>56800.00%</p>
-                  </div>
-                </Col>
-                <Col className="d-flex">
-                  <div className="pr-2">
-                    <p>PLAZO</p>
-                    <p>0</p>
-                  </div>
-                  <div className="pr-2">
-                    <p>FPP (Frecuencia Pago INT)</p>
-                    <p>12</p>
-                  </div>
-                </Col>
-                <Col sm={2}>
-                  <p>FPP (Frecuencia Pago Principal)</p>
-                  <p>MENSUAL</p>
-                </Col>
-              </Row>
             </CardBody>
           </Card>
         </Col>
@@ -217,6 +183,7 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
               if (elementTwo === cedula.internal_risks[element][0]) {
                 value = i;
               }
+              return false;
             });
           }
           return (
@@ -300,7 +267,6 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
               );
             })}
 
-            {/* TODO: eliminar columna cuando BE tenga estos datos */}
             <Col sm={12} md={6} xl={pdf ? 4 : 3}>
               <Card className="aesthetic-card yellow">
                 <CardBody
@@ -344,14 +310,20 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
                       </div>
                     </Col>
                   </Row>
-                  <Row>
+                  <Row className="align-items-center">
                     <Col xs={3} className="text-center">
                       {cedula && <p>{element[1]}</p>}
-                      {cedula && <p>{element[3]}</p>}
                     </Col>
                     <Col xs={9}>
                       {/* <p className="mt-2">Política:</p> */}
                       {cedula && <p className="total-stat">{element[2]}</p>}
+                    </Col>
+                  </Row>
+                  <Row className="align-items-center">
+                    <Col xs={3} className="text-center">
+                      {cedula && <p>{element[3]}</p>}
+                    </Col>
+                    <Col xs={9}>
                       {cedula && <p className="total-stat">{element[4]}</p>}
                     </Col>
                   </Row>
@@ -386,12 +358,14 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
                       </div>
                     </Col>
                   </Row>
-                  <Row className="py-2 border-bottom">
+                  <Row className="pt-2">
                     <Col xs={1}>
                     </ Col>
                     <Col xs={11} className="pb-2">
                       {cedula && <p>{element[0][0]}</p>}
                     </Col>
+                  </Row>
+                  <Row className="pb-2 border-bottom align-items-center">
                     <Col xs={1} className="text-center">
                       {cedula && <p>{element[0][1]}</p>}
                     </Col>
