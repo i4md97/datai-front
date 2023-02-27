@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useState } from "react";
 
 // Components
@@ -6,9 +5,8 @@ import { Col, Row, Table, Button } from "reactstrap";
 import { ControlledInput, CustomDropdown } from "..";
 
 const TableRow = ({
-  id = "", 
-  options = [], 
-  amount = 0,
+  id = "",
+  title = "",
   setTableRows = () => {},
   removeRow = () => {},
   setSaldoFinanciar = () => {} 
@@ -34,27 +32,11 @@ const TableRow = ({
     })
 
     setTimeout(() => {
-      const colElements = document.querySelectorAll(`.frt-amount__td input`);
+      const colElements = document.querySelectorAll(`.fnft-amount__td input`);
       const colValues = [...colElements].map(element => element.value.replace(/[^\d,]+/g, '').replace(/,/g, '.'));
       const colSum = colValues.reduce((a, b) => parseFloat(a ? a : 0) + parseFloat(b ? b : 0), 0);
       setSaldoFinanciar(colSum);
     });
-  }
-
-  const optionChangeHanlder = (option, id) => {
-    const rowId = parseInt(id.replace(/[^0-9.]/gm, ''));
-    setTableRows(prev => {
-      return prev.map(row => {
-        if (row.id === rowId ){
-          return {
-            ...row,
-            option: option,
-            description: `${option} Selected`
-          }
-        }
-        return row;
-      })
-    })
   }
 
   return (
@@ -67,35 +49,26 @@ const TableRow = ({
         <td style={{ minWidth: "10px", width:"10px"}}>
         </td>
       }
-      <td className="pt-0">
-        <CustomDropdown 
-          options={options}
-          selectedOption="REFINANCIAMIENTO"
-          classNameButton="mb-0"
-          id={`frt-r-description-${id}`}
-          callback={optionChangeHanlder}
-        />
-      </td>
-      <td className="frt-amount__td p-1">
-        <ControlledInput id={id} className="bg-green" defaultOption={`₡${amount}`} callback={sumCol} />
+      <td><p>{title}</p></td>
+      <td className="fnft-amount__td p-1">
+        <ControlledInput className="bg-green" placeholder="₡0" callback={sumCol} />
       </td>
     </tr>
   )
 }
 
-export const RefinanciamientoTable = ({
-  saldo = 0,
-  ahorro = 0,
-  options = [],
-  setGlobalBalance = () => {},
+export const NecesidadesFinanciamientoTable = ({
+  balance = 0,
+  cuota = 0,
+  ahorroPotencial
 }) => {
   const rowsLimit = 5;
   const [tableRows, setTableRows] = useState([
     {
-      id: 0, 
-      option: "REFINANCIAMIENTO",
+      id: 0,
+      title: "CAPITAL DE TRABAJO",
       amount: 0,
-      description: `Refinanciamiento Deudas`
+      description: ""
     }
   ]);
   const [rowId, setRowId] = useState(1);
@@ -107,8 +80,8 @@ export const RefinanciamientoTable = ({
   const addRow = () => {
     if (conditionalRender) {
       setTableRows(prev => [...prev, {
-        id: rowId, 
-        option: "REFINANCIAMIENTO",
+        id: rowId,
+        title: "CAPITAL DE TRABAJO",
         amount: 0,
         description: `Refinanciamiento Deudas`
       }]);
@@ -125,9 +98,9 @@ export const RefinanciamientoTable = ({
   const renderLeftRows = () => {
     return tableRows.map((row, i) => 
       <TableRow 
-        key={`frt-r-row-${row.id}`}
+        key={`fnft-r-row-${row.id}`}
         id={row.id}
-        options={options}
+        title={row.title}
         amount={row.amount}
         setTableRows={setTableRows}
         removeRow={removeRow}
@@ -137,27 +110,39 @@ export const RefinanciamientoTable = ({
   }
 
   const renderRightRows = () => {
+    const descriptionChange = (value, id) => {
+      setTableRows(prev => {
+        return prev.map(row => {
+          if (row.id === id ){
+            return {
+              ...row,
+              description: value,
+            }
+          }
+          return row;
+        })
+      })
+    }
+
     return tableRows.map((row, i) => 
-      <tr key={`frt-l-row-${row.id}`} style={{height: "54px"}}>
-        <td id={`frt-l-description-${row.id}`}>{row.description}</td>
+      <tr key={`fnft-l-row-${row.id}`}>
+        <td id={`fnft-l-description-${row.id}`} className="p-1">
+          <ControlledInput id={row.id} className="bg-green" placeholder="Descripcción" callback={descriptionChange} />
+        </td>
       </tr>
     )
   }
-
-  useEffect(() => {
-    setGlobalBalance(saldo - saldoFinanciar);
-  }, [saldo, saldoFinanciar, setGlobalBalance]);
 
   return (
     <Row>
       <Col xs={12} md={6}>
         <Table className="text-left" responsive>
           <tbody>
-            <tr>
+            {/* <tr>
               <th style={{ minWidth: "5px", width:"40px"}}>&nbsp;</th>
               <th className="py-4">PRODUCTOS CREDITICIOS PARA REFINANCIAR</th>
               <td></td>
-            </tr>
+            </tr> */}
             {renderLeftRows()}
             {conditionalRender && <tr>
               <td colSpan={"100%"} className="pr-0">
@@ -175,9 +160,9 @@ export const RefinanciamientoTable = ({
       <Col xs={12} md={6}>
         <Table className="text-left" responsive>
           <tbody>
-            <tr>
+            {/* <tr>
               <th colSpan="2" className="py-4">PLAN DE INVERSÓN</th>
-            </tr>
+            </tr> */}
             {renderRightRows()}
           </tbody>
         </Table>
@@ -186,14 +171,16 @@ export const RefinanciamientoTable = ({
         <Table>
           <tbody>
             <tr>
-              <td className="text-left w-25">Saldo a Refinanciar</td>
+              <td className="text-left w-25">Crédito Empresarial y Personal</td>
               <td className="w-25">₡{new Intl.NumberFormat(["ban", "id"]).format((saldoFinanciar))}</td>
-              <td className="pl-4 text-left w-25">Ahorro del Refinanciamiento</td>
-              <td className="w-25 text-left">₡{new Intl.NumberFormat(["ban", "id"]).format((ahorro))}</td>
+              <td className="text-left w-25 pl-4">Cuota por Financiamiento Empresarial y Personal</td>
+              <td className="w-25">₡{new Intl.NumberFormat(["ban", "id"]).format((cuota))}</td>
             </tr>
             <tr>
-              <td className="w-25 text-left">Balance</td>
-              <td className="w-25">₡{new Intl.NumberFormat(["ban", "id"]).format((saldo - saldoFinanciar))}</td>
+              <td className="w-25 text-left">TOTAL A FINANCIAR</td>
+              <td className="w-25">₡{new Intl.NumberFormat(["ban", "id"]).format((balance + saldoFinanciar))}</td>
+              <td className="w-25 text-left pl-4">Incremento cuota / Ahorro mensual por créditos nuevos</td>
+              <td className="w-25">₡{new Intl.NumberFormat(["ban", "id"]).format((cuota - ahorroPotencial))}</td>
             </tr>
           </tbody>
         </Table>
