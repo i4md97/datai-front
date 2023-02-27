@@ -7,12 +7,18 @@ import { escenarioPreliminarOptions } from "../../../db/dropdownsOptions";
 
 // Components
 import { Row, Col, Card, CardBody, Table, Button, Input, Spinner } from "reactstrap";
-import { CustomDropdown, ControlledInput } from "../../../components";
+import { 
+  CustomDropdown, 
+  ControlledInput,
+  RefinanciamientoTable
+} from "../../../components";
 
 export default function EscenarioPreliminar({ animation, StepFourCheck, pdf }) {
   const { changeStep } = useContext(PreaprobadoContext);
 
   const [isSaving, setIsSaving] = useState(false);
+  const [saldoRefinanciar, setSaldoRefinanciar] = useState(7678000);
+  const [ahorroPotencial, setAhorroPotencial] = useState(64000);
 
   const saveAndContinueHandler = () => {
     setIsSaving(true);
@@ -25,87 +31,41 @@ export default function EscenarioPreliminar({ animation, StepFourCheck, pdf }) {
   return (
     <div className={`dashboard escenario-preliminar step__cards ${animation && !pdf && "step__animation"}`} >
       <Row className="pt-4">
-        <Col xs={12} xl={12}>
-          <h4 className="page-title general-title">Refinanciamiento</h4>
+        <Col xs={12}>
+          <Card>
+            <CardBody>
+              <Row>
+                <Col><h4><span className="text-bold">Saldo a Refinanciar:</span> ₡{saldoRefinanciar}</h4></Col>
+                <Col><h4><span className="text-bold">Ahorro Potencial:</span> ₡{ahorroPotencial}</h4></Col>
+              </Row>
+            </CardBody>
+          </Card>
         </Col>
         <Col md={12}>
           <Card>
             <CardBody>
               <Row>
-                <Col xs={12} md={6}>
-                  <Table className="text-left" responsive style={{ minWidth: pdf ? "inherit" : "450px" }}>
-                    <tbody>
-                      <tr>
-                        <th className="font-weight-normal">Saldo a Refinanciar</th>
-                        <td>₡7,678,000</td>
-                      </tr>
-                      <tr>
-                        <th className="py-4">PRODUCTOS CREDITICIOS PARA REFINANCIAR</th>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <th className="pt-0">
-                          <CustomDropdown 
-                            options={escenarioPreliminarOptions.productosOptions}
-                            selectedOption="REFINANCIAMIENTO"
-                            classNameButton="mb-0"
-                          />
-                        </th>
-                        <td className="p-1">
-                          <ControlledInput className="bg-green" defaultOption="₡7,678,000"/>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th className="pt-0">
-                          <CustomDropdown 
-                            options={escenarioPreliminarOptions.productosOptions}
-                            selectedOption="REFINANCIAMIENTO"
-                            classNameButton="mb-0"
-                          />
-                        </th>
-                        <td className="p-1">
-                          <ControlledInput className="bg-green" defaultOption="₡0"/>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">Saldo a Refinanciar</th>
-                        <td>₡7,678,000</td>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">Balance</th>
-                        <td>₡0.00</td>
-                      </tr>
-                    </tbody>
-                  </Table>
+                <Col>
+                  <h4>Refinanciamiento</h4>
                 </Col>
-                <Col xs={12} md={6}>
-                  <Table className="text-left" responsive style={{ minWidth: pdf ? "inherit" : "450px" }}>
-                    <tbody>
-                      <tr>
-                        <th className="font-weight-normal">Ahorro Potencial</th>
-                        <td>₡64,000</td>
-                      </tr>
-                      <tr>
-                        <th colSpan="2" className="py-4">PLAN DE INVERSÓN</th>
-                      </tr>
-                      <tr>
-                        <td colSpan="2" className="font-weight-normal">Refinanciamiento Deudas</td>
-                      </tr>
-                      <tr>
-                        <td colSpan="2" className="font-weight-normal">0</td>
-                      </tr>
-                      <tr>
-                        <th className="font-weight-normal">Ahorro del Refinanciamiento</th>
-                        <td>₡64,000</td>
-                      </tr>
-                    </tbody>
-                  </Table>
+              </Row>
+              <RefinanciamientoTable 
+                options={escenarioPreliminarOptions.productosOptions} 
+                saldo={saldoRefinanciar}
+                ahorro={ahorroPotencial}
+              />
+            </CardBody>
+          </Card>
+        </Col>
+        <Col>
+          <Card>
+            <CardBody>
+              <Row className="mb-4">
+                <Col xs={12}>
+                  <h4>Necesidades de financiamiento empresarial y personal</h4>
                 </Col>
               </Row>
               <Row>
-                <Col xs={12} xl={12}>
-                  <h4 className="page-title general-title">Necesidades de financiamiento empresarial y personal</h4>
-                </Col>
                 <Col xs={12} md={6}>
                   <Table className="text-left" responsive style={{ minWidth: pdf ? "inherit" : "450px" }}>
                     <tr>

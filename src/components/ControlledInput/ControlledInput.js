@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Input } from "reactstrap";
 
 export const ControlledInput = ({
+  id="",
   type = "text", 
   pattern,
   placeholder = "",
@@ -23,11 +24,11 @@ export const ControlledInput = ({
     const inputValue = e.target.value;
     setValue(inputValue);
     if (callback) {
-      callback(inputValue);
+      callback(inputValue, id);
     }
   }
 
   return (
-    <Input style={{fontSize: "14px"}} type={type} pattern={pattern} placeholder={placeholder} className={className} value={value} onChange={onChangeHandler} />
+    <Input id={id} style={{fontSize: "14px"}} type={type} pattern={pattern} placeholder={placeholder} className={className} value={value} onChange={onChangeHandler} />
   )
 }

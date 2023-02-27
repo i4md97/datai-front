@@ -40,7 +40,7 @@ export const CustomDropdown = ({
     return () => {
       setOptionSelected(option);
       if (callback) {
-        callback(option);
+        callback(option, id);
       }
     }
   }

@@ -5,5 +5,6 @@ export { OptionalInput } from "./OptionalInput/OptionalInput";
 export { ControlledInput } from "./ControlledInput/ControlledInput";
 // Components
 export { EtapaSolicitud } from "./EtapaSolicitud/EtapaSolicitud";
+export { RefinanciamientoTable } from "./DynamicTables/RefinanciamientoTable";
 // Charts
 export { MultipleTestingAnalytics } from "./Charts/MultipleTestingAnalytics";
