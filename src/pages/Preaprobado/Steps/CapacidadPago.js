@@ -395,8 +395,8 @@ export default function CapacidadPago({
                         <td className="p-0"><ControlledInput className="bg-green" defaultOption="₡0" /></td>
                       </tr>
                       <tr>
-                        <td>Activos Fijos</td>
-                        <td>Valor Estimado</td>
+                        <td className="text-bold">Activos Fijos</td>
+                        <td className="text-bold">Valor Estimado</td>
                       </tr>
                       <tr>
                         <td>Propiedades actuales</td>
@@ -413,10 +413,6 @@ export default function CapacidadPago({
                       <tr>
                         <td>Otros AF</td>
                         <td className="p-0"><ControlledInput className="bg-green" defaultOption="₡0" /></td>
-                      </tr>
-                      <tr>
-                        <td>Total Activos</td>
-                        <td>₡28,000,000</td>
                       </tr>
                     </tbody>
                   </Table>
@@ -439,28 +435,38 @@ export default function CapacidadPago({
                         <td className="p-0"><ControlledInput className="bg-green" defaultOption="₡25,000,000" /></td>
                       </tr>
                       <tr>
-                        <td></td>
-                        <td></td>
+                        <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td>Patrimonio</td>
-                        <td>Valor Estimado</td>
+                        <td className="text-bold">Patrimonio</td>
+                        <td className="text-bold">Valor Estimado</td>
                       </tr>
                       <tr>
                         <td>Capital Soc</td>
                         <td className="p-0"><ControlledInput className="bg-green" defaultOption="₡1,500,000" /></td>
                       </tr>
                       <tr>
-                        <td></td>
-                        <td></td>
+                        <td colSpan={"100%"}></td>
                       </tr>
+                    </tbody>
+                  </Table>
+                </Col>
+                <Col xs={6}>
+                  <Table>
+                    <tbody>
                       <tr>
-                        <td></td>
-                        <td></td>
+                        <td className="text-bold">Total Activos</td>
+                        <td className="text-bold">₡28,000,000</td>
                       </tr>
+                    </tbody>
+                  </Table>
+                </Col>
+                <Col xs={6}>
+                  <Table>
+                    <tbody>
                       <tr>
-                        <td>Total Pas y Pat</td>
-                        <td>₡28,000,000</td>
+                        <td className="text-bold">Total Pas y Pat</td>
+                        <td className="text-bold">₡28,000,000</td>
                       </tr>
                     </tbody>
                   </Table>
@@ -1366,6 +1372,12 @@ export default function CapacidadPago({
             <CardBody>
               <Row className="justify-content-center">
                 <Col xs={12} sm={6}>
+                  <Row className="px-5 [b">
+                    <Col xs={12} className="pb-3 text-center"><h5>Escenario 0</h5></Col>
+                    <Col md={4}><p>T 0%</p></Col>
+                    <Col md={4}><p>I 0%</p></Col>
+                    <Col md={4}><p>G 0%</p></Col>
+                  </Row>
                   <MultipleTestingAnalytics 
                     data={flujoNetoData} 
                     dir={'left'}
@@ -1375,6 +1387,12 @@ export default function CapacidadPago({
                   />
                 </Col>
                 <Col xs={12} sm={6}>
+                  <Row className="px-5 [b">
+                    <Col xs={12} className="pb-3 text-center"><h5>Escenario 1</h5></Col>
+                    <Col md={4}><p>T 0%</p></Col>
+                    <Col md={4}><p>I 5%</p></Col>
+                    <Col md={4}><p>G 5%</p></Col>
+                  </Row>
                   <MultipleTestingAnalytics 
                     data={flujoNetoData} 
                     dir={'left'}
@@ -1384,6 +1402,12 @@ export default function CapacidadPago({
                   />
                 </Col>
                 <Col xs={12} sm={8}>
+                  <Row className="px-5 [b">
+                    <Col xs={12} className="pb-3 text-center"><h5>Escenario 0</h5></Col>
+                    <Col md={4}><p>T 0%</p></Col>
+                    <Col md={4}><p>I -5%</p></Col>
+                    <Col md={4}><p>G 10%</p></Col>
+                  </Row>
                   <MultipleTestingAnalytics 
                     data={flujoNetoData} 
                     dir={'left'}

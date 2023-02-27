@@ -8,7 +8,8 @@ import UsuarioContext from "../../../context/usuario/UsuarioContext";
 import { Row, Col, Table, Card, CardBody, Input, Button, Spinner } from "reactstrap";
 import { 
   CustomDropdown,
-  ControlledInput
+  ControlledInput,
+  EtapaSolicitud
 } from "../../../components";
 // import CustomTooltip from "../CustomTooltip";
 import { detallePasivosOptions } from "../../../db/dropdownsOptions";
@@ -596,49 +597,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
       
       <Row>
         <Col>
-          <Card>
-            <CardBody>
-              <Row className="pb-4">
-                <Col sm={12}>
-                  <p>ETAPA DE LA SOLICITUD</p>
-                </Col>
-              </Row>
-              <Row>
-                  <Col>
-                    <Row>
-                      <Col>
-                        <label className="text-center general-title">ESTATUS</label>
-                        <CustomDropdown 
-                          
-                          defaultOption="Seleccionar"
-                          options={detallePasivosOptions.statusOptions}
-                        />
-                      </Col>
-                      <Col>
-                        <label className="text-center general-title">ETAPA</label>
-                        <CustomDropdown 
-                          
-                          defaultOption="Seleccionar"
-                          options={detallePasivosOptions.stageOptions}
-                        />
-                      </Col>
-                      <Col>
-                        <label className="text-center general-title">STAND BY</label>
-                        <CustomDropdown 
-                          
-                          defaultOption="Seleccionar"
-                          options={detallePasivosOptions.standByOptions}
-                        />
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col>
-                    <label className="text-center general-title">DETALLE</label>
-                    <Input type="text" />
-                  </Col>
-                </Row>
-            </CardBody>
-          </Card>
+          <EtapaSolicitud />
         </Col>
       </Row>
 

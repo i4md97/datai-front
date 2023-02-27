@@ -14,7 +14,7 @@ export const EtapaSolicitud = () => {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col xs={12} lg={5}>
             <Row>
               <Col>
                 <label className="text-center general-title">ESTATUS</label>
@@ -42,7 +42,7 @@ export const EtapaSolicitud = () => {
               </Col>
             </Row>
           </Col>
-          <Col sm={7}>
+          <Col xs={12} lg={7}>
             <label className="text-center general-title">DETALLE</label>
             <Input className="w-100" type="text" />
           </Col>
