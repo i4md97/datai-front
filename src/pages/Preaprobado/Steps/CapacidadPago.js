@@ -147,7 +147,7 @@ export default function CapacidadPago({
         100;
 
       //CALCULAMOS ENDEUDAMIENTO ACTUAL
-      console.log(escenarioPreeliminar);
+      // console.log(escenarioPreeliminar);
       let endeudamientoCopy =
         ((saveIngresoNeto - deudasTotalesCopy - cuotaEscenarioPreeliminar) /
           saveIngresoNeto) *
@@ -478,7 +478,7 @@ export default function CapacidadPago({
               </Row>
               <Row className="normalize-table-section">
                 <Col className="pr-0 bg-white sticky-table-left">
-                  <Table style={{width: "100%"}} striped>
+                  <Table striped>
                     <thead>
                       <tr className="bg-white">
                         <th style={{minWidth: "140px", textAlign: "center"}}>Rubros de ingresos y gastos</th>
