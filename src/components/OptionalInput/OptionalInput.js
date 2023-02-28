@@ -1,7 +1,13 @@
 import { useState } from "react"
 import { Input, InputGroup, InputGroupText } from "reactstrap"
 
-export const OptionalInput = ({className, name}) => {
+export const OptionalInput = ({
+  className,
+  name,
+  setter = null,
+  property = "",
+  callback = () => {},
+}) => {
   const [isChecked, setIsChecked] = useState(false);
   const [value, setValue] = useState("");
 
@@ -10,12 +16,20 @@ export const OptionalInput = ({className, name}) => {
     setIsChecked(checked);
     if (!checked) {
       setValue("");
+      if (callback) {
+        setTimeout(() => {
+          callback(setter, "", property);
+        });
+      }
     }
   }
 
   const handleChangeValue = (e) => {
     const value = e.target.value;
     setValue(value);
+    if (callback) {
+      callback(setter, value, property);
+    }
   }
 
   return (

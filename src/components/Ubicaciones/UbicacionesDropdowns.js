@@ -1,14 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Row, Col } from "reactstrap";
 import { CustomDropdown } from "../";
 
 import { ubicaciones } from "../../db/ubicaciones";
 
-const UbicacionesDropdowns = () => {
+const UbicacionesDropdowns = ({
+  setter = null,
+  property = "",
+  callback = () => {},
+}) => {
   const provinciasOptions = ubicaciones.map(ubicacion => ubicacion.provincia);
   
+  const [provincia, setProvincia] = useState("");
+  const [canton, setCanton] = useState("");
+  const [distrito, setDistrito] = useState("");
+  const [cantonDropdown, setCantonDropdown] = useState({options: [], disabled: true, selected: ""});
+  const [distritoDropdown, setDistritoDropdown] = useState({options: [], disabled: true, selected: ""});
+
+  useEffect(() => {
+    if (callback) {
+      callback(
+        setter, 
+        {
+          provincia: provincia,
+          canton: canton,
+          distrito: distrito,
+        },
+        property
+      )
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [provincia, canton, distrito]);
+  
   const provinciaChangeHandler = (option) => {
+    setProvincia(option);
+    setCanton("");
+    setDistrito("");
     const cantones = ubicaciones.find(ubicacion => ubicacion.provincia === option).cantones.map(place => place.canton);
     if (cantones) {
       setCantonDropdown({options: cantones, disabled: false, selected: option});
@@ -17,14 +45,18 @@ const UbicacionesDropdowns = () => {
   }
   
   const cantonChangeHandler = (option) => {
+    setCanton(option);
+    setDistrito("");
     const distritos = ubicaciones.find(ubicacion => 
       ubicacion.provincia === cantonDropdown.selected).cantones.find(place => place.canton === option).distritos;
     if (distritos) {
       setDistritoDropdown({options: distritos, disabled: false, selected: option});
     }
   }
-  const [cantonDropdown, setCantonDropdown] = useState({options: [], disabled: true, selected: ""});
-  const [distritoDropdown, setDistritoDropdown] = useState({options: [], disabled: true, selected: ""});
+
+  const distritoChangeHandler = (option) => {
+    setDistrito(option);
+  }
 
   return (
     <Row>
@@ -56,6 +88,7 @@ const UbicacionesDropdowns = () => {
           options={distritoDropdown.options}
           disabled={distritoDropdown.disabled}
           selectedOption={distritoDropdown.selected}
+          callback={distritoChangeHandler}
         />
       </Col>
     </Row>

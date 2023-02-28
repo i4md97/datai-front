@@ -19,6 +19,8 @@ export const CustomDropdown = ({
   defaultOption = "",
   selectedOption = "",
   name = "",
+  setter = null,
+  property = "",
   callback = () => {}}
 ) => {
 
@@ -40,7 +42,11 @@ export const CustomDropdown = ({
     return () => {
       setOptionSelected(option);
       if (callback) {
-        callback(option, id);
+        if (setter) {
+          callback(setter, option, property);
+        } else {
+          callback(option, id);
+        }
       }
     }
   }
