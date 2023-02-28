@@ -150,40 +150,38 @@ export const RefinanciamientoTable = ({
 
   return (
     <Row>
-      <Col xs={12} md={6}>
-        <Table className="text-left" responsive>
-          <tbody>
-            <tr>
-              <th style={{ minWidth: "5px", width:"40px"}}>&nbsp;</th>
-              <th className="py-4">PRODUCTOS CREDITICIOS PARA REFINANCIAR</th>
-              <td></td>
-            </tr>
-            {renderLeftRows()}
-            {conditionalRender && <tr>
-              <td colSpan={"100%"} className="pr-0">
-                <Button 
-                  onClick={addRow}
-                  className="w-100 mb-0"
-                >
-                    +
-                </Button>
-              </td>
-            </tr>}
-          </tbody>
-        </Table>
-      </Col>
-      <Col xs={12} md={6}>
-        <Table className="text-left" responsive>
-          <tbody>
-            <tr>
-              <th colSpan="2" className="py-4">PLAN DE INVERSÓN</th>
-            </tr>
-            {renderRightRows()}
-          </tbody>
-        </Table>
+      <Col xs={12}>
+        <Row className="overflow-auto flex-nowrap">
+          <Col>
+            <p className="text-bold pl-2 pb-2">PRODUCTOS CREDITICIOS PARA REFINANCIAR</p>
+            <Table className="text-left" responsive>
+              <tbody>
+                {renderLeftRows()}
+                {conditionalRender && <tr>
+                  <td colSpan={"100%"} className="pr-0">
+                    <Button 
+                      onClick={addRow}
+                      className="w-100 mb-0"
+                    >
+                        +
+                    </Button>
+                  </td>
+                </tr>}
+              </tbody>
+            </Table>
+          </Col>
+          <Col>
+            <p className="text-bold pl-2 pb-2">PLAN DE INVERSÓN</p>
+            <Table className="text-left" responsive>
+              <tbody>
+                {renderRightRows()}
+              </tbody>
+            </Table>
+          </Col>
+        </Row>
       </Col>
       <Col xs={12}>
-        <Table>
+        <Table responsive>
           <tbody>
             <tr>
               <td className="text-left w-25">Saldo a Refinanciar</td>

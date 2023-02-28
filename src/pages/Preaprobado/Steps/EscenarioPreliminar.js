@@ -47,7 +47,7 @@ export default function EscenarioPreliminar({ animation, pdf }) {
         <Col md={12}>
           <Card>
             <CardBody>
-              <Row>
+              <Row className="pb-4">
                 <Col>
                   <h4>Refinanciamiento</h4>
                 </Col>
