@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Components
 import { Col, Row, Table, Button } from "reactstrap";
 import { ControlledInput, CustomDropdown } from "..";
 
+const keyNecesidad = "fe_ep_necesidad_";
+
 const TableRow = ({
-  id = "",
+  id = 0,
   title = "",
   setTableRows = () => {},
   removeRow = () => {},
-  setSaldoFinanciar = () => {} 
+  setSaldoFinanciar = () => {},
+  setNecesidades,
 }) => {
   const removeRowHandler = () => {
     removeRow(id);
@@ -18,7 +21,7 @@ const TableRow = ({
     });
   }
 
-  const sumCol = (value, id) => {
+  const sumCol = (value) => {
     setTableRows(prev => {
       return prev.map(row => {
         if (row.id === id ){
@@ -36,6 +39,11 @@ const TableRow = ({
       const colValues = [...colElements].map(element => element.value.replace(/[^\d,]+/g, '').replace(/,/g, '.'));
       const colSum = colValues.reduce((a, b) => parseFloat(a ? a : 0) + parseFloat(b ? b : 0), 0);
       setSaldoFinanciar(colSum);
+
+      setNecesidades(prev => ({
+        ...prev,
+        [keyNecesidad+id+"_value"]: value,
+      }));
     });
   }
 
@@ -51,7 +59,7 @@ const TableRow = ({
       }
       <td><p>{title}</p></td>
       <td className="fnft-amount__td p-1">
-        <ControlledInput className="bg-green" placeholder="₡0" callback={sumCol} />
+        <ControlledInput id={id} className="bg-green" placeholder="₡0" callback={sumCol} />
       </td>
     </tr>
   )
@@ -60,7 +68,8 @@ const TableRow = ({
 export const NecesidadesFinanciamientoTable = ({
   balance = 0,
   cuota = 0,
-  ahorroPotencial
+  ahorroPotencial,
+  setNecesidades = () => {},
 }) => {
   const rowsLimit = 5;
   const [tableRows, setTableRows] = useState([
@@ -77,6 +86,14 @@ export const NecesidadesFinanciamientoTable = ({
   // logic
   const [saldoFinanciar, setSaldoFinanciar] = useState(0);
 
+  useEffect(() => {
+    setNecesidades({
+      [keyNecesidad+0]: "CAPITAL DE TRABAJO",
+      [keyNecesidad+0+"_value"]: "0",
+      [keyNecesidad+0+"_description"]: "",
+    });
+  },[setNecesidades]);
+
   const addRow = () => {
     if (conditionalRender) {
       setTableRows(prev => [...prev, {
@@ -87,12 +104,27 @@ export const NecesidadesFinanciamientoTable = ({
       }]);
       setRowId(prev => prev + 1);
     }
+
+    setNecesidades(prev => ({
+      ...prev,
+      [keyNecesidad+rowId]: "0",
+      [keyNecesidad+rowId+"_value"]: "CAPITAL DE TRABAJO",
+      [keyNecesidad+rowId+"_description"]: "",
+    }));
   }
 
   const removeRow = (id) => {
+    setNecesidades(prev => {
+      delete prev[keyNecesidad+id]; 
+      delete prev[keyNecesidad+id+"_value"];
+      delete prev[keyNecesidad+id+"_description"];
+      return prev;
+    });
+
     setTableRows(prev => {
       return prev.filter(row => row.id !== id);
     });
+
   }
 
   const renderLeftRows = () => {
@@ -105,6 +137,7 @@ export const NecesidadesFinanciamientoTable = ({
         setTableRows={setTableRows}
         removeRow={removeRow}
         setSaldoFinanciar={setSaldoFinanciar}
+        setNecesidades={setNecesidades}
       />
     )
   }
@@ -121,7 +154,12 @@ export const NecesidadesFinanciamientoTable = ({
           }
           return row;
         })
-      })
+      });
+
+      setNecesidades(prev => ({
+        ...prev,
+        [keyNecesidad+id+"_description"]: value,
+      }));
     }
 
     return tableRows.map((row, i) => 

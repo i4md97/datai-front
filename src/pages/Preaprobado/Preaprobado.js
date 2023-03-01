@@ -242,21 +242,13 @@ export default function Preaprobado({ animation, activeStep, setActiveStep }) {
       case 1:
         return <ActividadEconomica animation={animation} />
       case 2:
-        return <VerificacionNormativa
-          riesgo={riesgo}
-          cedula={cedula}
-          animation={animation}
-        />
+        return <VerificacionNormativa riesgo={riesgo} cedula={cedula} animation={animation} />
       case 3:
         return <DetallesPasivos cedula={cedula} animation={animation} />
       case 4:
-        return <EscenarioPreliminar StepFourCheck={stepFourCheck} animation={animation} />
+        return <EscenarioPreliminar animation={animation} />
       case 5:
-        return <CapacidadPago
-          cedula={cedula}
-          escenarioPreeliminar={escenarioPreeliminar}
-          animation={animation}
-        />
+        return <CapacidadPago cedula={cedula} escenarioPreeliminar={escenarioPreeliminar} animation={animation} />
       case 6:
         return <EstructuraFinanciamiento animation={animation} />
       case 7:

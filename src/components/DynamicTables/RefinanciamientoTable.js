@@ -1,9 +1,10 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Components
 import { Col, Row, Table, Button } from "reactstrap";
 import { ControlledInput, CustomDropdown } from "..";
+
+const keyProducto = "fe_ep_producto_crediticio_";
 
 const TableRow = ({
   id = "", 
@@ -11,8 +12,10 @@ const TableRow = ({
   amount = 0,
   setTableRows = () => {},
   removeRow = () => {},
-  setSaldoFinanciar = () => {} 
+  setSaldoFinanciar = () => {},
+  setRefinanciamiento
 }) => {
+
   const removeRowHandler = () => {
     removeRow(id);
     setTimeout(() => {
@@ -20,7 +23,7 @@ const TableRow = ({
     });
   }
 
-  const sumCol = (value, id) => {
+  const sumCol = (value) => {
     setTableRows(prev => {
       return prev.map(row => {
         if (row.id === id ){
@@ -31,13 +34,19 @@ const TableRow = ({
         }
         return row;
       })
-    })
+    });
 
     setTimeout(() => {
       const colElements = document.querySelectorAll(`.frt-amount__td input`);
       const colValues = [...colElements].map(element => element.value.replace(/[^\d,]+/g, '').replace(/,/g, '.'));
       const colSum = colValues.reduce((a, b) => parseFloat(a ? a : 0) + parseFloat(b ? b : 0), 0);
       setSaldoFinanciar(colSum);
+
+      setRefinanciamiento(prev => ({
+        ...prev,
+        [keyProducto+id+"_value"]: value,
+      }));
+
     });
   }
 
@@ -54,7 +63,13 @@ const TableRow = ({
         }
         return row;
       })
-    })
+    });
+
+    setRefinanciamiento(prev => ({
+      ...prev,
+      [keyProducto+rowId]: option,
+      [keyProducto+rowId+"_plan"]: option,
+    }));
   }
 
   return (
@@ -88,21 +103,28 @@ export const RefinanciamientoTable = ({
   ahorro = 0,
   options = [],
   setGlobalBalance = () => {},
+  setRefinanciamiento = () => {},
 }) => {
   const rowsLimit = 5;
-  const [tableRows, setTableRows] = useState([
-    {
-      id: 0, 
-      option: "REFINANCIAMIENTO",
-      amount: 0,
-      description: `Refinanciamiento Deudas`
-    }
-  ]);
+  const [tableRows, setTableRows] = useState([{
+    id: 0, 
+    option: "REFINANCIAMIENTO",
+    amount: 0,
+    description: `Refinanciamiento Deudas`
+  }]);
   const [rowId, setRowId] = useState(1);
   const conditionalRender = tableRows.length <= rowsLimit -1;
 
   // logic
   const [saldoFinanciar, setSaldoFinanciar] = useState(0);
+
+  useEffect(()=>{
+    setRefinanciamiento({
+      [keyProducto+0]: "REFINANCIAMIENTO",
+      [keyProducto+0+"_value"]: "0",
+      [keyProducto+0+"_plan"]: "Refinanciamiento Deudas",
+    });
+  },[setRefinanciamiento]);
 
   const addRow = () => {
     if (conditionalRender) {
@@ -113,12 +135,26 @@ export const RefinanciamientoTable = ({
         description: `Refinanciamiento Deudas`
       }]);
       setRowId(prev => prev + 1);
+
+      setRefinanciamiento(prev => ({
+        ...prev,
+        [keyProducto+rowId]: "0",
+        [keyProducto+rowId+"_value"]: "REFINANCIAMIENTO",
+        [keyProducto+rowId+"_plan"]: "Refinanciamiento Deudas",
+      }));
     }
   }
 
   const removeRow = (id) => {
     setTableRows(prev => {
       return prev.filter(row => row.id !== id);
+    });
+
+    setRefinanciamiento(prev => {
+      delete prev[keyProducto+id]; 
+      delete prev[keyProducto+id+"_value"];
+      delete prev[keyProducto+id+"_plan"];
+      return prev;
     });
   }
 
@@ -132,6 +168,7 @@ export const RefinanciamientoTable = ({
         setTableRows={setTableRows}
         removeRow={removeRow}
         setSaldoFinanciar={setSaldoFinanciar}
+        setRefinanciamiento={setRefinanciamiento}
       />
     )
   }

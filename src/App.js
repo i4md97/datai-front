@@ -19,8 +19,8 @@ function App() {
   return (
     <UsuarioState> 
       <PreaprobadoState>
-        <ClientProvider>
-          <SidebarProvider>
+        {/* <ClientProvider> */}
+          {/* <SidebarProvider> */}
             <Router>
               <Switch>
                 {publicRoutes.map((element, i) => (
@@ -46,8 +46,8 @@ function App() {
                 />
               </Switch>
             </Router>
-          </SidebarProvider>
-        </ClientProvider>
+          {/* </SidebarProvider> */}
+        {/* </ClientProvider> */}
       </PreaprobadoState>
     </UsuarioState>
   );

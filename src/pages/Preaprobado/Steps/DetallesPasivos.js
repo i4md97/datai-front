@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect, useCallback } from "react";
 
 // Helpers
 import PreAprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
+import { usePreaprobado } from "../../../context/preaprobado/PreaprobadoContext";
 
 // Components
 import { Row, Col, Table, Card, CardBody, Button, Spinner } from "reactstrap";
@@ -20,6 +21,7 @@ import { db_buro } from "../../../db/db_buro";
 
 export default function DetallesPasivos({ animation, cedula, pdf }) {
   const { changeStep } = useContext(PreAprobadoContext);
+  const { setDetallesPasivos } = usePreaprobado();
 
   const [isSaving, setIsSaving] = useState(false);
   const [producto, setProducto] = useState("REFINANCIAMIENTO");
@@ -95,12 +97,14 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
   },[cedula, triggerSetters]);
 
   useEffect(() => {
-    setComposiconFinal({
+    const sumObject = {
       ahorroPotencial: pasivosInternos.ahorroPotencial + pasivosExternos.ahorroPotencial + noRegulados.ahorroPotencial,
       saldoActual: pasivosInternos.saldoActual + pasivosExternos.saldoActual + noRegulados.saldoActual,
       cuotaMensual: pasivosInternos.cuotaMensual + pasivosExternos.cuotaMensual + noRegulados.cuotaMensual
-    });
-  }, [pasivosInternos, pasivosExternos, noRegulados]);
+    }
+    setComposiconFinal(sumObject);
+    setDetallesPasivos( prev => ({...prev, ...sumObject}));
+  }, [pasivosInternos, pasivosExternos, noRegulados, setDetallesPasivos]);
 
   const productoChangeHandler = (value) => {
     setProducto(value);
@@ -112,6 +116,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
 
   const saveAndContinueHandler = () => {
     setIsSaving(true);
+    
     setTimeout(() => {
       setIsSaving(false);
       changeStep(4);
@@ -182,7 +187,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                   <Table style={{ minWidth: "800px" }} responsive>
                     <thead>
                       <tr style={{ borderBottom: "1px solid #e0e0e0" }}>
-                        <th>Tipo Garantía</th>
+                        <th style={{minWidth: "110px"}}>Tipo Garantía</th>
                         <th>Tipo de Operación</th>
                         <th>Ahorro Potencial</th>
                         <th>Saldo Actual</th>
@@ -200,7 +205,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                           <ControlledInput 
                             className="bg-green"
                             type="number"
-                            defaultOption={"0"}
+                            defaultOption={pasivosInternos.ahorroPotencial}
                             dbValue={"0"}
                             callback={() => {sumColumn(".pasivos-internos-ahorro__td input", "value", setPasivosInternos, 'ahorroPotencial')}} />
                         </td>
@@ -247,7 +252,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                   <Table style={{ minWidth: "800px" }} responsive>
                     <thead>
                       <tr style={{ borderBottom: "1px solid #e0e0e0" }}>
-                        <th>Entidad</th>
+                        <th style={{minWidth: "110px"}}>Entidad</th>
                         <th>Tipo de Operación</th>
                         <th>Ahorro Potencial</th>
                         <th>Saldo Actual</th>
@@ -265,7 +270,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                           <ControlledInput 
                             className="bg-green" 
                             type="number" 
-                            defaultOption="35000" 
+                            defaultOption={pasivosExternos.ahorroPotencial}
                             callback={() => sumColumn(".pasivos-externos-ahorro__td input", "value", setPasivosExternos, "ahorroPotencial")}
                           />
                         </td>
@@ -304,7 +309,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                   <Table style={{ minWidth: "800px" }} responsive>
                     <thead>
                       <tr style={{ borderBottom: "1px solid #e0e0e0" }}>
-                        <th>Entidad</th>
+                        <th style={{minWidth: "110px"}}>Entidad</th>
                         <th>Tipo de Operación</th>
                         <th>Ahorro Potencial</th>
                         <th>Saldo Actual</th>
@@ -324,7 +329,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                           <ControlledInput 
                             className="bg-green" 
                             type="number" 
-                            defaultOption={"0"}
+                            defaultOption={noRegulados.ahorroPotencial}
                             callback={() => {sumColumn(".no-regulados-ahorro__td input", "value", setNoRegulados, 'ahorroPotencial')}} />
                         </td>
                         <td className="no-regulados-saldo__td">

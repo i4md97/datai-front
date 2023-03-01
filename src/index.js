@@ -4,9 +4,13 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+import ContextProviders from "./context/ContextProviders";
+
 ReactDOM.render(
   <React.Fragment>
-    <App />
+    <ContextProviders>
+      <App />
+    </ContextProviders>
   </React.Fragment>,
   document.getElementById("root")
 );

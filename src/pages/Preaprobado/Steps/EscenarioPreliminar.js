@@ -2,26 +2,32 @@ import React, { useState, useContext } from "react";
 
 // Helpers
 import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
+import { usePreaprobado } from "../../../context/preaprobado/PreaprobadoContext";
 
 import { escenarioPreliminarOptions } from "../../../db/dropdownsOptions";
 
 // Components
-import { Row, Col, Card, CardBody, Button, Input, Spinner } from "reactstrap";
+import { Row, Col, Card, CardBody, Button, Spinner } from "reactstrap";
 import { 
-  CustomDropdown, 
   RefinanciamientoTable,
   NecesidadesFinanciamientoTable,
   EtapaSolicitud
 } from "../../../components";
+import { useEffect } from "react";
 
-export default function EscenarioPreliminar({ animation, pdf }) {
+export default function EscenarioPreliminar({ animation }) {
   const { changeStep } = useContext(PreaprobadoContext);
+  const {detallesPasivos} = usePreaprobado();
+
+  const saldoRefinanciar = detallesPasivos.saldoActual;
+  const ahorroPotencial = detallesPasivos.ahorroPotencial;
+  const globalCuota = 95000;
 
   const [isSaving, setIsSaving] = useState(false);
-  const [saldoRefinanciar, setSaldoRefinanciar] = useState(7678000);
-  const [ahorroPotencial, setAhorroPotencial] = useState(64000);
   const [globalBalance, setGlobalBalance] = useState(0);
-  const [globalCuota, setGlobalCuota] = useState(95000);
+
+  const [refinanciamiento, setRefinanciamiento] = useState({});
+  const [necesidades, setNecesidades] = useState({});
 
   const saveAndContinueHandler = () => {
     setIsSaving(true);
@@ -32,14 +38,14 @@ export default function EscenarioPreliminar({ animation, pdf }) {
   }
 
   return (
-    <div className={`dashboard escenario-preliminar step__cards ${animation && !pdf && "step__animation"}`} >
+    <div className={`dashboard escenario-preliminar step__cards ${animation && "step__animation"}`} >
       <Row className="pt-4">
         <Col xs={12}>
           <Card>
             <CardBody>
               <Row>
-                <Col><h4><span className="text-bold">Saldo a Refinanciar:</span> ₡{saldoRefinanciar}</h4></Col>
-                <Col><h4><span className="text-bold">Ahorro Potencial:</span> ₡{ahorroPotencial}</h4></Col>
+                <Col><h4><span className="text-bold">Saldo a Refinanciar:</span> ₡{new Intl.NumberFormat("de-DE").format(saldoRefinanciar)}</h4></Col>
+                <Col><h4><span className="text-bold">Ahorro Potencial:</span> ₡{new Intl.NumberFormat("de-DE").format(ahorroPotencial)}</h4></Col>
               </Row>
             </CardBody>
           </Card>
@@ -57,6 +63,7 @@ export default function EscenarioPreliminar({ animation, pdf }) {
                 saldo={saldoRefinanciar}
                 ahorro={ahorroPotencial}
                 setGlobalBalance={setGlobalBalance}
+                setRefinanciamiento={setRefinanciamiento}
               />
             </CardBody>
           </Card>
@@ -73,6 +80,7 @@ export default function EscenarioPreliminar({ animation, pdf }) {
                 balance={globalBalance} 
                 cuota={globalCuota}
                 ahorroPotencial={ahorroPotencial}
+                setNecesidades={setNecesidades}
               />
             </CardBody>
           </Card>
