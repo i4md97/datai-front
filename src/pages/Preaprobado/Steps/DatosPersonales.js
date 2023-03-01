@@ -65,7 +65,7 @@ export default function DatosPersonales({
                     id="tipo-identificacion"
                     className="mb-0" 
                     classNameButton="mb-0"
-                    defaultOption="Sleccionar"
+                    defaultOption="Seleccionar"
                     options={idTypes}
                     callback={setIdType}
                   />

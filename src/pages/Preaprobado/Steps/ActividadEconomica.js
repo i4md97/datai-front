@@ -51,7 +51,7 @@ const ActividadEconomica = ({ animation, pdf }) => {
                   <label className="text-center general-title">Formalmente constituida</label>
                   <CustomDropdown 
                     className="w-100" 
-                    defaultOption="Sleccionar"
+                    defaultOption="Seleccionar"
                     options={actividadOptions.yesNoOptions}
                     callback={updateStateHandler}
                     setter={setActividad}
@@ -60,7 +60,7 @@ const ActividadEconomica = ({ animation, pdf }) => {
                   <label className="text-center general-title">Esta inscrito en ATV?</label>
                   <CustomDropdown 
                     className="w-100" 
-                    defaultOption="Sleccionar"
+                    defaultOption="Seleccionar"
                     options={actividadOptions.yesNoOptions}
                     callback={updateStateHandler}
                     setter={setActividad}
@@ -69,7 +69,7 @@ const ActividadEconomica = ({ animation, pdf }) => {
                   <label className="text-center general-title">Cantidad de colaboradores</label>
                   <CustomDropdown 
                     className="w-100" 
-                    defaultOption="Sleccionar"
+                    defaultOption="Seleccionar"
                     options={actividadOptions.companySizeOptions}
                     callback={updateStateHandler}
                     setter={setActividad}
@@ -78,7 +78,7 @@ const ActividadEconomica = ({ animation, pdf }) => {
                   <label className="text-center general-title">Soy Repr Legal</label>
                   <CustomDropdown 
                     className="w-100" 
-                    defaultOption="Sleccionar"
+                    defaultOption="Seleccionar"
                     options={actividadOptions.yesNoOptions}
                     callback={updateStateHandler}
                     setter={setActividad}
@@ -87,7 +87,7 @@ const ActividadEconomica = ({ animation, pdf }) => {
                   <label className="text-center general-title">Inscrito en INS?</label>
                   <CustomDropdown 
                     className="w-100" 
-                    defaultOption="Sleccionar"
+                    defaultOption="Seleccionar"
                     options={actividadOptions.yesNoOptions}
                     callback={updateStateHandler}
                     setter={setActividad}
@@ -98,7 +98,7 @@ const ActividadEconomica = ({ animation, pdf }) => {
                   <label className="text-center general-title">Tipo Empresa</label>
                   <CustomDropdown 
                     className="w-100" 
-                    defaultOption="Sleccionar"
+                    defaultOption="Seleccionar"
                     options={actividadOptions.companyTypeOptions}
                     callback={updateStateHandler}
                     setter={setActividad}
@@ -107,7 +107,7 @@ const ActividadEconomica = ({ animation, pdf }) => {
                   <label className="text-center general-title">Jefa de Hogar?</label>
                   <CustomDropdown 
                     className="w-100" 
-                    defaultOption="Sleccionar"
+                    defaultOption="Seleccionar"
                     options={actividadOptions.yesNoOptions}
                     callback={updateStateHandler}
                     setter={setActividad}
@@ -116,7 +116,7 @@ const ActividadEconomica = ({ animation, pdf }) => {
                   <label className="text-center general-title">CCSS al día?</label>
                   <CustomDropdown 
                     className="w-100" 
-                    defaultOption="Sleccionar"
+                    defaultOption="Seleccionar"
                     options={actividadOptions.yesNoOptions}
                     callback={updateStateHandler}
                     setter={setActividad}
@@ -125,7 +125,7 @@ const ActividadEconomica = ({ animation, pdf }) => {
                   <label className="text-center general-title">Actividad Económica</label>
                   <CustomDropdown 
                     className="w-100" 
-                    defaultOption="Sleccionar"
+                    defaultOption="Seleccionar"
                     options={actividadOptions.activityOptions}
                     callback={updateStateHandler}
                     setter={setActividad}

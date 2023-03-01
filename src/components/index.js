@@ -7,5 +7,6 @@ export { ControlledInput } from "./ControlledInput/ControlledInput";
 export { EtapaSolicitud } from "./EtapaSolicitud/EtapaSolicitud";
 export { RefinanciamientoTable } from "./DynamicTables/RefinanciamientoTable";
 export { NecesidadesFinanciamientoTable } from "./DynamicTables/NecesidadesFinanciamientoTable";
+export { ButtonYesNo } from "./ButtonYesNo/ButtonYesNo";
 // Charts
 export { MultipleTestingAnalytics } from "./Charts/MultipleTestingAnalytics";

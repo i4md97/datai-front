@@ -128,7 +128,7 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
                   <CustomDropdown 
                     className="w-100" 
                     classNameButton="bg-light"
-                    defaultOption="Sleccionar"
+                    defaultOption="Seleccionar"
                     selectedOption="SBP MICRO CRÉDITO"
                     options={normativaOptions.creditoOptions}
                     callback={programChangeHandler}
@@ -140,7 +140,7 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
                   {/* <CustomDropdown 
                     className="w-100" 
                     classNameButton="bg-light"
-                    defaultOption="Sleccionar"
+                    defaultOption="Seleccionar"
                     selectedOption={"CAPITAL DE TRABAJO"}
                     options={normativaOptions.capitalOptions}
                   /> */}

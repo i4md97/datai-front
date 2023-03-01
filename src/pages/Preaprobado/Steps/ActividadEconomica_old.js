@@ -98,7 +98,7 @@ export default function ActividadEconomica({ animation, pdf }) {
                   <CustomDropdown 
                     id="profesion-oficio"
                     className="w-100 striped" 
-                    defaultOption="Sleccionar"
+                    defaultOption="Seleccionar"
                     options={profesiones}
                   />
 
@@ -112,7 +112,7 @@ export default function ActividadEconomica({ animation, pdf }) {
                   {/* <p className="dashboard__total-stat">CORPORATIVA</p> */}
                   <CustomDropdown 
                     className="w-100 striped" 
-                    defaultOption="Sleccionar" 
+                    defaultOption="Seleccionar" 
                     options={tiposEmpresas} 
                   />
                   <h5>Tipo de Industria</h5>
@@ -120,7 +120,7 @@ export default function ActividadEconomica({ animation, pdf }) {
                   <CustomDropdown 
                     id="tipo-industria"
                     className="w-100 striped" 
-                    defaultOption="Sleccionar" 
+                    defaultOption="Seleccionar" 
                     options={tipoIndustrias} 
                   />
 
@@ -129,7 +129,7 @@ export default function ActividadEconomica({ animation, pdf }) {
                   <CustomDropdown
                     id="tipo-actividad-economica" 
                     className="w-100 striped" 
-                    defaultOption="Sleccionar" 
+                    defaultOption="Seleccionar" 
                     options={tipoActividades} 
                   />
                 </Col>

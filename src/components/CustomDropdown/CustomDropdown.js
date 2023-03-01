@@ -63,7 +63,7 @@ export const CustomDropdown = ({
         <ChevronDownIcon />
       </DropdownToggle>
       <DropdownMenu className="dropdown__menu w-100">
-        <DropdownItem disabled>{defaultOption}</DropdownItem>
+        <DropdownItem disabled>{"SELECCIONAR"}</DropdownItem>
         {options.map((element, index) => (
           <DropdownItem key={`profesion-oficio-option-${index}`} onClick={onChangeHandler(element)}>{element}</DropdownItem>
         ))}
