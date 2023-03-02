@@ -5,8 +5,6 @@ import "./App.css";
 
 import PreaprobadoState from "./context/preaprobados/PreaprobadoState";
 import UsuarioState from "./context/usuario/UsuarioState";
-import { SidebarProvider } from "./context/SidebarContext";
-import { ClientProvider } from "./context/ClientContext";
 
 import NotFound from "./pages/NotFound/NotFound";
 
@@ -19,8 +17,6 @@ function App() {
   return (
     <UsuarioState> 
       <PreaprobadoState>
-        {/* <ClientProvider> */}
-          {/* <SidebarProvider> */}
             <Router>
               <Switch>
                 {publicRoutes.map((element, i) => (
@@ -46,8 +42,6 @@ function App() {
                 />
               </Switch>
             </Router>
-          {/* </SidebarProvider> */}
-        {/* </ClientProvider> */}
       </PreaprobadoState>
     </UsuarioState>
   );
