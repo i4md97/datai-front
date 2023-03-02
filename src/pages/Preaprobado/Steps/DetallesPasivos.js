@@ -32,24 +32,28 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
   const [externosBuro, setExternosBuro] = useState({});
 
   const [pasivosInternos, setPasivosInternos] = useState({
+    value: 0,
     ahorroPotencial: 0,
     saldoActual: 0,
     cuotaMensual: 0,
   });
 
   const [pasivosExternos, setPasivosExternos] = useState({
+    value: 0,
     ahorroPotencial: 0,
     saldoActual: 0,
     cuotaMensual: 0,
   });
 
   const [noRegulados, setNoRegulados] = useState({
+    value: 0,
     ahorroPotencial: 0,
     saldoActual: 0,
     cuotaMensual: 0,
   });
 
   const [composicionFinal, setComposiconFinal] = useState({
+    value: 0,
     ahorroPotencial: 0,
     saldoActual: 0,
     cuotaMensual: 0,
@@ -132,6 +136,10 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
     }
   }
 
+  const updateValueHandler = (setter, property, value) => {
+    setter(prev => ({...prev, [property]: value}));
+  }
+
   return (
     <div className={`dashboard detalles-pasivos step__cards ${animation && !pdf && "step__animation"}`}>
       <Row className="pt-4">
@@ -205,9 +213,13 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                           <ControlledInput 
                             className="bg-green"
                             type="number"
-                            defaultOption={pasivosInternos.ahorroPotencial}
+                            defaultOption={pasivosInternos.value}
                             dbValue={"0"}
-                            callback={() => {sumColumn(".pasivos-internos-ahorro__td input", "value", setPasivosInternos, 'ahorroPotencial')}} />
+                            callback={() => {
+                              sumColumn(".pasivos-internos-ahorro__td input", "value", setPasivosInternos, 'ahorroPotencial');
+                              updateValueHandler(setPasivosInternos, "value")
+                            }} 
+                          />
                         </td>
                         <td className="pasivos-internos-saldo__td" /* id={`internos-td-saldo-${i}`} */>
                           {dataPersonal.saldo_credito}
@@ -270,8 +282,11 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                           <ControlledInput 
                             className="bg-green" 
                             type="number" 
-                            defaultOption={pasivosExternos.ahorroPotencial}
-                            callback={() => sumColumn(".pasivos-externos-ahorro__td input", "value", setPasivosExternos, "ahorroPotencial")}
+                            defaultOption={pasivosExternos.value}
+                            callback={() => {
+                              sumColumn(".pasivos-externos-ahorro__td input", "value", setPasivosExternos, "ahorroPotencial");
+                              updateValueHandler(setPasivosExternos, "value");
+                            }}
                           />
                         </td>
                         <td className="pasivos-externos-saldo__td">{externosCIC.saldo_credito}</td>
@@ -330,7 +345,11 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                             className="bg-green" 
                             type="number" 
                             defaultOption={noRegulados.ahorroPotencial}
-                            callback={() => {sumColumn(".no-regulados-ahorro__td input", "value", setNoRegulados, 'ahorroPotencial')}} />
+                            callback={() => {
+                              sumColumn(".no-regulados-ahorro__td input", "value", setNoRegulados, 'ahorroPotencial');
+                              updateValueHandler(setNoRegulados, "value");
+                            }} 
+                          />
                         </td>
                         <td className="no-regulados-saldo__td">
                           {externosBuro.saldo_actual}

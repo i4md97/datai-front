@@ -14,338 +14,24 @@ export default function CapacidadPago({
   cedula,
   pdf,
 }) {
-  const { user } = useContext(UsuarioContext);
-  const { stepFourCheck, changeEscenarioPreeliminar, changeCapacidadPago } = useContext(PreaprobadoContext);
-  const [reloadCalc, setRealodCalc] = useState(false);
-  const [formSituacion, setFormSituacion] = useState({
-    previa: cedula ? cedula.salary : 0,
-    actual: cedula ? cedula.salary : 0,
-  });
 
-  const [formColillaPago, setFormColillaPago] = useState("");
+  // Balance General
+  const [balanceGeneral, setBalanceGeneral] = useState({});
+  const [totalActivos, setTotalActivos] = useState(0);
+  const [totalPasPat, setTotalPasPat] = useState(0);
+  
+  // Flujo Neto Efectivo
+  const [month, setMonth] = useState('2022-11-22');
+  // -- Ingresos
+  const [ingresos, setIngresos] = useState();
+  // -- Gastos
+  const [gastos, setGastos] = useState();
 
-  const [formPrevia, setFormPrevia] = useState({
-    cargaSociales: "",
-    impuestosRenta: "",
-    otrasDeducciones: "",
-    ingresoNeto: "",
-  });
-  const [formActual, setFormActual] = useState({
-    cargaSociales: "",
-    impuestosRenta: "",
-    otrasDeducciones: "",
-    ingresoNeto: "",
-    deudaInterna: "",
-    deudaExternal: "",
-    cuotasTarjetas: "",
-    deudasTotales: "",
-    liquidoAntes: "",
-  });
-
-  useEffect(() => {
-    setFormSituacion({
-      previa: cedula ? cedula.salary : 0,
-      actual: cedula ? cedula.salary : 0,
-    });
-    setFormColillaPago(escenarioPreeliminar.colillaPago || "");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (cedula || (!reloadCalc && cedula)) {
-      setRealodCalc(true);
-
-      //CALCULO DEUDAS
-      let deudaInternaCopy = 0;
-      let deudaExternalCopy = 0;
-      let cuotaInternalActual = 0;
-      let cuotaExternalActual = 0;
-      cedula.debts.data.map((element, i) => {
-        if (element[2] === user.firm_c) {
-          deudaInternaCopy += element[11] + element[12];
-        } else {
-          deudaExternalCopy += element[11] + element[12];
-        }
-
-        const find = stepFourCheck.find((elementTwo) => elementTwo.index === i);
-        if (find) {
-          if (find.type === "interno") {
-            cuotaInternalActual += find.data[11] + find.data[12];
-          } else {
-            cuotaExternalActual += find.data[11] + find.data[12];
-          }
-        }
-      });
-
-      let flagCuotas = true;
-
-      let cuotasTarjetasCopy = 0;
-      if (escenarioPreeliminar.check) {
-        escenarioPreeliminar.check.map((element) => {
-          if (element === "2") {
-            cuotasTarjetasCopy = parseFloat(
-              escenarioPreeliminar.ahorroDisponible
-            );
-          }
-        });
-      }
-
-      let deudasTotalesCopy =
-        cuotasTarjetasCopy +
-        deudaInternaCopy -
-        (flagCuotas ? cuotaInternalActual : 0) +
-        deudaExternalCopy -
-        (flagCuotas ? cuotaExternalActual : 0);
-      let deudasTotalesCopy2 = deudaInternaCopy + deudaExternalCopy;
-
-      //INGRESO BRUTO
-      let ingresoBruto = cedula.salary;
-
-      //CALCULAR IMPUESTOS DE RENTA
-      let impuestoRenta = 0;
-
-      if (ingresoBruto > 842000) {
-        let value = ingresoBruto > 1236000 ? 1236000 : ingresoBruto;
-        impuestoRenta += (value - 842000) * 0.1;
-      }
-
-      if (ingresoBruto > 1236000) {
-        let value = ingresoBruto > 2169000 ? 2169000 : ingresoBruto;
-        impuestoRenta += (value - 1236000) * 0.15;
-      }
-
-      if (ingresoBruto > 2169000) {
-        let value = ingresoBruto > 4337000 ? 4337000 : ingresoBruto;
-        impuestoRenta += (value - 2169000) * 0.2;
-      }
-
-      if (ingresoBruto > 4337000) {
-        impuestoRenta += (ingresoBruto - 4337000) * 0.25;
-      }
-
-      //CALCULAMOS CARGAS SOCIALES
-      let cargasSociales = ingresoBruto * 0.1065;
-
-      //CALCULAMOS OTRAS DEDUCCIONES
-      let otrasDeducciones = ingresoBruto * 0.095;
-
-      // CALCULAMOS INGRESO NETO
-
-      let saveIngresoNeto =
-        ingresoBruto - impuestoRenta - cargasSociales - otrasDeducciones;
-
-      //OBTENEMOS LA CUOTA MENSUAL DEL STEP ANTERIOR
-      let cuotaEscenarioPreeliminar =
-        escenarioPreeliminar.cuota && flagCuotas
-          ? parseFloat(escenarioPreeliminar.cuota)
-          : 0;
-
-      //Calculamos CSD ACTUAL
-      let csdCopy =
-        ((saveIngresoNeto - deudasTotalesCopy - cuotaEscenarioPreeliminar) /
-          ingresoBruto) *
-        100;
-
-      //CALCULAMOS ENDEUDAMIENTO ACTUAL
-      // console.log(escenarioPreeliminar);
-      let endeudamientoCopy =
-        ((saveIngresoNeto - deudasTotalesCopy - cuotaEscenarioPreeliminar) /
-          saveIngresoNeto) *
-        100;
-
-      //CALCULAMOS CUOTA MENSUAL REFINANCIADA ACTUAL
-
-      let cuotaMensualRefinanciadaCopy = escenarioPreeliminar.cuota
-        ? cuotaEscenarioPreeliminar
-        : 0;
-
-      //SALARIO LIQUIDO ANTES PREVIA
-
-      let liquidoAntes = deudasTotalesCopy2
-        ? saveIngresoNeto - deudasTotalesCopy2
-        : "";
-
-      //SALARIO LIQUIDO DESPUES ACTUAL
-      let liquidoDespues = deudasTotalesCopy2
-        ? saveIngresoNeto - deudasTotalesCopy2
-        : "";
-
-      //SALARIO LIQUIDO DISPONIBLE
-      let salarioLiquidoDisponible = deudasTotalesCopy2
-        ? saveIngresoNeto - deudasTotalesCopy2 - 200000
-        : "";
-
-      //CALCULAMOS LIQUIDO DESPUES ACTUAL
-
-      let liquidoDespuesCopy = escenarioPreeliminar.cuota
-        ? saveIngresoNeto - deudasTotalesCopy - cuotaEscenarioPreeliminar
-        : liquidoDespues;
-
-      //CALCULAMOS SALARIO LIQUIDO DISPONIBLE
-
-      let salarioLiquidoDisponibleCopy = escenarioPreeliminar.cuota
-        ? saveIngresoNeto -
-        deudasTotalesCopy -
-        cuotaEscenarioPreeliminar -
-        200000
-        : salarioLiquidoDisponible;
-
-      //CALCULAMOS NIVEL CAPACIDAD DE PAGO ACTUAL
-
-      let nivelCapacidadPagoCopy =
-        salarioLiquidoDisponibleCopy > 0 ? "N1" : "N2";
-
-      //CSD PREVIA
-
-      let csd = deudasTotalesCopy2
-        ? ((saveIngresoNeto - deudasTotalesCopy2) / ingresoBruto) * 100
-        : "";
-
-      //ENDEUDAMIENTO PREVIA
-
-      let endeudamiento = deudasTotalesCopy2
-        ? ((saveIngresoNeto - deudasTotalesCopy2) / saveIngresoNeto) * 100
-        : "";
-
-      setFormPrevia({
-        ...formPrevia,
-        csd,
-        deudasTotales: deudasTotalesCopy2,
-        cuotasTarjetas: 0,
-        deudaInterna: deudaInternaCopy,
-        deudaExternal: deudaExternalCopy,
-        endeudamiento,
-        liquidoAntes,
-        liquidoDespues,
-        salarioLiquidoDisponible,
-        ingresoNeto: saveIngresoNeto,
-        otrasDeducciones,
-        impuestosRenta: impuestoRenta,
-        cargaSociales: cargasSociales,
-        nivelCapacidadPago: salarioLiquidoDisponible > 0 ? "N1" : "N2",
-      });
-
-      let otrasDeduccionesActual = otrasDeducciones;
-      let saveIngresoNetoActual = saveIngresoNeto;
-      if (formColillaPago) {
-        otrasDeduccionesActual =
-          otrasDeduccionesActual - parseFloat(formColillaPago) + liquidoAntes;
-        saveIngresoNetoActual =
-          ingresoBruto -
-          impuestoRenta -
-          cargasSociales -
-          otrasDeduccionesActual;
-        liquidoDespuesCopy =
-          saveIngresoNetoActual - deudasTotalesCopy - cuotaEscenarioPreeliminar;
-        salarioLiquidoDisponibleCopy =
-          saveIngresoNetoActual -
-          deudasTotalesCopy -
-          cuotaEscenarioPreeliminar -
-          200000;
-        csdCopy =
-          ((saveIngresoNetoActual -
-            deudasTotalesCopy -
-            cuotaEscenarioPreeliminar) /
-            ingresoBruto) *
-          100;
-        endeudamientoCopy =
-          ((saveIngresoNetoActual -
-            deudasTotalesCopy -
-            cuotaEscenarioPreeliminar) /
-            saveIngresoNeto) *
-          100;
-      }
-
-      setFormActual({
-        ...formActual,
-        csd: csdCopy,
-        deudasTotales: deudasTotalesCopy,
-        cuotasTarjetas: cuotasTarjetasCopy,
-        deudaInterna: deudaInternaCopy - (flagCuotas ? cuotaInternalActual : 0),
-        deudaExternal:
-          deudaExternalCopy - (flagCuotas ? cuotaExternalActual : 0),
-        endeudamiento: endeudamientoCopy,
-        liquidoDespues: liquidoDespuesCopy,
-        cuotaMensualRefinanciada: cuotaMensualRefinanciadaCopy,
-        salarioLiquidoDisponible: salarioLiquidoDisponibleCopy,
-        liquidoAntes: saveIngresoNetoActual - deudasTotalesCopy,
-        ingresoNeto: saveIngresoNetoActual,
-        otrasDeducciones: otrasDeduccionesActual,
-        impuestosRenta: impuestoRenta,
-        cargaSociales: cargasSociales,
-        nivelCapacidadPago: nivelCapacidadPagoCopy,
-      });
-
-      changeCapacidadPago({
-        previa: {
-          ...formPrevia,
-          csd,
-          deudasTotales: deudasTotalesCopy2,
-          cuotasTarjetas: 0,
-          deudaInterna: deudaInternaCopy,
-          deudaExternal: deudaExternalCopy,
-          endeudamiento,
-          liquidoAntes,
-          liquidoDespues,
-          salarioLiquidoDisponible,
-          ingresoNeto: saveIngresoNeto,
-          otrasDeducciones,
-          impuestosRenta: impuestoRenta,
-          cargaSociales: cargasSociales,
-          nivelCapacidadPago: salarioLiquidoDisponible > 0 ? "N1" : "N2",
-        },
-        actual: {
-          ...formActual,
-          csd: csdCopy,
-          deudasTotales: deudasTotalesCopy,
-          cuotasTarjetas: cuotasTarjetasCopy,
-          deudaInterna:
-            deudaInternaCopy - (flagCuotas ? cuotaInternalActual : 0),
-          deudaExternal:
-            deudaExternalCopy - (flagCuotas ? cuotaExternalActual : 0),
-          endeudamiento: endeudamientoCopy,
-          liquidoDespues: liquidoDespuesCopy,
-          cuotaMensualRefinanciada: cuotaMensualRefinanciadaCopy,
-          salarioLiquidoDisponible: salarioLiquidoDisponibleCopy,
-          liquidoAntes: saveIngresoNetoActual - deudasTotalesCopy,
-          ingresoNeto: saveIngresoNetoActual,
-          otrasDeducciones: otrasDeduccionesActual,
-          impuestosRenta: impuestoRenta,
-          cargaSociales: cargasSociales,
-          nivelCapacidadPago: nivelCapacidadPagoCopy,
-        },
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formSituacion, reloadCalc]);
-
-  useEffect(() => {
-    if (formColillaPago && formActual.otrasDeducciones && formColillaPago > 0) {
-      setFormActual({
-        ...formActual,
-        otrasDeducciones:
-          formPrevia.otrasDeducciones -
-          parseFloat(formColillaPago) +
-          formPrevia.liquidoDespues,
-      });
-      changeEscenarioPreeliminar({
-        ...escenarioPreeliminar,
-        actual: {
-          ...escenarioPreeliminar.actual,
-          otrasDeducciones:
-            formPrevia.otrasDeducciones -
-            parseFloat(formColillaPago) +
-            formPrevia.liquidoDespues,
-        },
-      });
-      setRealodCalc(false);
-    }
-    if (!formColillaPago) {
-      setRealodCalc(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formColillaPago]);
-
+  // Flujo Neto de Efectivo
+  const [flujoNetoFinal, setFlujoNetoFianl] = useState(0);
+  // Flujo de Efectivo
+  const [flujoEfectivoFinal, setFlujoNetoFinal] = useState(0);
+  
   const flujoNetoData = {
     chartData: [
       { name: 'Nov-22', a: -1500, b: 500, c: 0, d: 2000 },
@@ -364,6 +50,25 @@ export default function CapacidadPago({
     ],
     legends: ["INCOMES", "SPENDS", "CF", "CERO"],
   };
+
+  useEffect(()=>{
+    sumColumnHandler(".activos-sum__td input", "value", setTotalActivos);
+    sumColumnHandler(".paviso-sum__td input", "value", setTotalPasPat);
+  },[]);
+
+  const sumColumnHandler = (targetClass, selector, stateSetter) => {
+    if (targetClass) {
+      const colElements = document.querySelectorAll(`${targetClass}`);
+      const colValues = [...colElements].map(element => element[selector].replace(/[^\d,]+/g, '').replace(/,/g, ''));
+      const colSum = colValues.reduce((a, b) => parseFloat(a ? a : 0) + parseFloat(b ? b : 0), 0);
+      stateSetter(colSum);
+    }
+  }
+  const updateValueHandler = (setter, property, value) => {
+    setter(prev => ({...prev, [property]: value}));
+  }
+
+  useEffect(()=>{},[balanceGeneral]);
 
   return (
     <div className={`dashboard capacidad-pago capacidad-pago step__cards ${animation && !pdf && "step__animation"}`}>
@@ -384,15 +89,29 @@ export default function CapacidadPago({
                         <th>Activos Circulantes</th>
                         <th>Valor Estimado</th>
                       </tr>
-                    </thead>
+                  </thead>
                     <tbody>
                       <tr>
                         <td>Inventario e inversiones</td>
-                        <td className="p-0"><ControlledInput className="bg-green" defaultOption="₡500,000" /></td>
+                        <td className="p-0 activos-sum__td">
+                          <ControlledInput className="bg-green" defaultOption="₡500,000" 
+                            callback={() => {
+                              sumColumnHandler(".activos-sum__td input", "value", setTotalActivos);
+                              updateValueHandler(setBalanceGeneral, "inventario_inversiones");
+                            }}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td>Otros AC</td>
-                        <td className="p-0"><ControlledInput className="bg-green" defaultOption="₡0" /></td>
+                        <td className="p-0 activos-sum__td">
+                          <ControlledInput className="bg-green" defaultOption="₡0" 
+                            callback={() => {
+                              sumColumnHandler(".activos-sum__td input", "value", setTotalActivos);
+                              updateValueHandler(setBalanceGeneral, "otros_ac");
+                          }}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td className="text-bold">Activos Fijos</td>
@@ -400,19 +119,47 @@ export default function CapacidadPago({
                       </tr>
                       <tr>
                         <td>Propiedades actuales</td>
-                        <td className="p-0"><ControlledInput className="bg-green" defaultOption="₡25,000,000" /></td>
+                        <td className="p-0 activos-sum__td">
+                          <ControlledInput className="bg-green" defaultOption="₡25,000,000" 
+                            callback={() => {
+                              sumColumnHandler(".activos-sum__td input", "value", setTotalActivos);
+                              updateValueHandler(setBalanceGeneral, "propiedades_actuales");
+                            }}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td>Vehículos actuales</td>
-                        <td className="p-0"><ControlledInput className="bg-green" defaultOption="₡1,000,000" /></td>
+                        <td className="p-0 activos-sum__td">
+                          <ControlledInput className="bg-green" defaultOption="₡1,000,000" 
+                            callback={() => {
+                              sumColumnHandler(".activos-sum__td input", "value", setTotalActivos);
+                              updateValueHandler(setBalanceGeneral, "vehiculos_actuales");
+                            }}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td>Mobiliario y equipo</td>
-                        <td className="p-0"><ControlledInput className="bg-green" defaultOption="₡1,500,000" /></td>
+                        <td className="p-0 activos-sum__td">
+                          <ControlledInput className="bg-green" defaultOption="₡1,500,000" 
+                            callback={() => {
+                              sumColumnHandler(".activos-sum__td input", "value", setTotalActivos);
+                              updateValueHandler(setBalanceGeneral, "mobiliario_equipo");
+                          }}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td>Otros AF</td>
-                        <td className="p-0"><ControlledInput className="bg-green" defaultOption="₡0" /></td>
+                        <td className="p-0 activos-sum__td">
+                          <ControlledInput className="bg-green" defaultOption="₡0" 
+                            callback={() => {
+                              sumColumnHandler(".activos-sum__td input", "value", setTotalActivos);
+                              updateValueHandler(setBalanceGeneral, "otros_af");
+                            }}
+                          />
+                        </td>
                       </tr>
                     </tbody>
                   </Table>
@@ -428,11 +175,25 @@ export default function CapacidadPago({
                     <tbody>
                       <tr>
                         <td>Pasivo CP</td>
-                        <td className="p-0"><ControlledInput className="bg-green" defaultOption="₡1,500,000" /></td>
+                        <td className="p-0 paviso-sum__td">
+                          <ControlledInput className="bg-green" defaultOption="₡1,500,000" 
+                            callback={() => {
+                              sumColumnHandler(".paviso-sum__td input", "value", setTotalPasPat);
+                              updateValueHandler(setBalanceGeneral, "pasivo_cp");
+                            }}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td>Pasivo LP</td>
-                        <td className="p-0"><ControlledInput className="bg-green" defaultOption="₡25,000,000" /></td>
+                        <td className="p-0 paviso-sum__td">
+                          <ControlledInput className="bg-green" defaultOption="₡25,000,000" 
+                            callback={() => {
+                              sumColumnHandler(".paviso-sum__td input", "value", setTotalPasPat);
+                              updateValueHandler(setBalanceGeneral, "pasivo_lp");
+                            }}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
@@ -443,7 +204,14 @@ export default function CapacidadPago({
                       </tr>
                       <tr>
                         <td>Capital Soc</td>
-                        <td className="p-0"><ControlledInput className="bg-green" defaultOption="₡1,500,000" /></td>
+                        <td className="p-0 paviso-sum__td">
+                          <ControlledInput className="bg-green" defaultOption="₡1,500,000" 
+                            callback={() => {
+                              sumColumnHandler(".paviso-sum__td input", "value", setTotalPasPat);
+                              updateValueHandler(setBalanceGeneral, "capital_soc");
+                            }}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
@@ -456,7 +224,7 @@ export default function CapacidadPago({
                     <tbody>
                       <tr>
                         <td className="text-bold">Total Activos</td>
-                        <td className="text-bold">₡28,000,000</td>
+                        <td className="text-bold">₡{new Intl.NumberFormat("de-DE").format(totalActivos)}</td>
                       </tr>
                     </tbody>
                   </Table>
@@ -466,7 +234,7 @@ export default function CapacidadPago({
                     <tbody>
                       <tr>
                         <td className="text-bold">Total Pas y Pat</td>
-                        <td className="text-bold">₡28,000,000</td>
+                        <td className="text-bold">₡{new Intl.NumberFormat("de-DE").format(totalPasPat)}</td>
                       </tr>
                     </tbody>
                   </Table>
@@ -492,7 +260,7 @@ export default function CapacidadPago({
                         <th>Fijos</th>
                         <th style={{minWidth: "40px"}}>%</th>
                         <th className="p-1">
-                          <ControlledInput type="date" dateFormat="MM-YY" defaultOption="2022-11-22" className="bg-green" />
+                          <ControlledInput type="date" dateFormat="MM-YY" defaultOption={month} className="bg-green" />
                         </th>
                       </tr>
                   </thead>

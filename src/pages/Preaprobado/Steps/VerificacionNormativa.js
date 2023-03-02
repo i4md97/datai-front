@@ -35,9 +35,9 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
   useEffect(() => {
     if (cedula) {
       const programFound = verificacion_normativa.find(item => item.programa === programa);
-      const dbInternaFound =  db_interna.find(id => id.no_identif === cedula.personal_data.tipo_id);
-      const dbCICFound =  db_cic.find(id => id.no_identif === cedula.personal_data.tipo_id);
-      const dbBuroFound = db_buro.find(id => id.no_identif === cedula.personal_data.tipo_id);
+      const dbInternaFound =  db_interna.find(id => id.no_identif === cedula.personal_data?.tipo_id);
+      const dbCICFound =  db_cic.find(id => id.no_identif === cedula.personal_data?.tipo_id);
+      const dbBuroFound = db_buro.find(id => id.no_identif === cedula.personal_data?.tipo_id);
       if (programFound) {
         setProducto(programFound.producto);
         setData({
@@ -60,48 +60,48 @@ export default function VerificacionNormativa({ animation, cedula, riesgo, pdf }
   }, [cedula, programa]);
 
   const dataCondiciones = [
-    {title: "MONTO MÍNIMO", parameter: "", parameterValue: "", value: data.condiciones.MONTO_MINIMO},
-    {title: "MONTO MÁXIMO", parameter: "", parameterValue: "", value: data.condiciones.MONTO_MAXIMO},
-    {title: "TIPO TASA", parameter: "Tasa", parameterValue: data.condiciones.TIPO_DE_TASA, value: data.condiciones.TASA_TOTAL},
-    {title: "FPP (Frecuencia Pago INT)", parameter: "Plazo", parameterValue: data.condiciones.PLAZO_MESES, value: data.condiciones.FPI_INT},
-    {title: "FPP (Frecuencia Pago Principal)", parameter: "", parameterValue: "", value: data.condiciones.FPP_PRINC},
+    {title: "MONTO MÍNIMO", parameter: "", parameterValue: "", value: data?.condiciones?.MONTO_MINIMO},
+    {title: "MONTO MÁXIMO", parameter: "", parameterValue: "", value: data?.condiciones?.MONTO_MAXIMO},
+    {title: "TIPO TASA", parameter: "Tasa", parameterValue: data?.condiciones?.TIPO_DE_TASA, value: data?.condiciones?.TASA_TOTAL},
+    {title: "FPP (Frecuencia Pago INT)", parameter: "Plazo", parameterValue: data?.condiciones?.PLAZO_MESES, value: data?.condiciones?.FPI_INT},
+    {title: "FPP (Frecuencia Pago Principal)", parameter: "", parameterValue: "", value: data?.condiciones?.FPP_PRINC},
   ];
 
   const dataInternos = [
-    {title: "Riesgo de Cumplimiento", politica: data.interno_int.riesgo_cumplimiento, value: data.interno.RIESGOS_DE_CUMPLIMIENTO},
-    {title: "Score de Atraso", politica: data.interno_int.score_atraso, value: data.interno.SCORE_DE_ATRASO},
-    {title: "Rango de Atraso", politica: data.interno_int.rango_atraso, value: data.interno.RANGO_DE_ATRASO},
-    {title: "Dias de Atraso Máximo", politica: data.interno_int.dias_atraso_max, value: data.interno.DIAS_DE_ATRASO},
-    {title: "Prorrogas Aplicadas", politica: data.interno_int.prorrogas_aplicadas, value: data.interno.PRORROGAS_APLICADAS},
-    {title: "Nivel de Riesgo", politica: data.interno_int.nivel_riesgo, value: data.interno.NIVEL_DE_RIESGO},
-    {title: "Categoria de Riesgo", politica: data.interno_int.categoria_riesgo, value: data.interno.CATEGORIA_DE_RIESGO}
+    {title: "Riesgo de Cumplimiento", politica: data?.interno_int?.riesgo_cumplimiento, value: data?.interno?.RIESGOS_DE_CUMPLIMIENTO},
+    {title: "Score de Atraso", politica: data?.interno_int?.score_atraso, value: data?.interno?.SCORE_DE_ATRASO},
+    {title: "Rango de Atraso", politica: data?.interno_int?.rango_atraso, value: data?.interno?.RANGO_DE_ATRASO},
+    {title: "Dias de Atraso Máximo", politica: data?.interno_int?.dias_atraso_max, value: data?.interno?.DIAS_DE_ATRASO},
+    {title: "Prorrogas Aplicadas", politica: data?.interno_int?.prorrogas_aplicadas, value: data?.interno?.PRORROGAS_APLICADAS},
+    {title: "Nivel de Riesgo", politica: data?.interno_int?.nivel_riesgo, value: data?.interno?.NIVEL_DE_RIESGO},
+    {title: "Categoria de Riesgo", politica: data?.interno_int?.categoria_riesgo, value: data?.interno?.CATEGORIA_DE_RIESGO}
   ];
 
   const dataCIC = [
-    {title: "Calificación Global CicNivel CHP", politica: data.cic_int.nivel_chp, value: data?.cic?.NIVEL_CHP},
-    {title: "Puntaje CIC", politica: data.cic_int.puntaje, value: data?.cic?.PUNTAJE_CIC},
-    {title: "Dias de Atraso en CIC", politica: data.cic_int.dias_atraso_max, value: data?.cic?.DIAS_ATRASO_EN_CIC},
-    {title: "Nivel CHP SBD", politica: data.cic_int.nivel_chp_sbd, value: data?.cic?.NIVEL_CHP_SBD},
-    {title: "Puntaje CIC SBD", politica: data.cic_int.puntaje_sbd, value: data?.cic?.PUNTAJE_CIC_SBD},
-    {title: "Dias de Atraso CIC SBD", politica: data.cic_int.dias_atraso_max_sbd, value: data?.cic?.DIAS_ATRASO_EN_CIC_SBD},
-    {title: "Operaciones con Estado > 1", politica: data.cic_int.operacions_con_estado_1, value: data?.cic?.OPERACIONES_CON_ESTADO_1},
-    {title: "Historial – Meses en CIC", politica: data.cic_int.meses_contados, value: data?.cic?.MESES_CONSULTADOS}
+    {title: "Calificación Global CicNivel CHP", politica: data?.cic_int?.nivel_chp, value: data?.cic?.NIVEL_CHP},
+    {title: "Puntaje CIC", politica: data?.cic_int?.puntaje, value: data?.cic?.PUNTAJE_CIC},
+    {title: "Dias de Atraso en CIC", politica: data?.cic_int?.dias_atraso_max, value: data?.cic?.DIAS_ATRASO_EN_CIC},
+    {title: "Nivel CHP SBD", politica: data?.cic_int?.nivel_chp_sbd, value: data?.cic?.NIVEL_CHP_SBD},
+    {title: "Puntaje CIC SBD", politica: data?.cic_int?.puntaje_sbd, value: data?.cic?.PUNTAJE_CIC_SBD},
+    {title: "Dias de Atraso CIC SBD", politica: data?.cic_int?.dias_atraso_max_sbd, value: data?.cic?.DIAS_ATRASO_EN_CIC_SBD},
+    {title: "Operaciones con Estado > 1", politica: data?.cic_int?.operacions_con_estado_1, value: data?.cic?.OPERACIONES_CON_ESTADO_1},
+    {title: "Historial – Meses en CIC", politica: data?.cic_int?.meses_contados, value: data?.cic?.MESES_CONSULTADOS}
   ];
 
   const dataBuro = [
-    {title: "Juicios Activos", cantidad1: data.buro_int.cantidad_juicios_activos, monto1: data.buro_int.monto_juicios_activos, cantidad2: data.buro.Juicios_Act_Cantidad, monto2: data.buro.Juicios_Act_Monto,},
-    {title: "Referencias Comerciales", cantidad1: data.buro_int.cantidad_referencias_comerciales, monto1: data.buro_int.monto_referencias_comerciales, cantidad2: data.buro.Ref_Com_Cantidad, monto2: data.buro.Ref_Com_Monto},
-    {title: "Embargos Bienes Muebles", cantidad1: data.buro_int.cantidad_embargo_muebles, monto1: data.buro_int.monto_embargo_muebles, cantidad2: data.buro.Emb_B_Mueb_Cantidad, monto2: data.buro.Emb_B_Mueb_Monto},
-    {title: "Embargos Bienes INMuebles", cantidad1: data.buro_int.cantidad_embargo_inmuebles, monto1: data.buro_int.monto_embargo_inmuebles, cantidad2: data.buro.Emb_B_InMueb_Cantidad, monto2: data.buro.Emb_B_InMueb_Monto},
-    {title: "Juicios Históricos", cantidad1: data.buro_int.cantidad_juicios_historicos, monto1: data.buro_int.monto_juicios_historicos, cantidad2: data.buro.Ref_Com_Hist_Cantidad, monto2: data.buro.Ref_Com_Hist_Monto},
-    {title: "Referencias Comerciales Históricas", cantidad1: data.buro_int.cantidad_referencias_comerciales_hist, monto1: data.buro_int.monto_referencias_comerciales_hist, cantidad2: data.buro.Ref_Com_Hist_Cantidad, monto2: data.buro.Ref_Com_Hist_Monto},
-    {title: "Bienes Prendados", cantidad1: data.buro_int.cantidad_bienes_prendados, monto1: data.buro_int.monto_bienes_prendados, cantidad2: data.buro.Bienes_Prendados_Cantidad, monto2: data.buro.Bienes_Prendados_Monto},
-    {title: "Bienes Hipotecados", cantidad1: data.buro_int.cantidad_bienes_hipotecados, monto1: data.buro_int.montos_bienes_hipotecados, cantidad2: data.buro.Bienes_Hipotecados_Cantidad, monto2: data.buro.Bienes_Hipotecados_Monto}
+    {title: "Juicios Activos", cantidad1: data?.buro_int?.cantidad_juicios_activos, monto1: data?.buro_int?.monto_juicios_activos, cantidad2: data?.buro?.Juicios_Act_Cantidad, monto2: data?.buro?.Juicios_Act_Monto,},
+    {title: "Referencias Comerciales", cantidad1: data?.buro_int?.cantidad_referencias_comerciales, monto1: data?.buro_int?.monto_referencias_comerciales, cantidad2: data?.buro?.Ref_Com_Cantidad, monto2: data?.buro?.Ref_Com_Monto},
+    {title: "Embargos Bienes Muebles", cantidad1: data?.buro_int?.cantidad_embargo_muebles, monto1: data?.buro_int?.monto_embargo_muebles, cantidad2: data?.buro?.Emb_B_Mueb_Cantidad, monto2: data?.buro?.Emb_B_Mueb_Monto},
+    {title: "Embargos Bienes INMuebles", cantidad1: data?.buro_int?.cantidad_embargo_inmuebles, monto1: data?.buro_int?.monto_embargo_inmuebles, cantidad2: data?.buro?.Emb_B_InMueb_Cantidad, monto2: data?.buro?.Emb_B_InMueb_Monto},
+    {title: "Juicios Históricos", cantidad1: data?.buro_int?.cantidad_juicios_historicos, monto1: data?.buro_int?.monto_juicios_historicos, cantidad2: data?.buro?.Ref_Com_Hist_Cantidad, monto2: data?.buro?.Ref_Com_Hist_Monto},
+    {title: "Referencias Comerciales Históricas", cantidad1: data?.buro_int?.cantidad_referencias_comerciales_hist, monto1: data?.buro_int?.monto_referencias_comerciales_hist, cantidad2: data?.buro?.Ref_Com_Hist_Cantidad, monto2: data?.buro?.Ref_Com_Hist_Monto},
+    {title: "Bienes Prendados", cantidad1: data?.buro_int?.cantidad_bienes_prendados, monto1: data?.buro_int?.monto_bienes_prendados, cantidad2: data?.buro?.Bienes_Prendados_Cantidad, monto2: data?.buro?.Bienes_Prendados_Monto},
+    {title: "Bienes Hipotecados", cantidad1: data?.buro_int?.cantidad_bienes_hipotecados, monto1: data?.buro_int?.montos_bienes_hipotecados, cantidad2: data?.buro?.Bienes_Hipotecados_Cantidad, monto2: data?.buro?.Bienes_Hipotecados_Monto}
   ];
 
   const dataIngresosImpuestos = [
-    {title: "Monto Promedio", label: "Ingreso reportado útimos meses", meses: data.buro_int.meses_salario, monto: data.buro_int.salario_promedio, label2: "Patrono reportado", value2: data.buro_int.empresa},
-    {title: "Monto Promedio", label: "Impuestos reportados últimos meses", meses: data.buro_int.meses_impuestos, monto: data.buro_int.impuesto_promedio, label2: "Sociedad Reportada", value2: data.buro_int.empresa_2},
+    {title: "Monto Promedio", label: "Ingreso reportado útimos meses", meses: data?.buro_int?.meses_salario, monto: data?.buro_int?.salario_promedio, label2: "Patrono reportado", value2: data?.buro_int?.empresa},
+    {title: "Monto Promedio", label: "Impuestos reportados últimos meses", meses: data?.buro_int?.meses_impuestos, monto: data?.buro_int?.impuesto_promedio, label2: "Sociedad Reportada", value2: data?.buro_int?.empresa_2},
   ];
 
   const programChangeHandler = (value) => {

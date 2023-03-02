@@ -74,7 +74,7 @@ export default function DatosPersonales({
                   <label>Número Identificación <span className="text-danger">*</span></label>
                   <input
                     type="text"
-                    className="bg-green text-center dashboard__total-stat form-cedula-input border-content my-0"
+                    className="text-center dashboard__total-stat form-cedula-input border-content my-0"
                     onChange={(e) => setIdNumber(e.target.value)}
                     value={idNumber}
                   />
@@ -239,56 +239,56 @@ export default function DatosPersonales({
                   
                   <p className="pb-1 text-color text-semibold">Nombre del cliente / Razón social</p>
                   <ControlledInput 
-                    className="editable-field bg-orange"
+                    className="editable-field"
                     defaultOption="n.a" 
                     dbValue={cliente?.interno?.nombre_completo} 
                   />
                   
                   <p className="pb-1 text-color text-semibold">Representante legal</p>
                   <ControlledInput 
-                    className="editable-field bg-green"
+                    className="editable-field"
                     defaultOption="n.a" 
                     dbValue={cliente?.interno?.nombre_completo}
                   />
 
                   <p className="pb-1 text-color text-semibold">Identificación</p>
                   <ControlledInput 
-                    className="editable-field bg-green"
+                    className="editable-field"
                     defaultOption="n.a" 
                     dbValue={cliente?.interno?.no_identif}
                   />
 
                   <p className="pb-1 text-color text-semibold">Nombre Comercial</p>
                   <ControlledInput 
-                    className="editable-field bg-green"
+                    className="editable-field"
                     defaultOption="n.a" 
                     dbValue={cliente?.buro?.empresa_2}
                   />
 
                   <p className="pb-1 text-color text-semibold">Teléfono personal</p>
                   <ControlledInput 
-                    className="editable-field bg-orange"
+                    className="editable-field"
                     defaultOption="n.a" 
                     dbValue={cliente?.interno?.tel_cel}
                   />
 
                   <p className="pb-1 text-color text-semibold">Teléfono empresa</p>
                   <ControlledInput 
-                    className="editable-field bg-orange"
+                    className="editable-field"
                     defaultOption="n.a" 
                     dbValue={cliente?.interno?.tel_trab}
                   />
 
                   <p className="pb-1 text-color text-semibold">Email</p>
                   <ControlledInput 
-                    className="editable-field bg-orange"
+                    className="editable-field"
                     defaultOption="n.a" 
                     dbValue={cliente?.interno?.email}
                   />
 
                   <p className="pb-1 text-color text-semibold">Sitio WEB</p>
                   <ControlledInput 
-                    className="editable-field bg-orange"
+                    className="editable-field"
                     defaultOption="n.a" 
                     dbValue={cliente?.interno?.url}
                   />
