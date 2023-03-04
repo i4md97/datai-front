@@ -82,7 +82,7 @@ const TableRow = ({
         <td style={{ minWidth: "10px", width:"10px"}}>
         </td>
       }
-      <td className="pt-0">
+      <td className="px-0 pt-0">
         <CustomDropdown 
           options={options}
           selectedOption="REFINANCIAMIENTO"

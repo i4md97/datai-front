@@ -13,7 +13,6 @@ import {
   NecesidadesFinanciamientoTable,
   EtapaSolicitud
 } from "../../../components";
-import { useEffect } from "react";
 
 export default function EscenarioPreliminar({ animation }) {
   const { changeStep } = useContext(PreaprobadoContext);

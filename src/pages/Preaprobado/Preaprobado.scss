@@ -276,8 +276,6 @@
   .escenario-preliminar {
     table {
       width: 100%;
-      &.table-3 {
-      }
       thead {
         tr {
           @include themify($themes) {
@@ -563,15 +561,23 @@
   .sticky-table-left {
     position: sticky;
     left: 0;
-    z-index: 1;
+    z-index: 2;
     height: 100%;
     @include themify($themes) {
       border-right: 1px solid themed("colorBorder");
     }
   }
 
+  .sticky-table-left {
+    table thead tr {
+      z-index: 2;
+    }
+  }
   .sticky-table-right {
     position: relative;
+    table thead tr {
+      z-index: 1;
+    }
   }
 
   table {

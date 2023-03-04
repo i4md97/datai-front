@@ -4,8 +4,10 @@
 @import '~react-vis/dist/styles/treemap';
 @import '~react-vis/dist/styles/examples';
 
+.overflow-x-scroll {
+  overflow-x: scroll;
+}
 //recharts
-
 path.recharts-sector {
 
   @include themify($themes) {
@@ -71,9 +73,7 @@ path.recharts-sector {
 }
 
 //chartsjs
-
 .card {
-
   .chartjs-size-monitor {
 
     & + .card__title:not(:first-child) {

@@ -4,16 +4,26 @@ import { useEffect, useState } from "react";
 import { Col, Row, Table, Button } from "reactstrap";
 import { ControlledInput, CustomDropdown } from "..";
 
+import { verificacion_normativa } from "../../db/parametros";
+
 const keyNecesidad = "fe_ep_necesidad_";
 
 const TableRow = ({
   id = 0,
-  title = "",
+  options,
   setTableRows = () => {},
   removeRow = () => {},
   setSaldoFinanciar = () => {},
   setNecesidades,
 }) => {
+  const [selectedOption, setSelectedOption] = useState("");
+
+  useEffect(() => {
+    if (options.length > 0) {
+      setSelectedOption(options[0]);
+    }
+  },[options]);
+
   const removeRowHandler = () => {
     removeRow(id);
     setTimeout(() => {
@@ -57,7 +67,13 @@ const TableRow = ({
         <td style={{ minWidth: "10px", width:"10px"}}>
         </td>
       }
-      <td><p>{title}</p></td>
+      <td className="px-0 pt-0">
+        <CustomDropdown 
+          options={options}
+          selectedOption={selectedOption}
+          classNameButton="mb-0"
+        />
+      </td>
       <td className="fnft-amount__td p-1">
         <ControlledInput id={id} className="bg-green" placeholder="₡0" callback={sumCol} />
       </td>
@@ -72,10 +88,11 @@ export const NecesidadesFinanciamientoTable = ({
   setNecesidades = () => {},
 }) => {
   const rowsLimit = 5;
+  const [options, setOptions] = useState([""]);
   const [tableRows, setTableRows] = useState([
     {
       id: 0,
-      title: "CAPITAL DE TRABAJO",
+      option: options[0],
       amount: 0,
       description: ""
     }
@@ -86,19 +103,26 @@ export const NecesidadesFinanciamientoTable = ({
   // logic
   const [saldoFinanciar, setSaldoFinanciar] = useState(0);
 
+  useEffect(()=>{
+    if (verificacion_normativa) {
+      const optionsMap = verificacion_normativa.map(producto => producto.producto);
+      setOptions(optionsMap);
+    }
+  },[]);
+
   useEffect(() => {
     setNecesidades({
-      [keyNecesidad+0]: "CAPITAL DE TRABAJO",
+      [keyNecesidad+0]: options[0],
       [keyNecesidad+0+"_value"]: "0",
       [keyNecesidad+0+"_description"]: "",
     });
-  },[setNecesidades]);
+  },[setNecesidades, options]);
 
   const addRow = () => {
     if (conditionalRender) {
       setTableRows(prev => [...prev, {
         id: rowId,
-        title: "CAPITAL DE TRABAJO",
+        option: options[0],
         amount: 0,
         description: `Refinanciamiento Deudas`
       }]);
@@ -107,8 +131,8 @@ export const NecesidadesFinanciamientoTable = ({
 
     setNecesidades(prev => ({
       ...prev,
-      [keyNecesidad+rowId]: "0",
-      [keyNecesidad+rowId+"_value"]: "CAPITAL DE TRABAJO",
+      [keyNecesidad+rowId]: options[0],
+      [keyNecesidad+rowId+"_value"]: "0",
       [keyNecesidad+rowId+"_description"]: "",
     }));
   }
@@ -128,12 +152,13 @@ export const NecesidadesFinanciamientoTable = ({
   }
 
   const renderLeftRows = () => {
-    return tableRows.map((row, i) => 
+    return tableRows.map((row) => 
       <TableRow 
         key={`fnft-r-row-${row.id}`}
         id={row.id}
-        title={row.title}
+        defaultOption={row.option}
         amount={row.amount}
+        options={options}
         setTableRows={setTableRows}
         removeRow={removeRow}
         setSaldoFinanciar={setSaldoFinanciar}
@@ -174,9 +199,9 @@ export const NecesidadesFinanciamientoTable = ({
   return (
     <Row>
       <Col xs={12}>
-        <Row className="overflow-auto flex-nowrap">
+        <Row className="overflow-x-auto ">
           <Col>
-            <Table className="text-left" responsive>
+            <Table className="text-left">
               <tbody>
                 {renderLeftRows()}
                 {conditionalRender && <tr>
@@ -193,7 +218,7 @@ export const NecesidadesFinanciamientoTable = ({
             </Table>
           </Col>
           <Col>
-            <Table className="text-left" responsive>
+            <Table className="text-left">
               <tbody>
                 {/* <tr>
                   <th colSpan="2" className="py-4">PLAN DE INVERSÓN</th>
