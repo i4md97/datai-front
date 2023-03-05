@@ -21,11 +21,12 @@ export default function CapacidadPago({
   const [totalPasPat, setTotalPasPat] = useState(0);
   
   // Flujo Neto Efectivo
-  const [month, setMonth] = useState('2022-11-22');
+  const currentDate = new Date().toISOString().substring(0, 10);;
+  const [month, setMonth] = useState(currentDate);
   // -- Ingresos
-  const [ingresos, setIngresos] = useState();
+  const [ingresos, setIngresos] = useState({});
   // -- Gastos
-  const [gastos, setGastos] = useState();
+  const [gastos, setGastos] = useState({});
 
   // Flujo Neto de Efectivo
   const [flujoNetoFinal, setFlujoNetoFianl] = useState(0);
@@ -51,6 +52,7 @@ export default function CapacidadPago({
     legends: ["INCOMES", "SPENDS", "CF", "CERO"],
   };
 
+  // Balance General
   useEffect(()=>{
     sumColumnHandler(".activos-sum__td input", "value", setTotalActivos);
     sumColumnHandler(".paviso-sum__td input", "value", setTotalPasPat);
@@ -65,10 +67,26 @@ export default function CapacidadPago({
     }
   }
   const updateValueHandler = (setter, property, value) => {
-    setter(prev => ({...prev, [property]: value}));
+    if (property) {
+      setter(prev => ({...prev, [property]: value}));
+    } else {
+      setter(value);
+    }
+  }
+  
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const formattedDate = (date, monthsAdded) => {
+    const newDate = new Date(date);
+    const dateMonth = newDate.getMonth() + monthsAdded;
+    const day = newDate.getDate() + 1;
+    // If value is greater than 12 starts again
+    const labelMonth = months[dateMonth] ? months[dateMonth] : months[dateMonth - 12];
+    return `${labelMonth}-${day}`;
   }
 
-  useEffect(()=>{},[balanceGeneral]);
+  useEffect(()=>{
+    // console.log(ingresos);
+  },[ingresos]);
 
   return (
     <div className={`dashboard capacidad-pago capacidad-pago step__cards ${animation && !pdf && "step__animation"}`}>
@@ -94,7 +112,7 @@ export default function CapacidadPago({
                       <tr>
                         <td>Inventario e inversiones</td>
                         <td className="p-0 activos-sum__td">
-                          <ControlledInput className="bg-green" defaultOption="₡500,000" 
+                          <ControlledInput className="bg-green" defaultValue="₡500,000" 
                             callback={() => {
                               sumColumnHandler(".activos-sum__td input", "value", setTotalActivos);
                               updateValueHandler(setBalanceGeneral, "inventario_inversiones");
@@ -105,7 +123,7 @@ export default function CapacidadPago({
                       <tr>
                         <td>Otros AC</td>
                         <td className="p-0 activos-sum__td">
-                          <ControlledInput className="bg-green" defaultOption="₡0" 
+                          <ControlledInput className="bg-green" defaultValue="₡0" 
                             callback={() => {
                               sumColumnHandler(".activos-sum__td input", "value", setTotalActivos);
                               updateValueHandler(setBalanceGeneral, "otros_ac");
@@ -120,7 +138,7 @@ export default function CapacidadPago({
                       <tr>
                         <td>Propiedades actuales</td>
                         <td className="p-0 activos-sum__td">
-                          <ControlledInput className="bg-green" defaultOption="₡25,000,000" 
+                          <ControlledInput className="bg-green" defaultValue="₡25,000,000" 
                             callback={() => {
                               sumColumnHandler(".activos-sum__td input", "value", setTotalActivos);
                               updateValueHandler(setBalanceGeneral, "propiedades_actuales");
@@ -131,7 +149,7 @@ export default function CapacidadPago({
                       <tr>
                         <td>Vehículos actuales</td>
                         <td className="p-0 activos-sum__td">
-                          <ControlledInput className="bg-green" defaultOption="₡1,000,000" 
+                          <ControlledInput className="bg-green" defaultValue="₡1,000,000" 
                             callback={() => {
                               sumColumnHandler(".activos-sum__td input", "value", setTotalActivos);
                               updateValueHandler(setBalanceGeneral, "vehiculos_actuales");
@@ -142,7 +160,7 @@ export default function CapacidadPago({
                       <tr>
                         <td>Mobiliario y equipo</td>
                         <td className="p-0 activos-sum__td">
-                          <ControlledInput className="bg-green" defaultOption="₡1,500,000" 
+                          <ControlledInput className="bg-green" defaultValue="₡1,500,000" 
                             callback={() => {
                               sumColumnHandler(".activos-sum__td input", "value", setTotalActivos);
                               updateValueHandler(setBalanceGeneral, "mobiliario_equipo");
@@ -153,7 +171,7 @@ export default function CapacidadPago({
                       <tr>
                         <td>Otros AF</td>
                         <td className="p-0 activos-sum__td">
-                          <ControlledInput className="bg-green" defaultOption="₡0" 
+                          <ControlledInput className="bg-green" defaultValue="₡0" 
                             callback={() => {
                               sumColumnHandler(".activos-sum__td input", "value", setTotalActivos);
                               updateValueHandler(setBalanceGeneral, "otros_af");
@@ -176,7 +194,7 @@ export default function CapacidadPago({
                       <tr>
                         <td>Pasivo CP</td>
                         <td className="p-0 paviso-sum__td">
-                          <ControlledInput className="bg-green" defaultOption="₡1,500,000" 
+                          <ControlledInput className="bg-green" defaultValue="₡1,500,000" 
                             callback={() => {
                               sumColumnHandler(".paviso-sum__td input", "value", setTotalPasPat);
                               updateValueHandler(setBalanceGeneral, "pasivo_cp");
@@ -187,7 +205,7 @@ export default function CapacidadPago({
                       <tr>
                         <td>Pasivo LP</td>
                         <td className="p-0 paviso-sum__td">
-                          <ControlledInput className="bg-green" defaultOption="₡25,000,000" 
+                          <ControlledInput className="bg-green" defaultValue="₡25,000,000" 
                             callback={() => {
                               sumColumnHandler(".paviso-sum__td input", "value", setTotalPasPat);
                               updateValueHandler(setBalanceGeneral, "pasivo_lp");
@@ -205,7 +223,7 @@ export default function CapacidadPago({
                       <tr>
                         <td>Capital Soc</td>
                         <td className="p-0 paviso-sum__td">
-                          <ControlledInput className="bg-green" defaultOption="₡1,500,000" 
+                          <ControlledInput className="bg-green" defaultValue="₡1,500,000" 
                             callback={() => {
                               sumColumnHandler(".paviso-sum__td input", "value", setTotalPasPat);
                               updateValueHandler(setBalanceGeneral, "capital_soc");
@@ -256,79 +274,248 @@ export default function CapacidadPago({
                     <thead>
                       <tr className="bg-white">
                         <th style={{minWidth: "140px", textAlign: "center"}}>Rubros de ingresos y gastos</th>
-                        <th style={{minWidth: "40px"}}>#</th>
+                        <th style={{minWidth: "60px"}}>#</th>
                         <th>Fijos</th>
                         <th style={{minWidth: "40px"}}>%</th>
                         <th className="p-1">
-                          <ControlledInput type="date" dateFormat="MM-YY" defaultOption={month} className="bg-green" />
+                          <ControlledInput 
+                            type="date"
+                            dateFormat="MM-YY"
+                            defaultValue={month}
+                            className="bg-green"
+                            callback={(e) => updateValueHandler(setMonth, null, e)}
+                          />
                         </th>
                       </tr>
                   </thead>
                     <tbody>
                       <tr>
                         <td className="text-bold">Ingresos</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>₡1,860,000</td>
+                        <td colSpan={3}></td>
+                        <td>₡{ingresos.total_month_1}</td>
                       </tr>
                       <tr>
                         <td>Ventas</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡300,000" /></td>
+                        <td className="p-1">
+                          <ControlledInput className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "ventas_no", e);
+                              // calculate?
+                            }}
+                           />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput 
+                            className="bg-green"
+                            defaultValue="0"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "ventas_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡300,000" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue=""
+                            mask="₡"
+                            updatedValue={ingresos.ventas_no * (ingresos.ventas_fijos * (ingresos.month_1_perc / 100))}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td>Estacionalidad %</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="0.0%" /></td>
+                        <td className="p-1">
+                          <ControlledInput 
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "estacionalidad_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="0.0"
+                            mask={"₡"}
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "estacionalidad_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="100.0%" /></td>
+                        <td className="p-1">
+                          <ControlledInput 
+                            className="bg-green"
+                            defaultValue="100.0"
+                            mask="%"
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "month_1_perc", e);
+                            }}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
                         <td>Ingresos estimados</td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="15000" /></td>
-                        <td>₡450,000</td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="15000"
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "estimados", e);
+                            }}
+                          />
+                        </td>
+                        <td>₡{ingresos.estimados * ingresos.detalle_no || "" }</td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            mask={"₡"}
+                            updatedValue={ingresos.estimados * ingresos.detalle_no}
+                          />
+                        </td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Detalle: Gasto telefónico X 30" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="30" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1">
+                          <ControlledInput 
+                            className="bg-green"
+                            placeholder="Detalle:"
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "estimado_detalle", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput 
+                            className="bg-green"
+                            defaultValue="30"
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "detalle_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            mask={"₡"}
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "detalle_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
                         <td>Ayudas, Donaciones, IMAS, etc</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡110,000" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "ayudas_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="110000"
+                            mask={"₡"}
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "ayudas_fijos", e);
+                            }}
+                          />
+                          </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡110,000"/></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="110000"
+                            mask={"₡"}
+                            updatedValue={ingresos.ayudas_no * ingresos.ayudas_fijos}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td>Financiamiento Empresarial</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td>₡1,500,000</td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "financiamiento_emp_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="bg-light">₡1,500,000{/* TODO {escenario_pre?.capital_de_trabajo.value + escenario_pre?.capital_de_inversion.value */}</td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡1,000,000"/></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="1000000"
+                            mask={"₡"}
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "financiamiento_emp_month_1", e);
+                            }}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td>Financiamiento Personal</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td>₡0</td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "financiamiento_per_no", e);
+                            }}
+                          />
+                        </td>
+                        <td>₡0{/* TODO {escenario_pre?.gastos_personales.value*/}</td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡0"/></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="0"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "financiamiento_per_month_1", e);
+                            }}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td>Otros ingresos familiares</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡0"/></td>
+                        <td className="p-1">
+                          <ControlledInput 
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "otros_ingresos_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="0"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "otros_ingresos_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td className="p-1"></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setIngresos, "otros_ingresos_month_1", e);
+                            }}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
@@ -338,21 +525,52 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>-₡1,544,000</td>
+                        <td>₡{gastos.total_month_1}</td>
                       </tr>
                       <tr>
                         <td className="text-semibold">Inversiones</td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>-₡800,000.00</td>
+                        <td>₡{gastos.inversiones_month_1}</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Compra Activos: mueb e Inmueb" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="Compra Activos: mueb e Inmueb"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "inversionse_detalle", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "inversiones_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "inversiones_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡800,000.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="-80000000"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "inversiones_month_1", e);
+                            }}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
@@ -362,56 +580,242 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>-₡200,000.00</td>
+                        <td>₡{gastos.cosoto_ventas_month_1}</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Costo de Ventas (insumos)" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡200,000" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="Costo de Ventas (insumos)"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "cosoto_ventas_desc", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "cosoto_ventas_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="-200000"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "cosoto_ventas_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡200,000.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="-20000000"
+                            mask="₡"
+                            updatedValue={gastos.cosoto_ventas_no * gastos.cosoto_ventas_fijos}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td className="text-semibold">Gasto operativo</td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>-₡364,000.00</td>
+                        <td>₡{gastos.operativo_total_month_1}</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Servicios subcontratados" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡75,000" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="Servicios subcontratados"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "operativo_1_desc", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "operativo_1_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="-75000" 
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "operativo_1_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="-7500000"
+                            mask="₡"
+                            updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos}
+                          />
+                        </td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Servicios públicos" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡68,000" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="Servicios públicos"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "operativo_2_desc", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "operativo_2_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="-68000"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "operativo_2_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="-6800000" 
+                            mask="₡"
+                            updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos}
+                          />
+                        </td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Alquileres" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡180,000" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="Alquileres"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "operativo_3_desc", e);
+                            }}
+                          />
+                          </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "operativo_3_no", e);
+                            }}
+                          />
+                          </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="-180000"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "operativo_3_fijos", e);
+                            }}
+                          />
+                          </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="-18000000" 
+                            mask="₡"
+                            updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos}
+                          />
+                          </td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="CCSS / INS" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡24,000" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="CCSS / INS"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "operativo_4_desc", e);
+                            }}
+                          />
+                          </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "operativo_4_no", e);
+                            }}
+                          />
+                          </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="-24000"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "operativo_4_fjos", e);
+                            }}
+                          />
+                          </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="-2400000"
+                            mask="₡"
+                            updatedValue={gastos.operativo_4_no * gastos.operativo_4_fjos}
+                          />
+                          </td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="Mantenimiento Planta y Eq" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡17,000" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="Mantenimiento Planta y Eq"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "operativo_5_desc", e);
+                            }}
+                          />
+                          </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "operativo_5_no", e);
+                            }}
+                          />
+                          </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="-17000"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "operativo_5_fijos", e);
+                            }}
+                          />
+                          </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="-1700000"
+                            mask="₡"
+                            updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos}
+                          />
+                          </td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
@@ -426,9 +830,9 @@ export default function CapacidadPago({
                       <tr>
                         <td>Mano de Obra / Otros Salarios</td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡75,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="-₡75,000" /></td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
@@ -443,30 +847,30 @@ export default function CapacidadPago({
                       <tr>
                         <td>Cargas Sociales</td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡25,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="-₡25,000" /></td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡25,000.00" /></td>
                       </tr>
                       <tr>
                         <td>Pensión alimenticia</td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡50,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="-₡50,000" /></td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡50,000.00" /></td>
                       </tr>
                       <tr>
                         <td>Gastos Familiares</td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡15,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="-₡15,000" /></td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
                       </tr>
                       <tr>
                         <td>Otras deducciones</td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡15,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="-₡15,000" /></td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
                       </tr>
                       <tr>
                         <td className="text-semibold">Gasto Financiero</td>
@@ -480,21 +884,21 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
                       </tr>
                       <tr>
                         <td>Cuota empresariales</td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
                       </tr>
                       <tr>
                         <td>Cuota personales</td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
@@ -509,9 +913,9 @@ export default function CapacidadPago({
                       <tr>
                         <td>Reinversión</td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡50,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡50,000" /></td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡50,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡50,000.00" /></td>
                       </tr>
                       <tr>
                         <td className="font-weight-bold">FLUJO DE EFECTIVO</td>
@@ -527,18 +931,9 @@ export default function CapacidadPago({
                   <Table striped>
                     <thead>
                       <tr className="bg-white">
-                        <th>Dec-22</th>
-                        <th>Jan-23</th>
-                        <th>Feb-23</th>
-                        <th>Mar-23</th>
-                        <th>Apr-23</th>
-                        <th>May-23</th>
-                        <th>Jun-23</th>
-                        <th>Jul-23</th>
-                        <th>Aug-23</th>
-                        <th>Sep-23</th>
-                        <th>Oct-23</th>
-                        <th>Nov-23</th>
+                        {months.map((m, i) => 
+                          <th key={`cp-month-${i}`}>{formattedDate(month, i + 1)}</th>
+                        )}
                         <th>"PROY AÑO 1"</th>
                         <th>"PROYAÑO 2"</th>
                         <th>"PROYAÑO 3"</th>
@@ -563,81 +958,81 @@ export default function CapacidadPago({
                         <td>₡14,922,600</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡270,000" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡240,000" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡240,000" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡300,000" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡300,000" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡300,000" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡300,000" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡300,000" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡300,000" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡300,000" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡300,000" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡300,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡270,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡240,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡240,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡300,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡300,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡300,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡300,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡300,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡300,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡300,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡300,000" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡300,000" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="90.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="80.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="80.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="100.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="100.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="100.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="100.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="100.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="100.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="100.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="100.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="100.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="90.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="80.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="80.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="100.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="100.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="100.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="100.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="100.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="100.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="100.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="100.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="100.0%" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="5.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="10.0%" /></td>
-                      </tr>
-                      <tr>
-                        <td colSpan={"100%"}></td>
-                      </tr>
-                      <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡450,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="5.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="10.0%" /></td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡110,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡110,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡110,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡120,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡120,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡120,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡120,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡120,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡120,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡120,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡120,000"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡120,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡450,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡450,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡450,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡450,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡450,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡450,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡450,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡450,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡450,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡450,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡450,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡450,000"/></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡500,000"/></td>
+                        <td colSpan={"100%"}></td>
+                      </tr>
+                      <tr>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡110,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡110,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡110,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡120,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡120,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡120,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡120,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡120,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡120,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡120,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡120,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡120,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" /></td>
+                      </tr>
+                      <tr>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡500,000"/></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
@@ -675,7 +1070,7 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡300,000"/></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡300,000"/></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
@@ -725,12 +1120,12 @@ export default function CapacidadPago({
                         <td>-₡3,417,750.00</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡2,000,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="-₡2,000,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="-₡300,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="-₡300,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
@@ -738,8 +1133,8 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
                         <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="5.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="5.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="5.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="5.0%" /></td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
@@ -762,7 +1157,7 @@ export default function CapacidadPago({
                         <td>-₡1,323,000.00</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡1,000,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡1,000,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
@@ -774,9 +1169,9 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡1,200,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="5.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="5.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡1,200,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0%" /></td>
                       </tr>
                       <tr>
                         <td>-₡364,000.00</td>
@@ -796,89 +1191,89 @@ export default function CapacidadPago({
                         <td>-₡5,217,030.00</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡975,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="5.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="5.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡975,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0%" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡68,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡884,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡68,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡68,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡68,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡68,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡68,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡68,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡68,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡68,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡68,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡68,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡68,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡68,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡884,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡180,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡2,340,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡180,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡180,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡180,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡180,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡180,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡180,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡180,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡180,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡180,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡180,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡180,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡180,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡2,340,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡24,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡312,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡24,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡24,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡24,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡24,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡24,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡24,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡24,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡24,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡24,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡24,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡24,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡24,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡312,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡17,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡221,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡17,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡17,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡17,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡17,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡17,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡17,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡17,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡17,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡17,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡17,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡17,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡17,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡221,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
@@ -901,21 +1296,21 @@ export default function CapacidadPago({
                         <td>-₡2,579,850.00</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡75,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡975,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="5.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="5.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡975,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0%" /></td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
@@ -938,70 +1333,70 @@ export default function CapacidadPago({
                         <td>-₡1,504,912.50</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡25,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡325,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="5.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="5.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡25,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡25,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡25,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡25,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡25,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡25,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡25,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡25,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡25,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡25,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡25,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡25,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡325,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0%" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡50,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡650,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡50,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡50,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡50,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡50,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡50,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡50,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡50,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡50,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡50,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡50,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡50,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡50,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡650,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡195,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡195,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡15,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="-₡195,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡195,000.00" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                       </tr>
@@ -1023,55 +1418,55 @@ export default function CapacidadPago({
                         <td>₡0.00</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="5.0%" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="5.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0%" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0%" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
@@ -1084,31 +1479,31 @@ export default function CapacidadPago({
                         <td>-₡434,000.00</td>
                         <td>-₡408,000.00</td>
                         <td>-₡82,000.00</td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡244,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡570,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡896,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡1,222,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡1,548,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡244,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡570,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡896,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡1,222,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡1,548,000.00" /></td>
                         <td>-₡2,114,000.00</td>
                         <td>-₡488,600.00</td>
                         <td>₡1,896,370.00</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡100,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡235,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡100,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡50,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡200,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡0.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="₡735,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultOption="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡100,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡235,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡100,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡50,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡200,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡735,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                       </tr>
                       <tr>
                         <td>-₡1,998,000.00</td>
@@ -1118,11 +1513,11 @@ export default function CapacidadPago({
                         <td>-₡484,000.00</td>
                         <td>-₡608,000.00</td>
                         <td>-₡82,000.00</td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡244,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡570,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡896,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡1,222,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultOption="₡1,548,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡244,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡570,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡896,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡1,222,000.00" /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡1,548,000.00" /></td>
                         <td>-₡2,749,000.00</td>
                         <td>-₡488,600.00</td>
                         <td>₡1,896,370.00</td>

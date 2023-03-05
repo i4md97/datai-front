@@ -1,24 +1,29 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Input } from "reactstrap";
+
+import { Input, InputGroup, InputGroupText } from "reactstrap";
+
+import "./ControlledInput.scss";
 
 export const ControlledInput = ({
   id="",
-  type = "text", 
+  type = "text",
+  readOnly = false,
   pattern,
   placeholder = "",
   className = "", 
-  defaultOption = "", 
-  dbValue, 
+  defaultValue = "",
+  updatedValue, 
+  mask = null,
   callback 
 }) => {
-  const [value, setValue] = useState(defaultOption);
+  const [value, setValue] = useState(defaultValue);
 
   useEffect(()=>{
-    if (dbValue) {
-      setValue(dbValue);
+    if (updatedValue) {
+      setValue(updatedValue);
     }
-  },[dbValue]);
+  },[updatedValue]);
 
   const onChangeHandler = (e) => {
     const inputValue = e.target.value;
@@ -29,6 +34,22 @@ export const ControlledInput = ({
   }
 
   return (
-    <Input id={id} style={{fontSize: "14px"}} type={type} pattern={pattern} placeholder={placeholder} className={className} value={value} onChange={onChangeHandler} />
+    <InputGroup className="fe-controlled-input">
+      {mask === "₡" && <InputGroupText className={"left "}>
+        ₡
+      </InputGroupText>}
+      <Input 
+        id={id} 
+        type={type} readOnly={readOnly} 
+        pattern={pattern} 
+        placeholder={placeholder} 
+        className={className} 
+        value={value} 
+        onChange={onChangeHandler} 
+      />
+      {mask === "%" && <InputGroupText className={"right "}>
+        %
+      </InputGroupText>}
+    </InputGroup>
   )
 }

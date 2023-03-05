@@ -1,0 +1,38 @@
+.fe-controlled-input {
+  position: relative;
+  z-index: 0;
+  input, .input-group-text {
+    font-size: 14px;
+  }
+  .input-group-text {
+    position: absolute;
+    background: transparent;
+    padding: 6px 5px 2px;
+  }
+  .input-group-text.left {
+    border-right: none;
+    padding-right: 0;
+  }
+  .input-group-text.right {
+    border-left: none;
+    padding-left: 0;
+    right: 0;
+  }
+  &:has(.input-group-text.left) {
+    input {
+      border-radius: .25rem !important;
+      padding-left: 17px;
+    }
+  }
+  &:has(.input-group-text.right) {
+    input {
+      border-radius: .25rem !important;
+      padding-right: 17px;
+    }
+  }
+  &:has(.input-group-text.left, .input-group-text.right) {
+    input:focus {
+      background: unset !important;
+    }
+  }
+}
