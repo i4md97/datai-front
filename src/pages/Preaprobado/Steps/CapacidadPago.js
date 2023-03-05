@@ -25,13 +25,16 @@ export default function CapacidadPago({
   const [month, setMonth] = useState(currentDate);
   // -- Ingresos
   const [ingresos, setIngresos] = useState({});
+  const [ingresosTotals, setIngresosTotals] = useState({total_month_1: "-"});
   // -- Gastos
   const [gastos, setGastos] = useState({});
+  const [gastosTotals, setGastosTotals] = useState({});
 
   // Flujo Neto de Efectivo
-  const [flujoNetoFinal, setFlujoNetoFianl] = useState(0);
+  const [flujoNeto, setFlujoNeto] = useState({});
+  const [flujoNetoTotals, setFlujoNetoTotals] = useState({});
   // Flujo de Efectivo
-  const [flujoEfectivoFinal, setFlujoNetoFinal] = useState(0);
+  const [flujoEfectivo, setFlujoEfectivo] = useState({});
   
   const flujoNetoData = {
     chartData: [
@@ -57,6 +60,18 @@ export default function CapacidadPago({
     sumColumnHandler(".activos-sum__td input", "value", setTotalActivos);
     sumColumnHandler(".paviso-sum__td input", "value", setTotalPasPat);
   },[]);
+
+  useEffect(()=>{
+    setTimeout(() => {
+      const sumCells = document.querySelectorAll('.ingreso-sum__input');
+      const cellValues = [...sumCells].map(element => element.value);
+      const colSum = cellValues.reduce((a, b) => parseFloat(a ? a : 0) + parseFloat(b ? b : 0), 0);
+      setIngresosTotals(prev => ({
+        ...prev, 
+        total_month_1: colSum
+      }));
+    });
+  },[ingresos]);
 
   const sumColumnHandler = (targetClass, selector, stateSetter) => {
     if (targetClass) {
@@ -292,7 +307,7 @@ export default function CapacidadPago({
                       <tr>
                         <td className="text-bold">Ingresos</td>
                         <td colSpan={3}></td>
-                        <td>₡{ingresos.total_month_1}</td>
+                        <td>₡{ingresosTotals.total_month_1}</td>
                       </tr>
                       <tr>
                         <td>Ventas</td>
@@ -300,14 +315,13 @@ export default function CapacidadPago({
                           <ControlledInput className="bg-green"
                             callback={(e) => {
                               updateValueHandler(setIngresos, "ventas_no", e);
-                              // calculate?
                             }}
                            />
                         </td>
                         <td className="p-1">
                           <ControlledInput 
                             className="bg-green"
-                            defaultValue="0"
+                            defaultValue="300000"
                             mask="₡"
                             callback={(e) => {
                               updateValueHandler(setIngresos, "ventas_fijos", e);
@@ -317,7 +331,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
+                            className="bg-orange ingreso-sum__input"
                             defaultValue=""
                             mask="₡"
                             updatedValue={ingresos.ventas_no * (ingresos.ventas_fijos * (ingresos.month_1_perc / 100))}
@@ -370,12 +384,12 @@ export default function CapacidadPago({
                             }}
                           />
                         </td>
-                        <td>₡{ingresos.estimados * ingresos.detalle_no || "" }</td>
+                        <td>₡{!isNaN(ingresos.estimados * ingresos.detalle_no) ? ingresos.estimados * ingresos.detalle_no : "-"}</td>
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
-                            mask={"₡"}
+                            className="bg-orange ingreso-sum__input"
+                            mask="₡"
                             updatedValue={ingresos.estimados * ingresos.detalle_no}
                           />
                         </td>
@@ -402,7 +416,7 @@ export default function CapacidadPago({
                         <td className="p-1">
                           <ControlledInput
                             className="bg-green"
-                            mask={"₡"}
+                            mask="₡"
                             callback={(e) => {
                               updateValueHandler(setIngresos, "detalle_fijos", e);
                             }}
@@ -433,7 +447,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
+                            className="bg-orange ingreso-sum__input"
                             defaultValue="110000"
                             mask={"₡"}
                             updatedValue={ingresos.ayudas_no * ingresos.ayudas_fijos}
@@ -454,7 +468,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-green"
+                            className="bg-green ingreso-sum__input"
                             defaultValue="1000000"
                             mask={"₡"}
                             callback={(e) => {
@@ -477,7 +491,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-green"
+                            className="bg-green ingreso-sum__input"
                             defaultValue="0"
                             mask="₡"
                             callback={(e) => {
@@ -509,7 +523,7 @@ export default function CapacidadPago({
                         <td className="p-1"></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-green"
+                            className="bg-green ingreso-sum__input"
                             mask="₡"
                             callback={(e) => {
                               updateValueHandler(setIngresos, "otros_ingresos_month_1", e);
@@ -525,14 +539,14 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡{gastos.total_month_1}</td>
+                        <td>₡{gastosTotals.total_month_1}</td>
                       </tr>
                       <tr>
                         <td className="text-semibold">Inversiones</td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡{gastos.inversiones_month_1}</td>
+                        <td>₡{gastosTotals.inversiones_month_1}</td>
                       </tr>
                       <tr>
                         <td className="p-1">
@@ -580,7 +594,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡{gastos.cosoto_ventas_month_1}</td>
+                        <td>₡{gastosTotals.costo_ventas_month_1}</td>
                       </tr>
                       <tr>
                         <td className="p-1">
@@ -588,7 +602,7 @@ export default function CapacidadPago({
                             className="bg-green"
                             defaultValue="Costo de Ventas (insumos)"
                             callback={(e) => {
-                              updateValueHandler(setGastos, "cosoto_ventas_desc", e);
+                              updateValueHandler(setGastos, "costo_ventas_desc", e);
                             }}
                           />
                         </td>
@@ -596,7 +610,7 @@ export default function CapacidadPago({
                           <ControlledInput
                             className="bg-green"
                             callback={(e) => {
-                              updateValueHandler(setGastos, "cosoto_ventas_no", e);
+                              updateValueHandler(setGastos, "costo_ventas_no", e);
                             }}
                           />
                         </td>
@@ -606,7 +620,7 @@ export default function CapacidadPago({
                             defaultValue="-200000"
                             mask="₡"
                             callback={(e) => {
-                              updateValueHandler(setGastos, "cosoto_ventas_fijos", e);
+                              updateValueHandler(setGastos, "costo_ventas_fijos", e);
                             }}
                           />
                         </td>
@@ -616,7 +630,7 @@ export default function CapacidadPago({
                             className="bg-orange"
                             defaultValue="-20000000"
                             mask="₡"
-                            updatedValue={gastos.cosoto_ventas_no * gastos.cosoto_ventas_fijos}
+                            updatedValue={gastos.costo_ventas_no * gastos.costo_ventas_fijos}
                           />
                         </td>
                       </tr>
@@ -625,7 +639,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡{gastos.operativo_total_month_1}</td>
+                        <td>₡{gastosTotals.operativo_total_month_1}</td>
                       </tr>
                       <tr>
                         <td className="p-1">
@@ -825,14 +839,37 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>-₡180,000.00</td>
+                        <td>₡{gastosTotals.admin_total_month_1}</td>
                       </tr>
                       <tr>
                         <td>Mano de Obra / Otros Salarios</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="-₡75,000" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "mano_obra_otros_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="-75000"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "mano_obra_otros_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡75,000.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="-75000"
+                            mask="₡"
+                            updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
@@ -842,63 +879,221 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>-₡105,000.00</td>
+                        <td>₡{gastosTotals.costo_familia_total_month_1}</td>
                       </tr>
                       <tr>
                         <td>Cargas Sociales</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="-₡25,000" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "cargas_sociales_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="-25000" 
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "cargas_sociales_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡25,000.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="-25000" 
+                            mask="₡"
+                            updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td>Pensión alimenticia</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="-₡50,000" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "pension_alimenticia_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="-50000"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "pension_alimenticia_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡50,000.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="-50000"
+                            mask="₡"
+                            updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td>Gastos Familiares</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="-₡15,000" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "gastos_familiares_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="-15000"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "gastos_familiares_fios", e);
+                            }}
+                          />
+                        </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="-15000"
+                            mask="₡"
+                            updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td>Otras deducciones</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="-₡15,000" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "otras_deducciones_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="-15000"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "otras_deducciones_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-₡15,000.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="-15000"
+                            mask="₡"
+                            updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td className="text-semibold">Gasto Financiero</td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡0.00</td>
+                        <td>₡{gastosTotals.financiero_total_month_1}</td>
                       </tr>
                       <tr>
                         <td>Cuota hipotecarios</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "cuota_hipotecaria_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "cuota_hipotecaria_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="0"
+                            mask="₡"
+                            updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td>Cuota empresariales</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "cuota_emp_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "cuota_emp_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="0"
+                            mask="₡"
+                            updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td>Cuota personales</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "cuota_personales_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setGastos, "cuota_personales_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡0.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="0"
+                            mask="₡"
+                            updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
@@ -908,21 +1103,44 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡316,000.00</td>
+                        <td>₡{flujoNetoTotals.total_month_1}</td>
                       </tr>
                       <tr>
                         <td>Reinversión</td>
-                        <td className="p-1"><ControlledInput className="bg-green" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡50,000" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            callback={(e) => {
+                              updateValueHandler(setFlujoNeto, "reinversion_no", e);
+                            }}
+                          />
+                        </td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-green"
+                            defaultValue="50000"
+                            mask="₡"
+                            callback={(e) => {
+                              updateValueHandler(setFlujoNeto, "reinversion_fijos", e);
+                            }}
+                          />
+                        </td>
                         <td></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="₡50,000.00" /></td>
+                        <td className="p-1">
+                          <ControlledInput
+                            className="bg-orange"
+                            defaultValue="50000"
+                            mask="₡"
+                            updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <td className="font-weight-bold">FLUJO DE EFECTIVO</td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡366,000.00</td>
+                        <td>₡{flujoEfectivo.total_month_1}</td>
                       </tr>
                     </tbody>
                   </Table>

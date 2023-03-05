@@ -1,8 +1,13 @@
+@import "../../assets/scss/settings/variable.scss";
+
 .fe-controlled-input {
   position: relative;
   z-index: 0;
   input, .input-group-text {
     font-size: 14px;
+    @include themify($themes) {
+      color: themed('colorText');
+    }
   }
   .input-group-text {
     position: absolute;
