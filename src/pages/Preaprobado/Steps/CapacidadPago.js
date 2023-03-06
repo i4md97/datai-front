@@ -60,7 +60,7 @@ export default function CapacidadPago({
 
   const getCellsSum = (target, selector) => {
     const sumCells = document.querySelectorAll(target);
-    const cellValues = [...sumCells].map(element => element[selector].replace("₡", ""));
+    const cellValues = [...sumCells].map(element => element[selector].replace("₡", "").replaceAll(".", ""));
     const colSum = cellValues.reduce((a, b) => parseFloat(a ? a : 0) + parseFloat(b ? b : 0), 0);
     return colSum;
   }
@@ -97,13 +97,14 @@ export default function CapacidadPago({
   
   useEffect(()=>{
     setTimeout(() => {
-      const colSum = getCellsSum(".neto-sum__", "");
-      setFlujoNetoTotals(prev => ({
+      const colSumTds = getCellsSum(".flujo-efectivo-sum__td", "innerText");
+      const colSumInputs = getCellsSum(".flujo-efectivo-sum__input", "value");
+      setFlujoEfectivo(prev => ({
         ...prev, 
-        total_month_1: colSum
+        total_month_1: colSumTds + colSumInputs,
       }));
     });
-  },[flujoNeto]);
+  },[flujoEfectivo]);
 
   const sumColumnHandler = (targetClass, selector, stateSetter) => {
     if (targetClass) {
@@ -1168,7 +1169,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡{flujoNetoTotals.total_month_1}</td>
+                        <td className="flujo-efectivo-sum__td">₡{new Intl.NumberFormat("de-DE").format(ingresosTotals.total_month_1 + gastosTotals.total_month_1)}</td>
                       </tr>
                       <tr>
                         <td>Reinversión</td>
@@ -1193,7 +1194,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
+                            className="bg-orange flujo-efectivo-sum__input"
                             defaultValue="50000"
                             mask="₡"
                             updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos}
@@ -1205,7 +1206,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡{flujoEfectivo.total_month_1}</td>
+                        <td>₡{new Intl.NumberFormat("de-DE").format(flujoEfectivo.total_month_1)}</td>
                       </tr>
                     </tbody>
                   </Table>
