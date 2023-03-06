@@ -92,7 +92,7 @@ const TableRow = ({
         />
       </td>
       <td className="frt-amount__td p-1">
-        <ControlledInput id={id} className="bg-green" defaultOption={`₡${amount}`} callback={sumCol} />
+        <ControlledInput id={id} className="bg-green" defaultValue={`₡${amount}`} callback={sumCol} />
       </td>
     </tr>
   )

@@ -213,8 +213,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                           <ControlledInput 
                             className="bg-green"
                             type="number"
-                            defaultOption={pasivosInternos.value}
-                            dbValue={"0"}
+                            defaultValue={pasivosInternos.value}
                             callback={() => {
                               sumColumn(".pasivos-internos-ahorro__td input", "value", setPasivosInternos, 'ahorroPotencial');
                               updateValueHandler(setPasivosInternos, "value")
@@ -282,7 +281,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                           <ControlledInput 
                             className="bg-green" 
                             type="number" 
-                            defaultOption={pasivosExternos.value}
+                            defaultValue={pasivosExternos.value}
                             callback={() => {
                               sumColumn(".pasivos-externos-ahorro__td input", "value", setPasivosExternos, "ahorroPotencial");
                               updateValueHandler(setPasivosExternos, "value");
@@ -344,7 +343,7 @@ export default function DetallesPasivos({ animation, cedula, pdf }) {
                           <ControlledInput 
                             className="bg-green" 
                             type="number" 
-                            defaultOption={noRegulados.ahorroPotencial}
+                            defaultValue={noRegulados.ahorroPotencial}
                             callback={() => {
                               sumColumn(".no-regulados-ahorro__td input", "value", setNoRegulados, 'ahorroPotencial');
                               updateValueHandler(setNoRegulados, "value");
