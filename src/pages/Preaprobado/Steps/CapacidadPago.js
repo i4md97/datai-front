@@ -1,18 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 
 // Helpers
-import UsuarioContext from "../../../context/usuario/UsuarioContext";
-import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
+// import UsuarioContext from "../../../context/usuario/UsuarioContext";
+// import PreaprobadoContext from "../../../context/preaprobados/PreaprobadoContext";
 
 // Components
 import { Row, Col, Card, CardBody, Table } from "reactstrap";
 import { ControlledInput, EtapaSolicitud, MultipleTestingAnalytics } from "../../../components";
 
 export default function CapacidadPago({
-  animation,
-  escenarioPreeliminar,
-  cedula,
-  pdf,
+  animation
 }) {
 
   // Balance General
@@ -61,17 +58,52 @@ export default function CapacidadPago({
     sumColumnHandler(".paviso-sum__td input", "value", setTotalPasPat);
   },[]);
 
+  const getCellsSum = (target, selector) => {
+    const sumCells = document.querySelectorAll(target);
+    const cellValues = [...sumCells].map(element => element[selector].replace("₡", ""));
+    const colSum = cellValues.reduce((a, b) => parseFloat(a ? a : 0) + parseFloat(b ? b : 0), 0);
+    return colSum;
+  }
+
   useEffect(()=>{
     setTimeout(() => {
-      const sumCells = document.querySelectorAll('.ingreso-sum__input');
-      const cellValues = [...sumCells].map(element => element.value);
-      const colSum = cellValues.reduce((a, b) => parseFloat(a ? a : 0) + parseFloat(b ? b : 0), 0);
+      const colSum = getCellsSum(".ingreso-sum__input", "value");
       setIngresosTotals(prev => ({
         ...prev, 
         total_month_1: colSum
       }));
     });
   },[ingresos]);
+
+  useEffect(()=>{
+    setTimeout(() => {
+      const colSum = getCellsSum(".gastos-sum__td", "innerText");
+      const ventasSum = getCellsSum(".gasto-ventas-sum__input", "value");
+      const opSum = getCellsSum(".gasto-op-sum__input", "value");
+      const manoObraSum = getCellsSum(".gasto-costo-mano-obra-sum__input", "value");
+      const costoFamiliaSum = getCellsSum(".gasto-costo-familia-sum__input", "value");
+      const costoFinancieroSum = getCellsSum(".gasto-costo-financiero-sum__input", "value");
+      setGastosTotals(prev => ({
+        ...prev, 
+        total_month_1: colSum,
+        costo_ventas_month_1: ventasSum,
+        operativo_total_month_1: opSum,
+        admin_total_month_1: manoObraSum + costoFamiliaSum + costoFinancieroSum,
+        costo_familia_total_month_1: costoFamiliaSum,
+        financiero_total_month_1: costoFinancieroSum,
+      }));
+    });
+  },[gastos]);
+  
+  useEffect(()=>{
+    setTimeout(() => {
+      const colSum = getCellsSum(".neto-sum__", "");
+      setFlujoNetoTotals(prev => ({
+        ...prev, 
+        total_month_1: colSum
+      }));
+    });
+  },[flujoNeto]);
 
   const sumColumnHandler = (targetClass, selector, stateSetter) => {
     if (targetClass) {
@@ -99,12 +131,8 @@ export default function CapacidadPago({
     return `${labelMonth}-${day}`;
   }
 
-  useEffect(()=>{
-    // console.log(ingresos);
-  },[ingresos]);
-
   return (
-    <div className={`dashboard capacidad-pago capacidad-pago step__cards ${animation && !pdf && "step__animation"}`}>
+    <div className={`dashboard capacidad-pago capacidad-pago step__cards ${animation ? "step__animation" : ""}`}>
       <Row className="pt-4">
         <Col>
           <Card>
@@ -307,7 +335,7 @@ export default function CapacidadPago({
                       <tr>
                         <td className="text-bold">Ingresos</td>
                         <td colSpan={3}></td>
-                        <td>₡{ingresosTotals.total_month_1}</td>
+                        <td>₡{new Intl.NumberFormat("de-DE").format(ingresosTotals.total_month_1)}</td>
                       </tr>
                       <tr>
                         <td>Ventas</td>
@@ -323,6 +351,7 @@ export default function CapacidadPago({
                             className="bg-green"
                             defaultValue="300000"
                             mask="₡"
+                            isTriggered
                             callback={(e) => {
                               updateValueHandler(setIngresos, "ventas_fijos", e);
                             }}
@@ -332,8 +361,9 @@ export default function CapacidadPago({
                         <td className="p-1">
                           <ControlledInput
                             className="bg-orange ingreso-sum__input"
-                            defaultValue=""
+                            defaultValue="300000"
                             mask="₡"
+                            isTriggered
                             updatedValue={ingresos.ventas_no * (ingresos.ventas_fijos * (ingresos.month_1_perc / 100))}
                           />
                         </td>
@@ -353,6 +383,7 @@ export default function CapacidadPago({
                             className="bg-green"
                             defaultValue="0.0"
                             mask={"₡"}
+                            isTriggered
                             callback={(e) => {
                               updateValueHandler(setIngresos, "estacionalidad_fijos", e);
                             }}
@@ -364,6 +395,7 @@ export default function CapacidadPago({
                             className="bg-green"
                             defaultValue="100.0"
                             mask="%"
+                            isTriggered
                             callback={(e) => {
                               updateValueHandler(setIngresos, "month_1_perc", e);
                             }}
@@ -379,6 +411,7 @@ export default function CapacidadPago({
                           <ControlledInput
                             className="bg-green"
                             defaultValue="15000"
+                            isTriggered
                             callback={(e) => {
                               updateValueHandler(setIngresos, "estimados", e);
                             }}
@@ -389,6 +422,8 @@ export default function CapacidadPago({
                         <td className="p-1">
                           <ControlledInput
                             className="bg-orange ingreso-sum__input"
+                            defaultValue="450000"
+                            isTriggered
                             mask="₡"
                             updatedValue={ingresos.estimados * ingresos.detalle_no}
                           />
@@ -408,6 +443,7 @@ export default function CapacidadPago({
                           <ControlledInput 
                             className="bg-green"
                             defaultValue="30"
+                            isTriggered
                             callback={(e) => {
                               updateValueHandler(setIngresos, "detalle_no", e);
                             }}
@@ -438,6 +474,7 @@ export default function CapacidadPago({
                           <ControlledInput
                             className="bg-green"
                             defaultValue="110000"
+                            isTriggered
                             mask={"₡"}
                             callback={(e) => {
                               updateValueHandler(setIngresos, "ayudas_fijos", e);
@@ -449,6 +486,7 @@ export default function CapacidadPago({
                           <ControlledInput
                             className="bg-orange ingreso-sum__input"
                             defaultValue="110000"
+                            isTriggered
                             mask={"₡"}
                             updatedValue={ingresos.ayudas_no * ingresos.ayudas_fijos}
                           />
@@ -470,6 +508,7 @@ export default function CapacidadPago({
                           <ControlledInput
                             className="bg-green ingreso-sum__input"
                             defaultValue="1000000"
+                            isTriggered
                             mask={"₡"}
                             callback={(e) => {
                               updateValueHandler(setIngresos, "financiamiento_emp_month_1", e);
@@ -494,6 +533,7 @@ export default function CapacidadPago({
                             className="bg-green ingreso-sum__input"
                             defaultValue="0"
                             mask="₡"
+                            isTriggered
                             callback={(e) => {
                               updateValueHandler(setIngresos, "financiamiento_per_month_1", e);
                             }}
@@ -515,6 +555,7 @@ export default function CapacidadPago({
                             className="bg-green"
                             defaultValue="0"
                             mask="₡"
+                            isTriggered
                             callback={(e) => {
                               updateValueHandler(setIngresos, "otros_ingresos_fijos", e);
                             }}
@@ -524,7 +565,9 @@ export default function CapacidadPago({
                         <td className="p-1">
                           <ControlledInput
                             className="bg-green ingreso-sum__input"
+                            defaultValue="0"
                             mask="₡"
+                            isTriggered
                             callback={(e) => {
                               updateValueHandler(setIngresos, "otros_ingresos_month_1", e);
                             }}
@@ -539,14 +582,14 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡{gastosTotals.total_month_1}</td>
+                        <td>₡{new Intl.NumberFormat("de-DE").format(gastosTotals.total_month_1)}</td>
                       </tr>
                       <tr>
                         <td className="text-semibold">Inversiones</td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡{gastosTotals.inversiones_month_1}</td>
+                        <td className="gastos-sum__td">₡{gastos.inversiones_month_1}</td>
                       </tr>
                       <tr>
                         <td className="p-1">
@@ -577,9 +620,10 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-green"
-                            defaultValue="-80000000"
+                            className="bg-green gastos-sum__input"
+                            defaultValue="-800000"
                             mask="₡"
+                            isTriggered
                             callback={(e) => {
                               updateValueHandler(setGastos, "inversiones_month_1", e);
                             }}
@@ -594,7 +638,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡{gastosTotals.costo_ventas_month_1}</td>
+                        <td className="gastos-sum__td">₡{new Intl.NumberFormat("de-DE").format(gastosTotals.costo_ventas_month_1)}</td>
                       </tr>
                       <tr>
                         <td className="p-1">
@@ -619,6 +663,7 @@ export default function CapacidadPago({
                             className="bg-green"
                             defaultValue="-200000"
                             mask="₡"
+                            isTriggered
                             callback={(e) => {
                               updateValueHandler(setGastos, "costo_ventas_fijos", e);
                             }}
@@ -627,9 +672,10 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
-                            defaultValue="-20000000"
+                            className="bg-orange gasto-ventas-sum__input"
+                            defaultValue="-200000"
                             mask="₡"
+                            isTriggered
                             updatedValue={gastos.costo_ventas_no * gastos.costo_ventas_fijos}
                           />
                         </td>
@@ -639,7 +685,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡{gastosTotals.operativo_total_month_1}</td>
+                        <td className="gastos-sum__td">₡{new Intl.NumberFormat("de-DE").format(gastosTotals.operativo_total_month_1)}</td>
                       </tr>
                       <tr>
                         <td className="p-1">
@@ -664,6 +710,7 @@ export default function CapacidadPago({
                             className="bg-green"
                             defaultValue="-75000" 
                             mask="₡"
+                            isTriggered
                             callback={(e) => {
                               updateValueHandler(setGastos, "operativo_1_fijos", e);
                             }}
@@ -672,8 +719,9 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
-                            defaultValue="-7500000"
+                            className="bg-orange gasto-op-sum__input"
+                            defaultValue="-75000"
+                            isTriggered
                             mask="₡"
                             updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos}
                           />
@@ -701,6 +749,7 @@ export default function CapacidadPago({
                           <ControlledInput
                             className="bg-green"
                             defaultValue="-68000"
+                            isTriggered
                             mask="₡"
                             callback={(e) => {
                               updateValueHandler(setGastos, "operativo_2_fijos", e);
@@ -710,8 +759,9 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
-                            defaultValue="-6800000" 
+                            className="bg-orange gasto-op-sum__input"
+                            defaultValue="-68000" 
+                            isTriggered
                             mask="₡"
                             updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos}
                           />
@@ -739,6 +789,7 @@ export default function CapacidadPago({
                           <ControlledInput
                             className="bg-green"
                             defaultValue="-180000"
+                            isTriggered
                             mask="₡"
                             callback={(e) => {
                               updateValueHandler(setGastos, "operativo_3_fijos", e);
@@ -748,8 +799,9 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
-                            defaultValue="-18000000" 
+                            className="bg-orange gasto-op-sum__input"
+                            defaultValue="-180000" 
+                            isTriggered
                             mask="₡"
                             updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos}
                           />
@@ -777,6 +829,7 @@ export default function CapacidadPago({
                           <ControlledInput
                             className="bg-green"
                             defaultValue="-24000"
+                            isTriggered
                             mask="₡"
                             callback={(e) => {
                               updateValueHandler(setGastos, "operativo_4_fjos", e);
@@ -786,8 +839,9 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
-                            defaultValue="-2400000"
+                            className="bg-orange gasto-op-sum__input"
+                            defaultValue="-24000"
+                            isTriggered
                             mask="₡"
                             updatedValue={gastos.operativo_4_no * gastos.operativo_4_fjos}
                           />
@@ -815,6 +869,7 @@ export default function CapacidadPago({
                           <ControlledInput
                             className="bg-green"
                             defaultValue="-17000"
+                            isTriggered
                             mask="₡"
                             callback={(e) => {
                               updateValueHandler(setGastos, "operativo_5_fijos", e);
@@ -824,8 +879,9 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
-                            defaultValue="-1700000"
+                            className="bg-orange gasto-op-sum__input"
+                            defaultValue="-17000"
+                            isTriggered
                             mask="₡"
                             updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos}
                           />
@@ -839,7 +895,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡{gastosTotals.admin_total_month_1}</td>
+                        <td className="gastos-sum__td">₡{new Intl.NumberFormat("de-DE").format(gastosTotals.admin_total_month_1)}</td>
                       </tr>
                       <tr>
                         <td>Mano de Obra / Otros Salarios</td>
@@ -855,6 +911,7 @@ export default function CapacidadPago({
                           <ControlledInput
                             className="bg-green"
                             defaultValue="-75000"
+                            isTriggered
                             mask="₡"
                             callback={(e) => {
                               updateValueHandler(setGastos, "mano_obra_otros_fijos", e);
@@ -864,9 +921,10 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
+                            className="bg-orange gasto-costo-mano-obra-sum__input"
                             defaultValue="-75000"
                             mask="₡"
+                            isTriggered
                             updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos}
                           />
                         </td>
@@ -879,7 +937,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡{gastosTotals.costo_familia_total_month_1}</td>
+                        <td>₡{new Intl.NumberFormat("de-DE").format(gastosTotals.costo_familia_total_month_1)}</td>
                       </tr>
                       <tr>
                         <td>Cargas Sociales</td>
@@ -904,8 +962,9 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
+                            className="bg-orange gasto-costo-familia-sum__input"
                             defaultValue="-25000" 
+                            isTriggered
                             mask="₡"
                             updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos}
                           />
@@ -934,8 +993,9 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
+                            className="bg-orange gasto-costo-familia-sum__input"
                             defaultValue="-50000"
+                            isTriggered
                             mask="₡"
                             updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos}
                           />
@@ -957,15 +1017,16 @@ export default function CapacidadPago({
                             defaultValue="-15000"
                             mask="₡"
                             callback={(e) => {
-                              updateValueHandler(setGastos, "gastos_familiares_fios", e);
+                              updateValueHandler(setGastos, "gastos_familiares_fijos", e);
                             }}
                           />
                         </td>
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
+                            className="bg-orange gasto-costo-familia-sum__input"
                             defaultValue="-15000"
+                            isTriggered
                             mask="₡"
                             updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos}
                           />
@@ -994,8 +1055,9 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
+                            className="bg-orange gasto-costo-familia-sum__input"
                             defaultValue="-15000"
+                            isTriggered
                             mask="₡"
                             updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos}
                           />
@@ -1006,7 +1068,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡{gastosTotals.financiero_total_month_1}</td>
+                        <td className="gastos-sum__td">₡{gastosTotals.financiero_total_month_1}</td>
                       </tr>
                       <tr>
                         <td>Cuota hipotecarios</td>
@@ -1030,9 +1092,10 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
+                            className="bg-orange gasto-costo-financiero-sum__input"
                             defaultValue="0"
                             mask="₡"
+                            isTriggered
                             updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos}
                           />
                         </td>
@@ -1059,9 +1122,10 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
+                            className="bg-orange gasto-costo-financiero-sum__input"
                             defaultValue="0"
                             mask="₡"
+                            isTriggered
                             updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos}
                           />
                         </td>
@@ -1088,9 +1152,10 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange"
+                            className="bg-orange gasto-costo-financiero-sum__input"
                             defaultValue="0"
                             mask="₡"
+                            isTriggered
                             updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos}
                           />
                         </td>

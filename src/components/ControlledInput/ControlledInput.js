@@ -15,9 +15,17 @@ export const ControlledInput = ({
   defaultValue = "",
   updatedValue, 
   mask = null,
-  callback 
+  callback,
+  isTriggered = false,
 }) => {
   const [value, setValue] = useState(defaultValue);
+
+  useEffect(()=>{
+    if (isTriggered && callback) {
+      callback(defaultValue);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   useEffect(()=>{
     if (updatedValue) {
@@ -40,7 +48,8 @@ export const ControlledInput = ({
       </InputGroupText>}
       <Input 
         id={id} 
-        type={type} readOnly={readOnly} 
+        type={type} 
+        readOnly={readOnly} 
         pattern={pattern} 
         placeholder={placeholder} 
         className={className} 
