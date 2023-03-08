@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 
 // Helpers
 // import UsuarioContext from "../../../context/usuario/UsuarioContext";
@@ -68,10 +68,40 @@ export default function CapacidadPago({
   useEffect(()=>{
     setTimeout(() => {
       const colSum = getCellsSum(".ingreso-sum__input", "value");
+      // right section
+      const months2Sum = getCellsSum(".ingresos-sum-month_2__input", "value");
+      const months3Sum = getCellsSum(".ingresos-sum-month_3__input", "value");
+      const months4Sum = getCellsSum(".ingresos-sum-month_4__input", "value");
+      const months5Sum = getCellsSum(".ingresos-sum-month_5__input", "value");
+      const months6Sum = getCellsSum(".ingresos-sum-month_6__input", "value");
+      const months7Sum = getCellsSum(".ingresos-sum-month_7__input", "value");
+      const months8Sum = getCellsSum(".ingresos-sum-month_8__input", "value");
+      const months9Sum = getCellsSum(".ingresos-sum-month_9__input", "value");
+      const months10Sum = getCellsSum(".ingresos-sum-month_10__input", "value");
+      const months11Sum = getCellsSum(".ingresos-sum-month_11__input", "value");
+      const months12Sum = getCellsSum(".ingresos-sum-month_12__input", "value");
+      const months13Sum = getCellsSum(".ingresos-sum-month_13__input", "value");
+      const proySum = getCellsSum(".ingresos-sum-proy1__td", "innerText");
+
       setIngresosTotals(prev => ({
         ...prev, 
         total_month_1: colSum,
         total_month_1_perc: ingresos.ventas_no * (ingresos.ventas_fijos * (ingresos.month_1_perc / 100)),
+        total_month_2: months2Sum,
+        total_month_3: months3Sum,
+        total_month_4: months4Sum,
+        total_month_5: months5Sum,
+        total_month_6: months6Sum,
+        total_month_7: months7Sum,
+        total_month_8: months8Sum,
+        total_month_9: months9Sum,
+        total_month_10: months10Sum,
+        total_month_11: months11Sum,
+        total_month_12: months12Sum,
+        total_month_13: months13Sum,
+        total_proy_1: proySum,
+        total_proy_2: proySum,
+        total_proy_3: proySum,
       }));
     });
   },[ingresos]);
@@ -133,6 +163,7 @@ export default function CapacidadPago({
       const colSumTds = getCellsSum(".flujo-efectivo-sum__td", "innerText");
       const colSumInputs = getCellsSum(".flujo-efectivo-sum__input", "value");
       const reinversionSum = getCellsSum(".reinversion-sum__input", "value");
+      
       setFlujoEfectivo(prev => ({
         ...prev, 
         total_month_1: colSumTds + colSumInputs,
@@ -371,7 +402,7 @@ export default function CapacidadPago({
                       <tr>
                         <td className="text-bold">Ingresos</td>
                         <td colSpan={3}></td>
-                        <td>₡{new Intl.NumberFormat("de-DE").format(ingresosTotals.total_month_1)}</td>
+                        <td className="ingresos-sum-proy1__td">₡{new Intl.NumberFormat("de-DE").format(ingresosTotals.total_month_1)}</td>
                       </tr>
                       <tr>
                         <td>Ventas</td>
@@ -1260,35 +1291,35 @@ export default function CapacidadPago({
                     </thead>
                     <tbody>
                       <tr>
-                        <td>₡1,330,000</td>
-                        <td>₡800,000</td>
-                        <td>₡800,000</td>
-                        <td>₡870,000</td>
-                        <td>₡1,170,000</td>
-                        <td>₡870,000</td>
-                        <td>₡870,000</td>
-                        <td>₡870,000</td>
-                        <td>₡870,000</td>
-                        <td>₡870,000</td>
-                        <td>₡870,000</td>
-                        <td>₡870,000</td>
-                        <td>₡12,920,000</td>
-                        <td>₡13,566,000</td>
-                        <td>₡14,922,600</td>
+                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_2}</td>
+                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_3}</td>
+                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_4}</td>
+                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_5}</td>
+                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_6}</td>
+                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_7}</td>
+                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_8}</td>
+                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_9}</td>
+                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_10}</td>
+                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_11}</td>
+                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_12}</td>
+                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_13}</td>
+                        <td>₡{ingresosTotals.total_proy_1}</td>
+                        <td>₡{ingresosTotals.total_proy_2 + (ingresosTotals.total_proy_2 * (ingresos.estacionalidad_proy_2 / 100))}</td>
+                        <td>₡{ingresosTotals.total_proy_3 + (ingresosTotals.total_proy_3 * (ingresos.estacionalidad_proy_3 / 100))}</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="270000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_2} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="240000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_3} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="240000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_4} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_5} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_6} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_7} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_8} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_9} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_10} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_11} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_12} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_13} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_2__input" defaultValue="270000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_2} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_3__input" defaultValue="240000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_3} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_4__input" defaultValue="240000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_4} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_5__input" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_5} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_6__input" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_6} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_7__input" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_7} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_8__input" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_8} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_9__input" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_9} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_10__input" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_10} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_11__input" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_11} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_12__input" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_12} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_13__input" defaultValue="300000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_13} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
@@ -1306,26 +1337,26 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-green" defaultValue="100" mask="%" callback={e => {updateValueHandler(setIngresos, "month_11", e)}} /></td>
                         <td className="p-1"><ControlledInput className="bg-green" defaultValue="100" mask="%" callback={e => {updateValueHandler(setIngresos, "month_12", e)}} /></td>
                         <td className="p-1"><ControlledInput className="bg-green" defaultValue="100" mask="%" callback={e => {updateValueHandler(setIngresos, "month_13", e)}} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="%" callback={e => {updateValueHandler(setIngresos, "proy_1", e)}} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="5" mask="%" callback={e => {updateValueHandler(setIngresos, "proy_2", e)}} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="10" mask="%" callback={e => {updateValueHandler(setIngresos, "proy_3", e)}} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" mask="%" callback={e => {updateValueHandler(setIngresos, "estacionalidad_proy_1", e)}} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="5" mask="%" callback={e => {updateValueHandler(setIngresos, "estacionalidad_proy_2", e)}} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="10" mask="%" callback={e => {updateValueHandler(setIngresos, "estacionalidad_proy_3", e)}} /></td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_2__input" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_3__input" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_4__input" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_5__input" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_6__input" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_7__input" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_8__input" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_9__input" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_10__input" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_11__input" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_12__input" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_13__input" defaultValue="450000" mask="₡" updatedValue={ingresos.estimados * ingresos.detalle_no}/></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
@@ -1334,69 +1365,69 @@ export default function CapacidadPago({
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="110000" mask="₡" updatedValue={ingresos.ayudas_no * ingresos.ayudas_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="110000" mask="₡" updatedValue={ingresos.ayudas_no * ingresos.ayudas_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="110000" mask="₡" updatedValue={ingresos.ayudas_no * ingresos.ayudas_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="120000" mask="₡" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="120000" mask="₡" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="120000" mask="₡" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="120000" mask="₡" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="120000" mask="₡" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="120000" mask="₡" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="120000" mask="₡" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="120000" mask="₡" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="120000" mask="₡" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_2__input" defaultValue="110000" mask="₡" updatedValue={ingresos.ayudas_no * ingresos.ayudas_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_3__input" defaultValue="110000" mask="₡" updatedValue={ingresos.ayudas_no * ingresos.ayudas_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_4__input" defaultValue="110000" mask="₡" updatedValue={ingresos.ayudas_no * ingresos.ayudas_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_5__input" defaultValue="120000" mask="₡" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_6__input" defaultValue="120000" mask="₡" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_7__input" defaultValue="120000" mask="₡" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_8__input" defaultValue="120000" mask="₡" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_9__input" defaultValue="120000" mask="₡" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_10__input" defaultValue="120000" mask="₡" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_11__input" defaultValue="120000" mask="₡" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_12__input" defaultValue="120000" mask="₡" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_13__input" defaultValue="120000" mask="₡" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="500000" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_2", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_3", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_4", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_5", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_6", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_7", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_8", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_9", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_10", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_11", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_12", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_13", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_2__input" defaultValue="500000" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_2", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_3__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_3", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_4__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_4", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_5__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_5", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_6__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_6", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_7__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_7", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_8__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_8", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_9__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_9", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_10__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_10", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_11__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_11", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_12__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_12", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_13__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_month_13", e)} /></td>
                         <td className="p-1"><ControlledInput className="bg-green" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_proy_1", e)} /></td>
                         <td className="p-1"><ControlledInput className="bg-green" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_proy_2", e)} /></td>
                         <td className="p-1"><ControlledInput className="bg-green" callback={e => updateValueHandler(setIngresos, "financiamiento_emp_proy_3", e)} /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_2", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_3", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_4", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_5", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_6", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_7", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_8", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_9", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_10", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_11", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_12", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_13", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_2__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_2", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_3__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_3", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_4__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_4", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_5__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_5", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_6__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_6", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_7__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_7", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_8__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_8", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_9__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_9", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_10__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_10", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_11__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_11", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_12__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_12", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_13__input" mask="₡" callback={e => updateValueHandler(setIngresos, "financiamiento_per_month_13", e)} /></td>
                         <td className="p-1"><ControlledInput className="bg-green" callback={e => updateValueHandler(setIngresos, "financiamiento_per_proy_1", e)} /></td>
                         <td className="p-1"><ControlledInput className="bg-green" callback={e => updateValueHandler(setIngresos, "financiamiento_per_proy_2", e)} /></td>
                         <td className="p-1"><ControlledInput className="bg-green" callback={e => updateValueHandler(setIngresos, "financiamiento_per_proy_3", e)} /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_2", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_3", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_4", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_5", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="300000" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_6", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_7", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_8", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_9", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_10", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_11", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_12", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_13", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_2__input" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_2", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_3__input" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_3", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_4__input" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_4", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_5__input" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_5", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_6__input" defaultValue="300000" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_6", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_7__input" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_7", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_8__input" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_8", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_9__input" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_9", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_10__input" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_10", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_11__input" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_11", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_12__input" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_12", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green ingresos-sum-month_13__input" mask="₡" callback={e => updateValueHandler(setIngresos, "otros_ingresos_month_13", e)} /></td>
                         <td className="p-1"><ControlledInput className="bg-green" callback={e => updateValueHandler(setIngresos, "otros_ingresos_proy_1", e)} /></td>
                         <td className="p-1"><ControlledInput className="bg-green" callback={e => updateValueHandler(setIngresos, "otros_ingresos_proy_2", e)} /></td>
                         <td className="p-1"><ControlledInput className="bg-green" callback={e => updateValueHandler(setIngresos, "otros_ingresos_proy_3", e)} /></td>
