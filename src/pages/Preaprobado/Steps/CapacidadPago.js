@@ -1435,53 +1435,54 @@ export default function CapacidadPago({
                       <tr>
                         <td colSpan={"100%"}></td>
                       </tr>
+                      {/* TODO continue from here*/}
                       <tr>
-                        <td>-₡3,544,000</td>
-                        <td>-₡544,000</td>
-                        <td>-₡544,000</td>
-                        <td>-₡544,000</td>
-                        <td>-₡544,000</td>
-                        <td>-₡844,000</td>
-                        <td>-₡544,000</td>
-                        <td>-₡544,000</td>
-                        <td>-₡544,000</td>
-                        <td>-₡544,000</td>
-                        <td>-₡544,000</td>
-                        <td>-₡544,000</td>
-                        <td>-₡11,372,000</td>
-                        <td>-₡11,940,600</td>
-                        <td>-₡12,537,630</td>
+                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_2}</td>
+                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_3}</td>
+                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_4}</td>
+                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_5}</td>
+                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_6}</td>
+                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_7}</td>
+                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_8}</td>
+                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_9}</td>
+                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_10}</td>
+                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_11}</td>
+                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_12}</td>
+                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_13}</td>
+                        <td>₡{gastosTotals.total_proy_1}</td>
+                        <td>₡{gastosTotals.total_proy_2 * (gastosTotals.total_proy_2 * (gastos.inversionees_desc_proy_2 / 100))}</td>
+                        <td>₡{gastosTotals.total_proy_3 * (gastosTotals.total_proy_3 * (gastos.inversionees_desc_proy_3 / 100))}</td>
                       </tr>
                       <tr>
-                        <td>-₡2,000,000.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>-₡300,000.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>-₡3,100,000.00</td>
-                        <td>-₡3,255,000.00</td>
-                        <td>-₡3,417,750.00</td>
+                        <td className="gastos-totals-month-2-sum__td">₡{gastosTotals.inversiones_month_2}</td>
+                        <td className="gastos-totals-month-3-sum__td">₡{gastosTotals.inversiones_month_3}</td>
+                        <td className="gastos-totals-month-4-sum__td">₡{gastosTotals.inversiones_month_4}</td>
+                        <td className="gastos-totals-month-5-sum__td">₡{gastosTotals.inversiones_month_5}</td>
+                        <td className="gastos-totals-month-6-sum__td">₡{gastosTotals.inversiones_month_6}</td>
+                        <td className="gastos-totals-month-7-sum__td">₡{gastosTotals.inversiones_month_7}</td>
+                        <td className="gastos-totals-month-8-sum__td">₡{gastosTotals.inversiones_month_8}</td>
+                        <td className="gastos-totals-month-9-sum__td">₡{gastosTotals.inversiones_month_9}</td>
+                        <td className="gastos-totals-month-10-sum__td">₡{gastosTotals.inversiones_month_10}</td>
+                        <td className="gastos-totals-month-11-sum__td">₡{gastosTotals.inversiones_month_11}</td>
+                        <td className="gastos-totals-month-12-sum__td">₡{gastosTotals.inversiones_month_12}</td>
+                        <td className="gastos-totals-month-13-sum__td">₡{gastosTotals.inversiones_month_13}</td>
+                        <td>₡{gastosTotals.inversiones_proy_1}</td>
+                        <td>₡{gastosTotals.inversiones_proy_2}</td>
+                        <td>₡{gastosTotals.inversiones_proy_3}</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="-2000000" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_2", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_3", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_4", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_5", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_6", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="-300000" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_7", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_8", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_9", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_10", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_11", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_12", e)} /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_13", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green gasto-inv-sum-month_2__input" defaultValue="-2000000" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_2", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green gasto-inv-sum-month_2__input" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_3", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green gasto-inv-sum-month_2__input" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_4", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green gasto-inv-sum-month_2__input" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_5", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green gasto-inv-sum-month_2__input" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_6", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green gasto-inv-sum-month_2__input" defaultValue="-300000" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_7", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green gasto-inv-sum-month_2__input" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_8", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green gasto-inv-sum-month_2__input" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_9", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green gasto-inv-sum-month_2__input" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_10", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green gasto-inv-sum-month_2__input" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_11", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green gasto-inv-sum-month_2__input" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_12", e)} /></td>
+                        <td className="p-1"><ControlledInput className="bg-green gasto-inv-sum-month_2__input" mask="₡" callback={e => updateValueHandler(setGastos, "inversionees_desc_month_13", e)} /></td>
                         <td className="p-1"><ControlledInput className="bg-green" callback={e => updateValueHandler(setGastos, "inversionees_desc_proy_1", e)} /></td>
                         <td className="p-1"><ControlledInput className="bg-green" defaultValue="5.0" mask="%" callback={e => updateValueHandler(setGastos, "inversionees_desc_proy_2", e)} /></td>
                         <td className="p-1"><ControlledInput className="bg-green" defaultValue="5.0" mask="%" callback={e => updateValueHandler(setGastos, "inversionees_desc_proy_3", e)} /></td>
@@ -1490,137 +1491,137 @@ export default function CapacidadPago({
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td>-₡1,000,000.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>-₡1,200,000.00</td>
-                        <td>-₡1,260,000.00</td>
-                        <td>-₡1,323,000.00</td>
+                        <td className="gastos-totals-month-2-sum__td">₡{gastos.costo_ventas_month_2}</td>
+                        <td className="gastos-totals-month-3-sum__td">₡{gastos.costo_ventas_month_3}</td>
+                        <td className="gastos-totals-month-4-sum__td">₡{gastos.costo_ventas_month_4}</td>
+                        <td className="gastos-totals-month-5-sum__td">₡{gastos.costo_ventas_month_5}</td>
+                        <td className="gastos-totals-month-6-sum__td">₡{gastos.costo_ventas_month_6}</td>
+                        <td className="gastos-totals-month-7-sum__td">₡{gastos.costo_ventas_month_7}</td>
+                        <td className="gastos-totals-month-8-sum__td">₡{gastos.costo_ventas_month_8}</td>
+                        <td className="gastos-totals-month-9-sum__td">₡{gastos.costo_ventas_month_9}</td>
+                        <td className="gastos-totals-month-10-sum__td">₡{gastos.costo_ventas_month_10}</td>
+                        <td className="gastos-totals-month-11-sum__td">₡{gastos.costo_ventas_month_11}</td>
+                        <td className="gastos-totals-month-12-sum__td">₡{gastos.costo_ventas_month_12}</td>
+                        <td className="gastos-totals-month-13-sum__td">₡{gastos.costo_ventas_month_13}</td>
+                        <td>₡{gastos.costo_ventas_proy_1}</td>
+                        <td>₡{gastos.costo_ventas_proy_2}</td>
+                        <td>₡{gastos.costo_ventas_proy_3}</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input" defaultValue="-1000000" mask="₡"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input" mask="₡"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input" mask="₡"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input" mask="₡"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input" mask="₡"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input" mask="₡"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input" mask="₡"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input" mask="₡"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input" mask="₡"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input" mask="₡"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input" mask="₡"/></td>
-                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input" mask="₡"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input costo-ventas-month-2-sum__input" defaultValue="-1000000" mask="₡"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input costo-ventas-month-3-sum__input" mask="₡"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input costo-ventas-month-4-sum__input" mask="₡"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input costo-ventas-month-5-sum__input" mask="₡"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input costo-ventas-month-6-sum__input" mask="₡"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input costo-ventas-month-7-sum__input" mask="₡"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input costo-ventas-month-8-sum__input" mask="₡"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input costo-ventas-month-9-sum__input" mask="₡"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input costo-ventas-month-10-sum__input" mask="₡"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input costo-ventas-month-11-sum__input" mask="₡"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input costo-ventas-month-12-sum__input" mask="₡"/></td>
+                        <td className="p-1"><ControlledInput className="bg-orange costo-ventas-desc-sum__input costo-ventas-month-13-sum__input" mask="₡"/></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-1200000" mask="₡" updatedValue={gastosTotals.costo_ventas_months}/></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0" mask="%"/></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0" mask="%"/></td>
                       </tr>
                       <tr>
-                        <td>-₡364,000.00</td>
-                        <td>-₡364,000.00</td>
-                        <td>-₡364,000.00</td>
-                        <td>-₡364,000.00</td>
-                        <td>-₡364,000.00</td>
-                        <td>-₡364,000.00</td>
-                        <td>-₡364,000.00</td>
-                        <td>-₡364,000.00</td>
-                        <td>-₡364,000.00</td>
-                        <td>-₡364,000.00</td>
-                        <td>-₡364,000.00</td>
-                        <td>-₡364,000.00</td>
-                        <td>-₡4,732,000.00</td>
-                        <td>-₡4,968,600.00</td>
-                        <td>-₡5,217,030.00</td>
+                        <td className="gastos-totals-month-2-sum__td">₡{gastos.operativo_total_month_2}</td>
+                        <td className="gastos-totals-month-3-sum__td">₡{gastos.operativo_total_month_3}</td>
+                        <td className="gastos-totals-month-4-sum__td">₡{gastos.operativo_total_month_4}</td>
+                        <td className="gastos-totals-month-5-sum__td">₡{gastos.operativo_total_month_5}</td>
+                        <td className="gastos-totals-month-6-sum__td">₡{gastos.operativo_total_month_6}</td>
+                        <td className="gastos-totals-month-7-sum__td">₡{gastos.operativo_total_month_7}</td>
+                        <td className="gastos-totals-month-8-sum__td">₡{gastos.operativo_total_month_8}</td>
+                        <td className="gastos-totals-month-9-sum__td">₡{gastos.operativo_total_month_9}</td>
+                        <td className="gastos-totals-month-10-sum__td">₡{gastos.operativo_total_month_10}</td>
+                        <td className="gastos-totals-month-11-sum__td">₡{gastos.operativo_total_month_11}</td>
+                        <td className="gastos-totals-month-12-sum__td">₡{gastos.operativo_total_month_12}</td>
+                        <td className="gastos-totals-month-13-sum__td">₡{gastos.operativo_total_month_13}</td>
+                        <td>₡{gastos.operativo_total_proy_1}</td>
+                        <td>₡{gastos.operativo_total_proy_2}</td>
+                        <td>₡{gastos.operativo_total_proy_3}</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input gasto-op-month-2-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input gasto-op-month-3-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input gasto-op-month-4-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input gasto-op-month-5-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input gasto-op-month-6-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input gasto-op-month-7-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input gasto-op-month-8-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input gasto-op-month-9-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input gasto-op-month-10-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input gasto-op-month-11-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input gasto-op-month-12-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-1-sum__input gasto-op-month-13-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.operativo_1_no * gastos.operativo_1_fijos} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-975000" mask="₡" updatedValue={gastosTotals.operativo_1_months} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0" mask="%" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0" mask="%" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input gasto-op-month-2-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input gasto-op-month-3-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input gasto-op-month-4-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input gasto-op-month-5-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input gasto-op-month-6-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input gasto-op-month-7-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input gasto-op-month-8-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input gasto-op-month-9-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input gasto-op-month-10-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input gasto-op-month-11-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input gasto-op-month-12-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-2-sum__input gasto-op-month-13-sum__input" defaultValue="-68000" mask="₡" updatedValue={gastos.operativo_2_no * gastos.operativo_2_fijos} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-884000" mask="₡" updatedValue={gastosTotals.operativo_2_months} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input gasto-op-month-2-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input gasto-op-month-3-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input gasto-op-month-4-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input gasto-op-month-5-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input gasto-op-month-6-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input gasto-op-month-7-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input gasto-op-month-8-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input gasto-op-month-9-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input gasto-op-month-10-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input gasto-op-month-11-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input gasto-op-month-12-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-3-sum__input gasto-op-month-13-sum__input" defaultValue="-180000" mask="₡" updatedValue={gastos.operativo_3_no * gastos.operativo_3_fijos} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-2340000" mask="₡" updatedValue={gastosTotals.operativo_3_months} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input gasto-op-month-2-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input gasto-op-month-3-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input gasto-op-month-4-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input gasto-op-month-5-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input gasto-op-month-6-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input gasto-op-month-7-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input gasto-op-month-8-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input gasto-op-month-9-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input gasto-op-month-10-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input gasto-op-month-11-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input gasto-op-month-12-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-4-sum__input gasto-op-month-13-sum__input" defaultValue="-24000" mask="₡" updatedValue={gastos.operativo_4_no * gastos.operativo_4_fijos} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-312000" mask="₡" updatedValue={gastosTotals.operativo_4_months} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input gasto-op-month-2-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input gasto-op-month-3-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input gasto-op-month-4-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input gasto-op-month-5-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input gasto-op-month-6-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input gasto-op-month-7-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input gasto-op-month-8-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input gasto-op-month-9-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input gasto-op-month-10-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input gasto-op-month-11-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input gasto-op-month-12-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-op-5-sum__input gasto-op-month-13-sum__input" defaultValue="-17000" mask="₡" updatedValue={gastos.operativo_5_no * gastos.operativo_5_fijos} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-221000" mask="₡" updatedValue={gastosTotals.operativo_5_months} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
@@ -1629,35 +1630,35 @@ export default function CapacidadPago({
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td>-₡180,000.00</td>
-                        <td>-₡180,000.00</td>
-                        <td>-₡180,000.00</td>
-                        <td>-₡180,000.00</td>
-                        <td>-₡180,000.00</td>
-                        <td>-₡180,000.00</td>
-                        <td>-₡180,000.00</td>
-                        <td>-₡180,000.00</td>
-                        <td>-₡180,000.00</td>
-                        <td>-₡180,000.00</td>
-                        <td>-₡180,000.00</td>
-                        <td>-₡180,000.00</td>
-                        <td>-₡2,340,000.00</td>
-                        <td>-₡2,457,000.00</td>
-                        <td>-₡2,579,850.00</td>
+                        <td className="gastos-totals-month-2-sum__td">₡{gastos.admin_total_month_2}</td>
+                        <td className="gastos-totals-month-3-sum__td">₡{gastos.admin_total_month_3}</td>
+                        <td className="gastos-totals-month-4-sum__td">₡{gastos.admin_total_month_4}</td>
+                        <td className="gastos-totals-month-5-sum__td">₡{gastos.admin_total_month_5}</td>
+                        <td className="gastos-totals-month-6-sum__td">₡{gastos.admin_total_month_6}</td>
+                        <td className="gastos-totals-month-7-sum__td">₡{gastos.admin_total_month_7}</td>
+                        <td className="gastos-totals-month-8-sum__td">₡{gastos.admin_total_month_8}</td>
+                        <td className="gastos-totals-month-9-sum__td">₡{gastos.admin_total_month_9}</td>
+                        <td className="gastos-totals-month-10-sum__td">₡{gastos.admin_total_month_10}</td>
+                        <td className="gastos-totals-month-11-sum__td">₡{gastos.admin_total_month_11}</td>
+                        <td className="gastos-totals-month-12-sum__td">₡{gastos.admin_total_month_12}</td>
+                        <td className="gastos-totals-month-13-sum__td">₡{gastos.admin_total_month_13}</td>
+                        <td>₡{gastos.admin_total_proy_1}</td>
+                        <td>₡{gastos.admin_total_proy_2}</td>
+                        <td>₡{gastos.admin_total_proy_3}</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input gasto-admin-month-2-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input gasto-admin-month-3-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input gasto-admin-month-4-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input gasto-admin-month-5-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input gasto-admin-month-6-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input gasto-admin-month-7-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input gasto-admin-month-8-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input gasto-admin-month-9-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input gasto-admin-month-10-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input gasto-admin-month-11-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input gasto-admin-month-12-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange adm-mano-obra-sum__input gasto-admin-month-13-sum__input" defaultValue="-75000" mask="₡" updatedValue={gastos.mano_obra_otros_no * gastos.mano_obra_otros_fijos} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-975000" mask="₡" updatedValue={gastosTotals.mano_obra_otros_months} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0" mask="%" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0" mask="%" /></td>
@@ -1666,154 +1667,154 @@ export default function CapacidadPago({
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td>-₡105,000.00</td>
-                        <td>-₡105,000.00</td>
-                        <td>-₡105,000.00</td>
-                        <td>-₡105,000.00</td>
-                        <td>-₡105,000.00</td>
-                        <td>-₡105,000.00</td>
-                        <td>-₡105,000.00</td>
-                        <td>-₡105,000.00</td>
-                        <td>-₡105,000.00</td>
-                        <td>-₡105,000.00</td>
-                        <td>-₡105,000.00</td>
-                        <td>-₡105,000.00</td>
-                        <td>-₡1,365,000.00</td>
-                        <td>-₡1,433,250.00</td>
-                        <td>-₡1,504,912.50</td>
+                        <td>₡{gastos.costo_familia_total_month_2}</td>
+                        <td>₡{gastos.costo_familia_total_month_3}</td>
+                        <td>₡{gastos.costo_familia_total_month_4}</td>
+                        <td>₡{gastos.costo_familia_total_month_5}</td>
+                        <td>₡{gastos.costo_familia_total_month_6}</td>
+                        <td>₡{gastos.costo_familia_total_month_7}</td>
+                        <td>₡{gastos.costo_familia_total_month_8}</td>
+                        <td>₡{gastos.costo_familia_total_month_9}</td>
+                        <td>₡{gastos.costo_familia_total_month_10}</td>
+                        <td>₡{gastos.costo_familia_total_month_11}</td>
+                        <td>₡{gastos.costo_familia_total_month_12}</td>
+                        <td>₡{gastos.costo_familia_total_month_13}</td>
+                        <td>₡{gastos.costo_familia_total_proy_1}</td>
+                        <td>₡{gastos.costo_familia_total_proy_2}</td>
+                        <td>₡{gastos.costo_familia_total_proy_3}</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input sd-costo-fam-month-2-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input sd-costo-fam-month-3-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input sd-costo-fam-month-4-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input sd-costo-fam-month-5-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input sd-costo-fam-month-6-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input sd-costo-fam-month-7-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input sd-costo-fam-month-8-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input sd-costo-fam-month-9-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input sd-costo-fam-month-10-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input sd-costo-fam-month-11-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input sd-costo-fam-month-12-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange sd-cargas-sociales-sum__input sd-costo-fam-month-13-sum__input" defaultValue="-25000" mask="₡" updatedValue={gastos.cargas_sociales_no * gastos.cargas_sociales_fijos} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-325000" mask="₡" updatedValue={gastosTotals.cargas_sociales_months} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0" mask="%" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0" mask="%" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input sd-costo-fam-month-2-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input sd-costo-fam-month-3-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input sd-costo-fam-month-4-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input sd-costo-fam-month-5-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input sd-costo-fam-month-6-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input sd-costo-fam-month-7-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input sd-costo-fam-month-8-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input sd-costo-fam-month-9-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input sd-costo-fam-month-10-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input sd-costo-fam-month-11-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input sd-costo-fam-month-12-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange pension-alimenticia-sum__input sd-costo-fam-month-13-sum__input" defaultValue="-50000" mask="₡" updatedValue={gastos.pension_alimenticia_no * gastos.pension_alimenticia_fijos} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-650000" mask="₡" updatedValue={gastosTotals.pension_alimenticia_months} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input sd-costo-fam-month-2-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input sd-costo-fam-month-3-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input sd-costo-fam-month-4-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input sd-costo-fam-month-5-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input sd-costo-fam-month-6-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input sd-costo-fam-month-7-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input sd-costo-fam-month-8-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input sd-costo-fam-month-9-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input sd-costo-fam-month-10-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input sd-costo-fam-month-11-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input sd-costo-fam-month-12-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange gasto-familiar-sum__input sd-costo-fam-month-13-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.gastos_familiares_no * gastos.gastos_familiares_fijos} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-195000" mask="₡" updatedValue={gastosTotals.gastos_familiares_months} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input sd-costo-fam-month-2-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input sd-costo-fam-month-3-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input sd-costo-fam-month-4-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input sd-costo-fam-month-5-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input sd-costo-fam-month-6-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input sd-costo-fam-month-7-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input sd-costo-fam-month-8-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input sd-costo-fam-month-9-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input sd-costo-fam-month-10-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input sd-costo-fam-month-11-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input sd-costo-fam-month-12-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange otras-deducciones-sum__input sd-costo-fam-month-13-sum__input" defaultValue="-15000" mask="₡" updatedValue={gastos.otras_deducciones_no * gastos.otras_deducciones_fijos} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="-195000" mask="₡" updatedValue={gastosTotals.otras_deducciones_months} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" /></td>
                       </tr>
                       <tr>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
-                        <td>₡0.00</td>
+                        <td className="gastos-totals-month-2-sum__td">₡{gastos.costo_familia_total_month_2}</td>
+                        <td className="gastos-totals-month-3-sum__td">₡{gastos.costo_familia_total_month_3}</td>
+                        <td className="gastos-totals-month-4-sum__td">₡{gastos.costo_familia_total_month_4}</td>
+                        <td className="gastos-totals-month-5-sum__td">₡{gastos.costo_familia_total_month_5}</td>
+                        <td className="gastos-totals-month-6-sum__td">₡{gastos.costo_familia_total_month_6}</td>
+                        <td className="gastos-totals-month-7-sum__td">₡{gastos.costo_familia_total_month_7}</td>
+                        <td className="gastos-totals-month-8-sum__td">₡{gastos.costo_familia_total_month_8}</td>
+                        <td className="gastos-totals-month-9-sum__td">₡{gastos.costo_familia_total_month_9}</td>
+                        <td className="gastos-totals-month-10-sum__td">₡{gastos.costo_familia_total_month_10}</td>
+                        <td className="gastos-totals-month-11-sum__td">₡{gastos.costo_familia_total_month_11}</td>
+                        <td className="gastos-totals-month-12-sum__td">₡{gastos.costo_familia_total_month_12}</td>
+                        <td className="gastos-totals-month-13-sum__td">₡{gastos.costo_familia_total_month_13}</td>
+                        <td>₡{gastos.costo_familia_total_proy_1}</td>
+                        <td>₡{gastos.costo_familia_total_proy_2}</td>
+                        <td>₡{gastos.costo_familia_total_proy_3}</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input gasto-financiero-month-2-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input gasto-financiero-month-3-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input gasto-financiero-month-4-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input gasto-financiero-month-5-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input gasto-financiero-month-6-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input gasto-financiero-month-7-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input gasto-financiero-month-8-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input gasto-financiero-month-9-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input gasto-financiero-month-10-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input gasto-financiero-month-11-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input gasto-financiero-month-12-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-hipotecarios-months-sum__input gasto-financiero-month-13-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_hipotecaria_no * gastos.cuota_hipotecaria_fijos} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="0" mask="₡" updatedValue={gastosTotals.cuota_hipotecaria_months} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0" mask="%" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="5.0" mask="%" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input gasto-financiero-month-2-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input gasto-financiero-month-3-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input gasto-financiero-month-4-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input gasto-financiero-month-5-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input gasto-financiero-month-6-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input gasto-financiero-month-7-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input gasto-financiero-month-8-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input gasto-financiero-month-9-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input gasto-financiero-month-10-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input gasto-financiero-month-11-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input gasto-financiero-month-12-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-emp-months-sum__input gasto-financiero-month-13-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_emp_no * gastos.cuota_emp_fijos} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="0.00" mask="₡" updatedValue={gastosTotals.cuota_emp_months} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-2-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-3-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-4-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-5-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-6-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-7-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-8-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-9-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-10-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-11-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-12-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-13-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="0.00" mask="₡" updatedValue={gastosTotals.cuota_personales_months} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
