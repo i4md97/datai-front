@@ -67,7 +67,14 @@ export default function CapacidadPago({
   const getCellsSum = (target, selector) => {
     const sumCells = document.querySelectorAll(target);
     const cellValues = [...sumCells].map(element => element[selector].replace("₡", "").replaceAll(".", ""));
-    const colSum = cellValues.reduce((a, b) => parseFloat(a ? a : 0) + parseFloat(b ? b : 0), 0);
+    const colSum = cellValues.reduce((a, b) => (parseFloat(a ? a : 0)) + (parseFloat(b ? b : 0)), 0);
+    return colSum;
+  }
+
+  const getCellsRest = (target, selector) => {
+    const sumCells = document.querySelectorAll(target);
+    const cellValues = [...sumCells].map(element => element[selector].replace("₡", "").replaceAll(".", ""));
+    const colSum = cellValues.reduce((a, b) => (parseFloat(a ? a : 0)) + (parseFloat(b ? b : 0)));
     return colSum;
   }
 
@@ -80,22 +87,22 @@ export default function CapacidadPago({
    */
   // Ingresos
   useEffect(()=>{
+    const months1Sum = getCellsSum(".ingresos-sum-month_1__input", "value");
+    const months2Sum = getCellsSum(".ingresos-sum-month_2__input", "value");
+    const months3Sum = getCellsSum(".ingresos-sum-month_3__input", "value");
+    const months4Sum = getCellsSum(".ingresos-sum-month_4__input", "value");
+    const months5Sum = getCellsSum(".ingresos-sum-month_5__input", "value");
+    const months6Sum = getCellsSum(".ingresos-sum-month_6__input", "value");
+    const months7Sum = getCellsSum(".ingresos-sum-month_7__input", "value");
+    const months8Sum = getCellsSum(".ingresos-sum-month_8__input", "value");
+    const months9Sum = getCellsSum(".ingresos-sum-month_9__input", "value");
+    const months10Sum = getCellsSum(".ingresos-sum-month_10__input", "value");
+    const months11Sum = getCellsSum(".ingresos-sum-month_11__input", "value");
+    const months12Sum = getCellsSum(".ingresos-sum-month_12__input", "value");
+    const months13Sum = getCellsSum(".ingresos-sum-month_13__input", "value");
+    const proySum = getCellsSum(".ingresos-sum-proy1__td", "innerText");
+    
     setTimeout(() => {
-      const months1Sum = getCellsSum(".ingresos-sum-month_1__input", "value");
-      const months2Sum = getCellsSum(".ingresos-sum-month_2__input", "value");
-      const months3Sum = getCellsSum(".ingresos-sum-month_3__input", "value");
-      const months4Sum = getCellsSum(".ingresos-sum-month_4__input", "value");
-      const months5Sum = getCellsSum(".ingresos-sum-month_5__input", "value");
-      const months6Sum = getCellsSum(".ingresos-sum-month_6__input", "value");
-      const months7Sum = getCellsSum(".ingresos-sum-month_7__input", "value");
-      const months8Sum = getCellsSum(".ingresos-sum-month_8__input", "value");
-      const months9Sum = getCellsSum(".ingresos-sum-month_9__input", "value");
-      const months10Sum = getCellsSum(".ingresos-sum-month_10__input", "value");
-      const months11Sum = getCellsSum(".ingresos-sum-month_11__input", "value");
-      const months12Sum = getCellsSum(".ingresos-sum-month_12__input", "value");
-      const months13Sum = getCellsSum(".ingresos-sum-month_13__input", "value");
-      const proySum = getCellsSum(".ingresos-sum-proy1__td", "innerText");
-
       setIngresosTotals(prev => ({
         ...prev, 
         total_month_1: months1Sum,
@@ -183,7 +190,7 @@ export default function CapacidadPago({
       const operativosMonth12 = getCellsSum(".gasto-op-month-12-sum__input", "value");
       const operativosMonth13 = getCellsSum(".gasto-op-month-13-sum__input", "value");
       const operativosProy = getCellsSum(".gastos-operativo-proy1__td", "innerText");
-
+  
       const manoObraSum = getCellsSum(".gasto-costo-mano-obra-sum__input", "value");
       const operativos1Sum = getCellsSum(".gasto-op-1-sum__input", "value");
       const operativo2Sum = getCellsSum(".gasto-op-2-sum__input", "value");
@@ -219,7 +226,7 @@ export default function CapacidadPago({
       const costoFamiliaMonth12 = getCellsSum(".sd-costo-fam-month-12-sum__input", "value");
       const costoFamiliaMonth13 = getCellsSum(".sd-costo-fam-month-13-sum__input", "value");
       const costoFamiliaProy1 = getCellsSum(".gastos-costo-familia-proy1__td", "innerText");
-
+  
       const manoObraMonthsSum = getCellsSum(".adm-mano-obra-sum__input", "value");
       const cargasSocialesSum = getCellsSum(".sd-cargas-sociales-sum__input", "value");
       const pensionAlimenticiaSum = getCellsSum(".pension-alimenticia-sum__input", "value");
@@ -378,24 +385,93 @@ export default function CapacidadPago({
         cuota_personales_months: cuotaPersonalesSum,
       }));
     });
-  },[gastos]);
+  },[gastos, ingresos]);
+
+  // Flujo Neto
+  useEffect(() => {
+    setTimeout(() => {
+      const totalMonth1 = getCellsSum(".flujo-neto-month-1-sum__td", "innerText");
+      const totalMonth2 = getCellsSum(".flujo-neto-month-2-sum__td", "innerText");
+      const totalMonth3 = getCellsSum(".flujo-neto-month-3-sum__td", "innerText");
+      const totalMonth4 = getCellsSum(".flujo-neto-month-4-sum__td", "innerText");
+      const totalMonth5 = getCellsSum(".flujo-neto-month-5-sum__td", "innerText");
+      const totalMonth6 = getCellsSum(".flujo-neto-month-6-sum__td", "innerText");
+      const totalMonth7 = getCellsSum(".flujo-neto-month-7-sum__td", "innerText");
+      const totalMonth8 = getCellsSum(".flujo-neto-month-8-sum__td", "innerText");
+      const totalMonth9 = getCellsSum(".flujo-neto-month-9-sum__td", "innerText");
+      const totalMonth10 = getCellsSum(".flujo-neto-month-10-sum__td", "innerText");
+      const totalMonth11 = getCellsSum(".flujo-neto-month-11-sum__td", "innerText");
+      const totalMonth12 = getCellsSum(".flujo-neto-month-12-sum__td", "innerText");
+      const totalMonth13 = getCellsSum(".flujo-neto-month-13-sum__td", "innerText");
+      const reinversionMonth1 = getCellsSum(".reinversion-month-1-sum__input", "value");
+      const proy1 = getCellsSum(".flujo-neto-proy1__td", "innerText");
+      const proy2 = getCellsSum(".flujo-neto-proy-2", "innerText");
+      const proy3 = getCellsSum(".flujo-neto-proy-3", "innerText");
+
+      setFlujoNeto(prev => ({
+        ...prev,
+          total_month_1: totalMonth1,
+          total_month_2: totalMonth2,
+          total_month_3: totalMonth3,
+          total_month_4: totalMonth4,
+          total_month_5: totalMonth5,
+          total_month_6: totalMonth6,
+          total_month_7: totalMonth7,
+          total_month_8: totalMonth8,
+          total_month_9: totalMonth9,
+          total_month_10: totalMonth10,
+          total_month_11: totalMonth11,
+          total_month_12: totalMonth12,
+          total_month_13: totalMonth13,
+          proy1: proy1,
+          proy2: proy2,
+          proy3: proy3,
+          reinversion_month_1: reinversionMonth1,
+      }), 100);
+    });
+  }, [ingresosTotals, gastosTotals]);
   
   // Flujo Efectivo
   useEffect(()=>{
+    const totalMonth1 = getCellsSum(".flujo-efectivo-month-1-sum__td", "innerText") + getCellsSum(".flujo-efectivo-month-1-sum__td", "innerText");
+    const totalMonth2 = getCellsRest(".flujo-efectivo-month-2-rest__td", "innerText") - getCellsRest(".flujo-efectivo-month-2-rest__input", "value");
+    const totalMonth3 = getCellsRest(".flujo-efectivo-month-3-rest__td", "innerText") - getCellsRest(".flujo-efectivo-month-3-rest__input", "value");
+    const totalMonth4 = getCellsRest(".flujo-efectivo-month-4-rest__td", "innerText") - getCellsRest(".flujo-efectivo-month-4-rest__input", "value");
+    const totalMonth5 = getCellsRest(".flujo-efectivo-month-5-rest__td", "innerText") - getCellsRest(".flujo-efectivo-month-5-rest__input", "value");
+    const totalMonth6 = getCellsRest(".flujo-efectivo-month-6-rest__td", "innerText") - getCellsRest(".flujo-efectivo-month-6-rest__input", "value");
+    const totalMonth7 = getCellsRest(".flujo-efectivo-month-7-rest__td", "innerText") - getCellsRest(".flujo-efectivo-month-7-rest__input", "value");
+    const totalMonth8 = getCellsRest(".flujo-efectivo-month-8-rest__td", "innerText") - getCellsRest(".flujo-efectivo-month-8-rest__input", "value");
+    const totalMonth9 = getCellsRest(".flujo-efectivo-month-9-rest__td", "innerText") - getCellsRest(".flujo-efectivo-month-9-rest__input", "value");
+    const totalMonth10 = getCellsRest(".flujo-efectivo-month-10-rest__td", "innerText") - getCellsRest(".flujo-efectivo-month-10-rest__input", "value");
+    const totalMonth11 = getCellsRest(".flujo-efectivo-month-11-rest__td", "innerText") - getCellsRest(".flujo-efectivo-month-11-rest__input", "value");
+    const totalMonth12 = getCellsRest(".flujo-efectivo-month-12-rest__td", "innerText") - getCellsRest(".flujo-efectivo-month-12-rest__input", "value");
+    const totalMonth13 = getCellsRest(".flujo-efectivo-month-13-rest__td", "innerText") - getCellsRest(".flujo-efectivo-month-13-rest__input", "value");
+    const proy1 = getCellsSum(".flujo-efectivo-proy-1", "innerText");
+    const proy2 = getCellsRest(".flujo-efectivo-proy-2-rest__td", "innerText") - getCellsRest(".flujo-efectivo-proy-2-rest__input", "value");
+    const proy3 = getCellsRest(".flujo-efectivo-proy-3-rest__td", "innerText") - getCellsRest(".flujo-efectivo-proy-3-rest__input", "value");
+
     setTimeout(() => {
-      const colSumTds = getCellsSum(".flujo-efectivo-sum__td", "innerText");
-      const colSumInputs = getCellsSum(".flujo-efectivo-sum__input", "value");
-      const reinversionSum = getCellsSum(".reinversion-sum__input", "value");
-      const proy1 = getCellsSum(".flujo-neto-proy1__td", "innerText");
-      
       setFlujoEfectivo(prev => ({
-        ...prev, 
-        total_month_1: colSumTds + colSumInputs,
-        reinversion_months: reinversionSum,
-        proy1: proy1,
+        ...prev,
+        total_month_1: totalMonth1,
+        total_month_2: totalMonth2,
+        total_month_3: totalMonth3,
+        total_month_4: totalMonth4,
+        total_month_5: totalMonth5,
+        total_month_6: totalMonth6,
+        total_month_7: totalMonth7,
+        total_month_8: totalMonth8,
+        total_month_9: totalMonth9,
+        total_month_10: totalMonth10,
+        total_month_11: totalMonth11,
+        total_month_12: totalMonth12,
+        total_month_13: totalMonth13,
+        proy_1: proy1,
+        proy_2: proy2,
+        proy_3: proy3,
       }));
     });
-  },[flujoEfectivo]);
+  },[flujoNeto]);
 
   const sumColumnHandler = (targetClass, selector, stateSetter) => {
     if (targetClass) {
@@ -405,6 +481,7 @@ export default function CapacidadPago({
       stateSetter(colSum);
     }
   }
+  
   const updateValueHandler = (setter, property, value) => {
     if (property) {
       setter(prev => ({...prev, [property]: value}));
@@ -627,7 +704,7 @@ export default function CapacidadPago({
                       <tr>
                         <td className="text-bold">Ingresos</td>
                         <td colSpan={3}></td>
-                        <td className="ingresos-sum-proy1__td">₡{new Intl.NumberFormat("de-DE").format(ingresosTotals.total_month_1)}</td>
+                        <td className="ingresos-sum-proy1__td flujo-neto-month-1-sum__td">₡{new Intl.NumberFormat("de-DE").format(ingresosTotals.total_month_1)}</td>
                       </tr>
                       <tr>
                         <td>Ventas</td>
@@ -874,7 +951,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td className="gastos-total-sum-proy1__td">₡{new Intl.NumberFormat("de-DE").format(gastosTotals.total_month_1)}</td>
+                        <td className="gastos-total-sum-proy1__td flujo-neto-month-1-sum__td">₡{new Intl.NumberFormat("de-DE").format(gastosTotals.total_month_1)}</td>
                       </tr>
                       <tr>
                         <td className="text-semibold">Inversiones</td>
@@ -1460,7 +1537,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td className="flujo-efectivo-sum__td flujo-neto-proy1__td">₡{new Intl.NumberFormat("de-DE").format(ingresosTotals.total_month_1 + gastosTotals.total_month_1)}</td>
+                        <td className="flujo-efectivo-month-1-sum__td flujo-neto-proy1__td flujo-neto-month-2-sum__td">₡{new Intl.NumberFormat("de-DE").format(flujoNeto.total_month_1)}</td>
                       </tr>
                       <tr>
                         <td>Reinversión</td>
@@ -1485,7 +1562,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td className="p-1">
                           <ControlledInput
-                            className="bg-orange flujo-efectivo-sum__input reinversion-sum__input"
+                            className="bg-orange flujo-efectivo-sum__input flujo-efectivo-month-1-sum__input flujo-reinversion-proy-1"
                             defaultValue="50000"
                             mask="₡"
                             updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos}
@@ -1497,7 +1574,7 @@ export default function CapacidadPago({
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>₡{new Intl.NumberFormat("de-DE").format(flujoEfectivo.total_month_1)}</td>
+                        <td className="flujo-efectivo-proy-1">₡{new Intl.NumberFormat("de-DE").format(flujoEfectivo.total_month_1)}</td>
                       </tr>
                     </tbody>
                   </Table>
@@ -1516,21 +1593,21 @@ export default function CapacidadPago({
                     </thead>
                     <tbody>
                       <tr>
-                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_2}</td>
-                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_3}</td>
-                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_4}</td>
-                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_5}</td>
-                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_6}</td>
-                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_7}</td>
-                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_8}</td>
-                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_9}</td>
-                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_10}</td>
-                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_11}</td>
-                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_12}</td>
-                        <td className="ingresos-sum-proy1__td">₡{ingresosTotals.total_month_13}</td>
+                        <td className="ingresos-sum-proy1__td flujo-neto-month-2-sum__td">₡{ingresosTotals.total_month_2}</td>
+                        <td className="ingresos-sum-proy1__td flujo-neto-month-3-sum__td">₡{ingresosTotals.total_month_3}</td>
+                        <td className="ingresos-sum-proy1__td flujo-neto-month-4-sum__td">₡{ingresosTotals.total_month_4}</td>
+                        <td className="ingresos-sum-proy1__td flujo-neto-month-5-sum__td">₡{ingresosTotals.total_month_5}</td>
+                        <td className="ingresos-sum-proy1__td flujo-neto-month-6-sum__td">₡{ingresosTotals.total_month_6}</td>
+                        <td className="ingresos-sum-proy1__td flujo-neto-month-7-sum__td">₡{ingresosTotals.total_month_7}</td>
+                        <td className="ingresos-sum-proy1__td flujo-neto-month-8-sum__td">₡{ingresosTotals.total_month_8}</td>
+                        <td className="ingresos-sum-proy1__td flujo-neto-month-9-sum__td">₡{ingresosTotals.total_month_9}</td>
+                        <td className="ingresos-sum-proy1__td flujo-neto-month-10-sum__td">₡{ingresosTotals.total_month_10}</td>
+                        <td className="ingresos-sum-proy1__td flujo-neto-month-11-sum__td">₡{ingresosTotals.total_month_11}</td>
+                        <td className="ingresos-sum-proy1__td flujo-neto-month-12-sum__td">₡{ingresosTotals.total_month_12}</td>
+                        <td className="ingresos-sum-proy1__td flujo-neto-month-13-sum__td">₡{ingresosTotals.total_month_13}</td>
                         <td>₡{ingresosTotals.total_proy_1}</td>
-                        <td>₡{ingresosTotals.total_proy_2 + (ingresosTotals.total_proy_2 * (ingresos.estacionalidad_proy_2 / 100))}</td>
-                        <td>₡{ingresosTotals.total_proy_3 + (ingresosTotals.total_proy_3 * (ingresos.estacionalidad_proy_3 / 100))}</td>
+                        <td className="flujo-neto-proy-2">₡{ingresosTotals.total_proy_2 + (ingresosTotals.total_proy_2 * (ingresos.estacionalidad_proy_2 / 100))}</td>
+                        <td className="flujo-neto-proy-3">₡{ingresosTotals.total_proy_3 + (ingresosTotals.total_proy_3 * (ingresos.estacionalidad_proy_3 / 100))}</td>
                       </tr>
                       <tr>
                         <td className="p-1"><ControlledInput className="bg-orange ingresos-sum-month_2__input" defaultValue="270000" mask="₡" updatedValue={ingresosTotals.total_month_1_perc * ingresos.month_2} /></td>
@@ -1661,21 +1738,21 @@ export default function CapacidadPago({
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_2}</td>
-                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_3}</td>
-                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_4}</td>
-                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_5}</td>
-                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_6}</td>
-                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_7}</td>
-                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_8}</td>
-                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_9}</td>
-                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_10}</td>
-                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_11}</td>
-                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_12}</td>
-                        <td className="gastos-total-sum-proy1__td">₡{gastosTotals.month_13}</td>
+                        <td className="gastos-total-sum-proy1__td flujo-neto-month-2-sum__td">₡{gastosTotals.month_2}</td>
+                        <td className="gastos-total-sum-proy1__td flujo-neto-month-3-sum__td">₡{gastosTotals.month_3}</td>
+                        <td className="gastos-total-sum-proy1__td flujo-neto-month-4-sum__td">₡{gastosTotals.month_4}</td>
+                        <td className="gastos-total-sum-proy1__td flujo-neto-month-5-sum__td">₡{gastosTotals.month_5}</td>
+                        <td className="gastos-total-sum-proy1__td flujo-neto-month-6-sum__td">₡{gastosTotals.month_6}</td>
+                        <td className="gastos-total-sum-proy1__td flujo-neto-month-7-sum__td">₡{gastosTotals.month_7}</td>
+                        <td className="gastos-total-sum-proy1__td flujo-neto-month-8-sum__td">₡{gastosTotals.month_8}</td>
+                        <td className="gastos-total-sum-proy1__td flujo-neto-month-9-sum__td">₡{gastosTotals.month_9}</td>
+                        <td className="gastos-total-sum-proy1__td flujo-neto-month-10-sum__td">₡{gastosTotals.month_10}</td>
+                        <td className="gastos-total-sum-proy1__td flujo-neto-month-11-sum__td">₡{gastosTotals.month_11}</td>
+                        <td className="gastos-total-sum-proy1__td flujo-neto-month-12-sum__td">₡{gastosTotals.month_12}</td>
+                        <td className="gastos-total-sum-proy1__td flujo-neto-month-13-sum__td">₡{gastosTotals.month_13}</td>
                         <td>₡{gastosTotals.total_proy_1}</td>
-                        <td>₡{gastosTotals.total_proy_2 * (gastosTotals.total_proy_2 * (gastos.inversionees_percentage_2 / 100))}</td>
-                        <td>₡{gastosTotals.total_proy_3 * (gastosTotals.total_proy_3 * (gastos.inversionees_percentage_3 / 100))}</td>
+                        <td className="flujo-neto-proy-2">₡{gastosTotals.total_proy_2 * (gastosTotals.total_proy_2 * (gastos.inversionees_percentage_2 / 100))}</td>
+                        <td className="flujo-neto-proy-3">₡{gastosTotals.total_proy_3 * (gastosTotals.total_proy_3 * (gastos.inversionees_percentage_3 / 100))}</td>
                       </tr>
                       <tr>
                         <td className="gastos-totals-month-2-sum__td gastos-inversiones-proy1__td">₡{gastosTotals.inversiones_month_2}</td>
@@ -2011,73 +2088,73 @@ export default function CapacidadPago({
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="0.00" mask="₡" updatedValue={gastosTotals.cuota_emp_months} /></td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-2-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-3-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-4-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-5-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-6-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-7-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-8-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-9-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-10-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-11-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-12-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-13-sum__input" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-2-sum__input flujo-neto-proy-1" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-3-sum__input flujo-neto-proy-1" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-4-sum__input flujo-neto-proy-1" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-5-sum__input flujo-neto-proy-1" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-6-sum__input flujo-neto-proy-1" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-7-sum__input flujo-neto-proy-1" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-8-sum__input flujo-neto-proy-1" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-9-sum__input flujo-neto-proy-1" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-10-sum__input flujo-neto-proy-1" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-11-sum__input flujo-neto-proy-1" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-12-sum__input flujo-neto-proy-1" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange cuota-personales-months-sum__input gasto-financiero-month-13-sum__input flujo-neto-proy-1" defaultValue="" mask="₡" updatedValue={gastos.cuota_personales_no * gastos.cuota_personales_fijos} /></td>
                         <td className="p-1"><ControlledInput className="bg-orange" defaultValue="0.00" mask="₡" updatedValue={gastosTotals.cuota_personales_months} /></td>
                       </tr>
                       <tr>
                         <td colSpan={"100%"}></td>
                       </tr>
                       <tr>
-                        <td className="flujo-neto-proy1__td">₡{(ingresosTotals.total_month_2 + gastosTotals.month_2) + (ingresosTotals.total_month_1 + gastosTotals.total_month_1)}</td>
-                        <td className="flujo-neto-proy1__td">₡{(ingresosTotals.total_month_3 + gastosTotals.month_3) + (ingresosTotals.total_month_2 + gastosTotals.month_2 + ingresosTotals.total_month_1 + gastosTotals.total_month_1)}</td>
-                        <td className="flujo-neto-proy1__td">₡{(ingresosTotals.total_month_4 + gastosTotals.month_4) + (ingresosTotals.total_month_3 + gastosTotals.month_3 + ingresosTotals.total_month_2 + gastosTotals.month_2 + ingresosTotals.total_month_1 + gastosTotals.total_month_1)}</td>
-                        <td className="flujo-neto-proy1__td">₡{(ingresosTotals.total_month_5 + gastosTotals.month_5) + (ingresosTotals.total_month_4 + gastosTotals.month_4 + ingresosTotals.total_month_3 + gastosTotals.month_3 + ingresosTotals.total_month_2 + gastosTotals.month_2 + ingresosTotals.total_month_1 + gastosTotals.total_month_1)}</td>
-                        <td className="flujo-neto-proy1__td">₡{(ingresosTotals.total_month_6 + gastosTotals.month_6) + (ingresosTotals.total_month_5 + gastosTotals.month_5 + ingresosTotals.total_month_4 + gastosTotals.month_4 + ingresosTotals.total_month_3 + gastosTotals.month_3 + ingresosTotals.total_month_2 + gastosTotals.month_2 + ingresosTotals.total_month_1 + gastosTotals.total_month_1)}</td>
-                        <td className="flujo-neto-proy1__td">₡{(ingresosTotals.total_month_7 + gastosTotals.month_7) + (ingresosTotals.total_month_6 + gastosTotals.month_6 + ingresosTotals.total_month_5 + gastosTotals.month_5 + ingresosTotals.total_month_4 + gastosTotals.month_4 + ingresosTotals.total_month_3 + gastosTotals.month_3 + ingresosTotals.total_month_2 + gastosTotals.month_2 + ingresosTotals.total_month_1 + gastosTotals.total_month_1)}</td>
-                        <td className="flujo-neto-proy1__td">₡{(ingresosTotals.total_month_8 + gastosTotals.month_8) + (ingresosTotals.total_month_7 + gastosTotals.month_7 + ingresosTotals.total_month_6 + gastosTotals.month_6 + ingresosTotals.total_month_5 + gastosTotals.month_5 + ingresosTotals.total_month_4 + gastosTotals.month_4 + ingresosTotals.total_month_3 + gastosTotals.month_3 + ingresosTotals.total_month_2 + gastosTotals.month_2 + ingresosTotals.total_month_1 + gastosTotals.total_month_1)}</td>
-                        <td className="flujo-neto-proy1__td">₡{(ingresosTotals.total_month_9 + gastosTotals.month_9) + (ingresosTotals.total_month_8 + gastosTotals.month_8 + ingresosTotals.total_month_7 + gastosTotals.month_7 + ingresosTotals.total_month_6 + gastosTotals.month_6 + ingresosTotals.total_month_5 + gastosTotals.month_5 + ingresosTotals.total_month_4 + gastosTotals.month_4 + ingresosTotals.total_month_3 + gastosTotals.month_3 + ingresosTotals.total_month_2 + gastosTotals.month_2 + ingresosTotals.total_month_1 + gastosTotals.total_month_1)}</td>
-                        <td className="flujo-neto-proy1__td">₡{(ingresosTotals.total_month_10 + gastosTotals.month_10) + (ingresosTotals.total_month_9 + gastosTotals.month_9 + ingresosTotals.total_month_8 + gastosTotals.month_8 + ingresosTotals.total_month_7 + gastosTotals.month_7 + ingresosTotals.total_month_6 + gastosTotals.month_6 + ingresosTotals.total_month_5 + gastosTotals.month_5 + ingresosTotals.total_month_4 + gastosTotals.month_4 + ingresosTotals.total_month_3 + gastosTotals.month_3 + ingresosTotals.total_month_2 + gastosTotals.month_2 + ingresosTotals.total_month_1 + gastosTotals.total_month_1)}</td>
-                        <td className="flujo-neto-proy1__td">₡{(ingresosTotals.total_month_11 + gastosTotals.month_11) + (ingresosTotals.total_month_10 + gastosTotals.month_10 + ingresosTotals.total_month_9 + gastosTotals.month_9 + ingresosTotals.total_month_8 + gastosTotals.month_8 + ingresosTotals.total_month_7 + gastosTotals.month_7 + ingresosTotals.total_month_6 + gastosTotals.month_6 + ingresosTotals.total_month_5 + gastosTotals.month_5 + ingresosTotals.total_month_4 + gastosTotals.month_4 + ingresosTotals.total_month_3 + gastosTotals.month_3 + ingresosTotals.total_month_2 + gastosTotals.month_2 + ingresosTotals.total_month_1 + gastosTotals.total_month_1)}</td>
-                        <td className="flujo-neto-proy1__td">₡{(ingresosTotals.total_month_12 + gastosTotals.month_12) + (ingresosTotals.total_month_11 + gastosTotals.month_11 + ingresosTotals.total_month_10 + gastosTotals.month_10 + ingresosTotals.total_month_9 + gastosTotals.month_9 + ingresosTotals.total_month_8 + gastosTotals.month_8 + ingresosTotals.total_month_7 + gastosTotals.month_7 + ingresosTotals.total_month_6 + gastosTotals.month_6 + ingresosTotals.total_month_5 + gastosTotals.month_5 + ingresosTotals.total_month_4 + gastosTotals.month_4 + ingresosTotals.total_month_3 + gastosTotals.month_3 + ingresosTotals.total_month_2 + gastosTotals.month_2 + ingresosTotals.total_month_1 + gastosTotals.total_month_1)}</td>
-                        <td className="flujo-neto-proy1__td">₡{(ingresosTotals.total_month_13 + gastosTotals.month_13) + (ingresosTotals.total_month_12 + gastosTotals.month_12 + ingresosTotals.total_month_11 + gastosTotals.month_11 + ingresosTotals.total_month_10 + gastosTotals.month_10 + ingresosTotals.total_month_9 + gastosTotals.month_9 + ingresosTotals.total_month_8 + gastosTotals.month_8 + ingresosTotals.total_month_7 + gastosTotals.month_7 + ingresosTotals.total_month_6 + gastosTotals.month_6 + ingresosTotals.total_month_5 + gastosTotals.month_5 + ingresosTotals.total_month_4 + gastosTotals.month_4 + ingresosTotals.total_month_3 + gastosTotals.month_3 + ingresosTotals.total_month_2 + gastosTotals.month_2 + ingresosTotals.total_month_1 + gastosTotals.total_month_1)}</td>
-                        <td>₡{flujoEfectivo.proy1}</td>
-                        <td>₡{(ingresosTotals.total_proy_2 + (ingresosTotals.total_proy_2 * (ingresos.estacionalidad_proy_2 / 100))) + (gastosTotals.total_proy_2 * (gastosTotals.total_proy_2 * (gastos.inversionees_percentage_2 / 100))) + flujoEfectivo.proy1}</td>
-                        <td>₡{(ingresosTotals.total_proy_3 + (ingresosTotals.total_proy_3 * (ingresos.estacionalidad_proy_3 / 100))) + (gastosTotals.total_proy_3 * (gastosTotals.total_proy_3 * (gastos.inversionees_percentage_2 / 100))) + flujoEfectivo.proy2 + ((ingresosTotals.total_proy_2 + (ingresosTotals.total_proy_2 * (ingresos.estacionalidad_proy_2 / 100))) + (gastosTotals.total_proy_2 * (gastosTotals.total_proy_2 * (gastos.inversionees_percentage_2 / 100))) + flujoEfectivo.proy1)}</td>
+                        <td className="flujo-neto-proy1__td flujo-efectivo-month-2-rest__td flujo-neto-month-3-sum__td">₡{flujoNeto.total_month_2}</td>
+                        <td className="flujo-neto-proy1__td flujo-efectivo-month-3-rest__td flujo-neto-month-4-sum__td">₡{flujoNeto.total_month_3}</td>
+                        <td className="flujo-neto-proy1__td flujo-efectivo-month-4-rest__td flujo-neto-month-5-sum__td">₡{flujoNeto.total_month_4}</td>
+                        <td className="flujo-neto-proy1__td flujo-efectivo-month-5-rest__td flujo-neto-month-6-sum__td">₡{flujoNeto.total_month_5}</td>
+                        <td className="flujo-neto-proy1__td flujo-efectivo-month-6-rest__td flujo-neto-month-7-sum__td">₡{flujoNeto.total_month_6}</td>
+                        <td className="flujo-neto-proy1__td flujo-efectivo-month-7-rest__td flujo-neto-month-8-sum__td">₡{flujoNeto.total_month_7}</td>
+                        <td className="flujo-neto-proy1__td flujo-efectivo-month-8-rest__td flujo-neto-month-9-sum__td">₡{flujoNeto.total_month_8}</td>
+                        <td className="flujo-neto-proy1__td bg-green flujo-efectivo-month-9-rest__td flujo-neto-month-10-sum__td">₡{flujoNeto.total_month_9?.toString().replace("-", "")}</td>
+                        <td className="flujo-neto-proy1__td bg-green flujo-efectivo-month-10-rest__td flujo-neto-month-11-sum__td">₡{flujoNeto.total_month_10?.toString().replace("-", "")}</td>
+                        <td className="flujo-neto-proy1__td bg-green flujo-efectivo-month-11-rest__td flujo-neto-month-12-sum__td">₡{flujoNeto.total_month_11?.toString().replace("-", "")}</td>
+                        <td className="flujo-neto-proy1__td bg-green flujo-efectivo-month-12-rest__td flujo-neto-month-13-sum__td">₡{flujoNeto.total_month_12?.toString().replace("-", "")}</td>
+                        <td className="flujo-neto-proy1__td bg-green flujo-efectivo-month-13-rest__td">₡{flujoNeto.total_month_13?.toString().replace("-", "")}</td>
+                        <td className="flujo-neto-proy-2">₡{flujoNeto.proy1}</td>
+                        <td className="flujo-neto-proy-3 flujo-efectivo-proy-2-rest__td">₡{flujoNeto.proy2}</td>
+                        <td className="flujo-efectivo-proy-3-rest__td">₡{flujoNeto.proy3}</td>
                       </tr>
                       <tr>
-                        <td className="p-1"><ControlledInput className="bg-orange reinversion-sum__input" defaultValue="100000" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange reinversion-sum__input" defaultValue="235000" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange reinversion-sum__input" defaultValue="100000" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange reinversion-sum__input" defaultValue="0" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange reinversion-sum__input" defaultValue="50000" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange reinversion-sum__input" defaultValue="200000" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange reinversion-sum__input" defaultValue="0" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange reinversion-sum__input" defaultValue="0" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange reinversion-sum__input" defaultValue="0" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange reinversion-sum__input" defaultValue="0" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange reinversion-sum__input" defaultValue="0" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange reinversion-sum__input" defaultValue="0" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="735000" mask="₡" updatedValue={flujoNeto.reinversion_months} /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
-                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange flujo-efectivo-month-2-rest__input flujo-reinversion-proy-1" defaultValue="100000" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange flujo-efectivo-month-3-rest__input flujo-reinversion-proy-1" defaultValue="235000" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange flujo-efectivo-month-4-rest__input flujo-reinversion-proy-1" defaultValue="100000" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange flujo-efectivo-month-5-rest__input flujo-reinversion-proy-1" defaultValue="0" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange flujo-efectivo-month-6-rest__input flujo-reinversion-proy-1" defaultValue="50000" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange flujo-efectivo-month-7-rest__input flujo-reinversion-proy-1" defaultValue="200000" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange flujo-efectivo-month-8-rest__input flujo-reinversion-proy-1" defaultValue="0" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange flujo-efectivo-month-9-rest__input flujo-reinversion-proy-1" defaultValue="0" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange flujo-efectivo-month-10-rest__input flujo-reinversion-proy-1" defaultValue="0" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange flujo-efectivo-month-11-rest__input flujo-reinversion-proy-1" defaultValue="0" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange flujo-efectivo-month-12-rest__input flujo-reinversion-proy-1" defaultValue="0" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange flujo-efectivo-month-13-rest__input flujo-reinversion-proy-1" defaultValue="0" mask="₡" updatedValue={flujoNeto.reinversion_no * flujoNeto.reinversion_fijos} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange" defaultValue="735000" mask="₡" updatedValue={flujoNeto.reinversion_proy_1} /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange flujo-efectivo-proy-2-rest__input" defaultValue="" /></td>
+                        <td className="p-1"><ControlledInput className="bg-orange flujo-efectivo-proy-3-rest__input" defaultValue="" /></td>
                       </tr>
                       <tr>
-                        <td>₡1,998,000.00</td>
-                        <td>₡1,877,000.00</td>
-                        <td>₡1,486,000.00</td>
-                        <td>₡1,060,000.00</td>
-                        <td>₡484,000.00</td>
-                        <td>₡608,000.00</td>
-                        <td>₡82,000.00</td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡244,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡570,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡896,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡1,222,000.00" /></td>
-                        <td className="p-1"><ControlledInput className="bg-green" defaultValue="₡1,548,000.00" /></td>
-                        <td>₡2,749,000.00</td>
-                        <td>₡488,600.00</td>
-                        <td>₡1,896,370.00</td>
+                        <td className="flujo-efectivo-proy-1">₡{flujoEfectivo.total_month_2}</td>
+                        <td className="flujo-efectivo-proy-1">₡{flujoEfectivo.total_month_3}</td>
+                        <td className="flujo-efectivo-proy-1">₡{flujoEfectivo.total_month_4}</td>
+                        <td className="flujo-efectivo-proy-1">₡{flujoEfectivo.total_month_5}</td>
+                        <td className="flujo-efectivo-proy-1">₡{flujoEfectivo.total_month_6}</td>
+                        <td className="flujo-efectivo-proy-1">₡{flujoEfectivo.total_month_7}</td>
+                        <td className="flujo-efectivo-proy-1">₡{flujoEfectivo.total_month_8}</td>
+                        <td className="flujo-efectivo-proy-1 bg-green">₡{flujoEfectivo.total_month_9?.toString().replace("-", "")}</td>
+                        <td className="flujo-efectivo-proy-1 bg-green">₡{flujoEfectivo.total_month_10?.toString().replace("-", "")}</td>
+                        <td className="flujo-efectivo-proy-1 bg-green">₡{flujoEfectivo.total_month_11?.toString().replace("-", "")}</td>
+                        <td className="flujo-efectivo-proy-1 bg-green">₡{flujoEfectivo.total_month_12?.toString().replace("-", "")}</td>
+                        <td className="flujo-efectivo-proy-1 bg-green">₡{flujoEfectivo.total_month_13?.toString().replace("-", "")}</td>
+                        <td className="flujo-efectivo-proy-2">₡{flujoEfectivo.proy_1}</td>
+                        <td className="flujo-efectivo-proy-3">₡{flujoEfectivo.proy_2}</td>
+                        <td>₡{flujoEfectivo.proy_3}</td>
                       </tr>
                     </tbody>
                   </Table>
