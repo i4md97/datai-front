@@ -29,28 +29,27 @@ export default function CapacidadPago({
 
   // Flujo Neto de Efectivo
   const [flujoNeto, setFlujoNeto] = useState({});
-  // const [flujoNetoTotals, setFlujoNetoTotals] = useState({});
   // Flujo de Efectivo
   const [flujoEfectivo, setFlujoEfectivo] = useState({});
   
-  const flujoNetoData = {
-    chartData: [
-      { name: 'Nov-22', a: -1500, b: 500, c: 0, d: 2000 },
-      { name: 'Dec-22', a: -3500, b: -2000, c: 0, d: 1500 },
-      { name: 'Jan-23', a: -500, b: -1700, c: 0, d: 1000 },
-      { name: 'Feb-23', a: -500, b: -1500, c: 0, d: 1000 },
-      { name: 'Mar-23', a: -500, b: -1000, c: 0, d: 1000 },
-      { name: 'Apr-23', a: -500, b: -500, c: 0, d: 1200 },
-      { name: 'May-23', a: -1000, b: -500, c: 0, d: 1000 },
-      { name: 'Jun-23', a: -500, b: 0, c: 0, d: 1000 },
-      { name: 'Jul-23', a: -500, b: 300, c: 0, d: 1000 },
-      { name: 'Aug-23', a: -500, b: 800, c: 0, d: 1000 },
-      { name: 'Sep-23', a: -500, b: 1000, c: 0, d: 1000 },
-      { name: 'Oct-23', a: -500, b: 1500, c: 0, d: 1000 },
-      { name: 'Nov-23', a: -500, b: 2000, c: 0, d: 1000 },
-    ],
-    legends: ["INCOMES", "SPENDS", "CF", "CERO"],
-  };
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const formattedDate = (date, monthsAdded) => {
+    const newDate = new Date(date);
+    const dateMonth = newDate.getMonth() + monthsAdded;
+    // If value is greater than 12 is another year
+    const year = months[dateMonth] ? newDate.getFullYear() : newDate.getFullYear() + 1;
+    const labelMonth = months[dateMonth] ? months[dateMonth] : months[dateMonth - 12];
+    return `${labelMonth}-${year.toString().substring(2)}`;
+  }
+
+  // Charts
+  const legends = ["INCOMES", "SPENDS", "CF", "CERO"];
+  const [escenraioInput0, setEscenarioInput0] = useState({i: 100, g: 100});
+  const [escenraioInput1, setEscenarioInput1] = useState({i: -5, g: 5});
+  const [escenraioInput2, setEscenarioInput2] = useState({i: -5, g: 10});
+  const [escenario0, setEscenario0] = useState({ chartData: [], legends: legends});
+  const [escenario1, setEscenario1] = useState({ chartData: [], legends: legends});
+  const [escenario2, setEscenario2] = useState({ chartData: [], legends: legends});
 
   // Balance General
   useEffect(()=>{
@@ -473,6 +472,223 @@ export default function CapacidadPago({
     });
   },[flujoNeto]);
 
+  // Charts
+  useEffect(()=>{
+    setEscenario0(prev => ({
+      ...prev,
+      chartData: [
+        { name: formattedDate(month, 0), a: ingresosTotals.total_month_1, b: gastosTotals.total_month_1, c: flujoNeto.total_month_1, d: 0 },
+        { name: formattedDate(month, 1), a: ingresosTotals.total_month_2, b: gastosTotals.month_2, c: flujoNeto.total_month_2, d: 0 },
+        { name: formattedDate(month, 2), a: ingresosTotals.total_month_3, b: gastosTotals.month_3, c: flujoNeto.total_month_3, d: 0 },
+        { name: formattedDate(month, 3), a: ingresosTotals.total_month_4, b: gastosTotals.month_4, c: flujoNeto.total_month_4, d: 0 },
+        { name: formattedDate(month, 4), a: ingresosTotals.total_month_5, b: gastosTotals.month_5, c: flujoNeto.total_month_5, d: 0 },
+        { name: formattedDate(month, 5), a: ingresosTotals.total_month_6, b: gastosTotals.month_6, c: flujoNeto.total_month_6, d: 0 },
+        { name: formattedDate(month, 6), a: ingresosTotals.total_month_7, b: gastosTotals.month_7, c: flujoNeto.total_month_7, d: 0 },
+        { name: formattedDate(month, 7), a: ingresosTotals.total_month_8, b: gastosTotals.month_8, c: flujoNeto.total_month_8, d: 0 },
+        { name: formattedDate(month, 8), a: ingresosTotals.total_month_9, b: gastosTotals.month_9, c: flujoNeto.total_month_9, d: 0 },
+        { name: formattedDate(month, 9), a: ingresosTotals.total_month_10, b: gastosTotals.month_10, c: flujoNeto.total_month_10, d: 0 },
+        { name: formattedDate(month, 10), a: ingresosTotals.total_month_11, b: gastosTotals.month_11, c: flujoNeto.total_month_11, d: 0 },
+        { name: formattedDate(month, 11), a: ingresosTotals.total_month_12, b: gastosTotals.month_12, c: flujoNeto.total_month_12, d: 0 },
+        { name: formattedDate(month, 12), a: ingresosTotals.total_month_13, b: gastosTotals.month_13, c: flujoNeto.total_month_13, d: 0 },
+      ]
+    }));
+
+    setEscenario1(prev => ({
+      ...prev,
+      chartData: [
+        { 
+          name: formattedDate(month, 0), 
+          a: ingresosTotals.total_month_1 * (escenraioInput1.i / 100), 
+          b: gastosTotals.total_month_1 * (escenraioInput1.g / 100), 
+          c: (ingresosTotals.total_month_1 * (escenraioInput1.i / 100)) + (gastosTotals.total_month_1 * (escenraioInput1.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 1), 
+          a: ingresosTotals.total_month_2 * (escenraioInput1.i / 100), 
+          b: gastosTotals.month_2 * (escenraioInput1.g / 100), 
+          c: (ingresosTotals.total_month_2 * (escenraioInput1.i / 100)) + (gastosTotals.month_2 * (escenraioInput1.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 2), 
+          a: ingresosTotals.total_month_3 * (escenraioInput1.i / 100), 
+          b: gastosTotals.month_3 * (escenraioInput1.g / 100), 
+          c: (ingresosTotals.total_month_3 * (escenraioInput1.i / 100)) + (gastosTotals.month_3 * (escenraioInput1.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 3), 
+          a: ingresosTotals.total_month_4 * (escenraioInput1.i / 100), 
+          b: gastosTotals.month_4 * (escenraioInput1.g / 100), 
+          c: (ingresosTotals.total_month_4 * (escenraioInput1.i / 100)) + (gastosTotals.month_4 * (escenraioInput1.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 4), 
+          a: ingresosTotals.total_month_5 * (escenraioInput1.i / 100), 
+          b: gastosTotals.month_5 * (escenraioInput1.g / 100), 
+          c: (ingresosTotals.total_month_5 * (escenraioInput1.i / 100)) + (gastosTotals.month_5 * (escenraioInput1.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 5), 
+          a: ingresosTotals.total_month_6 * (escenraioInput1.i / 100), 
+          b: gastosTotals.month_6 * (escenraioInput1.g / 100), 
+          c: (ingresosTotals.total_month_6 * (escenraioInput1.i / 100)) + (gastosTotals.month_6 * (escenraioInput1.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 6), 
+          a: ingresosTotals.total_month_7 * (escenraioInput1.i / 100), 
+          b: gastosTotals.month_7 * (escenraioInput1.g / 100), 
+          c: (ingresosTotals.total_month_7 * (escenraioInput1.i / 100)) + (gastosTotals.month_7 * (escenraioInput1.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 7), 
+          a: ingresosTotals.total_month_8 * (escenraioInput1.i / 100), 
+          b: gastosTotals.month_8 * (escenraioInput1.g / 100), 
+          c: (ingresosTotals.total_month_8 * (escenraioInput1.i / 100)) + (gastosTotals.month_8 * (escenraioInput1.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 8), 
+          a: ingresosTotals.total_month_9 * (escenraioInput1.i / 100), 
+          b: gastosTotals.month_9 * (escenraioInput1.g / 100), 
+          c: (ingresosTotals.total_month_9 * (escenraioInput1.i / 100)) + (gastosTotals.month_9 * (escenraioInput1.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 9), 
+          a: ingresosTotals.total_month_10 * (escenraioInput1.i / 100), 
+          b: gastosTotals.month_10 * (escenraioInput1.g / 100), 
+          c: (ingresosTotals.total_month_10 * (escenraioInput1.i / 100)) + (gastosTotals.month_10 * (escenraioInput1.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 10), 
+          a: ingresosTotals.total_month_11 * (escenraioInput1.i / 100), 
+          b: gastosTotals.month_11 * (escenraioInput1.g / 100), 
+          c: (ingresosTotals.total_month_11 * (escenraioInput1.i / 100)) + (gastosTotals.month_11 * (escenraioInput1.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 11), 
+          a: ingresosTotals.total_month_12 * (escenraioInput1.i / 100), 
+          b: gastosTotals.month_12 * (escenraioInput1.g / 100), 
+          c: (ingresosTotals.total_month_12 * (escenraioInput1.i / 100)) + (gastosTotals.month_12 * (escenraioInput1.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 12), 
+          a: ingresosTotals.total_month_13 * (escenraioInput1.i / 100), 
+          b: gastosTotals.month_13 * (escenraioInput1.g / 100), 
+          c: (ingresosTotals.total_month_13 * (escenraioInput1.i / 100)) + (gastosTotals.month_13 * (escenraioInput1.g / 100)), 
+          d: 0 
+        },
+      ]
+    }));
+
+    setEscenario2(prev => ({
+      ...prev,
+      chartData: [
+        { 
+          name: formattedDate(month, 0), 
+          a: ingresosTotals.total_month_1 * (escenraioInput2.i / 100), 
+          b: gastosTotals.total_month_1 * (escenraioInput2.g / 100), 
+          c: (ingresosTotals.total_month_1 * (escenraioInput2.i / 100)) + (gastosTotals.total_month_1 * (escenraioInput2.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 1), 
+          a: ingresosTotals.total_month_2 * (escenraioInput2.i / 100), 
+          b: gastosTotals.month_2 * (escenraioInput2.g / 100), 
+          c: (ingresosTotals.total_month_2 * (escenraioInput2.i / 100)) + (gastosTotals.month_2 * (escenraioInput2.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 2), 
+          a: ingresosTotals.total_month_3 * (escenraioInput2.i / 100), 
+          b: gastosTotals.month_3 * (escenraioInput2.g / 100), 
+          c: (ingresosTotals.total_month_3 * (escenraioInput2.i / 100)) + (gastosTotals.month_3 * (escenraioInput2.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 3), 
+          a: ingresosTotals.total_month_4 * (escenraioInput2.i / 100), 
+          b: gastosTotals.month_4 * (escenraioInput2.g / 100), 
+          c: (ingresosTotals.total_month_4 * (escenraioInput2.i / 100)) + (gastosTotals.month_4 * (escenraioInput2.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 4), 
+          a: ingresosTotals.total_month_5 * (escenraioInput2.i / 100), 
+          b: gastosTotals.month_5 * (escenraioInput2.g / 100), 
+          c: (ingresosTotals.total_month_5 * (escenraioInput2.i / 100)) + (gastosTotals.month_5 * (escenraioInput2.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 5), 
+          a: ingresosTotals.total_month_6 * (escenraioInput2.i / 100), 
+          b: gastosTotals.month_6 * (escenraioInput2.g / 100), 
+          c: (ingresosTotals.total_month_6 * (escenraioInput2.i / 100)) + (gastosTotals.month_6 * (escenraioInput2.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 6), 
+          a: ingresosTotals.total_month_7 * (escenraioInput2.i / 100), 
+          b: gastosTotals.month_7 * (escenraioInput2.g / 100), 
+          c: (ingresosTotals.total_month_7 * (escenraioInput2.i / 100)) + (gastosTotals.month_7 * (escenraioInput2.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 7), 
+          a: ingresosTotals.total_month_8 * (escenraioInput2.i / 100), 
+          b: gastosTotals.month_8 * (escenraioInput2.g / 100), 
+          c: (ingresosTotals.total_month_8 * (escenraioInput2.i / 100)) + (gastosTotals.month_8 * (escenraioInput2.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 8), 
+          a: ingresosTotals.total_month_9 * (escenraioInput2.i / 100), 
+          b: gastosTotals.month_9 * (escenraioInput2.g / 100), 
+          c: (ingresosTotals.total_month_9 * (escenraioInput2.i / 100)) + (gastosTotals.month_9 * (escenraioInput2.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 9), 
+          a: ingresosTotals.total_month_10 * (escenraioInput2.i / 100), 
+          b: gastosTotals.month_10 * (escenraioInput2.g / 100), 
+          c: (ingresosTotals.total_month_10 * (escenraioInput2.i / 100)) + (gastosTotals.month_10 * (escenraioInput2.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 10), 
+          a: ingresosTotals.total_month_11 * (escenraioInput2.i / 100), 
+          b: gastosTotals.month_11 * (escenraioInput2.g / 100), 
+          c: (ingresosTotals.total_month_11 * (escenraioInput2.i / 100)) + (gastosTotals.month_11 * (escenraioInput2.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 11), 
+          a: ingresosTotals.total_month_12 * (escenraioInput2.i / 100), 
+          b: gastosTotals.month_12 * (escenraioInput2.g / 100), 
+          c: (ingresosTotals.total_month_12 * (escenraioInput2.i / 100)) + (gastosTotals.month_12 * (escenraioInput2.g / 100)), 
+          d: 0 
+        },
+        { 
+          name: formattedDate(month, 12), 
+          a: ingresosTotals.total_month_13 * (escenraioInput2.i / 100), 
+          b: gastosTotals.month_13 * (escenraioInput2.g / 100), 
+          c: (ingresosTotals.total_month_13 * (escenraioInput2.i / 100)) + (gastosTotals.month_13 * (escenraioInput2.g / 100)), 
+          d: 0 
+        },
+      ]
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[ingresosTotals, gastosTotals, flujoEfectivo, escenraioInput1, escenraioInput2]);
+
   const sumColumnHandler = (targetClass, selector, stateSetter) => {
     if (targetClass) {
       const colElements = document.querySelectorAll(`${targetClass}`);
@@ -488,16 +704,6 @@ export default function CapacidadPago({
     } else {
       setter(value);
     }
-  }
-  
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const formattedDate = (date, monthsAdded) => {
-    const newDate = new Date(date);
-    const dateMonth = newDate.getMonth() + monthsAdded;
-    // If value is greater than 12 is another year
-    const year = months[dateMonth] ? newDate.getFullYear() : newDate.getFullYear() + 1;
-    const labelMonth = months[dateMonth] ? months[dateMonth] : months[dateMonth - 12];
-    return `${labelMonth}-${year.toString().substring(2)}`;
   }
 
   return (
@@ -2170,13 +2376,36 @@ export default function CapacidadPago({
               <Row className="justify-content-center">
                 <Col xs={12} sm={6}>
                   <Row className="px-5 [b">
-                    <Col xs={12} className="pb-3 text-center"><h5>Escenario 0</h5></Col>
-                    <Col md={4}><p>T 0%</p></Col>
-                    <Col md={4}><p>I 0%</p></Col>
-                    <Col md={4}><p>G 0%</p></Col>
+                    <Col className="pb-3 text-center"><h5>Escenario 0</h5></Col>
+                  </Row>
+                  <Row className="px-5">
+                    <Col>
+                      <Table>
+                        <thead>
+                          <tr>
+                            <th className="text-center" style={{minWidth: "100px"}}>T</th>
+                            <th className="text-center">I</th>
+                            <th className="text-center">G</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="text-center">
+                              <p>T 0%</p>
+                            </td>
+                            <td>
+                              <ControlledInput mask="%" defaultValue={escenraioInput0.i} callback={(e) => {updateValueHandler(setEscenarioInput0, "i", e)}} />
+                            </td>
+                            <td>
+                              <ControlledInput mask="%" defaultValue={escenraioInput0.g} callback={(e) => {updateValueHandler(setEscenarioInput0, "g", e)}} />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                    </Col>
                   </Row>
                   <MultipleTestingAnalytics 
-                    data={flujoNetoData} 
+                    data={escenario0} 
                     dir={'left'}
                     title={'Flujo Neto de Efectivo'}
                     subtitle1={'Escenario Realista 0'}
@@ -2185,13 +2414,36 @@ export default function CapacidadPago({
                 </Col>
                 <Col xs={12} sm={6}>
                   <Row className="px-5 [b">
-                    <Col xs={12} className="pb-3 text-center"><h5>Escenario 1</h5></Col>
-                    <Col md={4}><p>T 0%</p></Col>
-                    <Col md={4}><p>I 5%</p></Col>
-                    <Col md={4}><p>G 5%</p></Col>
+                    <Col className="pb-3 text-center"><h5>Escenario 1</h5></Col>
+                  </Row>
+                  <Row className="px-5">
+                    <Col>
+                      <Table>
+                        <thead>
+                          <tr>
+                            <th className="text-center" style={{minWidth: "100px"}}>T</th>
+                            <th className="text-center">I</th>
+                            <th className="text-center">G</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="text-center">
+                              <p>T 0%</p>
+                            </td>
+                            <td>
+                              <ControlledInput mask="%" defaultValue={escenraioInput1.i} callback={(e) => {updateValueHandler(setEscenarioInput1, "i", e)}} />
+                            </td>
+                            <td>
+                              <ControlledInput mask="%" defaultValue={escenraioInput1.g} callback={(e) => {updateValueHandler(setEscenarioInput1, "g", e)}} />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                    </Col>
                   </Row>
                   <MultipleTestingAnalytics 
-                    data={flujoNetoData} 
+                    data={escenario1} 
                     dir={'left'}
                     title={'Flujo Neto de Efectivo'}
                     subtitle1={'Escenario Realista 1'}
@@ -2200,13 +2452,36 @@ export default function CapacidadPago({
                 </Col>
                 <Col xs={12} sm={8}>
                   <Row className="px-5 [b">
-                    <Col xs={12} className="pb-3 text-center"><h5>Escenario 2</h5></Col>
-                    <Col md={4}><p>T 0%</p></Col>
-                    <Col md={4}><p>I -5%</p></Col>
-                    <Col md={4}><p>G 10%</p></Col>
+                    <Col className="pb-3 text-center"><h5>Escenario 2</h5></Col>
+                  </Row>
+                  <Row className="px-5">
+                    <Col>
+                      <Table>
+                        <thead>
+                          <tr>
+                            <th className="text-center" style={{minWidth: "100px"}}>T</th>
+                            <th className="text-center">I</th>
+                            <th className="text-center">G</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="text-center">
+                              <p>T 0%</p>
+                            </td>
+                            <td>
+                              <ControlledInput mask="%" defaultValue={escenraioInput2.i} callback={(e) => {updateValueHandler(setEscenarioInput2, "i", e)}} />
+                            </td>
+                            <td>
+                              <ControlledInput mask="%" defaultValue={escenraioInput2.g} callback={(e) => {updateValueHandler(setEscenarioInput2, "g", e)}} />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                    </Col>
                   </Row>
                   <MultipleTestingAnalytics 
-                    data={flujoNetoData} 
+                    data={escenario2} 
                     dir={'left'}
                     title={'Flujo Neto de Efectivo'}
                     subtitle1={'Escenario Realista 2'}

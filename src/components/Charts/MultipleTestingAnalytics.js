@@ -41,7 +41,7 @@ export const MultipleTestingAnalytics = ({ dir, themeName = 'white', data, title
     let colors = [];
     if (data) {
       // areas
-      data.chartData && Object.entries(data.chartData[0]).map(([key, value]) => {
+      data.chartData && data.chartData.length > 0 && Object.entries(data.chartData[0]).map(([key, value]) => {
         if (key !== "name" && key !== "color") {
           areas.push(key);
         }
@@ -53,7 +53,7 @@ export const MultipleTestingAnalytics = ({ dir, themeName = 'white', data, title
         const color = colorExists ? colorExists : getRandomColor();
         colors.push(color);
         legends.push({
-          id: `${data.legends[i].toLowerCase().trim()}`, 
+          id: `${data.legends[i]?.toLowerCase().trim()}`, 
           value: data.legends[i], 
           type: 'rect',
           color: color
@@ -65,18 +65,19 @@ export const MultipleTestingAnalytics = ({ dir, themeName = 'white', data, title
       colors: colors,
       legends: legends
     })
-
-  },[]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[data]);
 
   const renderAreas = () => {
     return formattedData?.areas.map((area, i) => {
       return <Area 
         key={`chart-area-${i}`} 
-        name="efectivo"
-        type="monotone" 
+        name={data.legends[i]}
+        type="monotone"
         dataKey={`${area}`} 
-        fill={formattedData.colors[i]} 
-        stroke={formattedData.colors[i]} 
+        fill="transparent"
+        // fill={formattedData.colors[i]}
+        stroke={formattedData.colors[i]}
         fillOpacity={0.2} 
       />
     })
