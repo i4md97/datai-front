@@ -14,14 +14,8 @@
 # build
 /build*
 
-/src/db/
-/src/db/*
-
 #components
-# /src/components/layout/Sidebar/
-# /src/components/layout/Sidebar/*
-# /src/components/layout/Topbar/
-# /src/components/layout/Topbar/*
+# /src/components/*
 
 # production
 
@@ -39,4 +33,3 @@ yarn-error.log*
 
 
 # features
-/src/components/layout/Sidebar*
